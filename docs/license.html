@@ -32,6 +32,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -262,7 +264,13 @@ $(document).ready(function () {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -301,7 +309,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-12
+<strong>Last updated:</strong> 2022-06-10
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -348,15 +356,15 @@ results.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomZZmyprojecttree2801870f4ff359b0cfc9c1de7c217919b0f2829atargetblank2801870a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetree2a2476c29787c12cc5445ff9464a58d902ee6f97targetblank2a2476ca">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/ZZ/myproject/tree/2801870f4ff359b0cfc9c1de7c217919b0f2829a" target="_blank">2801870</a>
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/2a2476c29787c12cc5445ff9464a58d902ee6f97" target="_blank">2a2476c</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomZZmyprojecttree2801870f4ff359b0cfc9c1de7c217919b0f2829atargetblank2801870a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetree2a2476c29787c12cc5445ff9464a58d902ee6f97targetblank2a2476ca"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -366,7 +374,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/ZZ/myproject/tree/2801870f4ff359b0cfc9c1de7c217919b0f2829a" target="_blank">2801870</a>.
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/2a2476c29787c12cc5445ff9464a58d902ee6f97" target="_blank">2a2476c</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -382,14 +390,34 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    code/.DS_Store
     Ignored:    data/.DS_Store
 
 Untracked files:
     Untracked:  Policy_landscape_workflowr.R
     Untracked:  Untitled.R
-    Untracked:  analysis/Data_prep_Topic_modeling_copy.Rmd
     Untracked:  analysis/test.Rmd
+    Untracked:  code/1a_Data_preprocessing.Rmd
+    Untracked:  code/1b_Dictionaries_preparation.Rmd
+    Untracked:  code/2_Topic_modeling.Rmd
+    Untracked:  code/3_Text_similarities.Rmd
+    Untracked:  code/4_Language_analysis.Rmd
+    Untracked:  code/5_For_and_not_for_profit_comparison.Rmd
+    Untracked:  code/Figure_1_research_landscape.Rmd
+    Untracked:  data/README.html
+    Untracked:  data/dictionaries/
     Untracked:  data/mission_statements/
+    Untracked:  output/cleaned_data.csv
+    Untracked:  output/dataset_4topics_stm.csv
+    Untracked:  output/dictionaries_dataset_all_words.csv
+    Untracked:  output/freq_dict_total_100.csv
+
+Unstaged changes:
+    Modified:   code/README.md
+    Modified:   data/README.md
 
 </code></pre>
 <p>
@@ -440,7 +468,7 @@ Message
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/ZZ/myproject/2801870f4ff359b0cfc9c1de7c217919b0f2829a/docs/license.html" target="_blank">2801870</a>
+<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/5940eeed6ad8d0a48df671c0a4cd55b5d390ae86/docs/license.html" target="_blank">5940eee</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -457,7 +485,24 @@ Build site.
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/ZZ/myproject/98ec1e0df2313fe5de24373ced17e03be9a6eab6/docs/license.html" target="_blank">98ec1e0</a>
+<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/2801870f4ff359b0cfc9c1de7c217919b0f2829a/docs/license.html" target="_blank">2801870</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2022-05-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/98ec1e0df2313fe5de24373ced17e03be9a6eab6/docs/license.html" target="_blank">98ec1e0</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -474,7 +519,7 @@ Build site.
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/ZZ/myproject/4e2a2928935e84401f75616fc214f1f77df5f56b/docs/license.html" target="_blank">4e2a292</a>
+<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/4e2a2928935e84401f75616fc214f1f77df5f56b/docs/license.html" target="_blank">4e2a292</a>
 </td>
 <td>
 ZZ
@@ -491,7 +536,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/ZZ/myproject/blob/80629efd641ff58fea3696d7a13de96e997e24f7/analysis/license.Rmd" target="_blank">80629ef</a>
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/80629efd641ff58fea3696d7a13de96e997e24f7/analysis/license.Rmd" target="_blank">80629ef</a>
 </td>
 <td>
 ZZ
