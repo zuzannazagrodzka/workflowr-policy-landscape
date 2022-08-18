@@ -160,7 +160,6 @@ corpus_df$stakeholder[corpus_df$stakeholder%in% c("CNPq", "Alexander von Humbold
 # Journals OA
 corpus_df$stakeholder[corpus_df$stakeholder%in% c("Arctic, Antarctic, and Alpine Research", "Biogeosciences","Conservation Letters", "Diversity and Distributions", "Ecology and Evolution", "Ecology and Society", "eLifeJournal", "Evolution Letters", "Evolutionary Applications", "Frontiers in Ecology and Evolution", "Neobiota", "PeerJJournal", "Plos Biology", "Remote Sensing in Ecology and Conservation")] <- "journals_OA"
 
-
 # Journals nonOA (including transitioning, hybrid and closed - last time checked August 2021)
 corpus_df$stakeholder[corpus_df$stakeholder%in% c("BioSciences", "American Naturalist", "Annual Review of Ecology Evolution and Systematics", "Biological Conservation", "Conservation Biology", "Ecological Applications", "Ecology Letters", "Ecology", "Evolution", "Frontiers in Ecology and the Environment", "Global Change Biology", "Journal of Applied Ecology", "Nature Ecology and Evolution", "Philosophical Transactions of the Royal Society B", "Proceedings of the Royal Society B Biological Sciences", "Trends in Ecology & Evolution")] <- "journals_nonOA"
 
