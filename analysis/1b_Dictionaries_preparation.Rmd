@@ -1,0 +1,370 @@
+---
+title: "1b_Dictionaries_preparation"
+author: "zuzannazagrodzka"
+date: '2022-05-13'
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+1b. Dictionaries preparation
+
+We created three dictionaries: UNESCO dictionary, business dictionary and book dictionary.
+
+UNESCO (Open Research) dictionary <br>
+The first dictionary (UNESCO (Open Research) dictionary) was created by removing stop words and choosing 100 most frequent words in the UNESCO Recommendations on Open Science (https://unesdoc.unesco.org/ark:/48223/pf0000379949.locale=en). 
+
+Business dictionary <br>
+The second one (Business dictionary) was created by importing business glossaries from four websites (see below). 100 words that occurred the most frequent were used to create this dictionary. 
+Websites:
+https://www.theguardian.com/business/glossary-business-terms-a-z-jargon
+https://www.investopedia.com/ 
+https://www.economist.com/economics-a-to-z
+https://www.workspace.co.uk/content-hub/business-insight/glossary-of-business-terminology
+
+Control dictionary <br>
+The third one (Control dictionary) was created by removing stop words and identifying 100 most common words in the ecology book "Our Vanishing Wildlife" downloaded from the online library Project Gutenberg.
+https://www.goodreads.com/book/show/1302950.Our_Vanishing_Wildlife
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+
+```
+
+
+```{r Libraries}
+# Libraries used for text/data analysis
+library(gutenbergr)
+library(tidyverse) 
+library(stopwords)
+library(dplyr)
+library(tidytext)
+library(quanteda)
+library(quanteda.dictionaries)
+
+# Libraries used to create plots
+library(ggwordcloud)
+library(compositions)
+library(ggtern)
+library(ggalt)     
+library(ggplot2)
+library(ggvenn)
+
+library("kableExtra") # to create a table when converting to html
+
+```
+
+# Preparing the dictionary dataset
+
+``` {r}
+# Dictionaries
+# Importing business language lexicons, UNESCO recommendation on Open Science and a book (control)
+
+# Downloading "Our Vanishing Wild Life: Its Extermination and Preservation" by William T. Hornaday
+book <- gutenberg_download(13249, mirror = "http://mirrors.xmission.com/gutenberg/")
+
+book <- book %>%
+  select(txt = text)
+book$name <- "Our Vanishing Wild Life"
+book$source_link <- "Our Vanishing Wild Life"
+book$doc_type <- "book"
+book$dictionary_type <- "book"
+
+# Importing business_lexicon_ZZ.csv as my business dictionary
+bus_lang <- read.csv(file = "./data/dictionaries/business_lexicon_ZZ.csv", sep = ";")
+
+# Importing UNESCO Recommendation on Open Science_Recommendation.txt as my UNESCO (Open Science dictionary)
+unesco_rec <- data_frame(txt = read_file("./data/dictionaries/UNESCO Recommendation Open Science 2021.txt")) 
+
+# Adding relevant columns
+unesco_rec$name <- "UNESCO"
+unesco_rec$source_link <- "UNESCO Recommendation on Open Science"
+unesco_rec$doc_type <- "dictionary"
+unesco_rec$dictionary_type <- "UNESCO"
+
+# Putting together all three datasets
+all_dict <- rbind(bus_lang, unesco_rec, book)
+
+# removing numbers 
+all_dict$txt <- gsub("[0-9]+","",all_dict$txt)
+# removing "'s"
+all_dict$txt <- gsub("'s","",all_dict$txt)
+
+all_dict <- all_dict %>%  
+  mutate_all(as.character) %>%
+  unnest_tokens(word, txt)
+
+
+# lemmatizing using lemma table
+token_words <- tokens(all_dict$word, remove_punct = TRUE)
+tw_out <- tokens_replace(token_words,
+               pattern = lexicon::hash_lemmas$token,
+               replacement = lexicon::hash_lemmas$lemma)
+tw_out_df<- as.data.frame(unlist(tw_out))
+
+
+
+all_dict <- cbind(all_dict, tw_out_df$"unlist(tw_out)")
+colnames(all_dict)[which(names(all_dict) == "word")] <- "orig_word"
+colnames(all_dict)[which(names(all_dict) == "tw_out_df$\"unlist(tw_out)\"")] <- "word_mix"
+
+```
+
+``` {r} 
+# changing American English to British English
+ukus_out <-  tokens(all_dict$word_mix, remove_punct = TRUE)
+ukus_out <- quanteda::tokens_lookup(ukus_out, dictionary = data_dictionary_us2uk, exclusive = FALSE,capkeys = FALSE)
+all_df<- as.data.frame(unlist(ukus_out))
+all_dict <- cbind(all_dict, all_df$"unlist(ukus_out)")
+colnames(all_dict)
+colnames(all_dict)[which(names(all_dict) == "all_df$\"unlist(ukus_out)\"")] <- "word"
+
+# my_stop_words
+my_stop_words <- stop_words %>%
+  filter(!grepl("onix", lexicon))
+
+# removing other words (names of stakeholders, types of documents, months, abbreviations and not meaning anything), the same stop words were removed in the aims and missions statements
+# updated 20.09.2022
+
+my_stop_words <- bind_rows(data_frame(word = c("e.g", "i.e", "ii", "iii", "iv", "v", "vi", "vii", "ix", "x", "", "missions", "mission", "aims", "aimed", "aim", "values", "value", "vision", "about", "publisher", "funder", "society", "journal", "repository", "deutsche", "january", "febuary", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", "jan", "feb", "mar", "apr", "jun", "jul", "aug", "sep", "sept", "oct", "nov", "dec", "australasian", "australians", "australian", "australia", "latin", "america", "cameroon", "yaoundé", "berlin", "baden", "london", "whipsnade", "san", "francisco", "britain", "european", "europe", "malawi", "sweden", "florida", "shanghai", "argentina", "india", "florida", "luxembourg", "italy", "canadians", "canadian", "canada", "spanish", "spain", "france", "french", "antarctica", "antarctic", "paris", "cambridge", "harvard", "russian", "russia", "chicago", "colorado", "africans", "african", "africa", "japan", "japanese", "brazil", "zelanders", "zeland", "mori", "aotearoa", "american", "america", "australasia", "hamburg", "netherlands", "berlin", "china", "chinese", "brazil", "mexico", "germany", "german", "ladenburg", "baden", "potsdam", "platz", "oxford", "berlin", "asia", "budapest", "taiwan", "chile", "putonghua", "hong", "kong","helmholtz", "bremen", "copenhagen", "stuttgart", "hinxton", "mātauranga", "māori", "yaound", "egypt", "uk", "usa", "eu", "st", "miraikan", "makao", "billion", "billions", "eight", "eighteen", "eighty", "eleven", "fifteen", "fifty", "five", "forty", "four", "fourteen", "hundreds", "million", "millions", "nine", "nineteen", "ninety", "one", "ones", "seven", "seventeen", "seventy", "six", "sixteen", "sixty", "ten", "tens", "thirteen", "thirty", "thousand", "thousands", "three", "twelve", "twenty", "two", "iccb", "ca"), lexicon = c("custom")), my_stop_words)
+
+
+# Removing my_stop_words
+all_dict <- all_dict %>%
+ anti_join(my_stop_words) 
+
+# Adding a presence/absence column
+all_dict$present <- 1
+# Removing some more:
+all_dict$word <-gsub("_","",as.character(all_dict$word))
+# removing numbers again after lemmatization
+all_dict$word <- gsub("[0-9]+","",all_dict$word)
+
+write_excel_csv(all_dict, "./output/created_datasets/dictionaries_dataset_all_words.csv") 
+```
+
+
+# Saving "book" dataset to .csv file in case the book would not be available anymore in the future
+``` {r}
+# write_csv(book, "./data/dictionaries/book.csv") # saving the dataset 
+```
+
+```{r}
+# Venn diagram to show how many unique words are shared between dictionaries
+
+dict_venn <- all_dict %>% 
+  select(dictionary_type, word) %>% # selecting columns of my interest
+  distinct(word, dictionary_type) # leaving the unique words
+
+dict_venn_bus <- dict_venn %>% 
+  filter(dictionary_type == "business_language")
+dict_venn_un <- dict_venn %>% 
+  filter(dictionary_type == "UNESCO")
+dict_venn_bk <- dict_venn %>% 
+  filter(dictionary_type == "book")
+
+dict_venn_ls <- list(Business = dict_venn_bus$word, Unesco = dict_venn_un$word, Book = dict_venn_bk$word)
+
+ggvenn(
+  dict_venn_ls,
+  stroke_size = 0.5
+  )
+
+```
+
+
+``` {r}
+# Looking at the most frequent words in each of the dictionary
+
+all_dict_total <- all_dict %>% 
+  rename(dictionary = dictionary_type) %>% 
+  select(name, dictionary, present, word) %>% 
+  group_by(word, dictionary) %>% 
+  summarize(in_dict_total = sum(present)) 
+
+all_dict_total <- as.data.frame(all_dict_total)
+
+# Choosing a number of words to extract from the dictionaries
+freq_dict_total <- all_dict_total %>% 
+  group_by(dictionary) %>% 
+  arrange(desc(in_dict_total)) 
+
+# Removing duplicates to create a table with 10 the most common words in each of the dictionary
+freq_dict_table <- freq_dict_total %>% 
+  group_by(dictionary) %>% 
+  arrange(desc(in_dict_total)) %>% 
+  slice_head(n=10) %>% 
+  mutate(rank = row_number()) %>% 
+  select(-in_dict_total)
+
+
+# Table with a common words in the UNESCO dictionary
+freq_dict_table_unesco <- freq_dict_table %>% 
+  filter(dictionary == "UNESCO")
+
+freq_dict_table_unesco %>% 
+  kbl(caption = "Ten most common words in the UNESCO dictionary") %>% 
+  kable_classic("hover", full_width = F)
+
+
+# Table with a common words in the book dictionary
+freq_dict_table_book <- freq_dict_table %>% 
+  filter(dictionary == "book")
+
+freq_dict_table_book %>% 
+  kbl(caption = "Ten most common words in the book dictionary") %>% 
+  kable_classic("hover", full_width = F)
+
+
+# Table with a common words in the business dictionary
+freq_dict_table_business <- freq_dict_table %>% 
+  filter(dictionary == "business_language")
+
+freq_dict_table_business %>% 
+  kbl(caption = "Ten most common words in the business dictionary") %>% 
+  kable_classic("hover", full_width = F)
+``` 
+
+
+# Saving the data
+``` {r}
+# Saving the data/ It will be used in 4_Language_analysis and 5_For_and_not_for_profit
+freq_dict_total_all <- freq_dict_total
+write_csv(freq_dict_total_all, "./output/created_datasets/freq_dict_total_all.csv")
+```
+
+
+# Creating dictionaries (all words, 100 unique words)
+
+``` {r}
+# Looking at the most frequent words in each of the dictionary
+
+all_dict_total <- all_dict %>% 
+  rename(dictionary = dictionary_type) %>% 
+  select(name, dictionary, present, word) %>% 
+  group_by(word, dictionary) %>% 
+  summarize(in_dict_total = sum(present)) 
+
+all_dict_total <- as.data.frame(all_dict_total)
+
+freq_dict_table_all <- all_dict_total %>% 
+  group_by(dictionary) %>% 
+  arrange(desc(in_dict_total)) %>% 
+  mutate(rank = row_number()) %>% 
+  select(-in_dict_total)
+
+dim(freq_dict_table_all)
+
+# Table with a common words in the UNESCO dictionary
+freq_dict_table_all_unesco <- freq_dict_table_all %>% 
+  filter(dictionary == "UNESCO")
+
+freq_dict_table_all_unesco %>% 
+  kbl(caption = "Ten most common words in the UNESCO dictionary") %>% 
+  kable_classic("hover", full_width = F)
+
+
+# Table with a common words in the book dictionary
+freq_dict_table_all_book <- freq_dict_table_all %>% 
+  filter(dictionary == "book")
+
+freq_dict_table_all_book %>% 
+  kbl(caption = "Ten most common words in the book dictionary") %>% 
+  kable_classic("hover", full_width = F)
+
+
+# Table with a common words in the business dictionary
+freq_dict_table_all_business <- freq_dict_table_all %>% 
+  filter(dictionary == "business_language")
+
+freq_dict_table_all_business %>% 
+  kbl(caption = "Ten most common words in the business dictionary") %>% 
+  kable_classic("hover", full_width = F)
+
+# Remove duplicates
+
+dictionaries <- freq_dict_table_all %>% # just as a precaution as it should not be a value different than 1
+  select(dictionary, word, rank) %>% 
+  mutate(present_in_dict = 1) 
+
+bus_dict <- dictionaries %>% 
+  filter(dictionary == "business_language") %>% 
+  rename(present_BUS = present_in_dict, rank_BUS = rank)
+
+unesco_dict <- dictionaries %>% 
+  filter(dictionary == "UNESCO") %>% 
+  rename(present_UNESCO = present_in_dict, rank_UNESCO = rank)
+
+book_dict <- dictionaries %>% 
+  filter(dictionary == "book") %>% 
+  rename(present_book = present_in_dict, rank_book = rank)
+
+colnames(dictionaries)
+
+dictionaries <- as.data.frame(dictionaries)
+dictionaries_added <- dictionaries %>%
+  left_join(bus_dict, by = c("word" = "word"))  %>% 
+  left_join(unesco_dict, by = c("word" = "word"))  %>% 
+  left_join(book_dict, by = c("word" = "word")) %>% 
+  select(present_in_dict, word, present_BUS, present_UNESCO, present_book, rank_BUS, rank_UNESCO, rank_book) %>% 
+   replace(is.na(.), 0) %>%
+  distinct(word, .keep_all = TRUE) %>% # removing duplicates
+  mutate(present_BUS = as.numeric(present_BUS)) %>% 
+  mutate(present_UNESCO = as.numeric(present_UNESCO)) %>% 
+  mutate(present_book = as.numeric(present_book))  %>%
+  mutate(sum = rowSums(.[3:5])) 
+
+# For my analysis choosing unique words from the dictionaries  
+dictionaries_added <- dictionaries_added %>% 
+  filter(sum == 1)
+
+dictionaries <- dictionaries_added
+
+# Saving the dataset with all words in the dictionary (it will be used in 4_Language_analysis and 5_For_and_not_for_profit)
+dictionaries_all <- dictionaries %>% 
+    select(-rank_BUS, -rank_UNESCO, -rank_book)
+write_csv(dictionaries_all, "./output/created_datasets/freq_dict_total_all.csv")
+
+
+# Choosing 100 most frequent words in the dictionaries based on "ranks" columns
+
+dictionaries_100_UNESCO <- dictionaries %>%
+  arrange(desc(rank_UNESCO)) %>%
+  slice_head(n=100)
+
+dictionaries_100_BUS <- dictionaries %>%
+  arrange(desc(rank_BUS)) %>%
+  slice_head(n=100)
+
+dictionaries_100_book <- dictionaries %>%
+  arrange(desc(rank_book)) %>%
+  slice_head(n=100)
+
+
+
+dictionaries_100 <- rbind(dictionaries_100_UNESCO, dictionaries_100_BUS, dictionaries_100_book)
+head(dictionaries_100, 3)
+
+dictionaries_100 <- dictionaries_100 %>% 
+  select(-rank_BUS, -rank_UNESCO, -rank_book)
+
+``` 
+
+
+# Saving the data
+``` {r}
+# Saving the data/ It will be used in 4_Language_analysis and 5_For_and_not_for_profit
+freq_dict_total_100 <- dictionaries_100
+write_csv(freq_dict_total_100, "./output/created_datasets/freq_dict_total_100.csv")
+```
+
+
+
+
+# Session information
+``` {r}
+sessionInfo()
+```
+

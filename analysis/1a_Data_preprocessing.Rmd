@@ -1,0 +1,361 @@
+---
+title: "1a_Data_preprocessing"
+author: "ZZ"
+# author: "zuzannazagrodzka"
+date: "2022-05-05"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r Setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1a. Data preprocessing
+
+Converting mission and aim statements documents into a table to use it in the further analysis.
+
+# General information 
+We collected in total 129 mission and aim statements of stakeholders involved in the research landscape in ecology and evolutionary biology. We identified six groups: advocates (24 documents), funders (30), journals (non Open Access = 16, journals Open Access = 14), publishers (for-profit = 7, not-for-profit = 8), repositories (17) and learned societies (13). 
+
+# Identifying stakeholders
+The stakeholders were identified in advance in various ways. 
+
+Journals <br>
+We used Scimago Journal & Country Rank website (https://www.scimagojr.com/) to search for the journals with the highest journal's impact value in 2020 (subject areas such as: Environmental Science, Agricultural and Biological Sciences, Biochemistry, Genetics and Molecular Biology) that publish articles relevant for fields: ecology and evolutionary biology. We aimed to identified ~ 15 journals for both categories: only open access (OA) journals and non-open access (non-OA) journals. We included some journals that were not on the list but were identified as relevant journals by others.
+We made sure that we had journals which are owned by identified by us learned societies. 
+
+Publishers <br>
+We identified publishers based on the list of our journals.
+
+Funders <br>
+We looked what funders were mentioned in "Acknowledgments" sections of some scientific articles published in 2019 and 2020 in high impact factor journals (OA and non-OA). We focused on finding funders from all continents with a limit to max. 3 per country (only when appeared frequently in Acknowledgments). Moreover, we contacted some colleges for information on the funding source in their country. 
+
+Repositories <br>
+We looked at the Data availability statements of the articles published in 2019 and 2020 in high impact factor journals (OA and non-OA) and collected information on where the data and code were archived. Our list includes generalist repositories and subject specific repositories. 
+
+Societies <br>
+We identified societies based on the journals they own and by word-of-mouth. 
+
+Advocates <br>
+Advocated is a group of organisations that actively support or promote good quality and accessible research (open research).
+<br>
+We have considered different aspects of open research (open access, open data, open methods) when looking for the organisations. They might support research in different than ecology and evolutionary biology discipline but should be relevant for these two as well. 
+
+# Aims and missions statements 
+In August 2021 we collected the Aims and Mission Statements on the official website of each of the stakeholder. We did not contact anyone associated with the stakeholders to request more information. If there was no separate section but the aims or missions were described in "About" section, we chose it instead. The text from these websites were manually copied and separately saved for each of the stakeholders as .txt. The first line in the documents is a source website. 
+
+# Documents preprocessing
+To be able to analyse the content of the statements we preprocessed the documents 
+to create one dataset with one word per row and information about the word source and position in the text/sentence. Some irrelevant words were removed and each of the word was lemmatizationed or stemminged. We followed a cleaning process suggested in Maier et al. 2018 "Applying LDA Topic Modelling in Communication Research: Toward a Valid and Reliable Methodology".
+
+We followed these steps:
+
+1) Importing all documents and converting them into a table.
+Columns:
+  name - name of the stakeholder
+  filename - name of the file (NameOfStakeholder_DocumentType)
+  stakeholder - stakeholder group (here: advocates, funders, journals,for-profit publishers, not-for-profit publishers, repositories, societies)
+  txt - text (Statements)
+  doc_type - type of the document (Mission Statement or About)
+
+2) Removing link formatting from the text (http:// and https:// links)
+3) Separating text into sentences and keeping information what document and stakeholder they belong to.
+4) Tokenisation - creating a tidy text, converting tokens to lowercase, removing punctuation, deleting special characters
+5) Removing stop-words, for this we used lexicons SMART and snowball in stop_words lexicon (library tidytext) and removing other not significant words like: numbering (ii, iii, iv, v), name of document type (aim, aims, mission...), name of the stakeholders (erc, nerc, wellcome)
+7) Lemmatization (library lexicon) - converting words to their lemma form/lexeme (e.g., "contaminating" and "contamination" become "contaminate") (Manning & Schütze, 2003, p. 132). 
+
+We worked on a relatively small number of documents and because of that we did not perform relative prunning (stripping very rare and extremely frequent word occurrences from the observed data).
+
+
+# Cleaning R 
+
+```{r Cleaning R}
+rm(list=ls())
+```
+
+# Libraries
+
+```{r Libraries, echo=FALSE}
+library(tidyverse)
+library(purrr)
+library(tidyr)
+library(stringr)
+library(tidytext)
+
+# Additional libraries
+library(quanteda)
+library(quanteda.textplots)
+library(quanteda.dictionaries)
+library(tm)
+library(topicmodels)
+library(ggplot2)
+library(dplyr)
+library(wordcloud)
+library(reshape2)
+library(igraph)
+library(ggraph)
+library(stm)
+
+library("kableExtra") # to create a table when converting to html
+```
+
+# Importing data
+```{r Importing data}
+dirs <- list.dirs(path = "./data/mission_statements", recursive = FALSE)
+getwd()
+# List of files
+files <- list()
+for (i in 1:length(dirs)){files[[i]] <- list.files(path = dirs[i], pattern = ".txt", full.names = TRUE, recursive = FALSE)}
+
+# files
+use_files <- unlist(files)
+
+dirs <- list.dirs(path = "./data/mission_statements", recursive = FALSE)
+# dirs
+
+files <- list()
+# files
+
+for (i in 1:length(dirs)){
+  files[[i]] <- list.files(path = dirs[i], 
+                           pattern = ".txt", 
+                           full.names = TRUE, 
+                           recursive = FALSE)}
+
+# files
+use_files <- unlist(files)
+# use_files
+
+# using purrr to generate a data frame of the corpuses
+corpus_df <- map_df(use_files, 
+                    ~ data_frame(txt = read_file(.x)) %>%
+                      mutate(filename = basename(.x)))
+
+
+# removing encoded junk from the text column
+corpus_df$txt <- gsub("[^[:print:]]", " ", corpus_df$txt)
+
+```
+
+# Adding columns to the corpus
+
+```{r}
+# create new columns: name, stakeholder
+corpus_df$name <- corpus_df$filename
+
+corpus_df <- corpus_df %>% separate(name, c("name","doc_type"), sep = "_") 
+corpus_df <- corpus_df %>% mutate_at("doc_type", str_replace, ".txt", "")
+
+# creating a column: stakeholder 
+corpus_df$stakeholder <- corpus_df$name
+
+# filling stakeholder column with the stakeholders' names
+
+# Funders
+corpus_df$stakeholder[corpus_df$stakeholder%in% c("CNPq", "Alexander von Humboldt Foundation", "Australian Research Council", "Chinese Academy of Sciences", "Conacyt", "CONICYT", "Consortium of African Funds for the Environment", "Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior", "CSIR South Africa", "Deutsche Forschungsgemeinschaft", "ERC", "FORMAS", "French National Centre for Scientific Research", "Helmholtz-Gemeinschaft", "JST", "Max Planck Society", "MOE China", "National Natural Science Foundation", "National Research Council Italy", "National Science Foundation", "NERC", "NRC Egypt", "NRF South Africa", "NSERC", "RSPB", "Russian Academy of Science", "Sea World Research and Rescue Foundation", "Spanish National Research Council", "The Daimler and Benz Foundation", "The French National Research Agency", "Wellcome")] <- "funders"
+
+
+# Journals OA
+corpus_df$stakeholder[corpus_df$stakeholder%in% c("Arctic, Antarctic, and Alpine Research", "Biogeosciences","Conservation Letters", "Diversity and Distributions", "Ecology and Evolution", "Ecology and Society", "eLifeJournal", "Evolution Letters", "Evolutionary Applications", "Frontiers in Ecology and Evolution", "Neobiota", "PeerJJournal", "Plos Biology", "Remote Sensing in Ecology and Conservation")] <- "journals_OA"
+
+# Journals nonOA (including transitioning, hybrid and closed - last time checked August 2021)
+corpus_df$stakeholder[corpus_df$stakeholder%in% c("BioSciences", "American Naturalist", "Annual Review of Ecology Evolution and Systematics", "Biological Conservation", "Conservation Biology", "Ecological Applications", "Ecology Letters", "Ecology", "Evolution", "Frontiers in Ecology and the Environment", "Global Change Biology", "Journal of Applied Ecology", "Nature Ecology and Evolution", "Philosophical Transactions of the Royal Society B", "Proceedings of the Royal Society B Biological Sciences", "Trends in Ecology & Evolution")] <- "journals_nonOA"
+
+
+# Societies
+corpus_df$stakeholder[corpus_df$stakeholder%in% c("BES", "ESEB", "RS", "SORTEE", "The Society for Conservation Biology", "The Zoological Society of London", "Society for the Study of Evolution", "Max Planck Society", "American Society of Naturalists", "British Ecological Society", "Ecological Society of America", "European Society for Evolutionary Biology", "National Academy of Sciences", "Australasian Evolution Society", "Ecological Society of Australia", "Royal Society Te Aparangi", "The Royal Society")] <- "societies"
+
+# Repositories
+corpus_df$stakeholder[corpus_df$stakeholder%in% c("Australian Antarctic Data Centre", "BCO-DMO", "DNA Databank of Japan", "Dryad", "European Bioinformatics Institute", "Figshare", "GBIF", "Harvard Dataverse", "KNB", "Marine Data Archive", "NCBI", "TERN", "World Data Center for Climate", "Zenodo", "EcoEvoRxiv", "bioRxiv", "OSF")] <- "repositories"
+
+# Publishers non for profit and for profit
+
+corpus_df$stakeholder[corpus_df$stakeholder%in% c("The University of Chicago Press", "Annual Reviews", "BioOne", "eLife", "Frontiers", "Resilience Alliance", "The Royal Society Publishing", "AIBS")]  <- "publishers_nonProfit"
+
+corpus_df$stakeholder[corpus_df$stakeholder%in% c("Cell Press", "Elsevier", "Springer Nature", "PeerJ", "Pensoft", "PLOS", "Wiley")]  <- "publishers_Profit"
+
+
+# Advocates - stakeholders promoting good research practices and Open Research agenda
+corpus_df$stakeholder[corpus_df$stakeholder%in% c("Center for Open Science", "coalitionS", "CoData", "DataCite", "DOAJ", "Gitlab", "Peer Community In", "RDA", "Research Data Canada", "Africa Open Science and Hardware", "Amelica", "Bioline International", "Coko", "COPDESS", "FAIRsharing" , "FORCE11", "FOSTER" , "Free our knowledge", "Jisc", "Open Access Australasia", "Reference Center for Environmental Information", "Research4life" , "ROpenSci" , "SPARC" )] <- "advocates"
+
+```
+
+Creating corpus_df_website_info which is going to be used later to get a list of the websites 
+``` {r}
+corpus_df_website_info <- corpus_df
+```
+
+# Preprocessing 
+
+```{r}
+# Cleaning the text from http:// and https:// links, removing numbers and "'s"
+# remove http:// and https:// and www.
+corpus_df$txt <- gsub("(s?)(f|ht)tp(s?)://\\S+\\b", " ", corpus_df$txt) 
+corpus_df$txt <- gsub("www.\\S+\\s*", "", corpus_df$txt) 
+
+
+# removing full names and phrases before tokenisation:
+# change oa to open access and or to open research, for-profit and for profit to forprofit, no-profit 
+
+corpus_df$txt <- gsub(" F.A.I.R. ", " FAIR ", corpus_df$txt)
+corpus_df$txt <- gsub(" OA ", " open access ", corpus_df$txt)
+corpus_df$txt <- gsub(" OR ", " open research ", corpus_df$txt)
+corpus_df$txt <- gsub(" OS ", " open science ", corpus_df$txt)
+corpus_df$txt <- gsub(" OA ", " open access ", corpus_df$txt)
+corpus_df$txt <- gsub("no-profit|not-for-profit|not for-profit|no profit", "nonprofit", corpus_df$txt)
+corpus_df$txt <- gsub("for-profit|for profit", "forprofit", corpus_df$txt)
+
+corpus_df$txt <- gsub("DOIs|dois|DOI", "doi", corpus_df$txt)
+
+# removing email addresses @
+corpus_df$txt <- gsub("\\S*@\\S*","",corpus_df$txt)
+
+# removing names mentioned in the documents:
+corpus_df$txt <- gsub("Marc Schiltz the President of Science Europe|Dr. Francesca Dominici|Kaiser Wilhelm|Harold Varmus|Patrick Brown|Michael Eisen|Adolph von Harnack|Harnack|Otto Hahn Medal|Albert Einstein|Robert-Jan Smits|Carl Folke|Lance Gunderson|Abraham Lincoln|Sewall Wright|Ruth Patric|Douglas Futuyama|Louis Agassiz at Harvard's Museum of Comparative Zoology|Charles Darwin|Isaac Newton|Rosalind Franklin|Theodosius Dobzhansky","",corpus_df$txt)
+
+# removing all names (part 1)
+corpus_df$txt <- gsub("General Conference of the United Nations Educational, Scientific and Cultural Organization|International Association of Scientific, Technical & Medical Publishers|Coordination for the Improvement of Higher Education Personnel (CAPES)|Jasper Loftus-Hills Young Investigator Award|Edward O. Wilson Naturalist Award|International Network for the Availability of Scientific Publications|United Nations Educational, Scientific and Cultural Organization|Office of Polar Programs at the U.S. National Science Foundation|National Commission for Scientific and Technological Research|Coalition for Publishing Data in the Earth and Space Sciences|Natural Sciences and Engineering Research Council of Canada|Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior|Catalogue of Australian Antarctic and Subantarctic Metadata|Open Reliable Transparent Ecology and Evolutionary biology|International Nucleotide Sequence Database Collaboration|United States Government's National Science Foundation|Proceedings of the Royal Society B Biological Sciences|National Charter of Ethics for the Research Profession|Consortium of African Funds for the Environment (CAFE)|Committee on Data of the International Science Council|South African National Biodiversity Institute (SANBI)|Scholarly Publishing and Academic Resources Coalition|Malawi Environmental Endowment Trust (MEET) in Malawi|National Council of Science and Technology (Conacyt)|Annual Review of Ecology Evolution and Systematics|the University of Chicago Press Journals Division|Philosophical Transactions of the Royal Society B|International Max Planck Research Schools (IMPRS)|the National Health and Medical Research Council|Australian Government’s Department of Innovation|Consortium of African Funds for the Environment|the National Competitive Grants Program (NCGP)|European Society of Evolutionary Biology|Research for Development and Innovation (ARDI)|National Institute of Standards and Technology|International Congress of Conservation Biology|French National Centre for Scientific Research|University of Chicago Press Journals Division|Study of Environmental Arctic Change (SEARCH)|South African National Biodiversity Institute|Reference Center on Environmental Information|Biological and Chemical Oceanography Sections|Open Access Envoy of the European Commission|National Natural Science Foundation of China|National Institutes of Health|Big Hairy Audacious Goal|Deutsche Zentren für Gesundheitsforschung|University of Colorado Boulder|Study of Environmental Arctic Change (SEARCH)|John Maynard Smith|Darwin Core|PeerJ – the Journal of Life & Environmental Sciences (PeerJ)|PeerJ Computer Science|PeerJ Physical Chemistry|PeerJ Organic Chemistry|PeerJ Inorganic Chemistry|PeerJ Analytical Chemistry and PeerJ Materials Science", "", corpus_df$txt)
+                      
+# removing all names (part 2)
+corpus_df$txt <- gsub("African Institute of Open Science & Hardware|Electronic Publishing Trust for Development|Remote Sensing in Ecology and Conservation|National Competitive Grants Program (NCGP)|Journal of Biogeography and Global Ecology|Excellence in Research for Australia (ERA)|Excellence in Research for Australia (ERA)|Intergovernmental Panel on Climate Change|Gottlieb Daimler and Karl Benz Foundation|Carl Benz House|European Society for Evolutionary Biology|Sea World Research and Rescue Foundation|Science for Nature and People Parnership|Global Biodiversity Information Facility|Frontiers in Ecology and the Environment|EMBL's European Bioinformatics Institute|Artificial Intelligence Review Assistant|Institute of Arctic and Alpine Research|State of Florida and Palm Beach County|Peer Community in Evolutionary Biology|European Group on Biological Invasions|Arctic, Antarctic, and Alpine Research|Weizmann Institute in Rehovot, Israel|UNESCO Universal Copyright Convention|UNESCO Recommendation on Open Science|International Panel on Climate Change|European Molecular Biology Laboratory|European Molecular Biology Laboratory|University of Toronto at Scarborough|Natural Environment Research Council|Knut and Alice Wallenberg Foundation|Global Open Science Hardware Roadmap|State of Alaska's Salmon and People|Research for Global Justice (GOALI)|National Natural Science Foundation|Knowledge Network for Biocomplexity|Society for the Study of Evolution|Research in the Environment (OARE)|Frontiers in Ecology and Evolution|Data Observation Network for Earth|Collaborative Peer Review Platform|the American Journal of Sociology|Spanish National Research Council|Research Ideas and Outcomes (RIO)|Research Ideas and Outcomes (RIO)|European Bioinformatics Institute|Directory of Open Access Journals|Cambridge Conservation Initiative|Alexander von Humboldt Foundation|the Zoological Society of London|Society for Conservation Biology|Open Educational Resources (OER)|Field Chief Editor Mark A. Elgar|Biogeosciences Discussions (BGD)|Australian Antarctic Data Centre|University of Toronto Libraries|The University of Chicago Press|Research in Agriculture (AGORA)|NIH Intramural Research Program|National Research Council|National Academy of Engineering|Millennium Ecosystem Assessment|Journal of Evolutionary Biology|Howard Hughes Medical Institute|German Climate Computing Centre|French National Research Agency|European Research Council (ERC)|eLife Sciences Publications Ltd|Ecological Society of Australia|Deutsche Forschungsgemeinschaft|American Society of Naturalists|Japan's Science and Technology|Australian Government Minister|Australasian Evolution Society|African Journals OnLine (AJOL)|Africa Open Science & Hardware|World Data Center for Climate|Trends in Ecology & Evolution|National Institutes of Health|Kurchatov Institute in Russia|International Science Council|Elsevier’s Clinical Solutions|Ecological Society of America|Department of Social Sciences|Cornell and Yale Universities|Cold Spring Harbor Laboratory|American Journal of Sociology|Research for Health (Hinari)|Philosophical Transactions B|Nature Ecology and Evolution|National Research Foundation|National Library of Medicine|National Academy of Sciences|National Academy of Medicine|Journal of Political Economy|Journal of Political Economy|Helmholtz-Alberta Initiative|Harvard Dataverse Repository|European Research Area (ERA)|ISI ScienceWatch|Royal Charter|Springer Nature|The Nature Portfolio|Scientific American", "", corpus_df$txt)
+                      
+# removing all names (part 3)
+corpus_df$txt <- gsub("University of Chicago Press|Tropical Database in Brazil|Research Ideas and Outcomes|National Science Foundation|Ministry of Education (MEC)|Federal Republic of Germany|Diversity and Distributions|Daimler and Benz Foundation|Chinese Academy of Sciences|Chinese Academy of Sciences|Australian Research Council|Australia’s Chief Scientist|Russian Academy of Science|Nature Ecology & Evolution|National Research Strategy|Max Planck Innovation GmbH|Journal of Applied Ecology|Further Max Planck Centers|British Ecological Society|WHO, FAO, UNEP, WIPO, ILO|Royal Society Te Aparangi|Peer Community in Ecology|National Research Council|Evolutionary Applications|European Research Council|Environmental Funds|EFs|Biodiversity Data Journal|Biodiversity Data Journal|Royal Society Publishing|Dryad Digital Repository|Digital Editorial Office|Data Distribution Centre|Comparative Cytogenetics|Comparative Cytogenetics|American Biology Teacher|University of Melbourne|Public Research Centers|International Data Week|Ecological Applications|Ecological Applications|Center for Open Science|Biological Conservation|African Journals OnLine|African Journals OnLine|Wellcome Genome Campus|Research Data Alliance|Kaiser Wilhelm Society|Helmholtz-Gemeinschaft|Deutscher Wetterdienst|BirdLife international|Swedish Energy Agency|Social Service Review|Senator Claude Pepper|Ministry of Education|Institute of Medicine|Helmholtz Association|Helmholtz Association|Global Change Biology|Ecology and Evolution|DNA Databank of Japan|Congress of the Union|Bioline International|Bioline|Australian Government|ARC Discovery Program|Research Data Canada|Conservation Letters|Conservation Biology|Brazilian Federation|Big Garden Birdwatch|Albatross Task Force|Resilience Alliance|Nature Conservation|Nature Conservation|Marine Data Archive|European Commission|European Commission|Environmental Funds|Environmental Funds|Ecology and Society|Clarivate Analytics|American Naturalist|Russian Federation|Publication Ethics|Max Planck Society|Max Planck Society|Give Nature a Home|Free Our Knowledge|Fraunhofer Society|Peer Community In|Harvard Dataverse|Evolution Letters|Ecology & Society|CSIR South Africa|Bertha Benz Prize|United Utilities|Carl Benz House|NRF South Africa|Nature Portfolio|Helmholtz Senate|Ecology Letters|Daimler-Benz AG|CSIRO Australia|Colorado alpine|BioOne Complete|BioOne|HAMAGUCHI Plan|Gray's Anatomy|Biogeosciences|Annual Reviews|ZSL Whipsnade|ScienceDirect|ScienceDirect|Royal Society|Research4Life|PCI Evol Biol|Mexican State|GCB Bioenergy|Cell Symposia|Bose-Einstein|Plos Biology|Humboldtians|Humboldt|Horizon 2020|Google Drive|Future Earth|Biogeography|WDC-Climate|the Academy|Kichstarter|Humboldtian|FOSTER Plus|FAIRsharing|ELIXIR Node|cOAlition S|ZSL London|SciDataCon|Max Planck|Figure 360|EcoEvoRxiv|Daimler AG|CU-Boulder|Cell Press|Africa OSH|Sea World|PhytoKeys|NRC Egypt|MOE China|Frontiers|Evolution|Elseviere|CiteScore|Wellcome|rOpenSci|PCI Ecol|OpenAIRE|CU-Boulder |Neobiota|NeoBiota|MycoKeys|HUPO PSI|Figshare|EMBL-EBI|Elsevier|DataCite|ZooKeys|RESTful|Redalyc|Pensoft|FORCE11|Figshare|figshare|Ecology|Dropbox|DataONE|Conacyt|COMBINE|bioRxiv|AmeliCA|Zenodo|Plan S|Lancet|Gitlab|GitLab|Git|FORMAS|CoData|CODATA|Wiley|PeerJ|Inter|eLife|Dryad|Coko|CNPq|Cell |Hinari|Pronaces|Cnr|Vinnova|Minerva|uGREAT|Benz|GitHub|protocols.io|Andrea Stephens|Mtauranga|Metacat|ELIXIR|VSNU and the UKB|Springer|Nikau Consultancy|Aspiration", "", corpus_df$txt)
+
+# removing all names (part 4)
+corpus_df$txt <- gsub("Washington Watch|BioScience|Eye on Education|AIBS Bulletin|Dr. Francesca Dominici|PeerJ – the Journal of Life & Environmental Sciences (PeerJ)|PeerJ Computer Science|PeerJ Physical Chemistry|PeerJ Organic Chemistry|PeerJ Inorganic Chemistry|PeerJ Analytical Chemistry and PeerJ Materials Science", "", corpus_df$txt)
+
+# removing words related to the locations and names
+corpus_df$txt <- gsub("Global South|Global North|New Zealanders|New Zelanders|New Zeland|New Zealand|Great Britain|North America|Eastern Europe|South America|South africans|South africa|Eastern Europe|ARPHA Platform|Woods Hole Oceanographic Institution|US JGOFS|US GLOBEC|NSF Geosciences Directorate (GEO) Division of Ocean Sciences (OCE) Biological and Chemical Oceanography Sections, Division of Polar Programs (PLR) Antarctic Sciences (ANT) Organisms & Ecosystems, and Arctic Sciences (ARC) awards|(DACST)|(CSD)|(FRD)|GBIF.org","",corpus_df$txt)
+
+# removing abbreviations and other missed words
+corpus_df$txt <- gsub("(CREDIT)|BCO-DMO|CONICYT|NEOBIOTA|INSTAAR|COPDESS|CLOCKSS|CoESRA|CAASM|AADC|CONZUL|EMPSEB|SHaRED|SORTEE|SEARCH|SANBI|SPARC|INSTAAR|UNESCO|APEC|AOASG|ARPHA|NCEAS|ICPSR|IMPRS|CMIP5|JDAP|CERN|MBMG|INASP|NSERC|GOALI|AIRA|AJOL|APIs|EMBL|AIBS|CAUL|CRIA|DOAJ|ICBB|ESEB|GBIF|K-12|NCBI|NCGP|NERC|IPCC|CNRS|CSIC|CSIR|BEIS|OARE|HSRC|PLOS|AAAR|USGS|NCAR|NOAA|NEON|ARDI|RSPB|DDBJ|INSDC|INSD|STAR|TERN|TREE|UTSC|UKRI|ARC|BES|SSE|COS|CAS|CTFs|DDI|EPT|ERC|ERA|JST|KNB|NRF|DFG|MDA|NIH|NLM|NRC|NRF|OSF|SCB|OSH|OAI|OCE|PCB|PCI|RDA|GCB|RDC|NSF|BGD|BMC|BHAG|ESA|ZSL|SPP|RCC|RMB|TRL|API|ARC|PLR|DDC|DKRZ|DWD|DVCS|NAE|NAM|EBI|ANR|API|NAS|ASN|NSF|OCE|ANT|UIs|API|EiC|TEE|UCL|SDGs|PIA|CL|RA|RS|STI|SNI|BG|U.K.|U.S.|EC|SC|CU|R&D|Eos|EIDs","",corpus_df$txt)
+
+# removing numbers 
+corpus_df$txt <- gsub("[0-9]+","",corpus_df$txt)
+
+# removing "'s"
+corpus_df$txt <- gsub("'s","",corpus_df$txt)
+
+```
+
+# Tokenisation 
+
+```{r}
+# Tokenisation - creating a tidy text: it convert tokens to lowercase, removes punctuation
+# Starting with tokenizing text into sentences:
+
+corpus_df$txt_copy <- corpus_df$txt
+
+data_tidy_sentences <- corpus_df %>%  
+  unnest_tokens(sentence, txt_copy, token = "sentences")
+
+data_tidy_sentences <- data_tidy_sentences %>% group_by(name) %>% mutate(sentence_id = row_number())
+
+data_tidy_sentences$sentence_doc <- paste0(data_tidy_sentences$name, "_", data_tidy_sentences$sentence_id)
+
+colnames(data_tidy_sentences)
+data_tidy_sentences <- as.data.frame(data_tidy_sentences)
+data_tidy <- data_tidy_sentences %>%  
+  # mutate(as.character(sentence)) %>%
+  unnest_tokens(word, sentence, token = "words" )  %>%
+  select(-sentence_id)
+
+
+# Removal of stop-words: check the lexicons in stop_words, create a list of my stop words like: numbering (ii, iii, iv, v), name of document type (aim, aims, mission...), name of the stakeholders (erc, nerc, wellcome)
+# onix lexicon contains words like "open", "opened" and so on, I decided to remove this lexicon from the analysis
+
+my_stop_words <- stop_words %>%
+  filter(!grepl("onix", lexicon))
+
+# removing other words (names of stakeholders, types of documents, months,  abbreviations and not meaning anything)
+
+my_stop_words <- bind_rows(data_frame(word = c("e.g", "i.e", "ii", "iii", "iv", "v", "vi", "vii", "ix", "x", "", "missions", "mission", "aims", "aimed", "aim", "values", "value", "vision", "about", "publisher", "funder", "society", "journal", "repository", "deutsche", "january", "febuary", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", "jan", "feb", "mar", "apr", "jun", "jul", "aug", "sep", "sept", "oct", "nov", "dec", "australasian", "australians", "australian", "australia", "latin", "america", "cameroon", "yaoundé", "berlin", "baden", "london", "whipsnade", "san", "francisco", "britain", "european", "europe", "malawi", "sweden", "florida", "shanghai", "argentina", "india", "florida", "luxembourg", "italy", "canadians", "canadian", "canada", "spanish", "spain", "france", "french", "antarctica", "antarctic", "paris", "cambridge", "harvard", "russian", "russia", "chicago", "colorado", "africans", "african", "africa", "japan", "japanese", "brazil", "zelanders", "zeland", "mori", "aotearoa", "american", "america", "australasia", "hamburg", "netherlands", "berlin", "china", "chinese", "brazil", "mexico", "germany", "german", "ladenburg", "baden", "potsdam", "platz", "oxford", "berlin", "asia", "budapest", "taiwan", "chile", "putonghua", "hong", "kong","helmholtz", "bremen", "copenhagen", "stuttgart", "hinxton", "mātauranga", "māori", "yaound", "egypt", "uk", "usa", "eu", "st", "miraikan", "makao", "billion", "billions", "eight", "eighteen", "eighty", "eleven", "fifteen", "fifty", "five", "forty", "four", "fourteen", "hundreds", "million", "millions", "nine", "nineteen", "ninety", "one", "ones", "seven", "seventeen", "seventy", "six", "sixteen", "sixty", "ten", "tens", "thirteen", "thirty", "thousand", "thousands", "three", "twelve", "twenty", "two", "iccb", "ca"), lexicon = c("custom")), my_stop_words)
+
+data_tidy <- data_tidy %>%
+ anti_join(my_stop_words)
+
+# lemmatizing using lemma table
+token_words <- tokens(data_tidy$word, remove_punct = TRUE)
+tw_out <- tokens_replace(token_words,
+               pattern = lexicon::hash_lemmas$token,
+               replacement = lexicon::hash_lemmas$lemma)
+tw_out_df<- as.data.frame(unlist(tw_out))
+data_tidy <- cbind(data_tidy, tw_out_df$"unlist(tw_out)")
+
+colnames(data_tidy)[which(names(data_tidy) == "word")] <- "orig_word"
+colnames(data_tidy)[which(names(data_tidy) == "tw_out_df$\"unlist(tw_out)\"")] <- "word_mix"
+
+# changing American English to British English
+ukus_out <- tokens(data_tidy$word_mix, remove_punct = TRUE)
+ukus_out <- quanteda::tokens_lookup(ukus_out, data_dictionary_us2uk, exclusive = FALSE, capkeys = FALSE)
+ukus_df <- as.data.frame(unlist(ukus_out))
+data_tidy <- cbind(data_tidy, ukus_df$"unlist(ukus_out)")
+colnames(data_tidy)[which(names(data_tidy) == "ukus_df$\"unlist(ukus_out)\"")] <- "word"
+
+```
+
+# Creating a column that will include info about OA and nonOA journals or publisher for profit and non-profit
+
+``` {r}
+data_words <- data_tidy
+
+# Creating a column that will include info about OA and nonOA journals or publisher for profit and non-profit
+data_words$org_subgroups <- data_words$stakeholder
+data_words$stakeholder[data_words$stakeholder%in% c("journals_OA", "journals_nonOA" )] <- "journals"
+data_words$stakeholder[data_words$stakeholder%in% c("publishers_Profit", "publishers_nonProfit" )] <- "publishers"
+```
+
+# Information and a table with the number of documents per stakeholder and list of documents
+
+``` {r}
+# Number of documents per stakeholder
+number_of_documents <- data_tidy %>% 
+  select(name, stakeholder) %>% 
+  distinct(name, .keep_all = TRUE) %>% 
+  group_by(stakeholder) %>% 
+  count(stakeholder)
+
+# Table with a number of documents per stakeholder group
+number_of_documents %>% 
+  kbl(caption = "Number of documents per stakeholder group") %>% 
+  kable_classic("hover", full_width = F)
+```
+
+``` {r}
+# Creating a table with a source links of the statements
+
+info <- corpus_df_website_info %>% 
+  select(txt, filename, name, stakeholder)
+
+info$stakeholder_more <- info$stakeholder
+
+info$stakeholder[info$stakeholder%in% c("journals_OA", "journals_nonOA" )] <- "journals"
+info$stakeholder[info$stakeholder%in% c("publishers_Profit", "publishers_nonProfit" )] <- "publishers"
+
+# source links of the websites
+source_website <- info$website <- word(info$txt, 1)
+
+website_info_table <- info %>% 
+  select(stakeholder, website)
+
+website_info_table %>% 
+  kbl(caption = "Source websites of the statements") %>% 
+  kable_paper("hover", full_width = F)
+
+```
+
+# Saving dataset
+``` {r}
+# This data will be used in 2_Topic_Modeling, 4_Language_analysis
+write_csv(data_words, "./output/created_datasets/cleaned_data.csv")
+```
+
+# Session information
+``` {r}
+sessionInfo()
+```
+
+
