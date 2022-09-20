@@ -72,7 +72,7 @@ We worked on a relatively small number of documents and because of that we did n
 # Cleaning R 
 
 ```{r Cleaning R}
-# rm(list=ls())
+rm(list=ls())
 ```
 
 # Libraries
