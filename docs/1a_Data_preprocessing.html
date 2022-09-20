@@ -1,0 +1,2566 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="ZZ" />
+
+<meta name="date" content="2022-05-05" />
+
+<title>1a_Data_preprocessing</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">myproject</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">1a_Data_preprocessing</h1>
+<h4 class="author">ZZ</h4>
+<h4 class="date">2022-05-05</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2022-09-20
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>myproject/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220505code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220505)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220505code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220505)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetreee8852f1d204cbbd8e1c60bf892ac407907bbc72etargetblanke8852f1a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/e8852f1d204cbbd8e1c60bf892ac407907bbc72e" target="_blank">e8852f1</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetreee8852f1d204cbbd8e1c60bf892ac407907bbc72etargetblanke8852f1a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/e8852f1d204cbbd8e1c60bf892ac407907bbc72e" target="_blank">e8852f1</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    code/.DS_Store
+    Ignored:    data/.DS_Store
+    Ignored:    output/.DS_Store
+
+Untracked files:
+    Untracked:  Policy_landscape_workflowr.R
+    Untracked:  analysis/2_Topic_modeling.Rmd
+    Untracked:  analysis/3_Text_similarities_Figure_2B.Rmd
+    Untracked:  analysis/4_Language_analysis_Figure_2C.Rmd
+    Untracked:  analysis/5_For_and_not_for_profit_comparison.Rmd
+    Untracked:  analysis/Figure_2A.Rmd
+    Untracked:  analysis/test.Rmd
+    Untracked:  code/1a_Data_preprocessing.html
+    Untracked:  code/1b_Dictionaries_preparation.html
+    Untracked:  code/2_Topic_modeling.html
+    Untracked:  code/3_Text_similarities_Figure_2B.html
+    Untracked:  code/4_Language_analysis_Figure_2C.html
+    Untracked:  code/5_For_and_not_for_profit_comparison.html
+    Untracked:  code/Figure_2A.html
+    Untracked:  code/figure/
+    Untracked:  data/README.html
+    Untracked:  data/dictionaries/
+    Untracked:  data/mission_statements/
+    Untracked:  output/Figure_2A/
+    Untracked:  output/Figure_2B/
+    Untracked:  output/Figure_2C/
+    Untracked:  output/Other_figures/
+    Untracked:  output/created_datasets/
+
+Unstaged changes:
+    Deleted:    code/1a_Data_preprocessing.Rmd
+    Deleted:    code/1b_Dictionaries_preparation.Rmd
+    Modified:   code/README.md
+    Modified:   data/README.md
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/1a_Data_preprocessing.Rmd</code>)
+and HTML (<code>docs/1a_Data_preprocessing.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/e8852f1d204cbbd8e1c60bf892ac407907bbc72e/analysis/1a_Data_preprocessing.Rmd" target="_blank">e8852f1</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2022-09-20
+</td>
+<td>
+wflow_publish(c("analysis/1a_Data_preprocessing.Rmd",
+"analysis/1b_Dictionaries_preparation.Rmd"))
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<p>1a. Data preprocessing</p>
+<p>Converting mission and aim statements documents into a table to use
+it in the further analysis.</p>
+<div id="general-information" class="section level1">
+<h1>General information</h1>
+<p>We collected in total 129 mission and aim statements of stakeholders
+involved in the research landscape in ecology and evolutionary biology.
+We identified six groups: advocates (24 documents), funders (30),
+journals (non Open Access = 16, journals Open Access = 14), publishers
+(for-profit = 7, not-for-profit = 8), repositories (17) and learned
+societies (13).</p>
+</div>
+<div id="identifying-stakeholders" class="section level1">
+<h1>Identifying stakeholders</h1>
+<p>The stakeholders were identified in advance in various ways.</p>
+<p>Journals <br> We used Scimago Journal &amp; Country Rank website (<a
+href="https://www.scimagojr.com/"
+class="uri">https://www.scimagojr.com/</a>) to search for the journals
+with the highest journal’s impact value in 2020 (subject areas such as:
+Environmental Science, Agricultural and Biological Sciences,
+Biochemistry, Genetics and Molecular Biology) that publish articles
+relevant for fields: ecology and evolutionary biology. We aimed to
+identified ~ 15 journals for both categories: only open access (OA)
+journals and non-open access (non-OA) journals. We included some
+journals that were not on the list but were identified as relevant
+journals by others. We made sure that we had journals which are owned by
+identified by us learned societies.</p>
+<p>Publishers <br> We identified publishers based on the list of our
+journals.</p>
+<p>Funders <br> We looked what funders were mentioned in
+“Acknowledgments” sections of some scientific articles published in 2019
+and 2020 in high impact factor journals (OA and non-OA). We focused on
+finding funders from all continents with a limit to max. 3 per country
+(only when appeared frequently in Acknowledgments). Moreover, we
+contacted some colleges for information on the funding source in their
+country.</p>
+<p>Repositories <br> We looked at the Data availability statements of
+the articles published in 2019 and 2020 in high impact factor journals
+(OA and non-OA) and collected information on where the data and code
+were archived. Our list includes generalist repositories and subject
+specific repositories.</p>
+<p>Societies <br> We identified societies based on the journals they own
+and by word-of-mouth.</p>
+<p>Advocates <br> Advocated is a group of organisations that actively
+support or promote good quality and accessible research (open research).
+<br> We have considered different aspects of open research (open access,
+open data, open methods) when looking for the organisations. They might
+support research in different than ecology and evolutionary biology
+discipline but should be relevant for these two as well.</p>
+</div>
+<div id="aims-and-missions-statements" class="section level1">
+<h1>Aims and missions statements</h1>
+<p>In August 2021 we collected the Aims and Mission Statements on the
+official website of each of the stakeholder. We did not contact anyone
+associated with the stakeholders to request more information. If there
+was no separate section but the aims or missions were described in
+“About” section, we chose it instead. The text from these websites were
+manually copied and separately saved for each of the stakeholders as
+.txt. The first line in the documents is a source website.</p>
+</div>
+<div id="documents-preprocessing" class="section level1">
+<h1>Documents preprocessing</h1>
+<p>To be able to analyse the content of the statements we preprocessed
+the documents to create one dataset with one word per row and
+information about the word source and position in the text/sentence.
+Some irrelevant words were removed and each of the word was
+lemmatizationed or stemminged. We followed a cleaning process suggested
+in Maier et al. 2018 “Applying LDA Topic Modelling in Communication
+Research: Toward a Valid and Reliable Methodology”.</p>
+<p>We followed these steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>Importing all documents and converting them into a table.
+Columns: name - name of the stakeholder filename - name of the file
+(NameOfStakeholder_DocumentType) stakeholder - stakeholder group (here:
+advocates, funders, journals,for-profit publishers, not-for-profit
+publishers, repositories, societies) txt - text (Statements) doc_type -
+type of the document (Mission Statement or About)</p></li>
+<li><p>Removing link formatting from the text (<a href="http://"
+class="uri">http://</a> and <a href="https://" class="uri">https://</a>
+links)</p></li>
+<li><p>Separating text into sentences and keeping information what
+document and stakeholder they belong to.</p></li>
+<li><p>Tokenisation - creating a tidy text, converting tokens to
+lowercase, removing punctuation, deleting special characters</p></li>
+<li><p>Removing stop-words, for this we used lexicons SMART and snowball
+in stop_words lexicon (library tidytext) and removing other not
+significant words like: numbering (ii, iii, iv, v), name of document
+type (aim, aims, mission…), name of the stakeholders (erc, nerc,
+wellcome)</p></li>
+<li><p>Lemmatization (library lexicon) - converting words to their lemma
+form/lexeme (e.g., “contaminating” and “contamination” become
+“contaminate”) (Manning &amp; Schütze, 2003, p. 132).</p></li>
+</ol>
+<p>We worked on a relatively small number of documents and because of
+that we did not perform relative prunning (stripping very rare and
+extremely frequent word occurrences from the observed data).</p>
+</div>
+<div id="cleaning-r" class="section level1">
+<h1>Cleaning R</h1>
+<pre class="r"><code>rm(list=ls())</code></pre>
+</div>
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+✓ tibble  3.1.6     ✓ dplyr   1.0.7
+✓ tidyr   1.1.4     ✓ stringr 1.4.0
+✓ readr   2.0.2     ✓ forcats 0.5.1</code></pre>
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+<pre><code>Package version: 3.1.0
+Unicode version: 13.0
+ICU version: 69.1</code></pre>
+<pre><code>Parallel computing: 8 of 8 threads used.</code></pre>
+<pre><code>See https://quanteda.io for tutorials and examples.</code></pre>
+<pre><code>Loading required package: NLP</code></pre>
+<pre><code>
+Attaching package: &#39;NLP&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:quanteda&#39;:
+
+    meta, meta&lt;-</code></pre>
+<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
+
+    annotate</code></pre>
+<pre><code>
+Attaching package: &#39;tm&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:quanteda&#39;:
+
+    stopwords</code></pre>
+<pre><code>Loading required package: RColorBrewer</code></pre>
+<pre><code>
+Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    smiths</code></pre>
+<pre><code>
+Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:quanteda.textplots&#39;:
+
+    as.igraph</code></pre>
+<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
+
+    as_data_frame, groups, union</code></pre>
+<pre><code>The following objects are masked from &#39;package:purrr&#39;:
+
+    compose, simplify</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    crossing</code></pre>
+<pre><code>The following object is masked from &#39;package:tibble&#39;:
+
+    as_data_frame</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    decompose, spectrum</code></pre>
+<pre><code>The following object is masked from &#39;package:base&#39;:
+
+    union</code></pre>
+<pre><code>stm v1.3.6 successfully loaded. See ?stm for help. 
+ Papers, resources, and other materials at structuraltopicmodel.com</code></pre>
+<pre><code>
+Attaching package: &#39;kableExtra&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:dplyr&#39;:
+
+    group_rows</code></pre>
+</div>
+<div id="importing-data" class="section level1">
+<h1>Importing data</h1>
+<pre class="r"><code>dirs &lt;- list.dirs(path = &quot;./data/mission_statements&quot;, recursive = FALSE)
+getwd()</code></pre>
+<pre><code>[1] &quot;/Users/zuzannazagrodzka/Desktop/Project_1_ZZ/myproject&quot;</code></pre>
+<pre class="r"><code># List of files
+files &lt;- list()
+for (i in 1:length(dirs)){files[[i]] &lt;- list.files(path = dirs[i], pattern = &quot;.txt&quot;, full.names = TRUE, recursive = FALSE)}
+
+# files
+use_files &lt;- unlist(files)
+
+dirs &lt;- list.dirs(path = &quot;./data/mission_statements&quot;, recursive = FALSE)
+# dirs
+
+files &lt;- list()
+# files
+
+for (i in 1:length(dirs)){
+  files[[i]] &lt;- list.files(path = dirs[i], 
+                           pattern = &quot;.txt&quot;, 
+                           full.names = TRUE, 
+                           recursive = FALSE)}
+
+# files
+use_files &lt;- unlist(files)
+# use_files
+
+# using purrr to generate a data frame of the corpuses
+corpus_df &lt;- map_df(use_files, 
+                    ~ data_frame(txt = read_file(.x)) %&gt;%
+                      mutate(filename = basename(.x)))</code></pre>
+<pre><code>Warning: `data_frame()` was deprecated in tibble 1.1.0.
+Please use `tibble()` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<pre class="r"><code># removing encoded junk from the text column
+corpus_df$txt &lt;- gsub(&quot;[^[:print:]]&quot;, &quot; &quot;, corpus_df$txt)</code></pre>
+</div>
+<div id="adding-columns-to-the-corpus" class="section level1">
+<h1>Adding columns to the corpus</h1>
+<pre class="r"><code># create new columns: name, stakeholder
+corpus_df$name &lt;- corpus_df$filename
+
+corpus_df &lt;- corpus_df %&gt;% separate(name, c(&quot;name&quot;,&quot;doc_type&quot;), sep = &quot;_&quot;) 
+corpus_df &lt;- corpus_df %&gt;% mutate_at(&quot;doc_type&quot;, str_replace, &quot;.txt&quot;, &quot;&quot;)
+
+# creating a column: stakeholder 
+corpus_df$stakeholder &lt;- corpus_df$name
+
+# filling stakeholder column with the stakeholders&#39; names
+
+# Funders
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;CNPq&quot;, &quot;Alexander von Humboldt Foundation&quot;, &quot;Australian Research Council&quot;, &quot;Chinese Academy of Sciences&quot;, &quot;Conacyt&quot;, &quot;CONICYT&quot;, &quot;Consortium of African Funds for the Environment&quot;, &quot;Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior&quot;, &quot;CSIR South Africa&quot;, &quot;Deutsche Forschungsgemeinschaft&quot;, &quot;ERC&quot;, &quot;FORMAS&quot;, &quot;French National Centre for Scientific Research&quot;, &quot;Helmholtz-Gemeinschaft&quot;, &quot;JST&quot;, &quot;Max Planck Society&quot;, &quot;MOE China&quot;, &quot;National Natural Science Foundation&quot;, &quot;National Research Council Italy&quot;, &quot;National Science Foundation&quot;, &quot;NERC&quot;, &quot;NRC Egypt&quot;, &quot;NRF South Africa&quot;, &quot;NSERC&quot;, &quot;RSPB&quot;, &quot;Russian Academy of Science&quot;, &quot;Sea World Research and Rescue Foundation&quot;, &quot;Spanish National Research Council&quot;, &quot;The Daimler and Benz Foundation&quot;, &quot;The French National Research Agency&quot;, &quot;Wellcome&quot;)] &lt;- &quot;funders&quot;
+
+
+# Journals OA
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;Arctic, Antarctic, and Alpine Research&quot;, &quot;Biogeosciences&quot;,&quot;Conservation Letters&quot;, &quot;Diversity and Distributions&quot;, &quot;Ecology and Evolution&quot;, &quot;Ecology and Society&quot;, &quot;eLifeJournal&quot;, &quot;Evolution Letters&quot;, &quot;Evolutionary Applications&quot;, &quot;Frontiers in Ecology and Evolution&quot;, &quot;Neobiota&quot;, &quot;PeerJJournal&quot;, &quot;Plos Biology&quot;, &quot;Remote Sensing in Ecology and Conservation&quot;)] &lt;- &quot;journals_OA&quot;
+
+# Journals nonOA (including transitioning, hybrid and closed - last time checked August 2021)
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;BioSciences&quot;, &quot;American Naturalist&quot;, &quot;Annual Review of Ecology Evolution and Systematics&quot;, &quot;Biological Conservation&quot;, &quot;Conservation Biology&quot;, &quot;Ecological Applications&quot;, &quot;Ecology Letters&quot;, &quot;Ecology&quot;, &quot;Evolution&quot;, &quot;Frontiers in Ecology and the Environment&quot;, &quot;Global Change Biology&quot;, &quot;Journal of Applied Ecology&quot;, &quot;Nature Ecology and Evolution&quot;, &quot;Philosophical Transactions of the Royal Society B&quot;, &quot;Proceedings of the Royal Society B Biological Sciences&quot;, &quot;Trends in Ecology &amp; Evolution&quot;)] &lt;- &quot;journals_nonOA&quot;
+
+
+# Societies
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;BES&quot;, &quot;ESEB&quot;, &quot;RS&quot;, &quot;SORTEE&quot;, &quot;The Society for Conservation Biology&quot;, &quot;The Zoological Society of London&quot;, &quot;Society for the Study of Evolution&quot;, &quot;Max Planck Society&quot;, &quot;American Society of Naturalists&quot;, &quot;British Ecological Society&quot;, &quot;Ecological Society of America&quot;, &quot;European Society for Evolutionary Biology&quot;, &quot;National Academy of Sciences&quot;, &quot;Australasian Evolution Society&quot;, &quot;Ecological Society of Australia&quot;, &quot;Royal Society Te Aparangi&quot;, &quot;The Royal Society&quot;)] &lt;- &quot;societies&quot;
+
+# Repositories
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;Australian Antarctic Data Centre&quot;, &quot;BCO-DMO&quot;, &quot;DNA Databank of Japan&quot;, &quot;Dryad&quot;, &quot;European Bioinformatics Institute&quot;, &quot;Figshare&quot;, &quot;GBIF&quot;, &quot;Harvard Dataverse&quot;, &quot;KNB&quot;, &quot;Marine Data Archive&quot;, &quot;NCBI&quot;, &quot;TERN&quot;, &quot;World Data Center for Climate&quot;, &quot;Zenodo&quot;, &quot;EcoEvoRxiv&quot;, &quot;bioRxiv&quot;, &quot;OSF&quot;)] &lt;- &quot;repositories&quot;
+
+# Publishers non for profit and for profit
+
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;The University of Chicago Press&quot;, &quot;Annual Reviews&quot;, &quot;BioOne&quot;, &quot;eLife&quot;, &quot;Frontiers&quot;, &quot;Resilience Alliance&quot;, &quot;The Royal Society Publishing&quot;, &quot;AIBS&quot;)]  &lt;- &quot;publishers_nonProfit&quot;
+
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;Cell Press&quot;, &quot;Elsevier&quot;, &quot;Springer Nature&quot;, &quot;PeerJ&quot;, &quot;Pensoft&quot;, &quot;PLOS&quot;, &quot;Wiley&quot;)]  &lt;- &quot;publishers_Profit&quot;
+
+
+# Advocates - stakeholders promoting good research practices and Open Research agenda
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;Center for Open Science&quot;, &quot;coalitionS&quot;, &quot;CoData&quot;, &quot;DataCite&quot;, &quot;DOAJ&quot;, &quot;Gitlab&quot;, &quot;Peer Community In&quot;, &quot;RDA&quot;, &quot;Research Data Canada&quot;, &quot;Africa Open Science and Hardware&quot;, &quot;Amelica&quot;, &quot;Bioline International&quot;, &quot;Coko&quot;, &quot;COPDESS&quot;, &quot;FAIRsharing&quot; , &quot;FORCE11&quot;, &quot;FOSTER&quot; , &quot;Free our knowledge&quot;, &quot;Jisc&quot;, &quot;Open Access Australasia&quot;, &quot;Reference Center for Environmental Information&quot;, &quot;Research4life&quot; , &quot;ROpenSci&quot; , &quot;SPARC&quot; )] &lt;- &quot;advocates&quot;</code></pre>
+<p>Creating corpus_df_website_info which is going to be used later to
+get a list of the websites</p>
+<pre class="r"><code>corpus_df_website_info &lt;- corpus_df</code></pre>
+</div>
+<div id="preprocessing" class="section level1">
+<h1>Preprocessing</h1>
+<pre class="r"><code># Cleaning the text from http:// and https:// links, removing numbers and &quot;&#39;s&quot;
+# remove http:// and https:// and www.
+corpus_df$txt &lt;- gsub(&quot;(s?)(f|ht)tp(s?)://\\S+\\b&quot;, &quot; &quot;, corpus_df$txt) 
+corpus_df$txt &lt;- gsub(&quot;www.\\S+\\s*&quot;, &quot;&quot;, corpus_df$txt) 
+
+
+# removing full names and phrases before tokenisation:
+# change oa to open access and or to open research, for-profit and for profit to forprofit, no-profit 
+
+corpus_df$txt &lt;- gsub(&quot; F.A.I.R. &quot;, &quot; FAIR &quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot; OA &quot;, &quot; open access &quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot; OR &quot;, &quot; open research &quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot; OS &quot;, &quot; open science &quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot; OA &quot;, &quot; open access &quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot;no-profit|not-for-profit|not for-profit|no profit&quot;, &quot;nonprofit&quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot;for-profit|for profit&quot;, &quot;forprofit&quot;, corpus_df$txt)
+
+corpus_df$txt &lt;- gsub(&quot;DOIs|dois|DOI&quot;, &quot;doi&quot;, corpus_df$txt)
+
+# removing email addresses @
+corpus_df$txt &lt;- gsub(&quot;\\S*@\\S*&quot;,&quot;&quot;,corpus_df$txt)
+
+# removing names mentioned in the documents:
+corpus_df$txt &lt;- gsub(&quot;Marc Schiltz the President of Science Europe|Dr. Francesca Dominici|Kaiser Wilhelm|Harold Varmus|Patrick Brown|Michael Eisen|Adolph von Harnack|Harnack|Otto Hahn Medal|Albert Einstein|Robert-Jan Smits|Carl Folke|Lance Gunderson|Abraham Lincoln|Sewall Wright|Ruth Patric|Douglas Futuyama|Louis Agassiz at Harvard&#39;s Museum of Comparative Zoology|Charles Darwin|Isaac Newton|Rosalind Franklin|Theodosius Dobzhansky&quot;,&quot;&quot;,corpus_df$txt)
+
+# removing all names (part 1)
+corpus_df$txt &lt;- gsub(&quot;General Conference of the United Nations Educational, Scientific and Cultural Organization|International Association of Scientific, Technical &amp; Medical Publishers|Coordination for the Improvement of Higher Education Personnel (CAPES)|Jasper Loftus-Hills Young Investigator Award|Edward O. Wilson Naturalist Award|International Network for the Availability of Scientific Publications|United Nations Educational, Scientific and Cultural Organization|Office of Polar Programs at the U.S. National Science Foundation|National Commission for Scientific and Technological Research|Coalition for Publishing Data in the Earth and Space Sciences|Natural Sciences and Engineering Research Council of Canada|Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior|Catalogue of Australian Antarctic and Subantarctic Metadata|Open Reliable Transparent Ecology and Evolutionary biology|International Nucleotide Sequence Database Collaboration|United States Government&#39;s National Science Foundation|Proceedings of the Royal Society B Biological Sciences|National Charter of Ethics for the Research Profession|Consortium of African Funds for the Environment (CAFE)|Committee on Data of the International Science Council|South African National Biodiversity Institute (SANBI)|Scholarly Publishing and Academic Resources Coalition|Malawi Environmental Endowment Trust (MEET) in Malawi|National Council of Science and Technology (Conacyt)|Annual Review of Ecology Evolution and Systematics|the University of Chicago Press Journals Division|Philosophical Transactions of the Royal Society B|International Max Planck Research Schools (IMPRS)|the National Health and Medical Research Council|Australian Government’s Department of Innovation|Consortium of African Funds for the Environment|the National Competitive Grants Program (NCGP)|European Society of Evolutionary Biology|Research for Development and Innovation (ARDI)|National Institute of Standards and Technology|International Congress of Conservation Biology|French National Centre for Scientific Research|University of Chicago Press Journals Division|Study of Environmental Arctic Change (SEARCH)|South African National Biodiversity Institute|Reference Center on Environmental Information|Biological and Chemical Oceanography Sections|Open Access Envoy of the European Commission|National Natural Science Foundation of China|National Institutes of Health|Big Hairy Audacious Goal|Deutsche Zentren für Gesundheitsforschung|University of Colorado Boulder|Study of Environmental Arctic Change (SEARCH)|John Maynard Smith|Darwin Core|PeerJ – the Journal of Life &amp; Environmental Sciences (PeerJ)|PeerJ Computer Science|PeerJ Physical Chemistry|PeerJ Organic Chemistry|PeerJ Inorganic Chemistry|PeerJ Analytical Chemistry and PeerJ Materials Science&quot;, &quot;&quot;, corpus_df$txt)
+                      
+# removing all names (part 2)
+corpus_df$txt &lt;- gsub(&quot;African Institute of Open Science &amp; Hardware|Electronic Publishing Trust for Development|Remote Sensing in Ecology and Conservation|National Competitive Grants Program (NCGP)|Journal of Biogeography and Global Ecology|Excellence in Research for Australia (ERA)|Excellence in Research for Australia (ERA)|Intergovernmental Panel on Climate Change|Gottlieb Daimler and Karl Benz Foundation|Carl Benz House|European Society for Evolutionary Biology|Sea World Research and Rescue Foundation|Science for Nature and People Parnership|Global Biodiversity Information Facility|Frontiers in Ecology and the Environment|EMBL&#39;s European Bioinformatics Institute|Artificial Intelligence Review Assistant|Institute of Arctic and Alpine Research|State of Florida and Palm Beach County|Peer Community in Evolutionary Biology|European Group on Biological Invasions|Arctic, Antarctic, and Alpine Research|Weizmann Institute in Rehovot, Israel|UNESCO Universal Copyright Convention|UNESCO Recommendation on Open Science|International Panel on Climate Change|European Molecular Biology Laboratory|European Molecular Biology Laboratory|University of Toronto at Scarborough|Natural Environment Research Council|Knut and Alice Wallenberg Foundation|Global Open Science Hardware Roadmap|State of Alaska&#39;s Salmon and People|Research for Global Justice (GOALI)|National Natural Science Foundation|Knowledge Network for Biocomplexity|Society for the Study of Evolution|Research in the Environment (OARE)|Frontiers in Ecology and Evolution|Data Observation Network for Earth|Collaborative Peer Review Platform|the American Journal of Sociology|Spanish National Research Council|Research Ideas and Outcomes (RIO)|Research Ideas and Outcomes (RIO)|European Bioinformatics Institute|Directory of Open Access Journals|Cambridge Conservation Initiative|Alexander von Humboldt Foundation|the Zoological Society of London|Society for Conservation Biology|Open Educational Resources (OER)|Field Chief Editor Mark A. Elgar|Biogeosciences Discussions (BGD)|Australian Antarctic Data Centre|University of Toronto Libraries|The University of Chicago Press|Research in Agriculture (AGORA)|NIH Intramural Research Program|National Research Council|National Academy of Engineering|Millennium Ecosystem Assessment|Journal of Evolutionary Biology|Howard Hughes Medical Institute|German Climate Computing Centre|French National Research Agency|European Research Council (ERC)|eLife Sciences Publications Ltd|Ecological Society of Australia|Deutsche Forschungsgemeinschaft|American Society of Naturalists|Japan&#39;s Science and Technology|Australian Government Minister|Australasian Evolution Society|African Journals OnLine (AJOL)|Africa Open Science &amp; Hardware|World Data Center for Climate|Trends in Ecology &amp; Evolution|National Institutes of Health|Kurchatov Institute in Russia|International Science Council|Elsevier’s Clinical Solutions|Ecological Society of America|Department of Social Sciences|Cornell and Yale Universities|Cold Spring Harbor Laboratory|American Journal of Sociology|Research for Health (Hinari)|Philosophical Transactions B|Nature Ecology and Evolution|National Research Foundation|National Library of Medicine|National Academy of Sciences|National Academy of Medicine|Journal of Political Economy|Journal of Political Economy|Helmholtz-Alberta Initiative|Harvard Dataverse Repository|European Research Area (ERA)|ISI ScienceWatch|Royal Charter|Springer Nature|The Nature Portfolio|Scientific American&quot;, &quot;&quot;, corpus_df$txt)
+                      
+# removing all names (part 3)
+corpus_df$txt &lt;- gsub(&quot;University of Chicago Press|Tropical Database in Brazil|Research Ideas and Outcomes|National Science Foundation|Ministry of Education (MEC)|Federal Republic of Germany|Diversity and Distributions|Daimler and Benz Foundation|Chinese Academy of Sciences|Chinese Academy of Sciences|Australian Research Council|Australia’s Chief Scientist|Russian Academy of Science|Nature Ecology &amp; Evolution|National Research Strategy|Max Planck Innovation GmbH|Journal of Applied Ecology|Further Max Planck Centers|British Ecological Society|WHO, FAO, UNEP, WIPO, ILO|Royal Society Te Aparangi|Peer Community in Ecology|National Research Council|Evolutionary Applications|European Research Council|Environmental Funds|EFs|Biodiversity Data Journal|Biodiversity Data Journal|Royal Society Publishing|Dryad Digital Repository|Digital Editorial Office|Data Distribution Centre|Comparative Cytogenetics|Comparative Cytogenetics|American Biology Teacher|University of Melbourne|Public Research Centers|International Data Week|Ecological Applications|Ecological Applications|Center for Open Science|Biological Conservation|African Journals OnLine|African Journals OnLine|Wellcome Genome Campus|Research Data Alliance|Kaiser Wilhelm Society|Helmholtz-Gemeinschaft|Deutscher Wetterdienst|BirdLife international|Swedish Energy Agency|Social Service Review|Senator Claude Pepper|Ministry of Education|Institute of Medicine|Helmholtz Association|Helmholtz Association|Global Change Biology|Ecology and Evolution|DNA Databank of Japan|Congress of the Union|Bioline International|Bioline|Australian Government|ARC Discovery Program|Research Data Canada|Conservation Letters|Conservation Biology|Brazilian Federation|Big Garden Birdwatch|Albatross Task Force|Resilience Alliance|Nature Conservation|Nature Conservation|Marine Data Archive|European Commission|European Commission|Environmental Funds|Environmental Funds|Ecology and Society|Clarivate Analytics|American Naturalist|Russian Federation|Publication Ethics|Max Planck Society|Max Planck Society|Give Nature a Home|Free Our Knowledge|Fraunhofer Society|Peer Community In|Harvard Dataverse|Evolution Letters|Ecology &amp; Society|CSIR South Africa|Bertha Benz Prize|United Utilities|Carl Benz House|NRF South Africa|Nature Portfolio|Helmholtz Senate|Ecology Letters|Daimler-Benz AG|CSIRO Australia|Colorado alpine|BioOne Complete|BioOne|HAMAGUCHI Plan|Gray&#39;s Anatomy|Biogeosciences|Annual Reviews|ZSL Whipsnade|ScienceDirect|ScienceDirect|Royal Society|Research4Life|PCI Evol Biol|Mexican State|GCB Bioenergy|Cell Symposia|Bose-Einstein|Plos Biology|Humboldtians|Humboldt|Horizon 2020|Google Drive|Future Earth|Biogeography|WDC-Climate|the Academy|Kichstarter|Humboldtian|FOSTER Plus|FAIRsharing|ELIXIR Node|cOAlition S|ZSL London|SciDataCon|Max Planck|Figure 360|EcoEvoRxiv|Daimler AG|CU-Boulder|Cell Press|Africa OSH|Sea World|PhytoKeys|NRC Egypt|MOE China|Frontiers|Evolution|Elseviere|CiteScore|Wellcome|rOpenSci|PCI Ecol|OpenAIRE|CU-Boulder |Neobiota|NeoBiota|MycoKeys|HUPO PSI|Figshare|EMBL-EBI|Elsevier|DataCite|ZooKeys|RESTful|Redalyc|Pensoft|FORCE11|Figshare|figshare|Ecology|Dropbox|DataONE|Conacyt|COMBINE|bioRxiv|AmeliCA|Zenodo|Plan S|Lancet|Gitlab|GitLab|Git|FORMAS|CoData|CODATA|Wiley|PeerJ|Inter|eLife|Dryad|Coko|CNPq|Cell |Hinari|Pronaces|Cnr|Vinnova|Minerva|uGREAT|Benz|GitHub|protocols.io|Andrea Stephens|Mtauranga|Metacat|ELIXIR|VSNU and the UKB|Springer|Nikau Consultancy|Aspiration&quot;, &quot;&quot;, corpus_df$txt)
+
+# removing all names (part 4)
+corpus_df$txt &lt;- gsub(&quot;Washington Watch|BioScience|Eye on Education|AIBS Bulletin|Dr. Francesca Dominici|PeerJ – the Journal of Life &amp; Environmental Sciences (PeerJ)|PeerJ Computer Science|PeerJ Physical Chemistry|PeerJ Organic Chemistry|PeerJ Inorganic Chemistry|PeerJ Analytical Chemistry and PeerJ Materials Science&quot;, &quot;&quot;, corpus_df$txt)
+
+# removing words related to the locations and names
+corpus_df$txt &lt;- gsub(&quot;Global South|Global North|New Zealanders|New Zelanders|New Zeland|New Zealand|Great Britain|North America|Eastern Europe|South America|South africans|South africa|Eastern Europe|ARPHA Platform|Woods Hole Oceanographic Institution|US JGOFS|US GLOBEC|NSF Geosciences Directorate (GEO) Division of Ocean Sciences (OCE) Biological and Chemical Oceanography Sections, Division of Polar Programs (PLR) Antarctic Sciences (ANT) Organisms &amp; Ecosystems, and Arctic Sciences (ARC) awards|(DACST)|(CSD)|(FRD)|GBIF.org&quot;,&quot;&quot;,corpus_df$txt)
+
+# removing abbreviations and other missed words
+corpus_df$txt &lt;- gsub(&quot;(CREDIT)|BCO-DMO|CONICYT|NEOBIOTA|INSTAAR|COPDESS|CLOCKSS|CoESRA|CAASM|AADC|CONZUL|EMPSEB|SHaRED|SORTEE|SEARCH|SANBI|SPARC|INSTAAR|UNESCO|APEC|AOASG|ARPHA|NCEAS|ICPSR|IMPRS|CMIP5|JDAP|CERN|MBMG|INASP|NSERC|GOALI|AIRA|AJOL|APIs|EMBL|AIBS|CAUL|CRIA|DOAJ|ICBB|ESEB|GBIF|K-12|NCBI|NCGP|NERC|IPCC|CNRS|CSIC|CSIR|BEIS|OARE|HSRC|PLOS|AAAR|USGS|NCAR|NOAA|NEON|ARDI|RSPB|DDBJ|INSDC|INSD|STAR|TERN|TREE|UTSC|UKRI|ARC|BES|SSE|COS|CAS|CTFs|DDI|EPT|ERC|ERA|JST|KNB|NRF|DFG|MDA|NIH|NLM|NRC|NRF|OSF|SCB|OSH|OAI|OCE|PCB|PCI|RDA|GCB|RDC|NSF|BGD|BMC|BHAG|ESA|ZSL|SPP|RCC|RMB|TRL|API|ARC|PLR|DDC|DKRZ|DWD|DVCS|NAE|NAM|EBI|ANR|API|NAS|ASN|NSF|OCE|ANT|UIs|API|EiC|TEE|UCL|SDGs|PIA|CL|RA|RS|STI|SNI|BG|U.K.|U.S.|EC|SC|CU|R&amp;D|Eos|EIDs&quot;,&quot;&quot;,corpus_df$txt)
+
+# removing numbers 
+corpus_df$txt &lt;- gsub(&quot;[0-9]+&quot;,&quot;&quot;,corpus_df$txt)
+
+# removing &quot;&#39;s&quot;
+corpus_df$txt &lt;- gsub(&quot;&#39;s&quot;,&quot;&quot;,corpus_df$txt)</code></pre>
+</div>
+<div id="tokenisation" class="section level1">
+<h1>Tokenisation</h1>
+<pre class="r"><code># Tokenisation - creating a tidy text: it convert tokens to lowercase, removes punctuation
+# Starting with tokenizing text into sentences:
+
+corpus_df$txt_copy &lt;- corpus_df$txt
+
+data_tidy_sentences &lt;- corpus_df %&gt;%  
+  unnest_tokens(sentence, txt_copy, token = &quot;sentences&quot;)
+
+data_tidy_sentences &lt;- data_tidy_sentences %&gt;% group_by(name) %&gt;% mutate(sentence_id = row_number())
+
+data_tidy_sentences$sentence_doc &lt;- paste0(data_tidy_sentences$name, &quot;_&quot;, data_tidy_sentences$sentence_id)
+
+colnames(data_tidy_sentences)</code></pre>
+<pre><code>[1] &quot;txt&quot;          &quot;filename&quot;     &quot;name&quot;         &quot;doc_type&quot;     &quot;stakeholder&quot; 
+[6] &quot;sentence&quot;     &quot;sentence_id&quot;  &quot;sentence_doc&quot;</code></pre>
+<pre class="r"><code>data_tidy_sentences &lt;- as.data.frame(data_tidy_sentences)
+data_tidy &lt;- data_tidy_sentences %&gt;%  
+  # mutate(as.character(sentence)) %&gt;%
+  unnest_tokens(word, sentence, token = &quot;words&quot; )  %&gt;%
+  select(-sentence_id)
+
+
+# Removal of stop-words: check the lexicons in stop_words, create a list of my stop words like: numbering (ii, iii, iv, v), name of document type (aim, aims, mission...), name of the stakeholders (erc, nerc, wellcome)
+# onix lexicon contains words like &quot;open&quot;, &quot;opened&quot; and so on, I decided to remove this lexicon from the analysis
+
+my_stop_words &lt;- stop_words %&gt;%
+  filter(!grepl(&quot;onix&quot;, lexicon))
+
+# removing other words (names of stakeholders, types of documents, months,  abbreviations and not meaning anything)
+
+my_stop_words &lt;- bind_rows(data_frame(word = c(&quot;e.g&quot;, &quot;i.e&quot;, &quot;ii&quot;, &quot;iii&quot;, &quot;iv&quot;, &quot;v&quot;, &quot;vi&quot;, &quot;vii&quot;, &quot;ix&quot;, &quot;x&quot;, &quot;&quot;, &quot;missions&quot;, &quot;mission&quot;, &quot;aims&quot;, &quot;aimed&quot;, &quot;aim&quot;, &quot;values&quot;, &quot;value&quot;, &quot;vision&quot;, &quot;about&quot;, &quot;publisher&quot;, &quot;funder&quot;, &quot;society&quot;, &quot;journal&quot;, &quot;repository&quot;, &quot;deutsche&quot;, &quot;january&quot;, &quot;febuary&quot;, &quot;march&quot;, &quot;april&quot;, &quot;may&quot;, &quot;june&quot;, &quot;july&quot;, &quot;august&quot;, &quot;september&quot;, &quot;october&quot;, &quot;november&quot;, &quot;december&quot;, &quot;jan&quot;, &quot;feb&quot;, &quot;mar&quot;, &quot;apr&quot;, &quot;jun&quot;, &quot;jul&quot;, &quot;aug&quot;, &quot;sep&quot;, &quot;sept&quot;, &quot;oct&quot;, &quot;nov&quot;, &quot;dec&quot;, &quot;australasian&quot;, &quot;australians&quot;, &quot;australian&quot;, &quot;australia&quot;, &quot;latin&quot;, &quot;america&quot;, &quot;cameroon&quot;, &quot;yaoundé&quot;, &quot;berlin&quot;, &quot;baden&quot;, &quot;london&quot;, &quot;whipsnade&quot;, &quot;san&quot;, &quot;francisco&quot;, &quot;britain&quot;, &quot;european&quot;, &quot;europe&quot;, &quot;malawi&quot;, &quot;sweden&quot;, &quot;florida&quot;, &quot;shanghai&quot;, &quot;argentina&quot;, &quot;india&quot;, &quot;florida&quot;, &quot;luxembourg&quot;, &quot;italy&quot;, &quot;canadians&quot;, &quot;canadian&quot;, &quot;canada&quot;, &quot;spanish&quot;, &quot;spain&quot;, &quot;france&quot;, &quot;french&quot;, &quot;antarctica&quot;, &quot;antarctic&quot;, &quot;paris&quot;, &quot;cambridge&quot;, &quot;harvard&quot;, &quot;russian&quot;, &quot;russia&quot;, &quot;chicago&quot;, &quot;colorado&quot;, &quot;africans&quot;, &quot;african&quot;, &quot;africa&quot;, &quot;japan&quot;, &quot;japanese&quot;, &quot;brazil&quot;, &quot;zelanders&quot;, &quot;zeland&quot;, &quot;mori&quot;, &quot;aotearoa&quot;, &quot;american&quot;, &quot;america&quot;, &quot;australasia&quot;, &quot;hamburg&quot;, &quot;netherlands&quot;, &quot;berlin&quot;, &quot;china&quot;, &quot;chinese&quot;, &quot;brazil&quot;, &quot;mexico&quot;, &quot;germany&quot;, &quot;german&quot;, &quot;ladenburg&quot;, &quot;baden&quot;, &quot;potsdam&quot;, &quot;platz&quot;, &quot;oxford&quot;, &quot;berlin&quot;, &quot;asia&quot;, &quot;budapest&quot;, &quot;taiwan&quot;, &quot;chile&quot;, &quot;putonghua&quot;, &quot;hong&quot;, &quot;kong&quot;,&quot;helmholtz&quot;, &quot;bremen&quot;, &quot;copenhagen&quot;, &quot;stuttgart&quot;, &quot;hinxton&quot;, &quot;mātauranga&quot;, &quot;māori&quot;, &quot;yaound&quot;, &quot;egypt&quot;, &quot;uk&quot;, &quot;usa&quot;, &quot;eu&quot;, &quot;st&quot;, &quot;miraikan&quot;, &quot;makao&quot;, &quot;billion&quot;, &quot;billions&quot;, &quot;eight&quot;, &quot;eighteen&quot;, &quot;eighty&quot;, &quot;eleven&quot;, &quot;fifteen&quot;, &quot;fifty&quot;, &quot;five&quot;, &quot;forty&quot;, &quot;four&quot;, &quot;fourteen&quot;, &quot;hundreds&quot;, &quot;million&quot;, &quot;millions&quot;, &quot;nine&quot;, &quot;nineteen&quot;, &quot;ninety&quot;, &quot;one&quot;, &quot;ones&quot;, &quot;seven&quot;, &quot;seventeen&quot;, &quot;seventy&quot;, &quot;six&quot;, &quot;sixteen&quot;, &quot;sixty&quot;, &quot;ten&quot;, &quot;tens&quot;, &quot;thirteen&quot;, &quot;thirty&quot;, &quot;thousand&quot;, &quot;thousands&quot;, &quot;three&quot;, &quot;twelve&quot;, &quot;twenty&quot;, &quot;two&quot;, &quot;iccb&quot;, &quot;ca&quot;), lexicon = c(&quot;custom&quot;)), my_stop_words)
+
+data_tidy &lt;- data_tidy %&gt;%
+ anti_join(my_stop_words)</code></pre>
+<pre><code>Joining, by = &quot;word&quot;</code></pre>
+<pre class="r"><code># lemmatizing using lemma table
+token_words &lt;- tokens(data_tidy$word, remove_punct = TRUE)
+tw_out &lt;- tokens_replace(token_words,
+               pattern = lexicon::hash_lemmas$token,
+               replacement = lexicon::hash_lemmas$lemma)
+tw_out_df&lt;- as.data.frame(unlist(tw_out))
+data_tidy &lt;- cbind(data_tidy, tw_out_df$&quot;unlist(tw_out)&quot;)
+
+colnames(data_tidy)[which(names(data_tidy) == &quot;word&quot;)] &lt;- &quot;orig_word&quot;
+colnames(data_tidy)[which(names(data_tidy) == &quot;tw_out_df$\&quot;unlist(tw_out)\&quot;&quot;)] &lt;- &quot;word_mix&quot;
+
+# changing American English to British English
+ukus_out &lt;- tokens(data_tidy$word_mix, remove_punct = TRUE)
+ukus_out &lt;- quanteda::tokens_lookup(ukus_out, data_dictionary_us2uk, exclusive = FALSE, capkeys = FALSE)
+ukus_df &lt;- as.data.frame(unlist(ukus_out))
+data_tidy &lt;- cbind(data_tidy, ukus_df$&quot;unlist(ukus_out)&quot;)
+colnames(data_tidy)[which(names(data_tidy) == &quot;ukus_df$\&quot;unlist(ukus_out)\&quot;&quot;)] &lt;- &quot;word&quot;</code></pre>
+</div>
+<div
+id="creating-a-column-that-will-include-info-about-oa-and-nonoa-journals-or-publisher-for-profit-and-non-profit"
+class="section level1">
+<h1>Creating a column that will include info about OA and nonOA journals
+or publisher for profit and non-profit</h1>
+<pre class="r"><code>data_words &lt;- data_tidy
+
+# Creating a column that will include info about OA and nonOA journals or publisher for profit and non-profit
+data_words$org_subgroups &lt;- data_words$stakeholder
+data_words$stakeholder[data_words$stakeholder%in% c(&quot;journals_OA&quot;, &quot;journals_nonOA&quot; )] &lt;- &quot;journals&quot;
+data_words$stakeholder[data_words$stakeholder%in% c(&quot;publishers_Profit&quot;, &quot;publishers_nonProfit&quot; )] &lt;- &quot;publishers&quot;</code></pre>
+</div>
+<div
+id="information-and-a-table-with-the-number-of-documents-per-stakeholder-and-list-of-documents"
+class="section level1">
+<h1>Information and a table with the number of documents per stakeholder
+and list of documents</h1>
+<pre class="r"><code># Number of documents per stakeholder
+number_of_documents &lt;- data_tidy %&gt;% 
+  select(name, stakeholder) %&gt;% 
+  distinct(name, .keep_all = TRUE) %&gt;% 
+  group_by(stakeholder) %&gt;% 
+  count(stakeholder)
+
+# Table with a number of documents per stakeholder group
+number_of_documents %&gt;% 
+  kbl(caption = &quot;Number of documents per stakeholder group&quot;) %&gt;% 
+  kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
+<table class=" lightable-classic lightable-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Number of documents per stakeholder group
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+stakeholder
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals_nonOA
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals_OA
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers_nonProfit
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers_Profit
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># Creating a table with a source links of the statements
+
+info &lt;- corpus_df_website_info %&gt;% 
+  select(txt, filename, name, stakeholder)
+
+info$stakeholder_more &lt;- info$stakeholder
+
+info$stakeholder[info$stakeholder%in% c(&quot;journals_OA&quot;, &quot;journals_nonOA&quot; )] &lt;- &quot;journals&quot;
+info$stakeholder[info$stakeholder%in% c(&quot;publishers_Profit&quot;, &quot;publishers_nonProfit&quot; )] &lt;- &quot;publishers&quot;
+
+# source links of the websites
+source_website &lt;- info$website &lt;- word(info$txt, 1)
+
+website_info_table &lt;- info %&gt;% 
+  select(stakeholder, website)
+
+website_info_table %&gt;% 
+  kbl(caption = &quot;Source websites of the statements&quot;) %&gt;% 
+  kable_paper(&quot;hover&quot;, full_width = F)</code></pre>
+<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Source websites of the statements
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+stakeholder
+</th>
+<th style="text-align:left;">
+website
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="http://africaosh.com/about/"
+class="uri">http://africaosh.com/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="http://amelica.org/index.php/en/about/#que-es"
+class="uri">http://amelica.org/index.php/en/about/#que-es</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="http://www.bioline.org.br/info?id=bioline&amp;doc=about"
+class="uri">http://www.bioline.org.br/info?id=bioline&amp;doc=about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://www.cos.io/about/mission"
+class="uri">https://www.cos.io/about/mission</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://www.coalition-s.org/about/"
+class="uri">https://www.coalition-s.org/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://codata.org/about-codata/"
+class="uri">https://codata.org/about-codata/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://coko.foundation/about/"
+class="uri">https://coko.foundation/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://copdess.org/home/about-copdess/"
+class="uri">https://copdess.org/home/about-copdess/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://datacite.org/value.html"
+class="uri">https://datacite.org/value.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://doaj.org/about/"
+class="uri">https://doaj.org/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://fairsharing.org/stakeholders/"
+class="uri">https://fairsharing.org/stakeholders/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://www.force11.org/about/mission-and-guiding-principles"
+class="uri">https://www.force11.org/about/mission-and-guiding-principles</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://www.fosteropenscience.eu/about#objectives"
+class="uri">https://www.fosteropenscience.eu/about#objectives</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://freeourknowledge.org/about/"
+class="uri">https://freeourknowledge.org/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://about.gitlab.com/company/"
+class="uri">https://about.gitlab.com/company/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://www.jisc.ac.uk/about/corporate/strategy"
+class="uri">https://www.jisc.ac.uk/about/corporate/strategy</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://oaaustralasia.org/about/"
+class="uri">https://oaaustralasia.org/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://peercommunityin.org/"
+class="uri">https://peercommunityin.org/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://www.rd-alliance.org/about-rda"
+class="uri">https://www.rd-alliance.org/about-rda</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://www.cria.org.br/index"
+class="uri">https://www.cria.org.br/index</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://www.rdc-drc.ca/about-us/"
+class="uri">https://www.rdc-drc.ca/about-us/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://www.research4life.org/about/"
+class="uri">https://www.research4life.org/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://ropensci.org/about/"
+class="uri">https://ropensci.org/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+advocates
+</td>
+<td style="text-align:left;">
+<a href="https://sparcopen.org/who-we-are/"
+class="uri">https://sparcopen.org/who-we-are/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a
+href="https://www.humboldt-foundation.de/en/explore/about-the-humboldt-foundation/strategy-of-the-alexander-von-humboldt-foundation"
+class="uri">https://www.humboldt-foundation.de/en/explore/about-the-humboldt-foundation/strategy-of-the-alexander-von-humboldt-foundation</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.arc.gov.au/about-arc"
+class="uri">https://www.arc.gov.au/about-arc</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://english.cas.cn/about_us/"
+class="uri">https://english.cas.cn/about_us/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a
+href="https://www.gov.br/mcti/pt-br/composicao/rede-mcti/conselho-nacional-de-desenvolvimento-cientifico-e-tecnologico"
+class="uri">https://www.gov.br/mcti/pt-br/composicao/rede-mcti/conselho-nacional-de-desenvolvimento-cientifico-e-tecnologico</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://conacyt.mx/conacyt/que-es-el-conacyt/"
+class="uri">https://conacyt.mx/conacyt/que-es-el-conacyt/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.conicyt.cl/sobre-conicyt/que-es-conicyt/"
+class="uri">https://www.conicyt.cl/sobre-conicyt/que-es-conicyt/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.cafeconsortium.org/about/"
+class="uri">https://www.cafeconsortium.org/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a
+href="https://www.gov.br/capes/pt-br/acesso-a-informacao/institucional/historia-e-missao"
+class="uri">https://www.gov.br/capes/pt-br/acesso-a-informacao/institucional/historia-e-missao</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.csir.co.za/csir-brief"
+class="uri">https://www.csir.co.za/csir-brief</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.dfg.de/en/dfg_profile/mission/index.html"
+class="uri">https://www.dfg.de/en/dfg_profile/mission/index.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://erc.europa.eu/about-erc/mission"
+class="uri">https://erc.europa.eu/about-erc/mission</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://formas.se/en/start-page/about-formas/what-we-do.html"
+class="uri">https://formas.se/en/start-page/about-formas/what-we-do.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.cnrs.fr/en/cnrs"
+class="uri">https://www.cnrs.fr/en/cnrs</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.helmholtz.de/en/about-us/"
+class="uri">https://www.helmholtz.de/en/about-us/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.jst.go.jp/EN/about/overview.html"
+class="uri">https://www.jst.go.jp/EN/about/overview.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.mpg.de/short-portrait"
+class="uri">https://www.mpg.de/short-portrait</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="http://en.moe.gov.cn/about_MOE/what_we_do/"
+class="uri">http://en.moe.gov.cn/about_MOE/what_we_do/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="http://www.nsfc.gov.cn/english/site_1/about/6.html"
+class="uri">http://www.nsfc.gov.cn/english/site_1/about/6.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.cnr.it/en/about-us"
+class="uri">https://www.cnr.it/en/about-us</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.nsf.gov/about/glance.jsp"
+class="uri">https://www.nsf.gov/about/glance.jsp</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://nerc.ukri.org/about/"
+class="uri">https://nerc.ukri.org/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.nrc.sci.eg/mission/"
+class="uri">https://www.nrc.sci.eg/mission/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.nrf.ac.za/about-us/"
+class="uri">https://www.nrf.ac.za/about-us/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.nserc-crsng.gc.ca/NSERC-CRSNG/Index_eng.asp"
+class="uri">https://www.nserc-crsng.gc.ca/NSERC-CRSNG/Index_eng.asp</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="http://www.ras.ru/about/rascharter/tasks.aspx"
+class="uri">http://www.ras.ru/about/rascharter/tasks.aspx</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://seaworld.com.au/conservation/our-mission"
+class="uri">https://seaworld.com.au/conservation/our-mission</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://www.csic.es/en/csic/about-csic/mission"
+class="uri">https://www.csic.es/en/csic/about-csic/mission</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a
+href="https://www.daimler-benz-stiftung.de/cms/en/foundation/about.html"
+class="uri">https://www.daimler-benz-stiftung.de/cms/en/foundation/about.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://anr.fr/en/anrs-role-in-research/missions/"
+class="uri">https://anr.fr/en/anrs-role-in-research/missions/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+funders
+</td>
+<td style="text-align:left;">
+<a href="https://wellcome.org/who-we-are/strategy"
+class="uri">https://wellcome.org/who-we-are/strategy</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://www.journals.uchicago.edu/journals/an/about"
+class="uri">https://www.journals.uchicago.edu/journals/an/about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://www.annualreviews.org/journal/ecolsys"
+class="uri">https://www.annualreviews.org/journal/ecolsys</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://www.sciencedirect.com/journal/biological-conservation/about/aims-and-scope"
+class="uri">https://www.sciencedirect.com/journal/biological-conservation/about/aims-and-scope</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://academic.oup.com/bioscience/pages/About"
+class="uri">https://academic.oup.com/bioscience/pages/About</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://conbio.org/publications/conservation-biology/"
+class="uri">https://conbio.org/publications/conservation-biology/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://esajournals.onlinelibrary.wiley.com/hub/journal/19395582/aims-and-scope/read-full-aims-and-scope"
+class="uri">https://esajournals.onlinelibrary.wiley.com/hub/journal/19395582/aims-and-scope/read-full-aims-and-scope</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://onlinelibrary.wiley.com/page/journal/14610248/homepage/productinformation.html"
+class="uri">https://onlinelibrary.wiley.com/page/journal/14610248/homepage/productinformation.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://esajournals.onlinelibrary.wiley.com/hub/journal/19399170/aims-and-scope/read-full-aims-and-scope"
+class="uri">https://esajournals.onlinelibrary.wiley.com/hub/journal/19399170/aims-and-scope/read-full-aims-and-scope</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://onlinelibrary.wiley.com/page/journal/15585646/homepage/forauthors.html#2"
+class="uri">https://onlinelibrary.wiley.com/page/journal/15585646/homepage/forauthors.html#2</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://esajournals.onlinelibrary.wiley.com/hub/journal/15409309/aims-and-scope/read-full-aims-and-scope"
+class="uri">https://esajournals.onlinelibrary.wiley.com/hub/journal/15409309/aims-and-scope/read-full-aims-and-scope</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://onlinelibrary.wiley.com/page/journal/13652486/homepage/productinformation.html"
+class="uri">https://onlinelibrary.wiley.com/page/journal/13652486/homepage/productinformation.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://besjournals.onlinelibrary.wiley.com/hub/journal/13652664/aims-and-scope/read-full-aims-and-scope"
+class="uri">https://besjournals.onlinelibrary.wiley.com/hub/journal/13652664/aims-and-scope/read-full-aims-and-scope</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://www.nature.com/natecolevol/about/aims"
+class="uri">https://www.nature.com/natecolevol/about/aims</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://royalsocietypublishing.org/rstb/about#question2"
+class="uri">https://royalsocietypublishing.org/rstb/about#question2</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://royalsocietypublishing.org/rspb/about"
+class="uri">https://royalsocietypublishing.org/rspb/about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://www.cell.com/trends/ecology-evolution/aims"
+class="uri">https://www.cell.com/trends/ecology-evolution/aims</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://www.tandfonline.com/action/journalInformation?show=aimsScope&amp;journalCode=uaar20"
+class="uri">https://www.tandfonline.com/action/journalInformation?show=aimsScope&amp;journalCode=uaar20</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://www.biogeosciences.net/about/aims_and_scope.html"
+class="uri">https://www.biogeosciences.net/about/aims_and_scope.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://conbio.onlinelibrary.wiley.com/hub/journal/1755263x/homepage/forauthors.html"
+class="uri">https://conbio.onlinelibrary.wiley.com/hub/journal/1755263x/homepage/forauthors.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://onlinelibrary.wiley.com/page/journal/14724642/homepage/productinformation.html"
+class="uri">https://onlinelibrary.wiley.com/page/journal/14724642/homepage/productinformation.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://onlinelibrary.wiley.com/page/journal/20457758/homepage/productinformation.html"
+class="uri">https://onlinelibrary.wiley.com/page/journal/20457758/homepage/productinformation.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://www.ecologyandsociety.org/about/policies.php#focus"
+class="uri">https://www.ecologyandsociety.org/about/policies.php#focus</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://elifesciences.org/about/aims-scope"
+class="uri">https://elifesciences.org/about/aims-scope</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://onlinelibrary.wiley.com/page/journal/20563744/homepage/productinformation.html"
+class="uri">https://onlinelibrary.wiley.com/page/journal/20563744/homepage/productinformation.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://onlinelibrary.wiley.com/page/journal/17524571/homepage/productinformation.html"
+class="uri">https://onlinelibrary.wiley.com/page/journal/17524571/homepage/productinformation.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://www.frontiersin.org/journals/ecology-and-evolution#about"
+class="uri">https://www.frontiersin.org/journals/ecology-and-evolution#about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://neobiota.pensoft.net/about"
+class="uri">https://neobiota.pensoft.net/about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://peerj.com/about/aims-and-scope/"
+class="uri">https://peerj.com/about/aims-and-scope/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a href="https://journals.plos.org/plosbiology/s/journal-information"
+class="uri">https://journals.plos.org/plosbiology/s/journal-information</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+journals
+</td>
+<td style="text-align:left;">
+<a
+href="https://zslpublications.onlinelibrary.wiley.com/hub/journal/20563485/aims-scopes"
+class="uri">https://zslpublications.onlinelibrary.wiley.com/hub/journal/20563485/aims-scopes</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://www.aibs.org/" class="uri">https://www.aibs.org/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://www.annualreviews.org/about/what-we-do"
+class="uri">https://www.annualreviews.org/about/what-we-do</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="http://www.bioonepublishing.org/who-we-are/"
+class="uri">http://www.bioonepublishing.org/who-we-are/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://elifesciences.org/about"
+class="uri">https://elifesciences.org/about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://www.frontiersin.org/about/about-frontiers"
+class="uri">https://www.frontiersin.org/about/about-frontiers</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://www.resalliance.org/about"
+class="uri">https://www.resalliance.org/about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://royalsociety.org/journals/"
+class="uri">https://royalsociety.org/journals/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://www.journals.uchicago.edu/about"
+class="uri">https://www.journals.uchicago.edu/about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://www.cell.com/about"
+class="uri">https://www.cell.com/about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://www.elsevier.com/about/this-is-elsevier"
+class="uri">https://www.elsevier.com/about/this-is-elsevier</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://peerj.com/about/"
+class="uri">https://peerj.com/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://pensoft.net/about#Company-profile"
+class="uri">https://pensoft.net/about#Company-profile</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://plos.org/about/"
+class="uri">https://plos.org/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://www.springernature.com/gp/advancing-discovery"
+class="uri">https://www.springernature.com/gp/advancing-discovery</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publishers
+</td>
+<td style="text-align:left;">
+<a href="https://www.wiley.com/en-gb/aboutus"
+class="uri">https://www.wiley.com/en-gb/aboutus</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://data.aad.gov.au/about"
+class="uri">https://data.aad.gov.au/about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://www.bco-dmo.org/"
+class="uri">https://www.bco-dmo.org/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://www.biorxiv.org/about-biorxiv"
+class="uri">https://www.biorxiv.org/about-biorxiv</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://www.ddbj.nig.ac.jp/about/index-e.html"
+class="uri">https://www.ddbj.nig.ac.jp/about/index-e.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://datadryad.org/stash/our_mission#community"
+class="uri">https://datadryad.org/stash/our_mission#community</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://www.ecoevorxiv.com/"
+class="uri">https://www.ecoevorxiv.com/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://www.ebi.ac.uk/about"
+class="uri">https://www.ebi.ac.uk/about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://help.figshare.com/article/what-is-figshare"
+class="uri">https://help.figshare.com/article/what-is-figshare</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://www.gbif.org/what-is-gbif"
+class="uri">https://www.gbif.org/what-is-gbif</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://support.dataverse.harvard.edu/"
+class="uri">https://support.dataverse.harvard.edu/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://knb.ecoinformatics.org/about"
+class="uri">https://knb.ecoinformatics.org/about</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://marinedataarchive.org/introduction.php"
+class="uri">https://marinedataarchive.org/introduction.php</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://www.ncbi.nlm.nih.gov/home/about/mission/"
+class="uri">https://www.ncbi.nlm.nih.gov/home/about/mission/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://www.cos.io/products/osf"
+class="uri">https://www.cos.io/products/osf</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://www.tern.org.au/"
+class="uri">https://www.tern.org.au/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a
+href="https://www.dwd.de/DWD-GCOS/EN/nationalcontributions/servicesforgcos/intdatacentres/wdc-climate/wdc-climate_node.html"
+class="uri">https://www.dwd.de/DWD-GCOS/EN/nationalcontributions/servicesforgcos/intdatacentres/wdc-climate/wdc-climate_node.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+repositories
+</td>
+<td style="text-align:left;">
+<a href="https://about.zenodo.org/"
+class="uri">https://about.zenodo.org/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="https://www.amnat.org/about/about-the-society.html"
+class="uri">https://www.amnat.org/about/about-the-society.html</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="http://ausevo.com/" class="uri">http://ausevo.com/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="https://www.britishecologicalsociety.org/about/strategic-aims/"
+class="uri">https://www.britishecologicalsociety.org/about/strategic-aims/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="https://www.esa.org/about/"
+class="uri">https://www.esa.org/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="https://www.ecolsoc.org.au/about/"
+class="uri">https://www.ecolsoc.org.au/about/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="https://eseb.org/" class="uri">https://eseb.org/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="http://www.nasonline.org/about-nas/mission/"
+class="uri">http://www.nasonline.org/about-nas/mission/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="https://www.royalsociety.org.nz/who-we-are/our-role/"
+class="uri">https://www.royalsociety.org.nz/who-we-are/our-role/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a
+href="http://www.evolutionsociety.org/index.php?module=content&amp;type=user&amp;func=view&amp;pid=2"
+class="uri">http://www.evolutionsociety.org/index.php?module=content&amp;type=user&amp;func=view&amp;pid=2</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="https://www.sortee.org/"
+class="uri">https://www.sortee.org/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="https://royalsociety.org/about-us/mission-priorities/"
+class="uri">https://royalsociety.org/about-us/mission-priorities/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="https://conbio.org/about-scb/who-we-are/"
+class="uri">https://conbio.org/about-scb/who-we-are/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+societies
+</td>
+<td style="text-align:left;">
+<a href="https://www.zsl.org/about-us"
+class="uri">https://www.zsl.org/about-us</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="saving-dataset" class="section level1">
+<h1>Saving dataset</h1>
+<pre class="r"><code># This data will be used in 2_Topic_Modeling, 4_Language_analysis
+write_csv(data_words, &quot;./output/created_datasets/cleaned_data.csv&quot;)</code></pre>
+</div>
+<div id="session-information" class="section level1">
+<h1>Session information</h1>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] kableExtra_1.3.4          stm_1.3.6                
+ [3] ggraph_2.0.5              igraph_1.2.6             
+ [5] reshape2_1.4.4            wordcloud_2.6            
+ [7] RColorBrewer_1.1-2        topicmodels_0.2-12       
+ [9] tm_0.7-8                  NLP_0.2-1                
+[11] quanteda.dictionaries_0.3 quanteda.textplots_0.94  
+[13] quanteda_3.1.0            tidytext_0.3.2           
+[15] forcats_0.5.1             stringr_1.4.0            
+[17] dplyr_1.0.7               purrr_0.3.4              
+[19] readr_2.0.2               tidyr_1.1.4              
+[21] tibble_3.1.6              ggplot2_3.3.5            
+[23] tidyverse_1.3.1           workflowr_1.7.0          
+
+loaded via a namespace (and not attached):
+ [1] colorspace_2.0-2   ellipsis_0.3.2     modeltools_0.2-23  rprojroot_2.0.2   
+ [5] fs_1.5.0           rstudioapi_0.13    farver_2.1.0       graphlayouts_0.7.1
+ [9] SnowballC_0.7.0    bit64_4.0.5        ggrepel_0.9.1      fansi_0.5.0       
+[13] lubridate_1.7.10   xml2_1.3.2         knitr_1.36         polyclip_1.10-0   
+[17] jsonlite_1.7.2     broom_0.7.9        dbplyr_2.1.1       ggforce_0.3.3     
+[21] compiler_4.0.3     httr_1.4.2         backports_1.2.1    assertthat_0.2.1  
+[25] Matrix_1.3-4       fastmap_1.1.0      cli_3.1.0          later_1.3.0       
+[29] tweenr_1.0.2       htmltools_0.5.2    tools_4.0.3        gtable_0.3.0      
+[33] glue_1.5.0         fastmatch_1.1-3    Rcpp_1.0.7         slam_0.1-48       
+[37] lexicon_1.2.1      cellranger_1.1.0   jquerylib_0.1.4    vctrs_0.3.8       
+[41] svglite_2.0.0      xfun_0.31          stopwords_2.3      ps_1.6.0          
+[45] rvest_1.0.1        lifecycle_1.0.1    getPass_0.2-2      MASS_7.3-54       
+[49] scales_1.1.1       tidygraph_1.2.0    vroom_1.5.5        hms_1.1.1         
+[53] promises_1.2.0.1   parallel_4.0.3     yaml_2.2.1         gridExtra_2.3     
+[57] sass_0.4.0         stringi_1.7.5      highr_0.9          tokenizers_0.2.1  
+[61] systemfonts_1.0.2  rlang_0.4.12       pkgconfig_2.0.3    evaluate_0.14     
+[65] lattice_0.20-45    bit_4.0.4          processx_3.5.2     tidyselect_1.1.1  
+[69] plyr_1.8.6         magrittr_2.0.3     R6_2.5.1           generics_0.1.1    
+[73] DBI_1.1.1          pillar_1.6.4       haven_2.4.3        whisker_0.4       
+[77] withr_2.4.2        janeaustenr_0.1.5  modelr_0.1.8       crayon_1.4.2      
+[81] utf8_1.2.2         tzdb_0.1.2         rmarkdown_2.11     viridis_0.6.1     
+[85] syuzhet_1.0.6      grid_4.0.3         readxl_1.3.1       data.table_1.14.2 
+[89] callr_3.7.0        git2r_0.29.0       webshot_0.5.2      reprex_2.0.1      
+[93] digest_0.6.28      httpuv_1.6.3       RcppParallel_5.1.4 stats4_4.0.3      
+[97] munsell_0.5.0      viridisLite_0.4.0  bslib_0.3.0       </code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] kableExtra_1.3.4          stm_1.3.6                
+ [3] ggraph_2.0.5              igraph_1.2.6             
+ [5] reshape2_1.4.4            wordcloud_2.6            
+ [7] RColorBrewer_1.1-2        topicmodels_0.2-12       
+ [9] tm_0.7-8                  NLP_0.2-1                
+[11] quanteda.dictionaries_0.3 quanteda.textplots_0.94  
+[13] quanteda_3.1.0            tidytext_0.3.2           
+[15] forcats_0.5.1             stringr_1.4.0            
+[17] dplyr_1.0.7               purrr_0.3.4              
+[19] readr_2.0.2               tidyr_1.1.4              
+[21] tibble_3.1.6              ggplot2_3.3.5            
+[23] tidyverse_1.3.1           workflowr_1.7.0          
+
+loaded via a namespace (and not attached):
+ [1] colorspace_2.0-2   ellipsis_0.3.2     modeltools_0.2-23  rprojroot_2.0.2   
+ [5] fs_1.5.0           rstudioapi_0.13    farver_2.1.0       graphlayouts_0.7.1
+ [9] SnowballC_0.7.0    bit64_4.0.5        ggrepel_0.9.1      fansi_0.5.0       
+[13] lubridate_1.7.10   xml2_1.3.2         knitr_1.36         polyclip_1.10-0   
+[17] jsonlite_1.7.2     broom_0.7.9        dbplyr_2.1.1       ggforce_0.3.3     
+[21] compiler_4.0.3     httr_1.4.2         backports_1.2.1    assertthat_0.2.1  
+[25] Matrix_1.3-4       fastmap_1.1.0      cli_3.1.0          later_1.3.0       
+[29] tweenr_1.0.2       htmltools_0.5.2    tools_4.0.3        gtable_0.3.0      
+[33] glue_1.5.0         fastmatch_1.1-3    Rcpp_1.0.7         slam_0.1-48       
+[37] lexicon_1.2.1      cellranger_1.1.0   jquerylib_0.1.4    vctrs_0.3.8       
+[41] svglite_2.0.0      xfun_0.31          stopwords_2.3      ps_1.6.0          
+[45] rvest_1.0.1        lifecycle_1.0.1    getPass_0.2-2      MASS_7.3-54       
+[49] scales_1.1.1       tidygraph_1.2.0    vroom_1.5.5        hms_1.1.1         
+[53] promises_1.2.0.1   parallel_4.0.3     yaml_2.2.1         gridExtra_2.3     
+[57] sass_0.4.0         stringi_1.7.5      highr_0.9          tokenizers_0.2.1  
+[61] systemfonts_1.0.2  rlang_0.4.12       pkgconfig_2.0.3    evaluate_0.14     
+[65] lattice_0.20-45    bit_4.0.4          processx_3.5.2     tidyselect_1.1.1  
+[69] plyr_1.8.6         magrittr_2.0.3     R6_2.5.1           generics_0.1.1    
+[73] DBI_1.1.1          pillar_1.6.4       haven_2.4.3        whisker_0.4       
+[77] withr_2.4.2        janeaustenr_0.1.5  modelr_0.1.8       crayon_1.4.2      
+[81] utf8_1.2.2         tzdb_0.1.2         rmarkdown_2.11     viridis_0.6.1     
+[85] syuzhet_1.0.6      grid_4.0.3         readxl_1.3.1       data.table_1.14.2 
+[89] callr_3.7.0        git2r_0.29.0       webshot_0.5.2      reprex_2.0.1      
+[93] digest_0.6.28      httpuv_1.6.3       RcppParallel_5.1.4 stats4_4.0.3      
+[97] munsell_0.5.0      viridisLite_0.4.0  bslib_0.3.0       </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
