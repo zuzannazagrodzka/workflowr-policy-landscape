@@ -7,28 +7,30 @@ output:
 editor_options:
   chunk_output_type: console
 ---
+Methodology for "Accelerating the Open Research agenda to solve global challenges"
 
-Methods including data and code for "Accelerating the Open Research agenda to solve global challenges"
-Methiods
+1. Methodology - Topic modeling
++ description of the data
++ code
+2. Methodology - Text similarities
++ description of the data
++ code
+3. Methodology - Language usage
++ description of the data
++ code
+4. Methodology - other
 
-Data
-Here to the code
 
-wflow_publish("analysis/_site.yml", "Change the theme", republish = TRUE)
-
-<br>
-[1a_Data_preprocessing](./code/1a_Data_preprocessing.html)
+<!-- wflow_publish("analysis/_site.yml", "Change the theme", republish = TRUE) -->
 
 <br>
 [1a_Data_preprocessing](./analysis/1a_Data_preprocessing.html)
 
+
 <br>
-[1b_Dictionaries_preparation](./code/1b_Dictionaries_preparation.html)
+[1b_Dictionaries_preparation](./analysis/1b_Dictionaries_preparation.html)
 <br>
 [List of the organisations](./data/README.html)
 <br>
-[Licence](./docs/license.html)
-
-
-Maybe include read.me file at the beginning and licence at the end?
+[Licence](./analysis/license.html)
 
