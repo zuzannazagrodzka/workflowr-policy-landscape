@@ -1,0 +1,27 @@
+https://codata.org/about-codata/
+https://codata.org/about-codata/our-mission/
+
+
+CODATA is the Committee on Data of the International Science Council (ISC).  CODATA exists to promote global collaboration to improve the availability and usability of data for all areas of research.  CODATA supports the principle that data produced by research and susceptible to be used for research should be as open as possible and as closed as necessary.  CODATA works also to advance the interoperability and the usability of such data: research data should be intelligently open or FAIR. By promoting the policy, technological and cultural changes that are essential to promote Open Science, CODATA helps advance ISC’s vision and mission of advancing science as a global public good.
+
+The CODATA Strategic Plan 2015 and Prospectus of Strategy and Achievement 2016 identify three priority areas:
+
+promoting principles, policies and practices for Open Data and Open Science;
+advancing the frontiers of data science;
+building capacity for Open Science by improving data skills and the functions of national science systems needed to support open data.
+
+CODATA achieves these objectives through a number of standing committees and strategic executive led initiatives, and through its Task Groups and Working Groups.  CODATA supports the Data Science Journal and collaborates on major data conferences like SciDataCon and International Data Week.
+
+
+CODATA’s mission is to connect data and people to advance science and improve our world.
+
+As the Committee on Data of the International Science Council (ISC), CODATA helps realise ISC’s vision of advancing science as a global public good.  CODATA does this by promoting international collaboration to advance Open Science and to improve the availability and usability of data for all areas of research.  CODATA supports the principle that data produced by research and susceptible to be used for research should be as open as possible and as closed as necessary.  CODATA works also to advance the interoperability and the usability of such data: research data should be FAIR (Findable, Accessible, Interoperable and Reusable).
+
+CODATA’s strategic activities are divided into four pillars:
+
+Data to Improve our World: looking at the application of data to real world issues, comprising the Decadal Programme ‘Making Data Work for Cross-Domain Grand Challenges’ and the Global Open Science Cloud Initiative.
+Data Policy: promoting principles, policies and practices for Open Data and Open Science;
+Data Science: advancing the frontiers of data science;
+Data Skills: building capacity for Open Science by improving data skills and the functions of national science systems needed to support open data.
+
+

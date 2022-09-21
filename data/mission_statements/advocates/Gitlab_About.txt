@@ -1,0 +1,37 @@
+https://about.gitlab.com/company/https://about.gitlab.com/company/mission/#mission
+GitLab is The DevOps platform that empowers organizations to maximize the overall return on software development by delivering software faster and efficiently, while strengthening security and compliance. With GitLab, every team in your organization can collaboratively plan, build, secure, and deploy software to drive business outcomes faster with complete transparency, consistency and traceability.
+
+GitLab is an open core company which develops software for the software development lifecycle with 30 million estimated registered users and more than 1 million active license users, and has an active community of more than 2,500 contributors. GitLab openly shares more information than most companies and is public by default, meaning our projects, strategy, direction and metrics are discussed openly and can be found within our website. Our values are Collaboration, Results, Efficiency, Diversity, Inclusion & Belonging , Iteration, and Transparency (CREDIT) and these form our culture.
+
+GitLab's team handbook, if printed would be over 8,000 pages of text, is the central repository for how we operate and is a foundational piece to the GitLab values.
+
+It is GitLab's mission to make it so that everyone can contribute.
+
+When everyone can contribute, users become contributors and we greatly increase the rate of innovation.
+
+Background
+We believe in a world where everyone can contribute. We believe that all digital products should be open to contributions; from legal documents to movie scripts, and from websites to chip designs.
+
+Allowing everyone to make a proposal is the core of what a DVCS (Distributed Version Control System) such as Git enables. No invite needed: if you can see it, you can contribute.
+
+We think that it is logical that our collaboration tools are a collaborative work themselves. More than 3,000 people from the wider community have contributed to GitLab to make that a reality.
+
+Our Mission is on a 30 year cadence. Our Vision is on a 10 year cadence. Our strategy is on a 3-year cadence.
+
+Mission
+It is GitLab's mission to make it so that everyone can contribute.
+
+When everyone can contribute, users become contributors and we greatly increase the rate of innovation.
+
+Big Hairy Audacious Goal
+Our BHAG over the next 30 years is to become the most popular collaboration tool for knowledge workers in any industry. For this, we need to make the DevOps lifecycle much more user friendly.
+
+Values
+Our mission guides our path, and we live our values along this path.
+
+Goals
+Ensure that everyone can contribute in the three ways outlined below.
+Become the most used software for the software development lifecycle and collaboration on all digital content by following the sequence below.
+Complete our product vision of a single application based on convention over configuration.
+Offer a sense of progress in a supportive environment with smart colleagues.
+Remain independent so we can preserve our values. Since we took external investment, we need a liquidity event. To remain independent, we went from being a private to a public company instead of being acquired.

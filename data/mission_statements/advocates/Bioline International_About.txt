@@ -1,0 +1,30 @@
+http://www.bioline.org.br/info?id=bioline&doc=about
+
+About Bioline International
+Bioline International is a pioneer in the provision of open access to peer reviewed bioscience journals published in developing countries. These journals contain timely research on public health, international development, tropical medicine, food and nutritional security, and biodiversity. Bioline increases the visibility of this research by making it readily available to researchers across the world. Bioline is not a publisher, but an aggregator that provides a free platform for journals who wish to participate in the global open access movement.
+
+Partnering Organizations
+Bioline International was launched in 1993 as a partnership between the Tropical Database in Brazil (now the Reference Center on Environmental Information, or CRIA) and the Electronic Publishing Trust for Development (EPT) in the U.K. In early-2000, the University of Toronto Libraries assumed the role previously performed by the EPT.
+
+Bioline International is now a cooperative project involving two principal parties:
+
+The Reference Center on Environmental Information (CRIA): based in Brazil, CRIA provides server hosting, administration, and server development on a volunteer basis.
+Bioline International (Toronto): located at the University of Toronto at Scarborough, the Department of Social Sciences and the UTSC Library collaborate to oversee content management, project development and research.
+Since its inception, Bioline International's operations have been supported by substantial in-kind contributions by CRIA (server hosting and administration) and the University of Toronto at Scarborough (office space and administrative support for the management team). Bioline also received funding support from organizations including the Open Society Institute, UNESCO, the International Network for the Availability of Scientific Publications (INASP).
+Beginning in 2008, Bioline has moved towards a community support business model that calls for broad based support from libraries as well as communities with the mission of knowledge access for all. 
+
+Mission
+Bioline International is a not-for-profit digital platform for peer-reveiwed, open access journals published in developing countries. Bioline continues to improve the visibility of its member journals while providing users open access to quality research. Bioline's goal of reducing the South to North knowledge gap is crucial to a global understanding of health, biodiversity, the environment, conservation and international development. Bioline is committed to improving the visibility of essential knowledge from local and regional research in developing countries through open access. In many disciplines - such as tropical medicine, infectious diseases, epidemiology, biodiversity, environmental sciences, and international development Ð this research can improve the progress of science and develop a knowledge base that is truly global in scope and perspective. Bioline provides a unique service by making bioscience information generated in developing countries available to the international research community world-wide.
+
+Collaborating Journals
+Journals using the Bioline International platform retain full and sole control of all editorial responsibilities. Bioline offers free document management services, promotes the journals and provides usage statistics, but plays no part in the production of the journals or relationships with authors.
+
+Objectives
+Since its inception, Bioline's activities have cross-cut a number of areas, including content delivery service, technical development, research on the efficacy of open access dissemination and library usage, as well as in education and training. In particular, Bioline:
+
+provides a free platform to promote open access journals for publishers who may not otherwise have sufficient resources on their own;
+reduces technological and financial limitations to knowledge acquisition by providing bioscience journal material on an open-access, easily accessible basis, regardless of geographic, technological or financial boundaries;
+improves the visibility of developing world publications, allowing them to enter into mainstream research and knowledge activities and thereby raising their impact and credibility;
+acts as an OAI data provider, allowing journal articles to be easily harvested and discovered by other indexing services;
+introduces publishers to new software and standards, and training them to make better use of open source resources;
+promotes open access to the academic community through case studies, research into how open access affects authors, and studies of library use and adoption of such resources

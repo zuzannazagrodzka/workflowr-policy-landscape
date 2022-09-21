@@ -1,0 +1,14 @@
+https://ropensci.org/about/
+
+rOpenSci fosters a culture that values open and reproducible research using shared data and reusable software
+
+We do this by
+Creating technical infrastructure in the form of carefully vetted, staff and community-contributed R software tools that lower barriers to working with scientific data sources on the web
+
+Making the right data, tools and best practices more discoverable
+
+Creating social infrastructure through a welcoming and diverse community
+
+Promoting advocacy for a culture of data sharing and reusable software
+
+Building capacity of software users and developers and fostering a sense of pride in their work

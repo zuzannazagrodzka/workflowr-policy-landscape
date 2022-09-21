@@ -1,0 +1,19 @@
+http://africaosh.com/about/
+
+Preamble
+Africa Open Science & Hardware (Africa OSH) is a grassroots effort that brings together researchers, technologists, hacker hobbyists, educators, government officials, and start-up innovators from around the world. Our goal is to create a conversation and set of actions on OSH, among African actors, and between them and the international community, in order to adopt OSH principles and practices appropriate to our context. After two editions of the Africa OSH Summit, it is time to take another step forward in our community’s development strategy. We are delighted to launch the African Institute of Open Science & Hardware, with its main campus in Yaound, Cameroon.
+
+Mission
+The mission of the Institute is to meet current research and training needs in the field of Open Science. This choice is part of the contextualisation of the Global Open Science Hardware Roadmap which lays out recommendations to make open hardware ubiquitous in science by 2025. This would be pursued through (i) activities that enable anyone to gain knowledge and find information about OSH and/or the community (Learn section) and (ii) actions aimed at creating the necessary enabling conditions for the present and future of the OSH community (Support section).
+
+Audience & Research Areas
+The African Institute of Open Science & Hardware welcomes anyone interested in Open Science in the African context, regardless of race, gender, language or  nationality. With an interdisciplinary approach, the Institute will focus on:
+
+– Fabrication of Open Source Hardware
+– Biotechnology and DIYbio
+– Publishing and Scholarly Communication
+– AI, IoT and Robotics
+– Entrepreneurship and Open Innovation
+– Intellectual Property and Open Licensing
+– Social Sciences (Critical Studies of Open Science)
+– Fair Open Science and Ethics of Openness

@@ -1,0 +1,23 @@
+https://coko.foundation/about/Transforming Publishing
+We design and build systems that are truly transformational.
+Coko Principles
+Collaboration and Community
+Collaboration and community is at the heart of everything that we do. It defines who we are, how we work, and the things we believe in. Like openness, transparency, and treating people with respect.
+
+We believe better workflows will transform publishing
+This single-minded focus drives everything that we do.
+
+We believe open source is the future of publishing tools
+We believe open source is the future of publishing tools. Sharing source code and sharing what we learn is the only way forward.
+
+We live in the real world
+We build products that solve actual problems and make life easier for the people doing the actual work.
+
+We challenge the status quo
+We will ask difficult questions and challenge your assumptions.
+
+Imprint
+Coko is a fiscally sponsored charitable not-for-profit project of Aspiration. All surplus goes back into the development of what we call “Community Products” (see Community). These products are developed with the community, for the community, and are freely available (open source) for use and re-use.
+
+Coko will only work with organisations to develop products that are 100% open source. For-profits interested in working with Coko code and community should contact Nikau Consultancy.
+

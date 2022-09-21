@@ -1,0 +1,39 @@
+https://help.figshare.com/article/what-is-figshare
+https://help.figshare.com/article/mission-statement-and-core-beliefs
+
+Figshare is a web-based interface designed for academic research data management and research data dissemination. It accepts all file types (with in-browser viewing). Below is an example of how Figshare can help you and your data:
+
+Figshare was originally created as a solution to keep research outputs in one tidy place whilst allowing it to be discovered by like minded individuals: the academic community. It quickly became apparent that others sought such a resource and Figshare opened its doors. Figshare enables academics to upload, share, cite and importantly discover all manner of research outputs with the security of knowing our hosting options and platform support long term preservation of data.
+
+Along the way, we have developed offerings not just for the individual (figshare.com) but for publishers and institutions with industry standards and best practice at our core.
+
+
+At Figshare, we have a vision to change the face of academic publishing with the improved dissemination and discoverability of all scholarly research and content. Figshare strives to make use of new technologies such as cloud hosting, RESTful APIs, and browser functionality to better aid researchers, publishers, and institutions in their attempts to better manage and disseminate academic research. The Figshare team are firm believers in the power of open access to knowledge.
+
+
+
+
+At figshare, we have a vision to change the face of academic publishing with the improved dissemination and discoverability of all scholarly research and content. Since day 1, we have always focussed on making use of new technologies such as cloud hosting and new browser functionality to better aid researchers, publishers and institutions in their attempts to better manage and disseminate academic research.
+
+Born out of frustrations within the academic system, the figshare team are firm believers in the power of open access to knowledge. At the same time, we fully understand that the changing landscape of academic publishing is in a transition stage and academic career progression is largely dependent on pre-web concepts. In order to empower modern day researchers, publishers and institutions, we acknowledge that simple UIs and incentives are necessary for a successful partnership.
+
+All content hosted on figshare infrastructure can be downloaded by anyone, with no need to log in. The content can also be mass downloaded or mined using the figshare API, also available to anyone at
+
+We believe in a future where academics are appropriately rewarded for all aspects of their careers. We are pushing for a world where academics can build on top of the cumulative research of those who have gone before. For this we believe that all content and associated metadata should be interpretable by man and machine alike. We will continue to utilise technology and workflow processes, such as the agile methodology currently implemented, in order to make responsible data management and dissemination a natural and unobtrusive part of the research life-cycle.
+
+Some of figshare’s Core Beliefs:
+?
+Academic research outputs should be as open as possible, as closed as necessary
+?
+Academic research outputs should never be behind a paywall
+?
+Academic research outputs should be human and machine readable/queryable
+?
+Academic infrastructure should be interchangeable
+?
+Academic researchers should never have to put the same information into multiple systems at the same institution
+?
+Identifiers for everything
+?
+The impact of research is independent of where it is published and what type of output it is
+
