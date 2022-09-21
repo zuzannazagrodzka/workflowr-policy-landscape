@@ -1,0 +1,87 @@
+---
+title: "Figure_2A"
+author: "ZZ"
+# author: "zuzannazagrodzka"
+date: "2022-05-05"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r Setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Creating Figure 2A
+Figure 2A shows gamma values (x-axis, means ± sd) that are the strength of association between a set of stakeholder documents (y-axis) and the corresponding topic. High gamma values are strong associations. We plotted the values for four main topics (side labels): Open Research (green), Community and Support (red), Innovation and Solutions (yellow) and Publication Process (blue). 
+
+
+# Cleaning R 
+```{r Cleaning R}
+rm(list=ls())
+```
+
+# Libraries
+``` {r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+```
+
+# Import data to create Figure 2A
+
+``` {r}
+df_doc_level_stm_gamma <- read_csv(file = "./output/created_datasets/df_doc_level_stm_gamma.csv")
+```
+
+
+
+``` {r}
+df_figure1_gamma <- df_doc_level_stm_gamma %>% 
+  select(-total_topic, -total_sent) 
+
+df_figure1_gamma$prop <- df_figure1_gamma$prop *100
+
+df_figure1_gamma_wide <- df_figure1_gamma %>% 
+  spread(topic, prop) %>% 
+  rename(topic_1 = `1`, topic_2 = `2`, topic_3 = `3`, topic_4 = `4`)
+
+# Topic/Category 1: Open Research 
+# Topic/Category 2: Community & Support
+# Topic/Category 3: Innovation & Solution
+# Topic/Category 4: Publication process (control)
+
+df_figure1_gamma_wide2 = data.frame(
+  document = rep(df_figure1_gamma_wide$name,4),
+  stakeholder = rep(df_figure1_gamma_wide$stakeholder,4),
+  # type = c(rep("Topic 1",129), rep("Topic 2",129), rep("Topic 3",129), rep("Topic 4", 129)),
+    type = c(rep("1. Open Research",129), rep("2. Community and Support",129), rep("3. Innovation and Solutions",129), rep("4. Publication Process", 129)),
+  perc = c(df_figure1_gamma_wide$topic_1, df_figure1_gamma_wide$topic_2, df_figure1_gamma_wide$topic_3, df_figure1_gamma_wide$topic_4),
+  perc2 = c(df_figure1_gamma_wide$topic_1, df_figure1_gamma_wide$topic_2, df_figure1_gamma_wide$topic_3, df_figure1_gamma_wide$topic_4)
+)
+
+# adding quantiles values
+sum_figure1_gamma_wide2 = 
+  df_figure1_gamma_wide2 %>%
+  group_by(stakeholder, type) %>%
+  dplyr::summarize(lower = quantile(perc, probs = .25), upper = quantile(perc, probs = .75), perc_fin = mean(perc)) %>% 
+  rename(perc = perc_fin)
+
+figure_topics <- ggplot() +
+  geom_point(data = df_figure1_gamma_wide2, aes(x = perc, y = stakeholder, colour = type), alpha = 0.2, position = position_jitter(), show.legend = FALSE) +
+  geom_pointrange(data = sum_figure1_gamma_wide2, aes(x = perc, xmin = lower, xmax = upper, y = stakeholder, colour = type), show.legend = FALSE) +
+  facet_grid(.~type) + 
+  labs(x = "Topics occuring in documents (%) gamma", y = "") +
+  scale_color_manual(values = c("dark green", "dark red", "darkgoldenrod", "dark blue")) +
+  theme_classic()
+
+figure_topics
+
+
+figure_name <- paste0("./output/Figure_2A/Figure_2A.png")
+png(file=figure_name,
+  width= 3000, height= 2000, res=400)
+  figure_topics
+  dev.off()
+
+```

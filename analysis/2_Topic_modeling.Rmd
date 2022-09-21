@@ -1,0 +1,526 @@
+---
+title: "2_Topic_modeling"
+author: "ZZ"
+# author: "zuzannazagrodzka"
+date: "2022-05-05"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Topic modeling 
+# Methods
+
+Topic Modeling
+
+To investigate the relationship to our research questions regarding the topics of our interest and the language choice in the stakeholders' statements, the study employs a computational text analysis called the Structural Topic Modeling (STM) using library stm. We chose STM because it addresses the issue with the independence (like Correlated Topic Models) but also enables the discovery of topics and their prevalence based on document metadata, such as stakeholder group. The topic modeling was conducted on a sentence level and the metadata variable contained information about the stakeholders group and the document each work comes from. 
+After generating the topics, we used the ground theory method of analysing qualitative data (Corbin and Strauss, 1990) to identify the main categories that are present in the topics. 
+
+The more detailed protocol of condensation multiple topics into a few more defined. 
+  1. Open coding 
+    a) obtaining codes by performing STM and choosing the setting that enable the algorithm of Lee and Mimno (2014) to find the number of topics (from now on: codes). The metadata used in the modelling was the information on documents and stakeholders. The model calculates highest probability, Score, Lift and FLEX values for each word and assigns words to one or multiple topics. 
+    b) we looked at the seven words with the highest value for these four categories/values and followed a coding paradigm that enabled us to create a descriptive label for each of the code
+    c) our paradigm contains enable us to search for words what describe or belong to missions and aims, functions, discipline and scale
+      - Missions and aims - words are related to stakeholders’ visions, goals, statements or objectives e.g. open, free.
+      - Functions - words associated with their roles and processes they are responsible in the research landscape e.g. publish, data, review, train
+      - Discipline - words describing the discipline e.g. multidisciplinary, biology, ecology, evolution
+      - Scale - words associated with the time and scale e.g. worldwide, global, long
+    d) these will be used to create labels to describe each code
+
+  2. Axial coding
+    a) finding connections and relationships with broader categories by identifying and drawing the connections between them. It has been done by carefully going through labels and finding codes that have the same or similar descriptive labels and intuitively they are connected
+    b) aggregating and condensing codes into broader categories based on criteria that the codes with the same or similar labels cluster together. Our aim was to end up with the smallest number of categories that we could identified.
+  3. Selective coding
+    a)  identifying the connections between the identified categories and the rest of the codes
+    b)  removing some of the categories that we are not interested in. Many stakeholders can share topics with each other and that's because their function in the research landscape is similar or the same. Therefore, we expect that we would not be interested in some of the codes since they would not be related to our research questions
+    c) going through the codes again and coding accordingly to the identified main categories
+
+There were three categories of our interests that we expected to find in the statements: 
+1. Related to Open Research (defined by UNESCO)
+2. Related to research impact and solving global challenges
+3. Related to business model or profit 
+
+Open Research and the values that it brings seems to be necessary approach to maximise impact of science and help to solve global challenges. We expect that stakeholders that care about the Open Research agenda will frequently use words such as: 
+open, research, science, datum, access, accessibility, share, transparency
+
+Research results and findings should be used to understand and solve challenges but also to educate people. Some stakeholders might emphasise the importance of it but not necessary seen the importance of Open Research in the process. The words that we could expect to be associated with the topic are: 
+impact, solve, development, sustainable, education, policy, climate, change, wildlife. We also expect that words such as open, access will be absent. 
+
+In our work, we hypothesise that some organisations are run as a for profit business. Their approach could be more monetary/profit driven and therefore, they would use a business language or financial terms in their aim and mission statements. We could expect in these topics to find words such as: profit, fund, service, management, pay, financially
+
+The stm model generated 73 topics which later were characterised and categorised following the above description. In the end we were able to identify four main topics that we called: 1. Open Research, 2. Community and Support, 3. Innovation and Solutions and 4. Publication Process. Only Open Research topic was identified as predicted beforehand.
+
+1. Open Research topic contains: Topic 1, Topic 13, Topic 58, Topic 69, Topic 43, Topic 25, Topic 32, Topic 54, Topic 52, Topic 60
+2. Community & Support topic contains: Topic 5, Topic 7, Topic 10, Topic 11, Topic 21, Topic 23, Topic 26, Topic 39, Topic 41, Topic 42, Topic 63, Topic 65
+3.Innovation & Solution topic contains: Topic 17, Topic 24, Topic 30, Topic 14, Topic 2, Topic 34, Topic 38, Topic 4, Topic 44, Topic 48, Topic 50, Topic 51, Topic 55, Topic 61, Topic 66, Topic 71, Topic 20, Topic 57, Topic 62
+4. Publication process topic contains: Topic 3, Topic 12, Topic 16, Topic 22, Topic 35, Topic 49, Topic 47, Topic 53
+Rest of the topics that were not able to be categorised to any of our topics were not included in our analysis and interpretation. 
+
+Topic modeling generated beta and gamma values that we later used in our analysis. 
+Beta value is a calculated for each word and for each topic and gives information on a probability that a certain word belongs to a certain topic. Score value gives us measure how exclusive the each word is to a certain topic. For example, if a word has a low value, it means that it's equally used in all topics. The score was calculated by a word beta value divided by a sum of beta values for this word across all topics.
+After merging topics into new topics that were categorised by us, we calculated mean value of the merged topics beta and score values. Later we used these values in our text similarities analysis to create Fig. 2B (3_Text_similarities, Figure_2B). 
+
+Next, we calculated the proportion of the topics appearing in all of the documents by using a mean gamma value for each sentence and new topics. The gamma value informs what is a probability that certain document (here: sentence) belongs to a certain topic. 
+We chose one topic with the highest mean gamma value as a dominant topic for each of the sentence and later calculated the proportion of the sentences belonging to the new topics.
+This data set was used to create Fig. 2A (Figure_2A).
+
+# Cleaning R 
+```{r}
+rm(list=ls())
+```
+
+# Libraries
+```{r, echo=FALSE}
+library(tidyverse)
+library(purrr)
+library(tidyr)
+library(stringr)
+library(tidytext)
+
+# Additional libraries
+library(quanteda)
+library(quanteda.textplots)
+library(quanteda.dictionaries)
+library(tm)
+library(topicmodels)
+library(ggplot2)
+library(dplyr)
+library(wordcloud)
+library(reshape2)
+library(igraph)
+library(ggraph)
+library(stm)
+
+library("kableExtra") # to create a table when converting to html
+```
+
+# Importing data
+``` {r}
+data_words <- read.csv(file = "./output/created_datasets/cleaned_data.csv")
+```
+
+# Structural Topic Models on stakeholders
+followed: https://juliasilge.com/blog/sherlock-holmes-stm/
+
+```{r}
+# Creating metadata and connecting it with my data to perform topic modeling on the documents. Metadata includes: document name and stakeholder name
+
+data_dfm <- data_words %>%
+  count(sentence_doc, word, sort = TRUE) %>%
+  cast_dfm(sentence_doc, word, n)
+
+data_sparse <- data_words %>%
+  count(sentence_doc, word, sort = TRUE) %>%
+  cast_sparse(sentence_doc, word, n)
+
+# Creating metadata: document name, stakeholder name
+data_metadata <- data_words %>% 
+  select(sentence_doc, name, stakeholder) %>% 
+  distinct(sentence_doc, .keep_all = TRUE)
+
+# Connecting my metadata and data_dfm for stm()
+covs = data.frame(sentence_doc = data_dfm@docvars$docname, row = c(1:length(data_dfm@docvars$docname)))
+covs = left_join(covs, data_metadata)
+```
+
+# Topic modeling - no predetermined number of topics
+
+``` {r}
+data_beta <- data_words
+
+topic_model <- stm(data_dfm, K = 0, verbose = FALSE, init.type = "Spectral", prevalence = ~ name + stakeholder, data = covs, seed = 1) # running stm() function to fit a model and generate topics
+tpc = topicCorr(topic_model)
+plot(tpc) # plotting topic connections, there are no clear clustering among the topics
+
+```
+
+``` {r}
+# Getting beta values from the topic modeling and adding beta value to the data_words 
+
+td_beta <- tidy(topic_model) # getting beta values
+td_beta %>% 
+  group_by(term) %>% 
+  arrange(term, -beta)
+```
+
+# Merging topics into new topics cathegories
+``` {r}
+# Topics generated by the model were coded and categorised into five defined by us topics. Below, new "topic" column was created and topics were assigned  
+
+td_beta$stm_topic <- td_beta$topic
+td_beta$topic <- "NA"
+
+# 1. Open Research topic contains: Topic 1, Topic 13, Topic 58, Topic 69, Topic 43, Topic 25, Topic 32, Topic 54, Topic 52, Topic 60
+td_beta$topic[td_beta$stm_topic%in% c(1, 13, 58, 69, 43, 25, 32, 54, 52, 60)] <- 1
+# 2. Community & Support topic contains: Topic 5, Topic 7, Topic 10, Topic 11, Topic 21, Topic 23, Topic 26, Topic 39, Topic 41, Topic 42, Topic 63, Topic 65
+td_beta$topic[td_beta$stm_topic%in% c(5,  7,  10,  11,  21,  23,  26,  39,  41,  42,  63,  65)] <- 2
+# 3.Innovation & Solution topic contains: Topic 17, Topic 24, Topic 30, Topic 14, Topic 2, Topic 34, Topic 38, Topic 4, Topic 44, Topic 48, Topic 50, Topic 51, Topic 55, Topic 61, Topic 66, Topic 71, Topic 20, Topic 57, Topic 62
+td_beta$topic[td_beta$stm_topic%in% c(17,  24,  30,  14,  2,  34,  38,  4,  44,  48,  50,  51,  55,  61,  66,  71,  20,  57,  62)] <- 3
+# 4. Publication process topic contains: Topic 3, Topic 12, Topic 16, Topic 22, Topic 35, Topic 49, Topic 47, Topic 53
+td_beta$topic[td_beta$stm_topic%in% c(3, 12, 16, 22, 35, 49, 47, 53)] <- 4
+# Rest of the topics that were not able to be categorised to any of our topics were not included in our analysis and interpretation. 
+td_beta$topic[td_beta$topic %in% "NA"] <- 5
+
+td_beta$topic <- as.integer(td_beta$topic)
+td_beta$term <- as.factor(td_beta$term)
+
+# Sum of beta values for all topics for each category for each word
+td_beta_sum <- td_beta %>% 
+  select(-stm_topic) %>%
+  group_by(topic, term) %>% 
+  summarise(beta = sum(beta)) 
+
+# Mean value of beta values for all topics for each category for each word
+td_beta_mean <- td_beta %>% 
+  select(-stm_topic) %>%
+  group_by(topic, term) %>% 
+  summarise(beta = mean(beta)) 
+
+td_beta_groups_sum <- td_beta_sum %>% 
+  spread(topic, beta) 
+  
+# Calculating score - beta value of the word in topic / total beta value for the word in all topics
+
+td_beta_total <- td_beta %>% 
+  group_by(term) %>% 
+  summarise(beta_word_total = sum(beta))
+
+td_beta_score <- td_beta %>% 
+  left_join(td_beta_total, by = c("term" = "term")) 
+
+td_beta_score$score = td_beta_score$beta/td_beta_score$beta_word_total
+head(td_beta_score)
+
+td_beta_score <- td_beta_score %>% 
+  select(topic, term, beta, score, stm_topic)
+
+# Calculating mean beta and score value for new topics
+
+# Grouping by word and then grouping by the category to calculate mean values
+
+td_beta_mean <- td_beta_score %>% 
+  group_by(term, topic) %>% 
+  summarise(mean_beta = mean(beta)) %>%
+  mutate(merge_col = paste(term, topic, sep = "_"))
+
+td_score_mean <- td_beta_score %>% 
+  group_by(term, topic) %>% 
+  summarise(mean_score = mean(score)) %>% 
+  mutate(merge_col = paste(term, topic, sep = "_")) %>% 
+  ungroup() %>% 
+  select(-term, -topic)
+
+# Creating a data frame with score and beta mean values
+td_beta_score_mean <- td_beta_mean %>% 
+  left_join(td_score_mean, by = c("merge_col" = "merge_col")) 
+
+# Adding a beta sum column
+td_beta_sum_w <- td_beta_sum %>% 
+  mutate(merge_col = paste(term, topic, sep = "_")) %>% 
+  ungroup() %>% 
+  select(- term, - topic)
+  
+td_beta_score_mean_max <- td_beta_score_mean %>% 
+  left_join(td_beta_sum_w, by = c("merge_col" = "merge_col")) %>% 
+  select(-merge_col) %>% 
+  rename(sum_beta = beta)
+
+```
+
+``` {r}
+# Getting highest beta value for each of the word with the information about the Topic number
+
+td_beta_select <- td_beta_score_mean_max
+
+td_beta_mean_wide <- td_beta_score_mean_max %>% 
+  select(term, topic, mean_beta) %>% 
+  spread(topic, mean_beta) %>% 
+  rename(mean_beta_t1 = `1`, mean_beta_t2 = `2`, mean_beta_t3 = `3`, mean_beta_t4 = `4`, mean_beta_t5 = `5`)
+
+td_score_mean_wide <- td_beta_score_mean_max %>% 
+  select(term, topic, mean_score) %>% 
+  spread(topic, mean_score) %>% 
+  rename(mean_score_t1 = `1`, mean_score_t2 = `2`, mean_score_t3 = `3`, mean_score_t4 = `4`, mean_score_t5 = `5`)
+
+td_beta_sum_wide <- td_beta_score_mean_max %>% 
+  select(term, topic, sum_beta) %>% 
+  spread(topic, sum_beta) %>% 
+  rename(sum_beta_t1 = `1`, sum_beta_t2 = `2`, sum_beta_t3 = `3`, sum_beta_t4 = `4`,  sum_beta_t5 = `5`)
+
+# Highest score value
+td_score_topic <- td_beta_select %>% 
+  select(-sum_beta, -mean_beta) %>% 
+  group_by(term) %>% 
+  top_n(1, mean_score) %>% 
+  rename(highest_mean_score = mean_score)
+
+td_score_topic %>% group_by(topic) %>% count()
+
+# Highest mean beta value
+td_beta_topic <- td_beta_select %>% 
+  select(-sum_beta, -mean_score) %>% 
+  group_by(term) %>% 
+  top_n(1, mean_beta) %>% 
+  rename(highest_mean_beta = mean_beta)
+
+```
+
+# Creating a new dataset by merging datasets with new values
+``` {r}
+# Merging data_words with: td_beta_mean_wide, td_score_mean_wide, td_beta_sum_wide, td_score_topic
+data_words$word <- as.factor(data_words$word)
+
+to_merge <- td_beta_mean_wide %>% 
+  left_join(td_score_mean_wide, by= c("term" = "term")) %>% 
+  left_join(td_beta_sum_wide, by= c("term" = "term")) %>% 
+  left_join(td_score_topic, by= c("term" = "term")) %>% 
+  left_join(td_beta_topic, by= c("term" = "term"))
+
+data_words_stm <- data_words %>% 
+  left_join(to_merge, by = c("word" = "term")) %>% 
+  select(-topic.y) %>% 
+  rename(topic = topic.x)
+```
+
+# Saving data 
+```{r}
+# Saving the csv file
+write_csv(data_words_stm, file = "./output/created_datasets/dataset_words_stm_5topics.csv")
+```
+
+
+# Creating a document (sentence) level dataset
+# Gamma values - followed the same logic as with beta values
+``` {r}
+# Getting gamma values from topic_modeling
+td_gamma <- tidy(topic_model, matrix = "gamma",                    
+                 document_names = rownames(data_dfm))
+
+td_gamma_prog <- td_gamma
+td_gamma_prog$stm_topic <- td_gamma_prog$topic
+td_gamma_prog$topic <- "NA"
+
+td_gamma_prog$topic[td_gamma_prog$stm_topic%in% c(1, 13, 58, 69, 43, 25, 32, 54, 52, 60)] <- 1
+td_gamma_prog$topic[td_gamma_prog$stm_topic%in% c(5,  7,  10,  11,  21,  23,  26,  39,  41,  42,  63,  65)] <- 2
+td_gamma_prog$topic[td_gamma_prog$stm_topic%in% c(17,  24,  30,  14,  2,  34,  38,  4,  44,  48,  50,  51,  55,  61,  66,  71,  20,  57,  62)] <- 3
+td_gamma_prog$topic[td_gamma_prog$stm_topic%in% c(3, 12, 16, 22, 35, 49, 47, 53)] <- 4
+td_gamma_prog$topic[td_gamma_prog$topic %in% "NA"] <- 5
+
+td_gamma_prog$topic <- as.integer(td_gamma_prog$topic)
+td_gamma_prog$document <- as.factor(td_gamma_prog$document)
+
+# Removing topic 5 as we are not interested in it
+td_gamma_prog <- td_gamma_prog %>% 
+  select(-stm_topic) %>% 
+  rename(sentence_doc = document) %>% 
+  filter(topic != 5)
+
+# Choosing the highest gamma value for each sentence
+# Sort by the sentence and take top_n(1, gamma) to choose the topic with the biggest gamma value
+
+td_gamma_prog_info <- td_gamma_prog %>% 
+  rename(topic_sentence = topic) %>% 
+  group_by(sentence_doc) %>% 
+  top_n(1, gamma) %>% 
+  ungroup()
+
+# If there are any sentences with the same gamma values, I will exclude them from my analysis as not belonging to only one topic.
+
+td_gamma_prog_info_keep <- td_gamma_prog_info %>% 
+  group_by(sentence_doc) %>% 
+  count() %>% 
+  filter(n == 1) %>% 
+  select(-n) %>% 
+  ungroup()
+
+td_gamma_prog_info <- td_gamma_prog_info_keep %>% 
+  left_join(td_gamma_prog_info, by= c("sentence_doc" = "sentence_doc"))
+
+# Calculating a proportion of sentences in each of the document, for that I need to add columns: document and stakeholder
+
+# Adding info:
+info_sentence_doc <- data_words %>% 
+  select(sentence_doc, name, stakeholder) %>% 
+  distinct(sentence_doc, .keep_all = TRUE)
+
+td_gamma_prog_info <- td_gamma_prog_info %>% 
+  left_join(info_sentence_doc, by= c("sentence_doc"="sentence_doc"))
+
+# Calculating proportion
+# I will do so by counting name (document) to get a number of sentences in each document, then I will count a number of each topic for a document and then I will create a column with the proportion
+
+sentence_count_gamma <- data_words %>% 
+  distinct(sentence_doc, .keep_all = TRUE) %>% 
+  group_by(name) %>% 
+  count() %>% 
+  rename(total_sent = n)
+
+topic_count_gamma <- td_gamma_prog_info %>% 
+  group_by(name, topic_sentence) %>% 
+  count() %>% 
+  rename(total_topic = n)
+
+doc_level_stm_gamma <- topic_count_gamma %>% 
+  left_join(sentence_count_gamma, by= c("name" = "name")) %>%
+  mutate(merge_col = paste(name, topic_sentence, sep = "_"))
+
+# There are some missing values, replacing it with 0 as not present
+
+df_base <- info_sentence_doc %>% 
+  select(-sentence_doc) %>% 
+  distinct(name, .keep_all = TRUE) %>% 
+  slice(rep(1:n(), each = 4)) %>% 
+  group_by(name) %>%
+  mutate(topic_sentence = 1:n()) %>% 
+  mutate(merge_col = paste(name, topic_sentence, sep = "_")) %>% 
+  ungroup() %>% 
+  select(-name, -topic_sentence)
+
+
+df_doc_level_stm_gamma <- df_base %>% 
+  left_join(doc_level_stm_gamma, by= c("merge_col" = "merge_col")) %>% 
+  select(-name, -topic_sentence) %>% 
+  separate(merge_col, c("name","topic"), sep = "_")
+  
+
+df_doc_level_stm_gamma$prop <- df_doc_level_stm_gamma$total_topic/df_doc_level_stm_gamma$total_sent
+df_doc_level_stm_gamma <- df_doc_level_stm_gamma %>%
+    mutate_at(vars(prop), ~replace_na(., 0)) # replacing NA with 0, when a topic not present
+```
+
+
+```{r}
+write_excel_csv(df_doc_level_stm_gamma, "./output/created_datasets/df_doc_level_stm_gamma.csv") 
+```
+
+
+# Additional information
+
+Topic 1: Open Research
+Topic 2: Community & Support
+Topic 3: Innovation & Solution
+Topic 4: Publication process
+
+
+# Information about the data/topics
+``` {r}
+# Number of words belonging to new topics
+no_words_topics <- data_words_stm %>% 
+  select(word, topic) %>% 
+  distinct(word, .keep_all = TRUE) %>% 
+  group_by(topic) %>% 
+  count()
+
+no_words_topics %>% 
+  kbl(caption = "No of words belonging to new topics") %>% 
+  kable_classic("hover", full_width = F)
+
+# The most relevant words (15) for each topic: highest mean beta
+words_high_beta_topic <- data_words_stm %>% 
+  select(word, topic, highest_mean_beta) %>% 
+  distinct(word, .keep_all = TRUE) %>% 
+  group_by(topic) %>% 
+  top_n(4) %>% 
+  ungroup() %>% 
+  arrange(topic, -highest_mean_beta)
+
+words_high_beta_topic %>% 
+  kbl(caption = "Most relevant words in topics") %>% 
+  kable_classic("hover", full_width = F)
+```
+
+
+# Information about the stakeholders
+```{r}
+# Advocates
+advocates_info <- df_doc_level_stm_gamma %>% 
+  select(-total_topic, - total_sent) %>%
+  filter(stakeholder == "advocates") %>% 
+  group_by(topic) %>% 
+  slice_max(order_by = prop, n = 3) %>% 
+  select(-stakeholder)
+advocates_info
+
+advocates_info %>% 
+  kbl(caption = "Advocates associated with topics") %>% 
+  kable_classic("hover", full_width = F)
+
+# Funders
+funders_info <- df_doc_level_stm_gamma %>% 
+  select(-total_topic, - total_sent) %>%
+  filter(stakeholder == "funders") %>% 
+  group_by(topic) %>% 
+  slice_max(order_by = prop, n = 3) %>% 
+  select(-stakeholder)
+funders_info
+
+funders_info %>% 
+  kbl(caption = "Funders associated with topics") %>% 
+  kable_classic("hover", full_width = F)
+
+# Journals
+journals_info <- df_doc_level_stm_gamma %>% 
+  select(-total_topic, - total_sent) %>%
+  filter(stakeholder == "journals") %>% 
+  group_by(topic) %>% 
+  slice_max(order_by = prop, n = 3) %>% 
+  select(-stakeholder)
+journals_info
+
+journals_info %>% 
+  kbl(caption = "Journals associated with topics") %>% 
+  kable_classic("hover", full_width = F)
+
+# Publishers
+publishers_info <- df_doc_level_stm_gamma %>% 
+  select(-total_topic, - total_sent) %>%
+  filter(stakeholder == "publishers") %>% 
+  group_by(topic) %>% 
+  slice_max(order_by = prop, n = 3) %>% 
+  select(-stakeholder)
+publishers_info
+
+publishers_info %>% 
+  kbl(caption = "Publishers associated with topics") %>% 
+  kable_classic("hover", full_width = F)
+
+# Repositories
+repositories_info <- df_doc_level_stm_gamma %>% 
+  select(-total_topic, - total_sent) %>%
+  filter(stakeholder == "repositories") %>% 
+  group_by(topic) %>% 
+  slice_max(order_by = prop, n = 3) %>% 
+  select(-stakeholder)
+repositories_info
+
+repositories_info %>% 
+  kbl(caption = "Repositories associated with topics") %>% 
+  kable_classic("hover", full_width = F)
+
+# Societies
+societies_info <- df_doc_level_stm_gamma %>% 
+  select(-total_topic, - total_sent) %>%
+  filter(stakeholder == "societies") %>% 
+  group_by(topic) %>% 
+  slice_max(order_by = prop, n = 3) %>% 
+  select(-stakeholder)
+societies_info
+
+societies_info %>% 
+  kbl(caption = "Societies associated with topics") %>% 
+  kable_classic("hover", full_width = F)
+
+
+
+```
+
+# Session information
+``` {r}
+sessionInfo()
+```
+
+

@@ -1,0 +1,268 @@
+---
+title: "4_Language_analysis"
+author: "ZZ"
+# author: "zuzannazagrodzka"
+date: "2021-11-10"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+Application of text analyses to reveal association between stakeholders and Open Research (UNESCO) and business language. The code below includes control (book). We decided to keep only words that are unique for each of the dictionary. 
+It will enable us see the association and the divergence across the documents. We plotted the percentage of words that documents in the stakeholders groups share with the created by us dictionaries. 
+
+RATIO = number of words from one document present in one dictionary / total number of words in the document
+
+Note: duplicates were not removed (it matters how many times a certain word occurs in a document)
+
+Meaning of the columns in the final dataframe: 
+"document" - name of the document
+"present_BUS" - a word is present (1) or absent (0) in the business dictionary
+"present_UNESCO" - a word is present (1) or absent (0) in the UNESCO Recommendations
+"present_book" - a word is present (1) or absent (0) in the book
+"doc_pres" - total number of words present in the document (1)
+"sum" - a total number of words that are present in our dictionaries 
+"stakeholder" - name of the stakeholder (funder/publisher/advocate/society/repository/journal)
+"proc_BUS" - % of number of words present in the certain document and business dictionary / total number of words in the certain document
+"proc_UNESCO" - % of number of words present in the certain document and UNESCO dictionary / total number of words in the certain document
+"proc_book" - % of number of words present in the certain document and book / total number of words in the certain document
+
+
+
+
+```{r}
+# Clearing R
+rm(list=ls())
+
+
+# Libraries used for text/data analysis
+library(tidyverse) 
+library(dplyr)
+library(tidytext)
+
+# Libraries used to create plots
+library(ggplot2)
+
+# Library to create a table when converting to html
+library("kableExtra") 
+
+```
+
+
+# Importing data
+
+```{r}
+# Data: words, stakeholder, documents...
+df_corpuses <- read_csv("./output/created_datasets/cleaned_data.csv")
+data_words <- df_corpuses
+
+# Dictionary data 100 words per dictionary
+# all_dict <- read_csv("./output/created_datasets/freq_dict_total_100.csv")
+# All words
+all_dict <- read_csv("./output/created_datasets/freq_dict_total_all.csv")
+```
+
+
+``` {r}
+# Data preparation
+
+# Changing name of the dictionary variable
+new_dictionary <- all_dict
+head(new_dictionary,3)
+
+# new_dictionary <- dictionaries
+## Getting a data set with the words
+data_words <- df_corpuses
+
+# Merging
+data_words <- data_words %>% 
+  rename(document = name) %>% 
+  select(document, stakeholder, word) %>% 
+  left_join(new_dictionary, by = c("word" = "word")) # merging
+
+# # HERE! I decided to remove words that did not appear in any of the dictionaries (20.09.2022)
+# data_words <- data_words %>%
+#   na.omit()
+
+
+# Adding a column with stakeholder and word together to allow merging later
+data_words$stake_word <- paste(data_words$stakeholder, "_", data_words$word)
+# Adding a column with a document name and word together to allow merging later
+data_words$doc_word <- paste(data_words$document, "_", data_words$word)
+# Adding a column that will be used later to calculate the total of unique words in the document (dictionaries without removed words)
+data_words$doc_pres <- 1
+
+# Adding two columns that will be used later to calculate the total of unique words in the document (new dictionaries with removed common words)
+
+# Replace NAs with 0 in all absence/presence columns
+data_words_ND <- data_words %>%
+  mutate_at(vars(present_in_dict, present_BUS, present_UNESCO, present_book, sum), ~replace_na(., 0)) # replacing NAs
+
+# Select columns of my interest (stakeholders) and aggregate 
+
+data_words_ND <- data_words_ND %>% 
+  select(document, stakeholder, word, present_BUS, present_UNESCO, present_book, doc_pres, sum) # selecting columns, sum - column with the information about in how many dictionaries a certain word occurs
+
+df_sum_pres_ND <- aggregate(x = data_words_ND[,4:8], by = list(data_words_ND$document), FUN = sum, na.rm = TRUE)
+  
+# head(df_sum_pres_ND, 3)
+
+# By doing aggregate I lost info about the stakeholder the doc come from, I want to add it
+df_doc_ord <- data_words_ND %>% 
+  select(document, stakeholder) %>% 
+  distinct(document, .keep_all = TRUE)
+  
+df_sum_pres_ND <- df_sum_pres_ND %>% 
+  left_join(df_doc_ord, by = c("Group.1" = "document")) %>% 
+  rename(document = Group.1)
+
+# Creating % columns in a new df_sum_proc_ND data frame 
+df_sum_proc_ND <- df_sum_pres_ND
+
+df_sum_proc_ND$proc_BUS <-df_sum_proc_ND$present_BUS/df_sum_proc_ND$doc_pres*100
+
+df_sum_proc_ND$proc_UNESCO <- df_sum_proc_ND$present_UNESCO/df_sum_proc_ND$doc_pres*100
+
+df_sum_proc_ND$proc_book <- df_sum_proc_ND$present_book/df_sum_proc_ND$doc_pres*100
+
+
+# Additional information about the data
+# Stakeholders (2 from each of the stakeholders) that shared the highest no of words with UNESCO recommendation
+
+UNESCO_stak_top <- df_sum_proc_ND %>% 
+  group_by(stakeholder) %>% 
+  arrange(desc(proc_UNESCO)) %>% 
+  slice_head(n=2) %>% 
+  select(stakeholder, document, proc_UNESCO)
+
+UNESCO_stak_top %>% 
+  kbl(caption = "Stakeholders that shared the higest no of words with UNESCO recommendation:") %>% 
+  kable_classic("hover", full_width = T)
+
+# Stakeholders (2 from each of the stakeholders) that shared the highest no of words with business dictionary
+
+business_stak_top <- df_sum_proc_ND %>% 
+  group_by(stakeholder) %>% 
+  arrange(desc(proc_BUS)) %>% 
+  slice_head(n=2) %>% 
+  select(stakeholder, document, proc_BUS)
+
+business_stak_top %>% 
+  kbl(caption = "Stakeholders that shared the higest no of words with business dictionary:") %>% 
+  kable_classic("hover", full_width = T)
+
+# Stakeholders (2 from each of the stakeholders) that shared the highest no of words with book dictionary (control)
+
+book_stak_top <-  df_sum_proc_ND %>% 
+  group_by(stakeholder) %>% 
+  arrange(desc(proc_book)) %>% 
+  slice_head(n=2) %>% 
+  select(stakeholder, document, proc_book)
+
+book_stak_top %>% 
+  kbl(caption = "Stakeholders that shared the higest no of words with book dictionary (control):") %>% 
+  kable_classic("hover", full_width = T)
+
+```
+
+
+# Graphs
+
+```{r}
+no <- nrow(df_sum_proc_ND)
+no
+
+# Plotting them separately book
+df_sum_proc_ND_book = data.frame(
+  document = rep(df_sum_proc_ND$document,1),
+  stakeholder = rep(df_sum_proc_ND$stakeholder,1),
+  type = c(rep("Book",no)),
+  perc = c(df_sum_proc_ND$proc_book),
+  perc2 = c(df_sum_proc_ND$proc_book))
+
+sum_df_sum_proc_ND_book = 
+  df_sum_proc_ND_book %>%
+  group_by(stakeholder, type) %>%
+  # dplyr::summarise(perc = mean(perc), SD = sd(perc2))
+  dplyr::summarise(perc = median(perc), SD = sd(perc2))
+
+fig_book <- ggplot() +
+  geom_point(data = df_sum_proc_ND_book, aes(x = perc, y = stakeholder), alpha = 0.1, position = position_jitter()) +
+  geom_pointrange(data = sum_df_sum_proc_ND_book, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = stakeholder)) +
+  facet_grid(type~.) +
+  labs(x = "Document words occuring in dictionary (%)", y = "") +
+  scale_colour_discrete(guide = F) +
+  theme_classic()
+fig_book
+
+# Saving the figure
+figure_name <- paste0("./output/Other_figures/language_book.png")
+ggsave(filename = figure_name, fig_book + theme_bw(base_size = 5),
+     width = 10, height = 5, dpi = 600, units = "in", device='png')  
+
+
+# Plotting them separately Business
+df_sum_proc_ND_BUS = data.frame(
+  document = rep(df_sum_proc_ND$document,1),
+  stakeholder = rep(df_sum_proc_ND$stakeholder,1),
+  type = c(rep("Business",no)),
+  perc = c(df_sum_proc_ND$proc_BUS),
+  perc2 = c(df_sum_proc_ND$proc_BUS))
+
+sum_df_sum_proc_ND_BUS = 
+  df_sum_proc_ND_BUS %>%
+  group_by(stakeholder, type) %>%
+  # dplyr::summarise(perc = mean(perc), SD = sd(perc2))
+  dplyr::summarise(perc = median(perc), SD = sd(perc2))
+
+fig_bus <- ggplot() +
+  geom_point(data = df_sum_proc_ND_BUS, aes(x = perc, y = stakeholder), alpha = 0.1, position = position_jitter()) +
+  geom_pointrange(data = sum_df_sum_proc_ND_BUS, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = stakeholder)) +
+  facet_grid(type~.) +
+  labs(x = "Document words occuring in dictionary (%)", y = "") +
+  scale_colour_discrete(guide = F) +
+  theme_classic()
+
+fig_bus
+# Saving the figure
+figure_name <- paste0("./output/Figure_2C/language_business.png")
+ggsave(filename = figure_name, fig_bus + theme_bw(base_size = 5),
+     width = 10, height = 5, dpi = 600, units = "in", device='png')  
+
+# Plotting them separately UNESCO
+df_sum_proc_ND_UNESCO = data.frame(
+  document = rep(df_sum_proc_ND$document,1),
+  stakeholder = rep(df_sum_proc_ND$stakeholder,1),
+  type = c(rep("UNESCO",no)),
+  perc = c(df_sum_proc_ND$proc_UNESCO),
+  perc2 = c(df_sum_proc_ND$proc_UNESCO))
+
+sum_df_sum_proc_ND_UNESCO = 
+  df_sum_proc_ND_UNESCO %>%
+  group_by(stakeholder, type) %>%
+  # dplyr::summarise(perc = mean(perc), SD = sd(perc2))
+  dplyr::summarise(perc = median(perc), SD = sd(perc2))
+
+fig_unesco <- ggplot() +
+  geom_point(data = df_sum_proc_ND_UNESCO, aes(x = perc, y = stakeholder), alpha = 0.1, position = position_jitter()) +
+  geom_pointrange(data = sum_df_sum_proc_ND_UNESCO, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = stakeholder)) +
+  facet_grid(type~.) +
+  labs(x = "Document words occuring in dictionary (%)", y = "") +
+  scale_colour_discrete(guide = F) +
+  theme_classic()
+fig_unesco
+
+# Saving the figure
+figure_name <- paste0("./output/Figure_2C/language_unesco.png")
+ggsave(filename = figure_name, fig_unesco  + theme_bw(base_size = 5),
+     width = 10, height = 5, dpi = 600, units = "in", device='png')  
+
+```
+
+
+# Session information
+``` {r}
+sessionInfo()
+```
+
+
