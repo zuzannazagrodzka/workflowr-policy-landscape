@@ -1,0 +1,2835 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="ZZ" />
+
+<meta name="date" content="2022-05-05" />
+
+<title>2_Topic_modeling</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">myproject</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">2_Topic_modeling</h1>
+<h4 class="author">ZZ</h4>
+<h4 class="date">2022-05-05</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2022-09-21
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>myproject/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220505code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220505)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220505code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220505)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetreeefb12025b35db2b4e815bc575445216d20c0d6f0targetblankefb1202a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/efb12025b35db2b4e815bc575445216d20c0d6f0" target="_blank">efb1202</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetreeefb12025b35db2b4e815bc575445216d20c0d6f0targetblankefb1202a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/efb12025b35db2b4e815bc575445216d20c0d6f0" target="_blank">efb1202</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    code/.DS_Store
+    Ignored:    data/.DS_Store
+    Ignored:    output/.DS_Store
+
+Untracked files:
+    Untracked:  Policy_landscape_workflowr.R
+    Untracked:  code/1a_Data_preprocessing.html
+    Untracked:  code/1b_Dictionaries_preparation.html
+    Untracked:  code/2_Topic_modeling.html
+    Untracked:  code/3_Text_similarities_Figure_2B.html
+    Untracked:  code/4_Language_analysis_Figure_2C.html
+    Untracked:  code/5_For_and_not_for_profit_comparison.html
+    Untracked:  code/Figure_2A.html
+    Untracked:  code/figure/
+    Untracked:  data/README.html
+    Untracked:  data/dictionaries/
+    Untracked:  data/mission_statements/
+    Untracked:  output/Figure_2A/
+    Untracked:  output/Figure_2B/
+    Untracked:  output/Figure_2C/
+    Untracked:  output/Other_figures/
+    Untracked:  output/created_datasets/
+
+Unstaged changes:
+    Deleted:    code/1a_Data_preprocessing.Rmd
+    Deleted:    code/1b_Dictionaries_preparation.Rmd
+    Modified:   code/README.md
+    Modified:   data/README.md
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/2_Topic_modeling.Rmd</code>) and
+HTML (<code>docs/2_Topic_modeling.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/efb12025b35db2b4e815bc575445216d20c0d6f0/analysis/2_Topic_modeling.Rmd" target="_blank">efb1202</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2022-09-21
+</td>
+<td>
+Publish other files
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="topic-modeling" class="section level1">
+<h1>Topic modeling</h1>
+</div>
+<div id="methods" class="section level1">
+<h1>Methods</h1>
+<p>Topic Modeling</p>
+<p>To investigate the relationship to our research questions regarding
+the topics of our interest and the language choice in the stakeholders’
+statements, the study employs a computational text analysis called the
+Structural Topic Modeling (STM) using library stm. We chose STM because
+it addresses the issue with the independence (like Correlated Topic
+Models) but also enables the discovery of topics and their prevalence
+based on document metadata, such as stakeholder group. The topic
+modeling was conducted on a sentence level and the metadata variable
+contained information about the stakeholders group and the document each
+work comes from. After generating the topics, we used the ground theory
+method of analysing qualitative data (Corbin and Strauss, 1990) to
+identify the main categories that are present in the topics.</p>
+<p>The more detailed protocol of condensation multiple topics into a few
+more defined. 1. Open coding a) obtaining codes by performing STM and
+choosing the setting that enable the algorithm of Lee and Mimno (2014)
+to find the number of topics (from now on: codes). The metadata used in
+the modelling was the information on documents and stakeholders. The
+model calculates highest probability, Score, Lift and FLEX values for
+each word and assigns words to one or multiple topics. b) we looked at
+the seven words with the highest value for these four categories/values
+and followed a coding paradigm that enabled us to create a descriptive
+label for each of the code c) our paradigm contains enable us to search
+for words what describe or belong to missions and aims, functions,
+discipline and scale - Missions and aims - words are related to
+stakeholders’ visions, goals, statements or objectives e.g. open, free.
+- Functions - words associated with their roles and processes they are
+responsible in the research landscape e.g. publish, data, review, train
+- Discipline - words describing the discipline e.g. multidisciplinary,
+biology, ecology, evolution - Scale - words associated with the time and
+scale e.g. worldwide, global, long d) these will be used to create
+labels to describe each code</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Axial coding a) finding connections and relationships with broader
+categories by identifying and drawing the connections between them. It
+has been done by carefully going through labels and finding codes that
+have the same or similar descriptive labels and intuitively they are
+connected b) aggregating and condensing codes into broader categories
+based on criteria that the codes with the same or similar labels cluster
+together. Our aim was to end up with the smallest number of categories
+that we could identified.</li>
+<li>Selective coding a) identifying the connections between the
+identified categories and the rest of the codes b) removing some of the
+categories that we are not interested in. Many stakeholders can share
+topics with each other and that’s because their function in the research
+landscape is similar or the same. Therefore, we expect that we would not
+be interested in some of the codes since they would not be related to
+our research questions c) going through the codes again and coding
+accordingly to the identified main categories</li>
+</ol>
+<p>There were three categories of our interests that we expected to find
+in the statements: 1. Related to Open Research (defined by UNESCO) 2.
+Related to research impact and solving global challenges 3. Related to
+business model or profit</p>
+<p>Open Research and the values that it brings seems to be necessary
+approach to maximise impact of science and help to solve global
+challenges. We expect that stakeholders that care about the Open
+Research agenda will frequently use words such as: open, research,
+science, datum, access, accessibility, share, transparency</p>
+<p>Research results and findings should be used to understand and solve
+challenges but also to educate people. Some stakeholders might emphasise
+the importance of it but not necessary seen the importance of Open
+Research in the process. The words that we could expect to be associated
+with the topic are: impact, solve, development, sustainable, education,
+policy, climate, change, wildlife. We also expect that words such as
+open, access will be absent.</p>
+<p>In our work, we hypothesise that some organisations are run as a for
+profit business. Their approach could be more monetary/profit driven and
+therefore, they would use a business language or financial terms in
+their aim and mission statements. We could expect in these topics to
+find words such as: profit, fund, service, management, pay,
+financially</p>
+<p>The stm model generated 73 topics which later were characterised and
+categorised following the above description. In the end we were able to
+identify four main topics that we called: 1. Open Research, 2. Community
+and Support, 3. Innovation and Solutions and 4. Publication Process.
+Only Open Research topic was identified as predicted beforehand.</p>
+<ol style="list-style-type: decimal">
+<li>Open Research topic contains: Topic 1, Topic 13, Topic 58, Topic 69,
+Topic 43, Topic 25, Topic 32, Topic 54, Topic 52, Topic 60</li>
+<li>Community &amp; Support topic contains: Topic 5, Topic 7, Topic 10,
+Topic 11, Topic 21, Topic 23, Topic 26, Topic 39, Topic 41, Topic 42,
+Topic 63, Topic 65 3.Innovation &amp; Solution topic contains: Topic 17,
+Topic 24, Topic 30, Topic 14, Topic 2, Topic 34, Topic 38, Topic 4,
+Topic 44, Topic 48, Topic 50, Topic 51, Topic 55, Topic 61, Topic 66,
+Topic 71, Topic 20, Topic 57, Topic 62</li>
+<li>Publication process topic contains: Topic 3, Topic 12, Topic 16,
+Topic 22, Topic 35, Topic 49, Topic 47, Topic 53 Rest of the topics that
+were not able to be categorised to any of our topics were not included
+in our analysis and interpretation.</li>
+</ol>
+<p>Topic modeling generated beta and gamma values that we later used in
+our analysis. Beta value is a calculated for each word and for each
+topic and gives information on a probability that a certain word belongs
+to a certain topic. Score value gives us measure how exclusive the each
+word is to a certain topic. For example, if a word has a low value, it
+means that it’s equally used in all topics. The score was calculated by
+a word beta value divided by a sum of beta values for this word across
+all topics. After merging topics into new topics that were categorised
+by us, we calculated mean value of the merged topics beta and score
+values. Later we used these values in our text similarities analysis to
+create Fig. 2B (3_Text_similarities, Figure_2B).</p>
+<p>Next, we calculated the proportion of the topics appearing in all of
+the documents by using a mean gamma value for each sentence and new
+topics. The gamma value informs what is a probability that certain
+document (here: sentence) belongs to a certain topic. We chose one topic
+with the highest mean gamma value as a dominant topic for each of the
+sentence and later calculated the proportion of the sentences belonging
+to the new topics. This data set was used to create Fig. 2A
+(Figure_2A).</p>
+</div>
+<div id="cleaning-r" class="section level1">
+<h1>Cleaning R</h1>
+<pre class="r"><code>rm(list=ls())</code></pre>
+</div>
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+✓ tibble  3.1.6     ✓ dplyr   1.0.7
+✓ tidyr   1.1.4     ✓ stringr 1.4.0
+✓ readr   2.0.2     ✓ forcats 0.5.1</code></pre>
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+<pre><code>Package version: 3.1.0
+Unicode version: 13.0
+ICU version: 69.1</code></pre>
+<pre><code>Parallel computing: 8 of 8 threads used.</code></pre>
+<pre><code>See https://quanteda.io for tutorials and examples.</code></pre>
+<pre><code>Loading required package: NLP</code></pre>
+<pre><code>
+Attaching package: &#39;NLP&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:quanteda&#39;:
+
+    meta, meta&lt;-</code></pre>
+<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
+
+    annotate</code></pre>
+<pre><code>
+Attaching package: &#39;tm&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:quanteda&#39;:
+
+    stopwords</code></pre>
+<pre><code>Loading required package: RColorBrewer</code></pre>
+<pre><code>
+Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    smiths</code></pre>
+<pre><code>
+Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:quanteda.textplots&#39;:
+
+    as.igraph</code></pre>
+<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
+
+    as_data_frame, groups, union</code></pre>
+<pre><code>The following objects are masked from &#39;package:purrr&#39;:
+
+    compose, simplify</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    crossing</code></pre>
+<pre><code>The following object is masked from &#39;package:tibble&#39;:
+
+    as_data_frame</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    decompose, spectrum</code></pre>
+<pre><code>The following object is masked from &#39;package:base&#39;:
+
+    union</code></pre>
+<pre><code>stm v1.3.6 successfully loaded. See ?stm for help. 
+ Papers, resources, and other materials at structuraltopicmodel.com</code></pre>
+<pre><code>
+Attaching package: &#39;kableExtra&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:dplyr&#39;:
+
+    group_rows</code></pre>
+</div>
+<div id="importing-data" class="section level1">
+<h1>Importing data</h1>
+<pre class="r"><code>data_words &lt;- read.csv(file = &quot;./output/created_datasets/cleaned_data.csv&quot;)</code></pre>
+</div>
+<div id="structural-topic-models-on-stakeholders"
+class="section level1">
+<h1>Structural Topic Models on stakeholders</h1>
+<p>followed: <a href="https://juliasilge.com/blog/sherlock-holmes-stm/"
+class="uri">https://juliasilge.com/blog/sherlock-holmes-stm/</a></p>
+<pre class="r"><code># Creating metadata and connecting it with my data to perform topic modeling on the documents. Metadata includes: document name and stakeholder name
+
+data_dfm &lt;- data_words %&gt;%
+  count(sentence_doc, word, sort = TRUE) %&gt;%
+  cast_dfm(sentence_doc, word, n)
+
+data_sparse &lt;- data_words %&gt;%
+  count(sentence_doc, word, sort = TRUE) %&gt;%
+  cast_sparse(sentence_doc, word, n)
+
+# Creating metadata: document name, stakeholder name
+data_metadata &lt;- data_words %&gt;% 
+  select(sentence_doc, name, stakeholder) %&gt;% 
+  distinct(sentence_doc, .keep_all = TRUE)
+
+# Connecting my metadata and data_dfm for stm()
+covs = data.frame(sentence_doc = data_dfm@docvars$docname, row = c(1:length(data_dfm@docvars$docname)))
+covs = left_join(covs, data_metadata)</code></pre>
+<pre><code>Joining, by = &quot;sentence_doc&quot;</code></pre>
+</div>
+<div id="topic-modeling---no-predetermined-number-of-topics"
+class="section level1">
+<h1>Topic modeling - no predetermined number of topics</h1>
+<pre class="r"><code>data_beta &lt;- data_words
+
+topic_model &lt;- stm(data_dfm, K = 0, verbose = FALSE, init.type = &quot;Spectral&quot;, prevalence = ~ name + stakeholder, data = covs, seed = 1) # running stm() function to fit a model and generate topics
+tpc = topicCorr(topic_model)
+plot(tpc) # plotting topic connections, there are no clear clustering among the topics</code></pre>
+<p><img src="figure/2_Topic_modeling.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Getting beta values from the topic modeling and adding beta value to the data_words 
+
+td_beta &lt;- tidy(topic_model) # getting beta values
+td_beta %&gt;% 
+  group_by(term) %&gt;% 
+  arrange(term, -beta)</code></pre>
+<pre><code># A tibble: 206,736 × 3
+# Groups:   term [2,832]
+   topic term       beta
+   &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;
+ 1    27 abide 3.10e-  3
+ 2    69 abide 1.96e-  3
+ 3    15 abide 1.19e-169
+ 4    56 abide 5.85e-182
+ 5    11 abide 1.23e-199
+ 6     9 abide 5.21e-207
+ 7    20 abide 1.89e-209
+ 8    73 abide 3.21e-216
+ 9    58 abide 1.19e-239
+10    21 abide 7.92e-256
+# … with 206,726 more rows</code></pre>
+</div>
+<div id="merging-topics-into-new-topics-cathegories"
+class="section level1">
+<h1>Merging topics into new topics cathegories</h1>
+<pre class="r"><code># Topics generated by the model were coded and categorised into five defined by us topics. Below, new &quot;topic&quot; column was created and topics were assigned  
+
+td_beta$stm_topic &lt;- td_beta$topic
+td_beta$topic &lt;- &quot;NA&quot;
+
+# 1. Open Research topic contains: Topic 1, Topic 13, Topic 58, Topic 69, Topic 43, Topic 25, Topic 32, Topic 54, Topic 52, Topic 60
+td_beta$topic[td_beta$stm_topic%in% c(1, 13, 58, 69, 43, 25, 32, 54, 52, 60)] &lt;- 1
+# 2. Community &amp; Support topic contains: Topic 5, Topic 7, Topic 10, Topic 11, Topic 21, Topic 23, Topic 26, Topic 39, Topic 41, Topic 42, Topic 63, Topic 65
+td_beta$topic[td_beta$stm_topic%in% c(5,  7,  10,  11,  21,  23,  26,  39,  41,  42,  63,  65)] &lt;- 2
+# 3.Innovation &amp; Solution topic contains: Topic 17, Topic 24, Topic 30, Topic 14, Topic 2, Topic 34, Topic 38, Topic 4, Topic 44, Topic 48, Topic 50, Topic 51, Topic 55, Topic 61, Topic 66, Topic 71, Topic 20, Topic 57, Topic 62
+td_beta$topic[td_beta$stm_topic%in% c(17,  24,  30,  14,  2,  34,  38,  4,  44,  48,  50,  51,  55,  61,  66,  71,  20,  57,  62)] &lt;- 3
+# 4. Publication process topic contains: Topic 3, Topic 12, Topic 16, Topic 22, Topic 35, Topic 49, Topic 47, Topic 53
+td_beta$topic[td_beta$stm_topic%in% c(3, 12, 16, 22, 35, 49, 47, 53)] &lt;- 4
+# Rest of the topics that were not able to be categorised to any of our topics were not included in our analysis and interpretation. 
+td_beta$topic[td_beta$topic %in% &quot;NA&quot;] &lt;- 5
+
+td_beta$topic &lt;- as.integer(td_beta$topic)
+td_beta$term &lt;- as.factor(td_beta$term)
+
+# Sum of beta values for all topics for each category for each word
+td_beta_sum &lt;- td_beta %&gt;% 
+  select(-stm_topic) %&gt;%
+  group_by(topic, term) %&gt;% 
+  summarise(beta = sum(beta)) </code></pre>
+<pre><code>`summarise()` has grouped output by &#39;topic&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code># Mean value of beta values for all topics for each category for each word
+td_beta_mean &lt;- td_beta %&gt;% 
+  select(-stm_topic) %&gt;%
+  group_by(topic, term) %&gt;% 
+  summarise(beta = mean(beta)) </code></pre>
+<pre><code>`summarise()` has grouped output by &#39;topic&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>td_beta_groups_sum &lt;- td_beta_sum %&gt;% 
+  spread(topic, beta) 
+  
+# Calculating score - beta value of the word in topic / total beta value for the word in all topics
+
+td_beta_total &lt;- td_beta %&gt;% 
+  group_by(term) %&gt;% 
+  summarise(beta_word_total = sum(beta))
+
+td_beta_score &lt;- td_beta %&gt;% 
+  left_join(td_beta_total, by = c(&quot;term&quot; = &quot;term&quot;)) 
+
+td_beta_score$score = td_beta_score$beta/td_beta_score$beta_word_total
+head(td_beta_score)</code></pre>
+<pre><code># A tibble: 6 × 6
+  topic term       beta stm_topic beta_word_total     score
+  &lt;int&gt; &lt;fct&gt;     &lt;dbl&gt;     &lt;int&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+1     1 abide 1.42e-273         1         0.00505 2.81e-271
+2     3 abide 5.43e-274         2         0.00505 1.07e-271
+3     4 abide 0                 3         0.00505 0        
+4     3 abide 0                 4         0.00505 0        
+5     2 abide 0                 5         0.00505 0        
+6     5 abide 0                 6         0.00505 0        </code></pre>
+<pre class="r"><code>td_beta_score &lt;- td_beta_score %&gt;% 
+  select(topic, term, beta, score, stm_topic)
+
+# Calculating mean beta and score value for new topics
+
+# Grouping by word and then grouping by the category to calculate mean values
+
+td_beta_mean &lt;- td_beta_score %&gt;% 
+  group_by(term, topic) %&gt;% 
+  summarise(mean_beta = mean(beta)) %&gt;%
+  mutate(merge_col = paste(term, topic, sep = &quot;_&quot;))</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;term&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>td_score_mean &lt;- td_beta_score %&gt;% 
+  group_by(term, topic) %&gt;% 
+  summarise(mean_score = mean(score)) %&gt;% 
+  mutate(merge_col = paste(term, topic, sep = &quot;_&quot;)) %&gt;% 
+  ungroup() %&gt;% 
+  select(-term, -topic)</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;term&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code># Creating a data frame with score and beta mean values
+td_beta_score_mean &lt;- td_beta_mean %&gt;% 
+  left_join(td_score_mean, by = c(&quot;merge_col&quot; = &quot;merge_col&quot;)) 
+
+# Adding a beta sum column
+td_beta_sum_w &lt;- td_beta_sum %&gt;% 
+  mutate(merge_col = paste(term, topic, sep = &quot;_&quot;)) %&gt;% 
+  ungroup() %&gt;% 
+  select(- term, - topic)
+  
+td_beta_score_mean_max &lt;- td_beta_score_mean %&gt;% 
+  left_join(td_beta_sum_w, by = c(&quot;merge_col&quot; = &quot;merge_col&quot;)) %&gt;% 
+  select(-merge_col) %&gt;% 
+  rename(sum_beta = beta)</code></pre>
+<pre class="r"><code># Getting highest beta value for each of the word with the information about the Topic number
+
+td_beta_select &lt;- td_beta_score_mean_max
+
+td_beta_mean_wide &lt;- td_beta_score_mean_max %&gt;% 
+  select(term, topic, mean_beta) %&gt;% 
+  spread(topic, mean_beta) %&gt;% 
+  rename(mean_beta_t1 = `1`, mean_beta_t2 = `2`, mean_beta_t3 = `3`, mean_beta_t4 = `4`, mean_beta_t5 = `5`)
+
+td_score_mean_wide &lt;- td_beta_score_mean_max %&gt;% 
+  select(term, topic, mean_score) %&gt;% 
+  spread(topic, mean_score) %&gt;% 
+  rename(mean_score_t1 = `1`, mean_score_t2 = `2`, mean_score_t3 = `3`, mean_score_t4 = `4`, mean_score_t5 = `5`)
+
+td_beta_sum_wide &lt;- td_beta_score_mean_max %&gt;% 
+  select(term, topic, sum_beta) %&gt;% 
+  spread(topic, sum_beta) %&gt;% 
+  rename(sum_beta_t1 = `1`, sum_beta_t2 = `2`, sum_beta_t3 = `3`, sum_beta_t4 = `4`,  sum_beta_t5 = `5`)
+
+# Highest score value
+td_score_topic &lt;- td_beta_select %&gt;% 
+  select(-sum_beta, -mean_beta) %&gt;% 
+  group_by(term) %&gt;% 
+  top_n(1, mean_score) %&gt;% 
+  rename(highest_mean_score = mean_score)
+
+td_score_topic %&gt;% group_by(topic) %&gt;% count()</code></pre>
+<pre><code># A tibble: 5 × 2
+# Groups:   topic [5]
+  topic     n
+  &lt;int&gt; &lt;int&gt;
+1     1   479
+2     2   439
+3     3   659
+4     4   502
+5     5   753</code></pre>
+<pre class="r"><code># Highest mean beta value
+td_beta_topic &lt;- td_beta_select %&gt;% 
+  select(-sum_beta, -mean_score) %&gt;% 
+  group_by(term) %&gt;% 
+  top_n(1, mean_beta) %&gt;% 
+  rename(highest_mean_beta = mean_beta)</code></pre>
+</div>
+<div id="creating-a-new-dataset-by-merging-datasets-with-new-values"
+class="section level1">
+<h1>Creating a new dataset by merging datasets with new values</h1>
+<pre class="r"><code># Merging data_words with: td_beta_mean_wide, td_score_mean_wide, td_beta_sum_wide, td_score_topic
+data_words$word &lt;- as.factor(data_words$word)
+
+to_merge &lt;- td_beta_mean_wide %&gt;% 
+  left_join(td_score_mean_wide, by= c(&quot;term&quot; = &quot;term&quot;)) %&gt;% 
+  left_join(td_beta_sum_wide, by= c(&quot;term&quot; = &quot;term&quot;)) %&gt;% 
+  left_join(td_score_topic, by= c(&quot;term&quot; = &quot;term&quot;)) %&gt;% 
+  left_join(td_beta_topic, by= c(&quot;term&quot; = &quot;term&quot;))
+
+data_words_stm &lt;- data_words %&gt;% 
+  left_join(to_merge, by = c(&quot;word&quot; = &quot;term&quot;)) %&gt;% 
+  select(-topic.y) %&gt;% 
+  rename(topic = topic.x)</code></pre>
+</div>
+<div id="saving-data" class="section level1">
+<h1>Saving data</h1>
+<pre class="r"><code># Saving the csv file
+write_csv(data_words_stm, file = &quot;./output/created_datasets/dataset_words_stm_5topics.csv&quot;)</code></pre>
+</div>
+<div id="creating-a-document-sentence-level-dataset"
+class="section level1">
+<h1>Creating a document (sentence) level dataset</h1>
+</div>
+<div id="gamma-values---followed-the-same-logic-as-with-beta-values"
+class="section level1">
+<h1>Gamma values - followed the same logic as with beta values</h1>
+<pre class="r"><code># Getting gamma values from topic_modeling
+td_gamma &lt;- tidy(topic_model, matrix = &quot;gamma&quot;,                    
+                 document_names = rownames(data_dfm))
+
+td_gamma_prog &lt;- td_gamma
+td_gamma_prog$stm_topic &lt;- td_gamma_prog$topic
+td_gamma_prog$topic &lt;- &quot;NA&quot;
+
+td_gamma_prog$topic[td_gamma_prog$stm_topic%in% c(1, 13, 58, 69, 43, 25, 32, 54, 52, 60)] &lt;- 1
+td_gamma_prog$topic[td_gamma_prog$stm_topic%in% c(5,  7,  10,  11,  21,  23,  26,  39,  41,  42,  63,  65)] &lt;- 2
+td_gamma_prog$topic[td_gamma_prog$stm_topic%in% c(17,  24,  30,  14,  2,  34,  38,  4,  44,  48,  50,  51,  55,  61,  66,  71,  20,  57,  62)] &lt;- 3
+td_gamma_prog$topic[td_gamma_prog$stm_topic%in% c(3, 12, 16, 22, 35, 49, 47, 53)] &lt;- 4
+td_gamma_prog$topic[td_gamma_prog$topic %in% &quot;NA&quot;] &lt;- 5
+
+td_gamma_prog$topic &lt;- as.integer(td_gamma_prog$topic)
+td_gamma_prog$document &lt;- as.factor(td_gamma_prog$document)
+
+# Removing topic 5 as we are not interested in it
+td_gamma_prog &lt;- td_gamma_prog %&gt;% 
+  select(-stm_topic) %&gt;% 
+  rename(sentence_doc = document) %&gt;% 
+  filter(topic != 5)
+
+# Choosing the highest gamma value for each sentence
+# Sort by the sentence and take top_n(1, gamma) to choose the topic with the biggest gamma value
+
+td_gamma_prog_info &lt;- td_gamma_prog %&gt;% 
+  rename(topic_sentence = topic) %&gt;% 
+  group_by(sentence_doc) %&gt;% 
+  top_n(1, gamma) %&gt;% 
+  ungroup()
+
+# If there are any sentences with the same gamma values, I will exclude them from my analysis as not belonging to only one topic.
+
+td_gamma_prog_info_keep &lt;- td_gamma_prog_info %&gt;% 
+  group_by(sentence_doc) %&gt;% 
+  count() %&gt;% 
+  filter(n == 1) %&gt;% 
+  select(-n) %&gt;% 
+  ungroup()
+
+td_gamma_prog_info &lt;- td_gamma_prog_info_keep %&gt;% 
+  left_join(td_gamma_prog_info, by= c(&quot;sentence_doc&quot; = &quot;sentence_doc&quot;))
+
+# Calculating a proportion of sentences in each of the document, for that I need to add columns: document and stakeholder
+
+# Adding info:
+info_sentence_doc &lt;- data_words %&gt;% 
+  select(sentence_doc, name, stakeholder) %&gt;% 
+  distinct(sentence_doc, .keep_all = TRUE)
+
+td_gamma_prog_info &lt;- td_gamma_prog_info %&gt;% 
+  left_join(info_sentence_doc, by= c(&quot;sentence_doc&quot;=&quot;sentence_doc&quot;))
+
+# Calculating proportion
+# I will do so by counting name (document) to get a number of sentences in each document, then I will count a number of each topic for a document and then I will create a column with the proportion
+
+sentence_count_gamma &lt;- data_words %&gt;% 
+  distinct(sentence_doc, .keep_all = TRUE) %&gt;% 
+  group_by(name) %&gt;% 
+  count() %&gt;% 
+  rename(total_sent = n)
+
+topic_count_gamma &lt;- td_gamma_prog_info %&gt;% 
+  group_by(name, topic_sentence) %&gt;% 
+  count() %&gt;% 
+  rename(total_topic = n)
+
+doc_level_stm_gamma &lt;- topic_count_gamma %&gt;% 
+  left_join(sentence_count_gamma, by= c(&quot;name&quot; = &quot;name&quot;)) %&gt;%
+  mutate(merge_col = paste(name, topic_sentence, sep = &quot;_&quot;))
+
+# There are some missing values, replacing it with 0 as not present
+
+df_base &lt;- info_sentence_doc %&gt;% 
+  select(-sentence_doc) %&gt;% 
+  distinct(name, .keep_all = TRUE) %&gt;% 
+  slice(rep(1:n(), each = 4)) %&gt;% 
+  group_by(name) %&gt;%
+  mutate(topic_sentence = 1:n()) %&gt;% 
+  mutate(merge_col = paste(name, topic_sentence, sep = &quot;_&quot;)) %&gt;% 
+  ungroup() %&gt;% 
+  select(-name, -topic_sentence)
+
+
+df_doc_level_stm_gamma &lt;- df_base %&gt;% 
+  left_join(doc_level_stm_gamma, by= c(&quot;merge_col&quot; = &quot;merge_col&quot;)) %&gt;% 
+  select(-name, -topic_sentence) %&gt;% 
+  separate(merge_col, c(&quot;name&quot;,&quot;topic&quot;), sep = &quot;_&quot;)
+  
+
+df_doc_level_stm_gamma$prop &lt;- df_doc_level_stm_gamma$total_topic/df_doc_level_stm_gamma$total_sent
+df_doc_level_stm_gamma &lt;- df_doc_level_stm_gamma %&gt;%
+    mutate_at(vars(prop), ~replace_na(., 0)) # replacing NA with 0, when a topic not present</code></pre>
+<pre class="r"><code>write_excel_csv(df_doc_level_stm_gamma, &quot;./output/created_datasets/df_doc_level_stm_gamma.csv&quot;) </code></pre>
+</div>
+<div id="additional-information" class="section level1">
+<h1>Additional information</h1>
+<p>Topic 1: Open Research Topic 2: Community &amp; Support Topic 3:
+Innovation &amp; Solution Topic 4: Publication process</p>
+</div>
+<div id="information-about-the-datatopics" class="section level1">
+<h1>Information about the data/topics</h1>
+<pre class="r"><code># Number of words belonging to new topics
+no_words_topics &lt;- data_words_stm %&gt;% 
+  select(word, topic) %&gt;% 
+  distinct(word, .keep_all = TRUE) %&gt;% 
+  group_by(topic) %&gt;% 
+  count()
+
+no_words_topics %&gt;% 
+  kbl(caption = &quot;No of words belonging to new topics&quot;) %&gt;% 
+  kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
+<table class=" lightable-classic lightable-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+No of words belonging to new topics
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+topic
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+479
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+439
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+659
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+502
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+753
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># The most relevant words (15) for each topic: highest mean beta
+words_high_beta_topic &lt;- data_words_stm %&gt;% 
+  select(word, topic, highest_mean_beta) %&gt;% 
+  distinct(word, .keep_all = TRUE) %&gt;% 
+  group_by(topic) %&gt;% 
+  top_n(4) %&gt;% 
+  ungroup() %&gt;% 
+  arrange(topic, -highest_mean_beta)</code></pre>
+<pre><code>Selecting by highest_mean_beta</code></pre>
+<pre class="r"><code>words_high_beta_topic %&gt;% 
+  kbl(caption = &quot;Most relevant words in topics&quot;) %&gt;% 
+  kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
+<table class=" lightable-classic lightable-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Most relevant words in topics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+word
+</th>
+<th style="text-align:right;">
+topic
+</th>
+<th style="text-align:right;">
+highest_mean_beta
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+open
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0565310
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+access
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0302685
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datum
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0229529
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+work
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0123668
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+community
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.0210155
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+support
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.0200826
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+develop
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.0194357
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+knowledge
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.0192257
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+science
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0295245
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+scientific
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0134324
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+innovation
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0117323
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+technology
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0099583
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+publish
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.0490068
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+review
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.0373344
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+article
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.0285216
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+paper
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.0279686
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+research
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0589167
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fund
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0108121
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+field
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0082796
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+organisation
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0069668
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="information-about-the-stakeholders" class="section level1">
+<h1>Information about the stakeholders</h1>
+<pre class="r"><code># Advocates
+advocates_info &lt;- df_doc_level_stm_gamma %&gt;% 
+  select(-total_topic, - total_sent) %&gt;%
+  filter(stakeholder == &quot;advocates&quot;) %&gt;% 
+  group_by(topic) %&gt;% 
+  slice_max(order_by = prop, n = 3) %&gt;% 
+  select(-stakeholder)
+advocates_info</code></pre>
+<pre><code># A tibble: 12 × 3
+# Groups:   topic [4]
+   name                                           topic  prop
+   &lt;chr&gt;                                          &lt;chr&gt; &lt;dbl&gt;
+ 1 Jisc                                           1     1    
+ 2 ROpenSci                                       1     1    
+ 3 FAIRsharing                                    1     0.84 
+ 4 Reference Center for Environmental Information 2     1    
+ 5 Free our knowledge                             2     0.846
+ 6 DataCite                                       2     0.75 
+ 7 Research Data Canada                           3     0.875
+ 8 Gitlab                                         3     0.731
+ 9 CoData                                         3     0.6  
+10 Peer Community In                              4     0.75 
+11 Amelica                                        4     0.308
+12 Coko                                           4     0.308</code></pre>
+<pre class="r"><code>advocates_info %&gt;% 
+  kbl(caption = &quot;Advocates associated with topics&quot;) %&gt;% 
+  kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
+<table class=" lightable-classic lightable-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Advocates associated with topics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+topic
+</th>
+<th style="text-align:right;">
+prop
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Jisc
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ROpenSci
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FAIRsharing
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.8400000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reference Center for Environmental Information
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Free our knowledge
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.8461538
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DataCite
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.7500000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Research Data Canada
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.8750000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gitlab
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.7307692
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CoData
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.6000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Peer Community In
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.7500000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Amelica
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.3076923
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Coko
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.3076923
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># Funders
+funders_info &lt;- df_doc_level_stm_gamma %&gt;% 
+  select(-total_topic, - total_sent) %&gt;%
+  filter(stakeholder == &quot;funders&quot;) %&gt;% 
+  group_by(topic) %&gt;% 
+  slice_max(order_by = prop, n = 3) %&gt;% 
+  select(-stakeholder)
+funders_info</code></pre>
+<pre><code># A tibble: 14 × 3
+# Groups:   topic [4]
+   name                                                        topic   prop
+   &lt;chr&gt;                                                       &lt;chr&gt;  &lt;dbl&gt;
+ 1 Sea World Research and Rescue Foundation                    1     0.75  
+ 2 ERC                                                         1     0.35  
+ 3 Max Planck Society                                          1     0.309 
+ 4 The French National Research Agency                         2     0.857 
+ 5 Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior 2     0.833 
+ 6 MOE China                                                   2     0.762 
+ 7 CNPq                                                        3     1     
+ 8 CONICYT                                                     3     1     
+ 9 National Research Council Italy                             3     1     
+10 NRC Egypt                                                   3     1     
+11 Spanish National Research Council                           3     1     
+12 Max Planck Society                                          4     0.0864
+13 The Daimler and Benz Foundation                             4     0.0833
+14 Helmholtz-Gemeinschaft                                      4     0.08  </code></pre>
+<pre class="r"><code>funders_info %&gt;% 
+  kbl(caption = &quot;Funders associated with topics&quot;) %&gt;% 
+  kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
+<table class=" lightable-classic lightable-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Funders associated with topics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+topic
+</th>
+<th style="text-align:right;">
+prop
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sea World Research and Rescue Foundation
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.7500000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ERC
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.3500000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Max Planck Society
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.3086420
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The French National Research Agency
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.8571429
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.8333333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MOE China
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.7619048
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CNPq
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CONICYT
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+National Research Council Italy
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NRC Egypt
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spanish National Research Council
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Max Planck Society
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.0864198
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Daimler and Benz Foundation
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.0833333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Helmholtz-Gemeinschaft
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.0800000
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># Journals
+journals_info &lt;- df_doc_level_stm_gamma %&gt;% 
+  select(-total_topic, - total_sent) %&gt;%
+  filter(stakeholder == &quot;journals&quot;) %&gt;% 
+  group_by(topic) %&gt;% 
+  slice_max(order_by = prop, n = 3) %&gt;% 
+  select(-stakeholder)
+journals_info</code></pre>
+<pre><code># A tibble: 13 × 3
+# Groups:   topic [4]
+   name                                              topic  prop
+   &lt;chr&gt;                                             &lt;chr&gt; &lt;dbl&gt;
+ 1 Arctic, Antarctic, and Alpine Research            1     0.4  
+ 2 Evolutionary Applications                         1     0.385
+ 3 Remote Sensing in Ecology and Conservation        1     0.333
+ 4 Frontiers in Ecology and Evolution                2     0.5  
+ 5 BioSciences                                       2     0.2  
+ 6 Global Change Biology                             2     0.167
+ 7 Global Change Biology                             3     0.833
+ 8 Ecological Applications                           3     0.643
+ 9 Philosophical Transactions of the Royal Society B 3     0.625
+10 American Naturalist                               4     1    
+11 Evolution                                         4     1    
+12 Frontiers in Ecology and the Environment          4     1    
+13 eLifeJournal                                      4     1    </code></pre>
+<pre class="r"><code>journals_info %&gt;% 
+  kbl(caption = &quot;Journals associated with topics&quot;) %&gt;% 
+  kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
+<table class=" lightable-classic lightable-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Journals associated with topics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+topic
+</th>
+<th style="text-align:right;">
+prop
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Arctic, Antarctic, and Alpine Research
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.4000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Evolutionary Applications
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.3846154
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Remote Sensing in Ecology and Conservation
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.3333333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Frontiers in Ecology and Evolution
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.5000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BioSciences
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.2000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Global Change Biology
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.1666667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Global Change Biology
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.8333333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ecological Applications
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.6428571
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Philosophical Transactions of the Royal Society B
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.6250000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+American Naturalist
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Evolution
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Frontiers in Ecology and the Environment
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+eLifeJournal
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># Publishers
+publishers_info &lt;- df_doc_level_stm_gamma %&gt;% 
+  select(-total_topic, - total_sent) %&gt;%
+  filter(stakeholder == &quot;publishers&quot;) %&gt;% 
+  group_by(topic) %&gt;% 
+  slice_max(order_by = prop, n = 3) %&gt;% 
+  select(-stakeholder)
+publishers_info</code></pre>
+<pre><code># A tibble: 12 × 3
+# Groups:   topic [4]
+   name                            topic  prop
+   &lt;chr&gt;                           &lt;chr&gt; &lt;dbl&gt;
+ 1 PeerJ                           1     0.533
+ 2 Pensoft                         1     0.429
+ 3 eLife                           1     0.4  
+ 4 BioOne                          2     1    
+ 5 Wiley                           2     0.786
+ 6 Elsevier                        2     0.621
+ 7 AIBS                            3     1    
+ 8 Cell Press                      3     0.739
+ 9 Resilience Alliance             3     0.6  
+10 Pensoft                         4     0.571
+11 The Royal Society Publishing    4     0.5  
+12 The University of Chicago Press 4     0.455</code></pre>
+<pre class="r"><code>publishers_info %&gt;% 
+  kbl(caption = &quot;Publishers associated with topics&quot;) %&gt;% 
+  kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
+<table class=" lightable-classic lightable-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Publishers associated with topics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+topic
+</th>
+<th style="text-align:right;">
+prop
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+PeerJ
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.5333333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pensoft
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.4285714
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+eLife
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.4000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BioOne
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wiley
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.7857143
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Elsevier
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.6206897
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIBS
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cell Press
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.7391304
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Resilience Alliance
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.6000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pensoft
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.5714286
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Royal Society Publishing
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.5000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The University of Chicago Press
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.4545455
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># Repositories
+repositories_info &lt;- df_doc_level_stm_gamma %&gt;% 
+  select(-total_topic, - total_sent) %&gt;%
+  filter(stakeholder == &quot;repositories&quot;) %&gt;% 
+  group_by(topic) %&gt;% 
+  slice_max(order_by = prop, n = 3) %&gt;% 
+  select(-stakeholder)
+repositories_info</code></pre>
+<pre><code># A tibble: 12 × 3
+# Groups:   topic [4]
+   name                             topic  prop
+   &lt;chr&gt;                            &lt;chr&gt; &lt;dbl&gt;
+ 1 Marine Data Archive              1     1    
+ 2 TERN                             1     1    
+ 3 Zenodo                           1     0.762
+ 4 Australian Antarctic Data Centre 2     0.625
+ 5 World Data Center for Climate    2     0.538
+ 6 BCO-DMO                          2     0.5  
+ 7 DNA Databank of Japan            3     0.923
+ 8 NCBI                             3     0.5  
+ 9 KNB                              3     0.444
+10 bioRxiv                          4     0.889
+11 EcoEvoRxiv                       4     0.4  
+12 Harvard Dataverse                4     0.25 </code></pre>
+<pre class="r"><code>repositories_info %&gt;% 
+  kbl(caption = &quot;Repositories associated with topics&quot;) %&gt;% 
+  kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
+<table class=" lightable-classic lightable-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Repositories associated with topics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+topic
+</th>
+<th style="text-align:right;">
+prop
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Marine Data Archive
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TERN
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Zenodo
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.7619048
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Australian Antarctic Data Centre
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.6250000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+World Data Center for Climate
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.5384615
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BCO-DMO
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.5000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DNA Databank of Japan
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.9230769
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NCBI
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.5000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+KNB
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.4444444
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bioRxiv
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.8888889
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EcoEvoRxiv
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.4000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Harvard Dataverse
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.2500000
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># Societies
+societies_info &lt;- df_doc_level_stm_gamma %&gt;% 
+  select(-total_topic, - total_sent) %&gt;%
+  filter(stakeholder == &quot;societies&quot;) %&gt;% 
+  group_by(topic) %&gt;% 
+  slice_max(order_by = prop, n = 3) %&gt;% 
+  select(-stakeholder)
+societies_info</code></pre>
+<pre><code># A tibble: 12 × 3
+# Groups:   topic [4]
+   name                                      topic   prop
+   &lt;chr&gt;                                     &lt;chr&gt;  &lt;dbl&gt;
+ 1 Royal Society Te Aparangi                 1     0.174 
+ 2 Ecological Society of Australia           1     0.0714
+ 3 The Zoological Society of London          1     0.0357
+ 4 European Society for Evolutionary Biology 2     1     
+ 5 American Society of Naturalists           2     0.867 
+ 6 SORTEE                                    2     0.667 
+ 7 Australasian Evolution Society            3     1     
+ 8 Ecological Society of America             3     1     
+ 9 The Royal Society                         3     1     
+10 SORTEE                                    4     0.333 
+11 The Zoological Society of London          4     0.214 
+12 British Ecological Society                4     0.111 </code></pre>
+<pre class="r"><code>societies_info %&gt;% 
+  kbl(caption = &quot;Societies associated with topics&quot;) %&gt;% 
+  kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
+<table class=" lightable-classic lightable-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Societies associated with topics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+topic
+</th>
+<th style="text-align:right;">
+prop
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Royal Society Te Aparangi
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.1739130
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ecological Society of Australia
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.0714286
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Zoological Society of London
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.0357143
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+European Society for Evolutionary Biology
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+American Society of Naturalists
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.8666667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SORTEE
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.6666667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Australasian Evolution Society
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ecological Society of America
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Royal Society
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SORTEE
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.3333333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Zoological Society of London
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.2142857
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+British Ecological Society
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.1111111
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="session-information" class="section level1">
+<h1>Session information</h1>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] kableExtra_1.3.4          stm_1.3.6                
+ [3] ggraph_2.0.5              igraph_1.2.6             
+ [5] reshape2_1.4.4            wordcloud_2.6            
+ [7] RColorBrewer_1.1-2        topicmodels_0.2-12       
+ [9] tm_0.7-8                  NLP_0.2-1                
+[11] quanteda.dictionaries_0.3 quanteda.textplots_0.94  
+[13] quanteda_3.1.0            tidytext_0.3.2           
+[15] forcats_0.5.1             stringr_1.4.0            
+[17] dplyr_1.0.7               purrr_0.3.4              
+[19] readr_2.0.2               tidyr_1.1.4              
+[21] tibble_3.1.6              ggplot2_3.3.5            
+[23] tidyverse_1.3.1           workflowr_1.7.0          
+
+loaded via a namespace (and not attached):
+  [1] Rtsne_0.15         colorspace_2.0-2   ellipsis_0.3.2    
+  [4] modeltools_0.2-23  rprojroot_2.0.2    fs_1.5.0          
+  [7] rstudioapi_0.13    farver_2.1.0       graphlayouts_0.7.1
+ [10] SnowballC_0.7.0    bit64_4.0.5        ggrepel_0.9.1     
+ [13] fansi_0.5.0        lubridate_1.7.10   xml2_1.3.2        
+ [16] knitr_1.36         polyclip_1.10-0    jsonlite_1.7.2    
+ [19] broom_0.7.9        dbplyr_2.1.1       ggforce_0.3.3     
+ [22] compiler_4.0.3     httr_1.4.2         backports_1.2.1   
+ [25] assertthat_0.2.1   Matrix_1.3-4       fastmap_1.1.0     
+ [28] cli_3.1.0          later_1.3.0        tweenr_1.0.2      
+ [31] htmltools_0.5.2    tools_4.0.3        rsvd_1.0.5        
+ [34] gtable_0.3.0       glue_1.5.0         fastmatch_1.1-3   
+ [37] Rcpp_1.0.7         slam_0.1-48        cellranger_1.1.0  
+ [40] jquerylib_0.1.4    vctrs_0.3.8        svglite_2.0.0     
+ [43] xfun_0.31          stopwords_2.3      ps_1.6.0          
+ [46] rvest_1.0.1        lifecycle_1.0.1    getPass_0.2-2     
+ [49] MASS_7.3-54        scales_1.1.1       tidygraph_1.2.0   
+ [52] vroom_1.5.5        hms_1.1.1          promises_1.2.0.1  
+ [55] parallel_4.0.3     yaml_2.2.1         gridExtra_2.3     
+ [58] sass_0.4.0         stringi_1.7.5      highr_0.9         
+ [61] tokenizers_0.2.1   geometry_0.4.5     systemfonts_1.0.2 
+ [64] rlang_0.4.12       pkgconfig_2.0.3    evaluate_0.14     
+ [67] lattice_0.20-45    bit_4.0.4          processx_3.5.2    
+ [70] tidyselect_1.1.1   plyr_1.8.6         magrittr_2.0.3    
+ [73] R6_2.5.1           generics_0.1.1     DBI_1.1.1         
+ [76] pillar_1.6.4       haven_2.4.3        whisker_0.4       
+ [79] withr_2.4.2        abind_1.4-5        janeaustenr_0.1.5 
+ [82] modelr_0.1.8       crayon_1.4.2       utf8_1.2.2        
+ [85] tzdb_0.1.2         rmarkdown_2.11     viridis_0.6.1     
+ [88] grid_4.0.3         readxl_1.3.1       data.table_1.14.2 
+ [91] callr_3.7.0        git2r_0.29.0       webshot_0.5.2     
+ [94] reprex_2.0.1       digest_0.6.28      httpuv_1.6.3      
+ [97] RcppParallel_5.1.4 stats4_4.0.3       munsell_0.5.0     
+[100] viridisLite_0.4.0  bslib_0.3.0        magic_1.6-0       </code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] kableExtra_1.3.4          stm_1.3.6                
+ [3] ggraph_2.0.5              igraph_1.2.6             
+ [5] reshape2_1.4.4            wordcloud_2.6            
+ [7] RColorBrewer_1.1-2        topicmodels_0.2-12       
+ [9] tm_0.7-8                  NLP_0.2-1                
+[11] quanteda.dictionaries_0.3 quanteda.textplots_0.94  
+[13] quanteda_3.1.0            tidytext_0.3.2           
+[15] forcats_0.5.1             stringr_1.4.0            
+[17] dplyr_1.0.7               purrr_0.3.4              
+[19] readr_2.0.2               tidyr_1.1.4              
+[21] tibble_3.1.6              ggplot2_3.3.5            
+[23] tidyverse_1.3.1           workflowr_1.7.0          
+
+loaded via a namespace (and not attached):
+  [1] Rtsne_0.15         colorspace_2.0-2   ellipsis_0.3.2    
+  [4] modeltools_0.2-23  rprojroot_2.0.2    fs_1.5.0          
+  [7] rstudioapi_0.13    farver_2.1.0       graphlayouts_0.7.1
+ [10] SnowballC_0.7.0    bit64_4.0.5        ggrepel_0.9.1     
+ [13] fansi_0.5.0        lubridate_1.7.10   xml2_1.3.2        
+ [16] knitr_1.36         polyclip_1.10-0    jsonlite_1.7.2    
+ [19] broom_0.7.9        dbplyr_2.1.1       ggforce_0.3.3     
+ [22] compiler_4.0.3     httr_1.4.2         backports_1.2.1   
+ [25] assertthat_0.2.1   Matrix_1.3-4       fastmap_1.1.0     
+ [28] cli_3.1.0          later_1.3.0        tweenr_1.0.2      
+ [31] htmltools_0.5.2    tools_4.0.3        rsvd_1.0.5        
+ [34] gtable_0.3.0       glue_1.5.0         fastmatch_1.1-3   
+ [37] Rcpp_1.0.7         slam_0.1-48        cellranger_1.1.0  
+ [40] jquerylib_0.1.4    vctrs_0.3.8        svglite_2.0.0     
+ [43] xfun_0.31          stopwords_2.3      ps_1.6.0          
+ [46] rvest_1.0.1        lifecycle_1.0.1    getPass_0.2-2     
+ [49] MASS_7.3-54        scales_1.1.1       tidygraph_1.2.0   
+ [52] vroom_1.5.5        hms_1.1.1          promises_1.2.0.1  
+ [55] parallel_4.0.3     yaml_2.2.1         gridExtra_2.3     
+ [58] sass_0.4.0         stringi_1.7.5      highr_0.9         
+ [61] tokenizers_0.2.1   geometry_0.4.5     systemfonts_1.0.2 
+ [64] rlang_0.4.12       pkgconfig_2.0.3    evaluate_0.14     
+ [67] lattice_0.20-45    bit_4.0.4          processx_3.5.2    
+ [70] tidyselect_1.1.1   plyr_1.8.6         magrittr_2.0.3    
+ [73] R6_2.5.1           generics_0.1.1     DBI_1.1.1         
+ [76] pillar_1.6.4       haven_2.4.3        whisker_0.4       
+ [79] withr_2.4.2        abind_1.4-5        janeaustenr_0.1.5 
+ [82] modelr_0.1.8       crayon_1.4.2       utf8_1.2.2        
+ [85] tzdb_0.1.2         rmarkdown_2.11     viridis_0.6.1     
+ [88] grid_4.0.3         readxl_1.3.1       data.table_1.14.2 
+ [91] callr_3.7.0        git2r_0.29.0       webshot_0.5.2     
+ [94] reprex_2.0.1       digest_0.6.28      httpuv_1.6.3      
+ [97] RcppParallel_5.1.4 stats4_4.0.3       munsell_0.5.0     
+[100] viridisLite_0.4.0  bslib_0.3.0        magic_1.6-0       </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

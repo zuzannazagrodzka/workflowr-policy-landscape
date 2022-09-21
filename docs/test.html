@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="zuzannazagrodzka" />
+
+<meta name="date" content="2022-05-05" />
+
+<title>test</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">myproject</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">test</h1>
+<h4 class="author">zuzannazagrodzka</h4>
+<h4 class="date">2022-05-05</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2022-09-21
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>myproject/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220505code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220505)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220505code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220505)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetreeefb12025b35db2b4e815bc575445216d20c0d6f0targetblankefb1202a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/efb12025b35db2b4e815bc575445216d20c0d6f0" target="_blank">efb1202</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetreeefb12025b35db2b4e815bc575445216d20c0d6f0targetblankefb1202a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/efb12025b35db2b4e815bc575445216d20c0d6f0" target="_blank">efb1202</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    code/.DS_Store
+    Ignored:    data/.DS_Store
+    Ignored:    output/.DS_Store
+
+Untracked files:
+    Untracked:  Policy_landscape_workflowr.R
+    Untracked:  code/1a_Data_preprocessing.html
+    Untracked:  code/1b_Dictionaries_preparation.html
+    Untracked:  code/2_Topic_modeling.html
+    Untracked:  code/3_Text_similarities_Figure_2B.html
+    Untracked:  code/4_Language_analysis_Figure_2C.html
+    Untracked:  code/5_For_and_not_for_profit_comparison.html
+    Untracked:  code/Figure_2A.html
+    Untracked:  code/figure/
+    Untracked:  data/dictionaries/
+    Untracked:  data/mission_statements/
+    Untracked:  output/Figure_2A/
+    Untracked:  output/Figure_2B/
+    Untracked:  output/Figure_2C/
+    Untracked:  output/Other_figures/
+    Untracked:  output/created_datasets/
+
+Unstaged changes:
+    Deleted:    code/1a_Data_preprocessing.Rmd
+    Deleted:    code/1b_Dictionaries_preparation.Rmd
+    Modified:   code/README.md
+    Modified:   data/README.md
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/test.Rmd</code>) and HTML
+(<code>docs/test.html</code>) files. If you’ve configured a remote Git
+repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
+in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/efb12025b35db2b4e815bc575445216d20c0d6f0/analysis/test.Rmd" target="_blank">efb1202</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2022-09-21
+</td>
+<td>
+Publish other files
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="topic-modeling" class="section level1">
+<h1>Topic modeling</h1>
+<p>The key stakeholders relevant in ecological and evolutionary research
+landscape (for and non-for profit publishers, OA and other journals,
+learned societies, repositories, funders and stakeholders actively
+promoting OR movement) will be identified in advance. Aims, missions,
+strategic plans and other documents describing their values must be
+publicly available on their official websites. Our objective is to
+analyse all documents together of each type of stakeholder to identify
+their topics of focus and messages they want to communicate. I will
+analyse the documents which are publicly accessible and I will not
+contact anyone associated with the stakeholder to request more
+information.</p>
+<p>For each stakeholder, I will identify eligible website or document.
+For each document I will manually copy its text, copy the source link to
+the first line and save as a text document (.txt).</p>
+<p>I have started with up to 5 representatives of each type and in the
+future I will increase my sample size.</p>
+<p>Wordclouds will be generate for the each type of the stakeholders to
+identify the most relevant words used in their documents.</p>
+<p>Topic modelling uncover latent topics within a corpus of documents.
+In my analysis I will conduct the Structural Topic Model (STM) and
+Latent Dirichlet Allocation (LDA).</p>
+</div>
+<div id="cleaning-r" class="section level1">
+<h1>CLeaning R</h1>
+<pre class="r"><code>rm(list=ls())</code></pre>
+</div>
+<div id="git-settings" class="section level1">
+<h1>Git settings</h1>
+<p>To check if I already have an SSH key-pair by running:</p>
+<pre class="r"><code>file.exists(&quot;~/.ssh/id_rsa.pub&quot;)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+✓ tibble  3.1.6     ✓ dplyr   1.0.7
+✓ tidyr   1.1.4     ✓ stringr 1.4.0
+✓ readr   2.0.2     ✓ forcats 0.5.1</code></pre>
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+<pre><code>Package version: 3.1.0
+Unicode version: 13.0
+ICU version: 69.1</code></pre>
+<pre><code>Parallel computing: 8 of 8 threads used.</code></pre>
+<pre><code>See https://quanteda.io for tutorials and examples.</code></pre>
+<pre><code>Loading required package: NLP</code></pre>
+<pre><code>
+Attaching package: &#39;NLP&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:quanteda&#39;:
+
+    meta, meta&lt;-</code></pre>
+<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
+
+    annotate</code></pre>
+<pre><code>
+Attaching package: &#39;tm&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:quanteda&#39;:
+
+    stopwords</code></pre>
+<pre><code>Loading required package: RColorBrewer</code></pre>
+<pre><code>
+Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    smiths</code></pre>
+<pre><code>
+Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:quanteda.textplots&#39;:
+
+    as.igraph</code></pre>
+<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
+
+    as_data_frame, groups, union</code></pre>
+<pre><code>The following objects are masked from &#39;package:purrr&#39;:
+
+    compose, simplify</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    crossing</code></pre>
+<pre><code>The following object is masked from &#39;package:tibble&#39;:
+
+    as_data_frame</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    decompose, spectrum</code></pre>
+<pre><code>The following object is masked from &#39;package:base&#39;:
+
+    union</code></pre>
+<pre><code>stm v1.3.6 successfully loaded. See ?stm for help. 
+ Papers, resources, and other materials at structuraltopicmodel.com</code></pre>
+</div>
+<div id="importing-data" class="section level1">
+<h1>Importing data</h1>
+<pre class="r"><code>dirs &lt;- list.dirs(path = &quot;./data/mission_statements&quot;, recursive = FALSE)
+getwd()</code></pre>
+<pre><code>[1] &quot;/Users/zuzannazagrodzka/Desktop/Project_1_ZZ/myproject&quot;</code></pre>
+<pre class="r"><code># List of files
+files &lt;- list()
+for (i in 1:length(dirs)){files[[i]] &lt;- list.files(path = dirs[i], pattern = &quot;.txt&quot;, full.names = TRUE, recursive = FALSE)}
+
+# files
+use_files &lt;- unlist(files)
+
+dirs &lt;- list.dirs(path = &quot;./data/mission_statements&quot;, recursive = FALSE)
+# dirs
+
+files &lt;- list()
+# files
+
+for (i in 1:length(dirs)){
+  files[[i]] &lt;- list.files(path = dirs[i], 
+                           pattern = &quot;.txt&quot;, 
+                           full.names = TRUE, 
+                           recursive = FALSE)}
+
+# files
+use_files &lt;- unlist(files)
+# use_files
+
+# using purrr to generate a data frame of the corpuses
+corpus_df &lt;- map_df(use_files, 
+                    ~ data_frame(txt = read_file(.x)) %&gt;%
+                      mutate(filename = basename(.x)))</code></pre>
+<pre><code>Warning: `data_frame()` was deprecated in tibble 1.1.0.
+Please use `tibble()` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<pre class="r"><code># removing encoded junk from the text column
+corpus_df$txt &lt;- gsub(&quot;[^[:print:]]&quot;, &quot; &quot;, corpus_df$txt)</code></pre>
+</div>
+<div id="adding-columns-to-the-corpus" class="section level1">
+<h1>Adding columns to the corpus</h1>
+<pre class="r"><code># create new columns: Name, Organisation
+corpus_df$name &lt;- corpus_df$filename
+
+corpus_df &lt;- corpus_df %&gt;% separate(name, c(&quot;name&quot;,&quot;doc_type&quot;), sep = &quot;_&quot;) 
+corpus_df &lt;- corpus_df %&gt;% mutate_at(&quot;doc_type&quot;, str_replace, &quot;.txt&quot;, &quot;&quot;)
+
+# creating a column: stakeholder 
+corpus_df$stakeholder &lt;- corpus_df$name
+
+unique(corpus_df$filename)</code></pre>
+<pre><code>  [1] &quot;Africa Open Science and Hardware_About.txt&quot;                           
+  [2] &quot;Amelica_About.txt&quot;                                                    
+  [3] &quot;Bioline International_About.txt&quot;                                      
+  [4] &quot;Center for Open Science_Mission.txt&quot;                                  
+  [5] &quot;coalitionS_About.txt&quot;                                                 
+  [6] &quot;CoData_About.txt&quot;                                                     
+  [7] &quot;Coko_About.txt&quot;                                                       
+  [8] &quot;COPDESS_About.txt&quot;                                                    
+  [9] &quot;DataCite_About.txt&quot;                                                   
+ [10] &quot;DOAJ_About.txt&quot;                                                       
+ [11] &quot;FAIRsharing_About.txt&quot;                                                
+ [12] &quot;FORCE11_About.txt&quot;                                                    
+ [13] &quot;FOSTER_About.txt&quot;                                                     
+ [14] &quot;Free our knowledge_About.txt&quot;                                         
+ [15] &quot;Gitlab_About.txt&quot;                                                     
+ [16] &quot;Jisc_About.txt&quot;                                                       
+ [17] &quot;Open Access Australasia_About.txt&quot;                                    
+ [18] &quot;Peer Community In_About.txt&quot;                                          
+ [19] &quot;RDA_About.txt&quot;                                                        
+ [20] &quot;Reference Center for Environmental Information_About.txt&quot;             
+ [21] &quot;Research Data Canada_About.txt&quot;                                       
+ [22] &quot;Research4life_About.txt&quot;                                              
+ [23] &quot;ROpenSci_About.txt&quot;                                                   
+ [24] &quot;SPARC_About.txt&quot;                                                      
+ [25] &quot;Alexander von Humboldt Foundation_About.txt&quot;                          
+ [26] &quot;Australian Research Council_About.txt&quot;                                
+ [27] &quot;Chinese Academy of Sciences_About.txt&quot;                                
+ [28] &quot;CNPq_About.txt&quot;                                                       
+ [29] &quot;Conacyt_About.txt&quot;                                                    
+ [30] &quot;CONICYT_About.txt&quot;                                                    
+ [31] &quot;Consortium of African Funds for the Environment_About.txt&quot;            
+ [32] &quot;Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior_About.txt&quot;
+ [33] &quot;CSIR South Africa_About.txt&quot;                                          
+ [34] &quot;Deutsche Forschungsgemeinschaft_About.txt&quot;                            
+ [35] &quot;ERC_About.txt&quot;                                                        
+ [36] &quot;FORMAS_About.txt&quot;                                                     
+ [37] &quot;French National Centre for Scientific Research_About.txt&quot;             
+ [38] &quot;Helmholtz-Gemeinschaft_About.txt&quot;                                     
+ [39] &quot;JST_About.txt&quot;                                                        
+ [40] &quot;Max Planck Society_About.txt&quot;                                         
+ [41] &quot;MOE China_About.txt&quot;                                                  
+ [42] &quot;National Natural Science Foundation_About.txt&quot;                        
+ [43] &quot;National Research Council Italy_About.txt&quot;                            
+ [44] &quot;National Science Foundation_About.txt&quot;                                
+ [45] &quot;NERC_About.txt&quot;                                                       
+ [46] &quot;NRC Egypt_About.txt&quot;                                                  
+ [47] &quot;NRF South Africa_About.txt&quot;                                           
+ [48] &quot;NSERC_About.txt&quot;                                                      
+ [49] &quot;Russian Academy of Science_About.txt&quot;                                 
+ [50] &quot;Sea World Research and Rescue Foundation_About.txt&quot;                   
+ [51] &quot;Spanish National Research Council_About.txt&quot;                          
+ [52] &quot;The Daimler and Benz Foundation_About.txt&quot;                            
+ [53] &quot;The French National Research Agency_About.txt&quot;                        
+ [54] &quot;Wellcome_About.txt&quot;                                                   
+ [55] &quot;American Naturalist_Aims.txt&quot;                                         
+ [56] &quot;Annual Review of Ecology Evolution and Systematics_Aims.txt&quot;          
+ [57] &quot;Biological Conservation_Aims.txt&quot;                                     
+ [58] &quot;BioSciences_About.txt&quot;                                                
+ [59] &quot;Conservation Biology_Aims.txt&quot;                                        
+ [60] &quot;Ecological Applications_Aims.txt&quot;                                     
+ [61] &quot;Ecology Letters_Aims.txt&quot;                                             
+ [62] &quot;Ecology_Aims.txt&quot;                                                     
+ [63] &quot;Evolution_Aims.txt&quot;                                                   
+ [64] &quot;Frontiers in Ecology and the Environment_Aims.txt&quot;                    
+ [65] &quot;Global Change Biology_Aims.txt&quot;                                       
+ [66] &quot;Journal of Applied Ecology_Aims.txt&quot;                                  
+ [67] &quot;Nature Ecology and Evolution_Aims.txt&quot;                                
+ [68] &quot;Philosophical Transactions of the Royal Society B_Aims.txt&quot;           
+ [69] &quot;Proceedings of the Royal Society B Biological Sciences_Aims.txt&quot;      
+ [70] &quot;Trends in Ecology &amp; Evolution_Aims.txt&quot;                               
+ [71] &quot;Arctic, Antarctic, and Alpine Research_Aims.txt&quot;                      
+ [72] &quot;Biogeosciences_Aims.txt&quot;                                              
+ [73] &quot;Conservation Letters_Aims.txt&quot;                                        
+ [74] &quot;Diversity and Distributions_Aims.txt&quot;                                 
+ [75] &quot;Ecology and Evolution_Aims.txt&quot;                                       
+ [76] &quot;Ecology and Society_Aims.txt&quot;                                         
+ [77] &quot;eLifeJournal_Aims.txt&quot;                                                
+ [78] &quot;Evolution Letters_Aims.txt&quot;                                           
+ [79] &quot;Evolutionary Applications_Aims.txt&quot;                                   
+ [80] &quot;Frontiers in Ecology and Evolution_Aims.txt&quot;                          
+ [81] &quot;Neobiota_About.txt&quot;                                                   
+ [82] &quot;PeerJJournal_Aims.txt&quot;                                                
+ [83] &quot;Plos Biology_Aims.txt&quot;                                                
+ [84] &quot;Remote Sensing in Ecology and Conservation_Aims.txt&quot;                  
+ [85] &quot;AIBS_About.txt&quot;                                                       
+ [86] &quot;Annual Reviews_About.txt&quot;                                             
+ [87] &quot;BioOne_About.txt&quot;                                                     
+ [88] &quot;eLife_About.txt&quot;                                                      
+ [89] &quot;Frontiers_About.txt&quot;                                                  
+ [90] &quot;Resilience Alliance_About.txt&quot;                                        
+ [91] &quot;The Royal Society Publishing_About.txt&quot;                               
+ [92] &quot;The University of Chicago Press_About.txt&quot;                            
+ [93] &quot;Cell Press_About.txt&quot;                                                 
+ [94] &quot;Elsevier_About.txt&quot;                                                   
+ [95] &quot;PeerJ_About.txt&quot;                                                      
+ [96] &quot;Pensoft_About.txt&quot;                                                    
+ [97] &quot;PLOS_About.txt&quot;                                                       
+ [98] &quot;Springer Nature_About.txt&quot;                                            
+ [99] &quot;Wiley_About.txt&quot;                                                      
+[100] &quot;Australian Antarctic Data Centre_About.txt&quot;                           
+[101] &quot;BCO-DMO_About.txt&quot;                                                    
+[102] &quot;bioRxiv_About.txt&quot;                                                    
+[103] &quot;DNA Databank of Japan_About.txt&quot;                                      
+[104] &quot;Dryad_About.txt&quot;                                                      
+[105] &quot;EcoEvoRxiv_About.txt&quot;                                                 
+[106] &quot;European Bioinformatics Institute_About.txt&quot;                          
+[107] &quot;Figshare_About.txt&quot;                                                   
+[108] &quot;GBIF_About.txt&quot;                                                       
+[109] &quot;Harvard Dataverse_About.txt&quot;                                          
+[110] &quot;KNB_About.txt&quot;                                                        
+[111] &quot;Marine Data Archive_About.txt&quot;                                        
+[112] &quot;NCBI_About.txt&quot;                                                       
+[113] &quot;OSF_About.txt&quot;                                                        
+[114] &quot;TERN_About.txt&quot;                                                       
+[115] &quot;World Data Center for Climate_About.txt&quot;                              
+[116] &quot;Zenodo_About.txt&quot;                                                     
+[117] &quot;American Society of Naturalists_About.txt&quot;                            
+[118] &quot;Australasian Evolution Society_About.txt&quot;                             
+[119] &quot;British Ecological Society_About.txt&quot;                                 
+[120] &quot;Ecological Society of America_About.txt&quot;                              
+[121] &quot;Ecological Society of Australia_About.txt&quot;                            
+[122] &quot;European Society for Evolutionary Biology_About.txt&quot;                  
+[123] &quot;National Academy of Sciences_About.txt&quot;                               
+[124] &quot;Royal Society Te Aparangi_About.txt&quot;                                  
+[125] &quot;Society for the Study of Evolution_About.txt&quot;                         
+[126] &quot;SORTEE_About.txt&quot;                                                     
+[127] &quot;The Royal Society_About.txt&quot;                                          
+[128] &quot;The Society for Conservation Biology_About.txt&quot;                       
+[129] &quot;The Zoological Society of London_About.txt&quot;                           </code></pre>
+<pre class="r"><code># class(corpus_df$stakeholder)
+# files
+
+# Funder
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;CNPq&quot;, &quot;Alexander von Humboldt Foundation&quot;, &quot;Australian Research Council&quot;, &quot;Chinese Academy of Sciences&quot;, &quot;Conacyt&quot;, &quot;CONICYT&quot;, &quot;Consortium of African Funds for the Environment&quot;, &quot;Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior&quot;, &quot;CSIR South Africa&quot;, &quot;Deutsche Forschungsgemeinschaft&quot;, &quot;ERC&quot;, &quot;FORMAS&quot;, &quot;French National Centre for Scientific Research&quot;, &quot;Helmholtz-Gemeinschaft&quot;, &quot;JST&quot;, &quot;Max Planck Society&quot;, &quot;MOE China&quot;, &quot;National Natural Science Foundation&quot;, &quot;National Research Council Italy&quot;, &quot;National Science Foundation&quot;, &quot;NERC&quot;, &quot;NRC Egypt&quot;, &quot;NRF South Africa&quot;, &quot;NSERC&quot;, &quot;RSPB&quot;, &quot;Russian Academy of Science&quot;, &quot;Sea World Research and Rescue Foundation&quot;, &quot;Spanish National Research Council&quot;, &quot;The Daimler and Benz Foundation&quot;, &quot;The French National Research Agency&quot;, &quot;Wellcome&quot;)] &lt;- &quot;funder&quot;
+
+
+# Journals OA
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;Arctic, Antarctic, and Alpine Research&quot;, &quot;Biogeosciences&quot;,&quot;Conservation Letters&quot;, &quot;Diversity and Distributions&quot;, &quot;Ecology and Evolution&quot;, &quot;Ecology and Society&quot;, &quot;eLifeJournal&quot;, &quot;Evolution Letters&quot;, &quot;Evolutionary Applications&quot;, &quot;Frontiers in Ecology and Evolution&quot;, &quot;Neobiota&quot;, &quot;PeerJJournal&quot;, &quot;Plos Biology&quot;, &quot;Remote Sensing in Ecology and Conservation&quot;)] &lt;- &quot;journal_OA&quot;
+
+
+# Journals nonOA (including transitioning, hybrid and closed - last time checked August 2021)
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;BioSciences&quot;, &quot;American Naturalist&quot;, &quot;Annual Review of Ecology Evolution and Systematics&quot;, &quot;Biological Conservation&quot;, &quot;Conservation Biology&quot;, &quot;Ecological Applications&quot;, &quot;Ecology Letters&quot;, &quot;Ecology&quot;, &quot;Evolution&quot;, &quot;Frontiers in Ecology and the Environment&quot;, &quot;Global Change Biology&quot;, &quot;Journal of Applied Ecology&quot;, &quot;Nature Ecology and Evolution&quot;, &quot;Philosophical Transactions of the Royal Society B&quot;, &quot;Proceedings of the Royal Society B Biological Sciences&quot;, &quot;Trends in Ecology &amp; Evolution&quot;)] &lt;- &quot;journal_nonOA&quot;
+
+
+# Society
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;BES&quot;, &quot;ESEB&quot;, &quot;RS&quot;, &quot;SORTEE&quot;, &quot;The Society for Conservation Biology&quot;, &quot;The Zoological Society of London&quot;, &quot;Society for the Study of Evolution&quot;, &quot;Max Planck Society&quot;, &quot;American Society of Naturalists&quot;, &quot;British Ecological Society&quot;, &quot;Ecological Society of America&quot;, &quot;European Society for Evolutionary Biology&quot;, &quot;National Academy of Sciences&quot;, &quot;Australasian Evolution Society&quot;, &quot;Ecological Society of Australia&quot;, &quot;Royal Society Te Aparangi&quot;, &quot;The Royal Society&quot;)] &lt;- &quot;society&quot;
+
+# Repository
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;Australian Antarctic Data Centre&quot;, &quot;BCO-DMO&quot;, &quot;DNA Databank of Japan&quot;, &quot;Dryad&quot;, &quot;European Bioinformatics Institute&quot;, &quot;Figshare&quot;, &quot;GBIF&quot;, &quot;Harvard Dataverse&quot;, &quot;KNB&quot;, &quot;Marine Data Archive&quot;, &quot;NCBI&quot;, &quot;TERN&quot;, &quot;World Data Center for Climate&quot;, &quot;Zenodo&quot;, &quot;EcoEvoRxiv&quot;, &quot;bioRxiv&quot;, &quot;OSF&quot;)] &lt;- &quot;repository&quot;
+
+# Publishers non for profit and for profit
+
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;The University of Chicago Press&quot;, &quot;Annual Reviews&quot;, &quot;BioOne&quot;, &quot;eLife&quot;, &quot;Frontiers&quot;, &quot;Resilience Alliance&quot;, &quot;The Royal Society Publishing&quot;, &quot;AIBS&quot;)]  &lt;- &quot;publisher_nonProfit&quot;
+
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;Cell Press&quot;, &quot;Elsevier&quot;, &quot;Springer Nature&quot;, &quot;PeerJ&quot;, &quot;Pensoft&quot;, &quot;PLOS&quot;, &quot;Wiley&quot;)]  &lt;- &quot;publisher_Profit&quot;
+
+
+# stakeholders promoting Open Research agenda
+corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;Center for Open Science&quot;, &quot;coalitionS&quot;, &quot;CoData&quot;, &quot;DataCite&quot;, &quot;DOAJ&quot;, &quot;Gitlab&quot;, &quot;Peer Community In&quot;, &quot;RDA&quot;, &quot;Research Data Canada&quot;, &quot;Africa Open Science and Hardware&quot;, &quot;Amelica&quot;, &quot;Bioline International&quot;, &quot;Coko&quot;, &quot;COPDESS&quot;, &quot;FAIRsharing&quot; , &quot;FORCE11&quot;, &quot;FOSTER&quot; , &quot;Free our knowledge&quot;, &quot;Jisc&quot;, &quot;Open Access Australasia&quot;, &quot;Reference Center for Environmental Information&quot;, &quot;Research4life&quot; , &quot;ROpenSci&quot; , &quot;SPARC&quot; )] &lt;- &quot;advocates&quot;
+
+
+# # UNESCO Recommendation on Open Science
+# corpus_df$stakeholder[corpus_df$stakeholder%in% c(&quot;UNESCO Recommendation on Open Science&quot; )] &lt;- &quot;recommendation&quot;
+
+unique(corpus_df$stakeholder)</code></pre>
+<pre><code>[1] &quot;advocates&quot;           &quot;funder&quot;              &quot;journal_nonOA&quot;      
+[4] &quot;journal_OA&quot;          &quot;publisher_nonProfit&quot; &quot;publisher_Profit&quot;   
+[7] &quot;repository&quot;          &quot;society&quot;            </code></pre>
+<pre class="r"><code># removing the first string from the each document that is a source link
+# corpus_df$txt &lt;- sub(&quot;.*?\r&quot;,&quot;&quot;,corpus_df$txt)</code></pre>
+<pre class="r"><code># saving the dataframe
+# write_excel_csv(corpus_df, &quot;corpuses_preprocessing.csv&quot;)</code></pre>
+<pre class="r"><code># Saving a file with the document info
+head(corpus_df)</code></pre>
+<pre><code># A tibble: 6 × 5
+  txt                        filename          name         doc_type stakeholder
+  &lt;chr&gt;                      &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;      
+1 &quot;http://africaosh.com/abo… Africa Open Scie… Africa Open… About    advocates  
+2 &quot;http://amelica.org/index… Amelica_About.txt Amelica      About    advocates  
+3 &quot;http://www.bioline.org.b… Bioline Internat… Bioline Int… About    advocates  
+4 &quot;https://www.cos.io/about… Center for Open … Center for … Mission  advocates  
+5 &quot;https://www.coalition-s.… coalitionS_About… coalitionS   About    advocates  
+6 &quot;https://codata.org/about… CoData_About.txt  CoData       About    advocates  </code></pre>
+<pre class="r"><code>info &lt;- corpus_df %&gt;% 
+  select(txt, filename, organisation = name, stakeholder)
+
+info$stakeholder_more &lt;- info$stakeholder
+
+info$stakeholder[info$stakeholder%in% c(&quot;journal_OA&quot;, &quot;journal_nonOA&quot; )] &lt;- &quot;journal&quot;
+info$stakeholder[info$stakeholder%in% c(&quot;publisher_Profit&quot;, &quot;publisher_nonProfit&quot; )] &lt;- &quot;publisher&quot;
+
+head(info)</code></pre>
+<pre><code># A tibble: 6 × 5
+  txt                filename       organisation    stakeholder stakeholder_more
+  &lt;chr&gt;              &lt;chr&gt;          &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;           
+1 &quot;http://africaosh… Africa Open S… Africa Open Sc… advocates   advocates       
+2 &quot;http://amelica.o… Amelica_About… Amelica         advocates   advocates       
+3 &quot;http://www.bioli… Bioline Inter… Bioline Intern… advocates   advocates       
+4 &quot;https://www.cos.… Center for Op… Center for Ope… advocates   advocates       
+5 &quot;https://www.coal… coalitionS_Ab… coalitionS      advocates   advocates       
+6 &quot;https://codata.o… CoData_About.… CoData          advocates   advocates       </code></pre>
+<pre class="r"><code>library(stringr)
+info$website &lt;- word(info$txt, 1)
+
+# write_excel_csv(info, &quot;documents_info.csv&quot;)</code></pre>
+<p>Maier et al. 2018 “Applying LDA Topic Modelling in Communication
+Research: Toward a Valid and Reliable Methodology” (a) preprocessing: -
+cleaning the text from <a href="http://" class="uri">http://</a> and <a
+href="https://" class="uri">https://</a> links - tokenisation - capital
+letters to lowercase - punctuation and special characters deleted -
+removal of stop-words: check the lexicons in stop_words, remove words
+like: numbering (ii, iii, iv, v), name of document type (aim, aims,
+mission…), name of the stakeholders (erc, nerc, wellcome) -
+lemmatization and stemming Stemming and lemmatizing are used to make
+inflected words comparable to each other. While stemming reduces each
+word to its stem by stripping “its derivational and inflectional
+suffixes” (Lovins, 1968, p. 22) (e.g., “contaminating” and
+“contamination” become “contamin”), lemmatizing converts them to their
+lemma form/lexeme (e.g., “contaminating” and “contamination” become
+“contaminate”) (Manning &amp; Schütze, 2003, p. 132). Recommended to use
+lemmatization instead of stemming - relative prunning relative pruning
+is recommended to strip very rare and extremely frequent word
+occurrences from the observed data:, relative pruning reduces the size
+of the corpus vocabulary, which will enhance the algorithm’s performance
+remarkably (Denny &amp; Spirling, 2017) and will stabilize LDA’s
+stochastic inference. In our empirical study, relative pruning was
+applied, removing all terms that occurred in more than 99% or less than
+.5% of all documents (Denny &amp; Spirling, 2017; Grimmer, 2010; Grimmer
+&amp; Stewart, 2013).</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>parameter selection,</li>
+<li>reliability, and</li>
+<li>validity</li>
+</ol>
+</div>
+<div id="a-preprocessing" class="section level1">
+<h1>A) Preprocessing</h1>
+<pre class="r"><code># Cleaning the text from http:// and https:// links, removing numbers and &quot;&#39;s&quot;
+# remove http:// and https:// and www.
+corpus_df$txt &lt;- gsub(&quot;(s?)(f|ht)tp(s?)://\\S+\\b&quot;, &quot; &quot;, corpus_df$txt) 
+corpus_df$txt &lt;- gsub(&quot;www.\\S+\\s*&quot;, &quot;&quot;, corpus_df$txt) 
+
+
+# removing full names and phrases before tokenisation:
+# change oa to open access and or to open research, for-profit and for profit to forprofit, no-profit 
+
+corpus_df$txt &lt;- gsub(&quot; F.A.I.R. &quot;, &quot; FAIR &quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot; OA &quot;, &quot; open access &quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot; OR &quot;, &quot; open research &quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot; OS &quot;, &quot; open science &quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot; OA &quot;, &quot; open access &quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot;no-profit|not-for-profit|not for-profit|no profit&quot;, &quot;nonprofit&quot;, corpus_df$txt)
+corpus_df$txt &lt;- gsub(&quot;for-profit|for profit&quot;, &quot;forprofit&quot;, corpus_df$txt)
+
+corpus_df$txt &lt;- gsub(&quot;DOIs|dois|DOI&quot;, &quot;doi&quot;, corpus_df$txt)
+
+# removing email addresses @
+corpus_df$txt &lt;- gsub(&quot;\\S*@\\S*&quot;,&quot;&quot;,corpus_df$txt)
+
+# removing names mentioned in the documents:
+corpus_df$txt &lt;- gsub(&quot;Marc Schiltz the President of Science Europe|Dr. Francesca Dominici|Kaiser Wilhelm|Harold Varmus|Patrick Brown|Michael Eisen|Adolph von Harnack|Harnack|Otto Hahn Medal|Albert Einstein|Robert-Jan Smits|Carl Folke|Lance Gunderson|Abraham Lincoln|Sewall Wright|Ruth Patric|Douglas Futuyama|Louis Agassiz at Harvard&#39;s Museum of Comparative Zoology|Charles Darwin|Isaac Newton|Rosalind Franklin|Theodosius Dobzhansky&quot;,&quot;&quot;,corpus_df$txt)
+
+
+# removing all names (part 1)
+corpus_df$txt &lt;- gsub(&quot;General Conference of the United Nations Educational, Scientific and Cultural Organization|International Association of Scientific, Technical &amp; Medical Publishers|Coordination for the Improvement of Higher Education Personnel (CAPES)|Jasper Loftus-Hills Young Investigator Award|Edward O. Wilson Naturalist Award|International Network for the Availability of Scientific Publications|United Nations Educational, Scientific and Cultural Organization|Office of Polar Programs at the U.S. National Science Foundation|National Commission for Scientific and Technological Research|Coalition for Publishing Data in the Earth and Space Sciences|Natural Sciences and Engineering Research Council of Canada|Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior|Catalogue of Australian Antarctic and Subantarctic Metadata|Open Reliable Transparent Ecology and Evolutionary biology|International Nucleotide Sequence Database Collaboration|United States Government&#39;s National Science Foundation|Proceedings of the Royal Society B Biological Sciences|National Charter of Ethics for the Research Profession|Consortium of African Funds for the Environment (CAFE)|Committee on Data of the International Science Council|South African National Biodiversity Institute (SANBI)|Scholarly Publishing and Academic Resources Coalition|Malawi Environmental Endowment Trust (MEET) in Malawi|National Council of Science and Technology (Conacyt)|Annual Review of Ecology Evolution and Systematics|the University of Chicago Press Journals Division|Philosophical Transactions of the Royal Society B|International Max Planck Research Schools (IMPRS)|the National Health and Medical Research Council|Australian Government’s Department of Innovation|Consortium of African Funds for the Environment|the National Competitive Grants Program (NCGP)|European Society of Evolutionary Biology|Research for Development and Innovation (ARDI)|National Institute of Standards and Technology|International Congress of Conservation Biology|French National Centre for Scientific Research|University of Chicago Press Journals Division|Study of Environmental Arctic Change (SEARCH)|South African National Biodiversity Institute|Reference Center on Environmental Information|Biological and Chemical Oceanography Sections|Open Access Envoy of the European Commission|National Natural Science Foundation of China|National Institutes of Health|Big Hairy Audacious Goal|Deutsche Zentren für Gesundheitsforschung|University of Colorado Boulder|Study of Environmental Arctic Change (SEARCH)|John Maynard Smith|Darwin Core|PeerJ – the Journal of Life &amp; Environmental Sciences (PeerJ)|PeerJ Computer Science|PeerJ Physical Chemistry|PeerJ Organic Chemistry|PeerJ Inorganic Chemistry|PeerJ Analytical Chemistry and PeerJ Materials Science&quot;, &quot;&quot;, corpus_df$txt)
+                      
+                      
+# removing all names (part 2)
+corpus_df$txt &lt;- gsub(&quot;African Institute of Open Science &amp; Hardware|Electronic Publishing Trust for Development|Remote Sensing in Ecology and Conservation|National Competitive Grants Program (NCGP)|Journal of Biogeography and Global Ecology|Excellence in Research for Australia (ERA)|Excellence in Research for Australia (ERA)|Intergovernmental Panel on Climate Change|Gottlieb Daimler and Karl Benz Foundation|Carl Benz House|European Society for Evolutionary Biology|Sea World Research and Rescue Foundation|Science for Nature and People Parnership|Global Biodiversity Information Facility|Frontiers in Ecology and the Environment|EMBL&#39;s European Bioinformatics Institute|Artificial Intelligence Review Assistant|Institute of Arctic and Alpine Research|State of Florida and Palm Beach County|Peer Community in Evolutionary Biology|European Group on Biological Invasions|Arctic, Antarctic, and Alpine Research|Weizmann Institute in Rehovot, Israel|UNESCO Universal Copyright Convention|UNESCO Recommendation on Open Science|International Panel on Climate Change|European Molecular Biology Laboratory|European Molecular Biology Laboratory|University of Toronto at Scarborough|Natural Environment Research Council|Knut and Alice Wallenberg Foundation|Global Open Science Hardware Roadmap|State of Alaska&#39;s Salmon and People|Research for Global Justice (GOALI)|National Natural Science Foundation|Knowledge Network for Biocomplexity|Society for the Study of Evolution|Research in the Environment (OARE)|Frontiers in Ecology and Evolution|Data Observation Network for Earth|Collaborative Peer Review Platform|the American Journal of Sociology|Spanish National Research Council|Research Ideas and Outcomes (RIO)|Research Ideas and Outcomes (RIO)|European Bioinformatics Institute|Directory of Open Access Journals|Cambridge Conservation Initiative|Alexander von Humboldt Foundation|the Zoological Society of London|Society for Conservation Biology|Open Educational Resources (OER)|Field Chief Editor Mark A. Elgar|Biogeosciences Discussions (BGD)|Australian Antarctic Data Centre|University of Toronto Libraries|The University of Chicago Press|Research in Agriculture (AGORA)|NIH Intramural Research Program|National Research Council|National Academy of Engineering|Millennium Ecosystem Assessment|Journal of Evolutionary Biology|Howard Hughes Medical Institute|German Climate Computing Centre|French National Research Agency|European Research Council (ERC)|eLife Sciences Publications Ltd|Ecological Society of Australia|Deutsche Forschungsgemeinschaft|American Society of Naturalists|Japan&#39;s Science and Technology|Australian Government Minister|Australasian Evolution Society|African Journals OnLine (AJOL)|Africa Open Science &amp; Hardware|World Data Center for Climate|Trends in Ecology &amp; Evolution|National Institutes of Health|Kurchatov Institute in Russia|International Science Council|Elsevier’s Clinical Solutions|Ecological Society of America|Department of Social Sciences|Cornell and Yale Universities|Cold Spring Harbor Laboratory|American Journal of Sociology|Research for Health (Hinari)|Philosophical Transactions B|Nature Ecology and Evolution|National Research Foundation|National Library of Medicine|National Academy of Sciences|National Academy of Medicine|Journal of Political Economy|Journal of Political Economy|Helmholtz-Alberta Initiative|Harvard Dataverse Repository|European Research Area (ERA)|ISI ScienceWatch|Royal Charter|Springer Nature|The Nature Portfolio|Scientific American&quot;, &quot;&quot;, corpus_df$txt)
+                      
+                      
+                      
+# removing all names (part 3)
+corpus_df$txt &lt;- gsub(&quot;University of Chicago Press|Tropical Database in Brazil|Research Ideas and Outcomes|National Science Foundation|Ministry of Education (MEC)|Federal Republic of Germany|Diversity and Distributions|Daimler and Benz Foundation|Chinese Academy of Sciences|Chinese Academy of Sciences|Australian Research Council|Australia’s Chief Scientist|Russian Academy of Science|Nature Ecology &amp; Evolution|National Research Strategy|Max Planck Innovation GmbH|Journal of Applied Ecology|Further Max Planck Centers|British Ecological Society|WHO, FAO, UNEP, WIPO, ILO|Royal Society Te Aparangi|Peer Community in Ecology|National Research Council|Evolutionary Applications|European Research Council|Environmental Funds|EFs|Biodiversity Data Journal|Biodiversity Data Journal|Royal Society Publishing|Dryad Digital Repository|Digital Editorial Office|Data Distribution Centre|Comparative Cytogenetics|Comparative Cytogenetics|American Biology Teacher|University of Melbourne|Public Research Centers|International Data Week|Ecological Applications|Ecological Applications|Center for Open Science|Biological Conservation|African Journals OnLine|African Journals OnLine|Wellcome Genome Campus|Research Data Alliance|Kaiser Wilhelm Society|Helmholtz-Gemeinschaft|Deutscher Wetterdienst|BirdLife international|Swedish Energy Agency|Social Service Review|Senator Claude Pepper|Ministry of Education|Institute of Medicine|Helmholtz Association|Helmholtz Association|Global Change Biology|Ecology and Evolution|DNA Databank of Japan|Congress of the Union|Bioline International|Bioline|Australian Government|ARC Discovery Program|Research Data Canada|Conservation Letters|Conservation Biology|Brazilian Federation|Big Garden Birdwatch|Albatross Task Force|Resilience Alliance|Nature Conservation|Nature Conservation|Marine Data Archive|European Commission|European Commission|Environmental Funds|Environmental Funds|Ecology and Society|Clarivate Analytics|American Naturalist|Russian Federation|Publication Ethics|Max Planck Society|Max Planck Society|Give Nature a Home|Free Our Knowledge|Fraunhofer Society|Peer Community In|Harvard Dataverse|Evolution Letters|Ecology &amp; Society|CSIR South Africa|Bertha Benz Prize|United Utilities|Carl Benz House|NRF South Africa|Nature Portfolio|Helmholtz Senate|Ecology Letters|Daimler-Benz AG|CSIRO Australia|Colorado alpine|BioOne Complete|BioOne|HAMAGUCHI Plan|Gray&#39;s Anatomy|Biogeosciences|Annual Reviews|ZSL Whipsnade|ScienceDirect|ScienceDirect|Royal Society|Research4Life|PCI Evol Biol|Mexican State|GCB Bioenergy|Cell Symposia|Bose-Einstein|Plos Biology|Humboldtians|Humboldt|Horizon 2020|Google Drive|Future Earth|Biogeography|WDC-Climate|the Academy|Kichstarter|Humboldtian|FOSTER Plus|FAIRsharing|ELIXIR Node|cOAlition S|ZSL London|SciDataCon|Max Planck|Figure 360|EcoEvoRxiv|Daimler AG|CU-Boulder|Cell Press|Africa OSH|Sea World|PhytoKeys|NRC Egypt|MOE China|Frontiers|Evolution|Elseviere|CiteScore|Wellcome|rOpenSci|PCI Ecol|OpenAIRE|CU-Boulder |Neobiota|NeoBiota|MycoKeys|HUPO PSI|Figshare|EMBL-EBI|Elsevier|DataCite|ZooKeys|RESTful|Redalyc|Pensoft|FORCE11|Figshare|figshare|Ecology|Dropbox|DataONE|Conacyt|COMBINE|bioRxiv|AmeliCA|Zenodo|Plan S|Lancet|Gitlab|GitLab|Git|FORMAS|CoData|CODATA|Wiley|PeerJ|Inter|eLife|Dryad|Coko|CNPq|Cell |Hinari|Pronaces|Cnr|Vinnova|Minerva|uGREAT|Benz|GitHub|protocols.io|Andrea Stephens|Mtauranga|Metacat|ELIXIR|VSNU and the UKB|Springer|Nikau Consultancy|Aspiration&quot;, &quot;&quot;, corpus_df$txt)
+
+# removing all names (part 4)
+corpus_df$txt &lt;- gsub(&quot;Washington Watch|BioScience|Eye on Education|AIBS Bulletin|Dr. Francesca Dominici|PeerJ – the Journal of Life &amp; Environmental Sciences (PeerJ)|PeerJ Computer Science|PeerJ Physical Chemistry|PeerJ Organic Chemistry|PeerJ Inorganic Chemistry|PeerJ Analytical Chemistry and PeerJ Materials Science&quot;, &quot;&quot;, corpus_df$txt)
+
+
+
+# Removing words related to the locations and names
+corpus_df$txt &lt;- gsub(&quot;Global South|Global North|New Zealanders|New Zelanders|New Zeland|New Zealand|Great Britain|North America|Eastern Europe|South America|South africans|South africa|Eastern Europe|ARPHA Platform|Woods Hole Oceanographic Institution|US JGOFS|US GLOBEC|NSF Geosciences Directorate (GEO) Division of Ocean Sciences (OCE) Biological and Chemical Oceanography Sections, Division of Polar Programs (PLR) Antarctic Sciences (ANT) Organisms &amp; Ecosystems, and Arctic Sciences (ARC) awards|(DACST)|(CSD)|(FRD)|GBIF.org&quot;,&quot;&quot;,corpus_df$txt)
+
+
+# removing abbreviations and other missed words
+corpus_df$txt &lt;- gsub(&quot;(CREDIT)|BCO-DMO|CONICYT|NEOBIOTA|INSTAAR|COPDESS|CLOCKSS|CoESRA|CAASM|AADC|CONZUL|EMPSEB|SHaRED|SORTEE|SEARCH|SANBI|SPARC|INSTAAR|UNESCO|APEC|AOASG|ARPHA|NCEAS|ICPSR|IMPRS|CMIP5|JDAP|CERN|MBMG|INASP|NSERC|GOALI|AIRA|AJOL|APIs|EMBL|AIBS|CAUL|CRIA|DOAJ|ICBB|ESEB|GBIF|K-12|NCBI|NCGP|NERC|IPCC|CNRS|CSIC|CSIR|BEIS|OARE|HSRC|PLOS|AAAR|USGS|NCAR|NOAA|NEON|ARDI|RSPB|DDBJ|INSDC|INSD|STAR|TERN|TREE|UTSC|UKRI|ARC|BES|SSE|COS|CAS|CTFs|DDI|EPT|ERC|ERA|JST|KNB|NRF|DFG|MDA|NIH|NLM|NRC|NRF|OSF|SCB|OSH|OAI|OCE|PCB|PCI|RDA|GCB|RDC|NSF|BGD|BMC|BHAG|ESA|ZSL|SPP|RCC|RMB|TRL|API|ARC|PLR|DDC|DKRZ|DWD|DVCS|NAE|NAM|EBI|ANR|API|NAS|ASN|NSF|OCE|ANT|UIs|API|EiC|TEE|UCL|SDGs|PIA|CL|RA|RS|STI|SNI|BG|U.K.|U.S.|EC|SC|CU|R&amp;D|Eos|EIDs&quot;,&quot;&quot;,corpus_df$txt)
+
+
+
+# removing numbers 
+corpus_df$txt &lt;- gsub(&quot;[0-9]+&quot;,&quot;&quot;,corpus_df$txt)
+
+# removing &quot;&#39;s&quot;
+corpus_df$txt &lt;- gsub(&quot;&#39;s&quot;,&quot;&quot;,corpus_df$txt)</code></pre>
+</div>
+<div id="tokenisation" class="section level1">
+<h1>Tokenisation</h1>
+<pre class="r"><code># Tokenisation - creating a tidy text: it convert tokens to lowercase, removes punctuation
+head(corpus_df, 3)</code></pre>
+<pre><code># A tibble: 3 × 5
+  txt                        filename          name         doc_type stakeholder
+  &lt;chr&gt;                      &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;      
+1 &quot; /    Preamble   () is a… Africa Open Scie… Africa Open… About    advocates  
+2 &quot;   /   is a communicatio… Amelica_About.txt Amelica      About    advocates  
+3 &quot;     About    is a pione… Bioline Internat… Bioline Int… About    advocates  </code></pre>
+<pre class="r"><code># Starting with tokenizing text into sentences:
+
+corpus_df$txt_copy &lt;- corpus_df$txt
+
+data_tidy_sentences &lt;- corpus_df %&gt;%  
+  # unnest_tokens(sentence, txt_copy, token = &quot;regex&quot;, pattern = &quot;(?&lt;=\\.|\\?)\\s(?=[A-Z])&quot;)
+  unnest_tokens(sentence, txt_copy, token = &quot;sentences&quot;)
+
+head(data_tidy_sentences,5)</code></pre>
+<pre><code># A tibble: 5 × 6
+  txt              filename      name     doc_type stakeholder sentence         
+  &lt;chr&gt;            &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;            
+1 &quot; /    Preamble… Africa Open … Africa … About    advocates   /    preamble   …
+2 &quot; /    Preamble… Africa Open … Africa … About    advocates   our goal is to c…
+3 &quot; /    Preamble… Africa Open … Africa … About    advocates   after two editio…
+4 &quot; /    Preamble… Africa Open … Africa … About    advocates   we are delighted…
+5 &quot; /    Preamble… Africa Open … Africa … About    advocates   mission  the mis…</code></pre>
+<pre class="r"><code>data_tidy_sentences &lt;- data_tidy_sentences %&gt;% group_by(name) %&gt;% mutate(sentence_id = row_number())
+
+data_tidy_sentences$sentence_doc &lt;- paste0(data_tidy_sentences$name, &quot;_&quot;, data_tidy_sentences$sentence_id)
+
+colnames(data_tidy_sentences)</code></pre>
+<pre><code>[1] &quot;txt&quot;          &quot;filename&quot;     &quot;name&quot;         &quot;doc_type&quot;     &quot;stakeholder&quot; 
+[6] &quot;sentence&quot;     &quot;sentence_id&quot;  &quot;sentence_doc&quot;</code></pre>
+<pre class="r"><code>data_tidy_sentences &lt;- as.data.frame(data_tidy_sentences)
+data_tidy &lt;- data_tidy_sentences %&gt;%  
+  # mutate(as.character(sentence)) %&gt;%
+  unnest_tokens(word, sentence, token = &quot;words&quot; )  %&gt;%
+  select(-sentence_id)
+
+
+dim(data_tidy)</code></pre>
+<pre><code>[1] 43595     7</code></pre>
+<pre class="r"><code>colnames(data_tidy)</code></pre>
+<pre><code>[1] &quot;txt&quot;          &quot;filename&quot;     &quot;name&quot;         &quot;doc_type&quot;     &quot;stakeholder&quot; 
+[6] &quot;sentence_doc&quot; &quot;word&quot;        </code></pre>
+<pre class="r"><code># Removal of stop-words: check the lexicons in stop_words, create a list of my stop words like: numbering (ii, iii, iv, v), name of document type (aim, aims, mission...), name of the stakeholders (erc, nerc, wellcome)
+# onix lexicon contains words like &quot;open&quot;, &quot;opened&quot; and so on, I decided to remove this lexicon from the analysis
+
+my_stop_words &lt;- stop_words %&gt;%
+  filter(!grepl(&quot;onix&quot;, lexicon))
+
+# unique(stop_words$lexicon)
+# View(stop_words)
+# x &lt;- print(stop_words)
+
+# unique(data_tidy$name)
+
+# removing other words (names of stakeholders, types of documents, months,  abbreviations and not meaning anything)
+
+my_stop_words &lt;- bind_rows(data_frame(word = c(&quot;e.g&quot;, &quot;i.e&quot;, &quot;ii&quot;, &quot;iii&quot;, &quot;iv&quot;, &quot;v&quot;, &quot;vi&quot;, &quot;vii&quot;, &quot;ix&quot;, &quot;x&quot;, &quot;&quot;, &quot;missions&quot;, &quot;mission&quot;, &quot;aims&quot;, &quot;aimed&quot;, &quot;aim&quot;, &quot;values&quot;, &quot;value&quot;, &quot;vision&quot;, &quot;about&quot;, &quot;publisher&quot;, &quot;funder&quot;, &quot;society&quot;, &quot;journal&quot;, &quot;repository&quot;, &quot;deutsche&quot;, &quot;january&quot;, &quot;febuary&quot;, &quot;march&quot;, &quot;april&quot;, &quot;may&quot;, &quot;june&quot;, &quot;july&quot;, &quot;august&quot;, &quot;september&quot;, &quot;october&quot;, &quot;november&quot;, &quot;december&quot;, &quot;jan&quot;, &quot;feb&quot;, &quot;mar&quot;, &quot;apr&quot;, &quot;jun&quot;, &quot;jul&quot;, &quot;aug&quot;, &quot;sep&quot;, &quot;sept&quot;, &quot;oct&quot;, &quot;nov&quot;, &quot;dec&quot;, &quot;australasian&quot;, &quot;australians&quot;, &quot;australian&quot;, &quot;australia&quot;, &quot;latin&quot;, &quot;america&quot;, &quot;cameroon&quot;, &quot;yaoundé&quot;, &quot;berlin&quot;, &quot;baden&quot;, &quot;london&quot;, &quot;whipsnade&quot;, &quot;san&quot;, &quot;francisco&quot;, &quot;britain&quot;, &quot;european&quot;, &quot;europe&quot;, &quot;malawi&quot;, &quot;sweden&quot;, &quot;florida&quot;, &quot;shanghai&quot;, &quot;argentina&quot;, &quot;india&quot;, &quot;florida&quot;, &quot;luxembourg&quot;, &quot;italy&quot;, &quot;canadians&quot;, &quot;canadian&quot;, &quot;canada&quot;, &quot;spanish&quot;, &quot;spain&quot;, &quot;france&quot;, &quot;french&quot;, &quot;antarctica&quot;, &quot;antarctic&quot;, &quot;paris&quot;, &quot;cambridge&quot;, &quot;harvard&quot;, &quot;russian&quot;, &quot;russia&quot;, &quot;chicago&quot;, &quot;colorado&quot;, &quot;africans&quot;, &quot;african&quot;, &quot;africa&quot;, &quot;japan&quot;, &quot;japanese&quot;, &quot;brazil&quot;, &quot;zelanders&quot;, &quot;zeland&quot;, &quot;mori&quot;, &quot;aotearoa&quot;, &quot;american&quot;, &quot;america&quot;, &quot;australasia&quot;, &quot;hamburg&quot;, &quot;netherlands&quot;, &quot;berlin&quot;, &quot;china&quot;, &quot;chinese&quot;, &quot;brazil&quot;, &quot;mexico&quot;, &quot;germany&quot;, &quot;german&quot;, &quot;ladenburg&quot;, &quot;baden&quot;, &quot;potsdam&quot;, &quot;platz&quot;, &quot;oxford&quot;, &quot;berlin&quot;, &quot;asia&quot;, &quot;budapest&quot;, &quot;taiwan&quot;, &quot;chile&quot;, &quot;putonghua&quot;, &quot;hong&quot;, &quot;kong&quot;,&quot;helmholtz&quot;, &quot;bremen&quot;, &quot;copenhagen&quot;, &quot;stuttgart&quot;, &quot;hinxton&quot;, &quot;mātauranga&quot;, &quot;māori&quot;, &quot;yaound&quot;, &quot;egypt&quot;, &quot;uk&quot;, &quot;usa&quot;, &quot;eu&quot;, &quot;st&quot;, &quot;miraikan&quot;, &quot;makao&quot;, &quot;billion&quot;, &quot;billions&quot;, &quot;eight&quot;, &quot;eighteen&quot;, &quot;eighty&quot;, &quot;eleven&quot;, &quot;fifteen&quot;, &quot;fifty&quot;, &quot;five&quot;, &quot;forty&quot;, &quot;four&quot;, &quot;fourteen&quot;, &quot;hundreds&quot;, &quot;million&quot;, &quot;millions&quot;, &quot;nine&quot;, &quot;nineteen&quot;, &quot;ninety&quot;, &quot;one&quot;, &quot;ones&quot;, &quot;seven&quot;, &quot;seventeen&quot;, &quot;seventy&quot;, &quot;six&quot;, &quot;sixteen&quot;, &quot;sixty&quot;, &quot;ten&quot;, &quot;tens&quot;, &quot;thirteen&quot;, &quot;thirty&quot;, &quot;thousand&quot;, &quot;thousands&quot;, &quot;three&quot;, &quot;twelve&quot;, &quot;twenty&quot;, &quot;two&quot;, &quot;iccb&quot;, &quot;ca&quot;), lexicon = c(&quot;custom&quot;)), my_stop_words)
+
+data_tidy &lt;- data_tidy %&gt;%
+ anti_join(my_stop_words) </code></pre>
+<pre><code>Joining, by = &quot;word&quot;</code></pre>
+<pre class="r"><code>head(data_tidy, 3)</code></pre>
+<pre><code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       txt
+1  /    Preamble   () is a grassroots effort that brings together researchers, technologists, hacker hobbyists, educators, government officials, and start-up innovators from around the world. Our goal is to create a conversation and set of actions on , among African actors, and between them and the international community, in order to adopt  principles and practices appropriate to our context. After two editions of the  Summit, it is time to take another step forward in our community s development strategy. We are delighted to launch the , with its main campus in Yaound, Cameroon.    Mission  The mission of the Institute is to meet current research and training needs in the field of Open Science. This choice is part of the contextualisation of the  which lays out recommendations to make open hardware ubiquitous in science by . This would be pursued through (i) activities that enable anyone to gain knowledge and find information about  and/or the community (Learn section) and (ii) actions aimed at creating the necessary enabling conditions for the present and future of the  community (Support section).    Audience &amp; Research Areas  The  welcomes anyone interested in Open Science in the African context, regardless of race, gender, language or  nationality. With an interdisciplinary approach, the Institute will focus on:      Fabrication of Open Source Hardware    Biotechnology and DIYbio    Publishing and Scholarly Communication    AI, IoT and Robotics    Entrepreneurship and Open Innovation    Intellectual Property and Open Licensing    Social Sciences (Critical Studies of Open Science)    Fair Open Science and Ethics of Openness  
+2  /    Preamble   () is a grassroots effort that brings together researchers, technologists, hacker hobbyists, educators, government officials, and start-up innovators from around the world. Our goal is to create a conversation and set of actions on , among African actors, and between them and the international community, in order to adopt  principles and practices appropriate to our context. After two editions of the  Summit, it is time to take another step forward in our community s development strategy. We are delighted to launch the , with its main campus in Yaound, Cameroon.    Mission  The mission of the Institute is to meet current research and training needs in the field of Open Science. This choice is part of the contextualisation of the  which lays out recommendations to make open hardware ubiquitous in science by . This would be pursued through (i) activities that enable anyone to gain knowledge and find information about  and/or the community (Learn section) and (ii) actions aimed at creating the necessary enabling conditions for the present and future of the  community (Support section).    Audience &amp; Research Areas  The  welcomes anyone interested in Open Science in the African context, regardless of race, gender, language or  nationality. With an interdisciplinary approach, the Institute will focus on:      Fabrication of Open Source Hardware    Biotechnology and DIYbio    Publishing and Scholarly Communication    AI, IoT and Robotics    Entrepreneurship and Open Innovation    Intellectual Property and Open Licensing    Social Sciences (Critical Studies of Open Science)    Fair Open Science and Ethics of Openness  
+3  /    Preamble   () is a grassroots effort that brings together researchers, technologists, hacker hobbyists, educators, government officials, and start-up innovators from around the world. Our goal is to create a conversation and set of actions on , among African actors, and between them and the international community, in order to adopt  principles and practices appropriate to our context. After two editions of the  Summit, it is time to take another step forward in our community s development strategy. We are delighted to launch the , with its main campus in Yaound, Cameroon.    Mission  The mission of the Institute is to meet current research and training needs in the field of Open Science. This choice is part of the contextualisation of the  which lays out recommendations to make open hardware ubiquitous in science by . This would be pursued through (i) activities that enable anyone to gain knowledge and find information about  and/or the community (Learn section) and (ii) actions aimed at creating the necessary enabling conditions for the present and future of the  community (Support section).    Audience &amp; Research Areas  The  welcomes anyone interested in Open Science in the African context, regardless of race, gender, language or  nationality. With an interdisciplinary approach, the Institute will focus on:      Fabrication of Open Source Hardware    Biotechnology and DIYbio    Publishing and Scholarly Communication    AI, IoT and Robotics    Entrepreneurship and Open Innovation    Intellectual Property and Open Licensing    Social Sciences (Critical Studies of Open Science)    Fair Open Science and Ethics of Openness  
+                                    filename                             name
+1 Africa Open Science and Hardware_About.txt Africa Open Science and Hardware
+2 Africa Open Science and Hardware_About.txt Africa Open Science and Hardware
+3 Africa Open Science and Hardware_About.txt Africa Open Science and Hardware
+  doc_type stakeholder                       sentence_doc       word
+1    About   advocates Africa Open Science and Hardware_1   preamble
+2    About   advocates Africa Open Science and Hardware_1 grassroots
+3    About   advocates Africa Open Science and Hardware_1     effort</code></pre>
+<pre class="r"><code># lemmatizing using lemma table
+token_words &lt;- tokens(data_tidy$word, remove_punct = TRUE)
+tw_out &lt;- tokens_replace(token_words,
+               pattern = lexicon::hash_lemmas$token,
+               replacement = lexicon::hash_lemmas$lemma)
+tw_out_df&lt;- as.data.frame(unlist(tw_out))
+data_tidy &lt;- cbind(data_tidy, tw_out_df$&quot;unlist(tw_out)&quot;)
+
+
+
+colnames(data_tidy)[which(names(data_tidy) == &quot;word&quot;)] &lt;- &quot;orig_word&quot;
+colnames(data_tidy)[which(names(data_tidy) == &quot;tw_out_df$\&quot;unlist(tw_out)\&quot;&quot;)] &lt;- &quot;word_mix&quot;
+
+# changing American English to British English
+ukus_out &lt;- tokens(data_tidy$word_mix, remove_punct = TRUE)
+ukus_out &lt;- quanteda::tokens_lookup(ukus_out, data_dictionary_us2uk, exclusive = FALSE, capkeys = FALSE)
+ukus_df &lt;- as.data.frame(unlist(ukus_out))
+data_tidy &lt;- cbind(data_tidy, ukus_df$&quot;unlist(ukus_out)&quot;)
+colnames(data_tidy)[which(names(data_tidy) == &quot;ukus_df$\&quot;unlist(ukus_out)\&quot;&quot;)] &lt;- &quot;word&quot;</code></pre>
+</div>
+<div
+id="creating-a-column-that-will-include-info-about-oa-and-nonoa-journals-or-publisher-for-profit-and-non-profit"
+class="section level1">
+<h1>Creating a column that will include info about OA and nonOA journals
+or publisher for profit and non-profit</h1>
+<pre class="r"><code>data_words &lt;- data_tidy
+
+# Creating a column that will include info about OA and nonOA journals or publisher for profit and non-profit
+data_words$org_subgroups &lt;- data_words$stakeholder
+data_words$stakeholder[data_words$stakeholder%in% c(&quot;journal_OA&quot;, &quot;journal_nonOA&quot; )] &lt;- &quot;journal&quot;
+data_words$stakeholder[data_words$stakeholder%in% c(&quot;publisher_Profit&quot;, &quot;publisher_nonProfit&quot; )] &lt;- &quot;publisher&quot;
+unique(data_words$stakeholder)</code></pre>
+<pre><code>[1] &quot;advocates&quot;  &quot;funder&quot;     &quot;journal&quot;    &quot;publisher&quot;  &quot;repository&quot;
+[6] &quot;society&quot;   </code></pre>
+<pre class="r"><code>unique(data_words$stakeholder)</code></pre>
+<pre><code>[1] &quot;advocates&quot;  &quot;funder&quot;     &quot;journal&quot;    &quot;publisher&quot;  &quot;repository&quot;
+[6] &quot;society&quot;   </code></pre>
+<pre class="r"><code># This data will be used to create wordclouds in other script and Ternary_plot_final
+# write_csv(data_words, &quot;corpuses_data_1.csv&quot;)
+head(data_words,5)</code></pre>
+<pre><code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       txt
+1  /    Preamble   () is a grassroots effort that brings together researchers, technologists, hacker hobbyists, educators, government officials, and start-up innovators from around the world. Our goal is to create a conversation and set of actions on , among African actors, and between them and the international community, in order to adopt  principles and practices appropriate to our context. After two editions of the  Summit, it is time to take another step forward in our community s development strategy. We are delighted to launch the , with its main campus in Yaound, Cameroon.    Mission  The mission of the Institute is to meet current research and training needs in the field of Open Science. This choice is part of the contextualisation of the  which lays out recommendations to make open hardware ubiquitous in science by . This would be pursued through (i) activities that enable anyone to gain knowledge and find information about  and/or the community (Learn section) and (ii) actions aimed at creating the necessary enabling conditions for the present and future of the  community (Support section).    Audience &amp; Research Areas  The  welcomes anyone interested in Open Science in the African context, regardless of race, gender, language or  nationality. With an interdisciplinary approach, the Institute will focus on:      Fabrication of Open Source Hardware    Biotechnology and DIYbio    Publishing and Scholarly Communication    AI, IoT and Robotics    Entrepreneurship and Open Innovation    Intellectual Property and Open Licensing    Social Sciences (Critical Studies of Open Science)    Fair Open Science and Ethics of Openness  
+2  /    Preamble   () is a grassroots effort that brings together researchers, technologists, hacker hobbyists, educators, government officials, and start-up innovators from around the world. Our goal is to create a conversation and set of actions on , among African actors, and between them and the international community, in order to adopt  principles and practices appropriate to our context. After two editions of the  Summit, it is time to take another step forward in our community s development strategy. We are delighted to launch the , with its main campus in Yaound, Cameroon.    Mission  The mission of the Institute is to meet current research and training needs in the field of Open Science. This choice is part of the contextualisation of the  which lays out recommendations to make open hardware ubiquitous in science by . This would be pursued through (i) activities that enable anyone to gain knowledge and find information about  and/or the community (Learn section) and (ii) actions aimed at creating the necessary enabling conditions for the present and future of the  community (Support section).    Audience &amp; Research Areas  The  welcomes anyone interested in Open Science in the African context, regardless of race, gender, language or  nationality. With an interdisciplinary approach, the Institute will focus on:      Fabrication of Open Source Hardware    Biotechnology and DIYbio    Publishing and Scholarly Communication    AI, IoT and Robotics    Entrepreneurship and Open Innovation    Intellectual Property and Open Licensing    Social Sciences (Critical Studies of Open Science)    Fair Open Science and Ethics of Openness  
+3  /    Preamble   () is a grassroots effort that brings together researchers, technologists, hacker hobbyists, educators, government officials, and start-up innovators from around the world. Our goal is to create a conversation and set of actions on , among African actors, and between them and the international community, in order to adopt  principles and practices appropriate to our context. After two editions of the  Summit, it is time to take another step forward in our community s development strategy. We are delighted to launch the , with its main campus in Yaound, Cameroon.    Mission  The mission of the Institute is to meet current research and training needs in the field of Open Science. This choice is part of the contextualisation of the  which lays out recommendations to make open hardware ubiquitous in science by . This would be pursued through (i) activities that enable anyone to gain knowledge and find information about  and/or the community (Learn section) and (ii) actions aimed at creating the necessary enabling conditions for the present and future of the  community (Support section).    Audience &amp; Research Areas  The  welcomes anyone interested in Open Science in the African context, regardless of race, gender, language or  nationality. With an interdisciplinary approach, the Institute will focus on:      Fabrication of Open Source Hardware    Biotechnology and DIYbio    Publishing and Scholarly Communication    AI, IoT and Robotics    Entrepreneurship and Open Innovation    Intellectual Property and Open Licensing    Social Sciences (Critical Studies of Open Science)    Fair Open Science and Ethics of Openness  
+4  /    Preamble   () is a grassroots effort that brings together researchers, technologists, hacker hobbyists, educators, government officials, and start-up innovators from around the world. Our goal is to create a conversation and set of actions on , among African actors, and between them and the international community, in order to adopt  principles and practices appropriate to our context. After two editions of the  Summit, it is time to take another step forward in our community s development strategy. We are delighted to launch the , with its main campus in Yaound, Cameroon.    Mission  The mission of the Institute is to meet current research and training needs in the field of Open Science. This choice is part of the contextualisation of the  which lays out recommendations to make open hardware ubiquitous in science by . This would be pursued through (i) activities that enable anyone to gain knowledge and find information about  and/or the community (Learn section) and (ii) actions aimed at creating the necessary enabling conditions for the present and future of the  community (Support section).    Audience &amp; Research Areas  The  welcomes anyone interested in Open Science in the African context, regardless of race, gender, language or  nationality. With an interdisciplinary approach, the Institute will focus on:      Fabrication of Open Source Hardware    Biotechnology and DIYbio    Publishing and Scholarly Communication    AI, IoT and Robotics    Entrepreneurship and Open Innovation    Intellectual Property and Open Licensing    Social Sciences (Critical Studies of Open Science)    Fair Open Science and Ethics of Openness  
+5  /    Preamble   () is a grassroots effort that brings together researchers, technologists, hacker hobbyists, educators, government officials, and start-up innovators from around the world. Our goal is to create a conversation and set of actions on , among African actors, and between them and the international community, in order to adopt  principles and practices appropriate to our context. After two editions of the  Summit, it is time to take another step forward in our community s development strategy. We are delighted to launch the , with its main campus in Yaound, Cameroon.    Mission  The mission of the Institute is to meet current research and training needs in the field of Open Science. This choice is part of the contextualisation of the  which lays out recommendations to make open hardware ubiquitous in science by . This would be pursued through (i) activities that enable anyone to gain knowledge and find information about  and/or the community (Learn section) and (ii) actions aimed at creating the necessary enabling conditions for the present and future of the  community (Support section).    Audience &amp; Research Areas  The  welcomes anyone interested in Open Science in the African context, regardless of race, gender, language or  nationality. With an interdisciplinary approach, the Institute will focus on:      Fabrication of Open Source Hardware    Biotechnology and DIYbio    Publishing and Scholarly Communication    AI, IoT and Robotics    Entrepreneurship and Open Innovation    Intellectual Property and Open Licensing    Social Sciences (Critical Studies of Open Science)    Fair Open Science and Ethics of Openness  
+                                    filename                             name
+1 Africa Open Science and Hardware_About.txt Africa Open Science and Hardware
+2 Africa Open Science and Hardware_About.txt Africa Open Science and Hardware
+3 Africa Open Science and Hardware_About.txt Africa Open Science and Hardware
+4 Africa Open Science and Hardware_About.txt Africa Open Science and Hardware
+5 Africa Open Science and Hardware_About.txt Africa Open Science and Hardware
+  doc_type stakeholder                       sentence_doc   orig_word
+1    About   advocates Africa Open Science and Hardware_1    preamble
+2    About   advocates Africa Open Science and Hardware_1  grassroots
+3    About   advocates Africa Open Science and Hardware_1      effort
+4    About   advocates Africa Open Science and Hardware_1      brings
+5    About   advocates Africa Open Science and Hardware_1 researchers
+    word_mix       word org_subgroups
+1   preamble   preamble     advocates
+2 grassroots grassroots     advocates
+3     effort     effort     advocates
+4      bring      bring     advocates
+5 researcher researcher     advocates</code></pre>
+<pre class="r"><code># 
+# check &lt;- data_words %&gt;% 
+#   select(-sentence_doc, -txt,  )
+# write_csv(check, &quot;check.csv&quot;)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] stm_1.3.6                 ggraph_2.0.5             
+ [3] igraph_1.2.6              reshape2_1.4.4           
+ [5] wordcloud_2.6             RColorBrewer_1.1-2       
+ [7] topicmodels_0.2-12        tm_0.7-8                 
+ [9] NLP_0.2-1                 quanteda.dictionaries_0.3
+[11] quanteda.textplots_0.94   quanteda_3.1.0           
+[13] tidytext_0.3.2            forcats_0.5.1            
+[15] stringr_1.4.0             dplyr_1.0.7              
+[17] purrr_0.3.4               readr_2.0.2              
+[19] tidyr_1.1.4               tibble_3.1.6             
+[21] ggplot2_3.3.5             tidyverse_1.3.1          
+[23] workflowr_1.7.0          
+
+loaded via a namespace (and not attached):
+ [1] colorspace_2.0-2   ellipsis_0.3.2     modeltools_0.2-23  rprojroot_2.0.2   
+ [5] fs_1.5.0           rstudioapi_0.13    farver_2.1.0       graphlayouts_0.7.1
+ [9] SnowballC_0.7.0    ggrepel_0.9.1      fansi_0.5.0        lubridate_1.7.10  
+[13] xml2_1.3.2         knitr_1.36         polyclip_1.10-0    jsonlite_1.7.2    
+[17] broom_0.7.9        dbplyr_2.1.1       ggforce_0.3.3      compiler_4.0.3    
+[21] httr_1.4.2         backports_1.2.1    assertthat_0.2.1   Matrix_1.3-4      
+[25] fastmap_1.1.0      cli_3.1.0          later_1.3.0        tweenr_1.0.2      
+[29] htmltools_0.5.2    tools_4.0.3        gtable_0.3.0       glue_1.5.0        
+[33] fastmatch_1.1-3    Rcpp_1.0.7         slam_0.1-48        lexicon_1.2.1     
+[37] cellranger_1.1.0   jquerylib_0.1.4    vctrs_0.3.8        xfun_0.31         
+[41] stopwords_2.3      ps_1.6.0           rvest_1.0.1        lifecycle_1.0.1   
+[45] getPass_0.2-2      MASS_7.3-54        scales_1.1.1       tidygraph_1.2.0   
+[49] hms_1.1.1          promises_1.2.0.1   parallel_4.0.3     yaml_2.2.1        
+[53] gridExtra_2.3      sass_0.4.0         stringi_1.7.5      tokenizers_0.2.1  
+[57] rlang_0.4.12       pkgconfig_2.0.3    evaluate_0.14      lattice_0.20-45   
+[61] processx_3.5.2     tidyselect_1.1.1   plyr_1.8.6         magrittr_2.0.3    
+[65] R6_2.5.1           generics_0.1.1     DBI_1.1.1          pillar_1.6.4      
+[69] haven_2.4.3        whisker_0.4        withr_2.4.2        janeaustenr_0.1.5 
+[73] modelr_0.1.8       crayon_1.4.2       utf8_1.2.2         tzdb_0.1.2        
+[77] rmarkdown_2.11     viridis_0.6.1      syuzhet_1.0.6      grid_4.0.3        
+[81] readxl_1.3.1       data.table_1.14.2  callr_3.7.0        git2r_0.29.0      
+[85] reprex_2.0.1       digest_0.6.28      httpuv_1.6.3       RcppParallel_5.1.4
+[89] stats4_4.0.3       munsell_0.5.0      viridisLite_0.4.0  bslib_0.3.0       </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
