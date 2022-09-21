@@ -20,11 +20,11 @@ Methodology for "Accelerating the Open Research agenda to solve global challenge
 <!-- wflow_publish("analysis/_site.yml", "Change the theme", republish = TRUE) -->
 
 <br>
-[1a_Data_preprocessing](./analysis/1a_Data_preprocessing.html)
+[1a_Data_preprocessing](./docs/1a_Data_preprocessing.html)
 <br>
-[1b_Dictionaries_preparation](./analysis/1b_Dictionaries_preparation.html)
+[1b_Dictionaries_preparation](./docs/1b_Dictionaries_preparation.html)
 <br>
 [List of the organisations](./data/README.html)
 <br>
-[Licence](./analysis/license.html)
+[Licence](./docs/license.html)
 
