@@ -349,7 +349,7 @@ website_info_table %>%
 
 # Saving dataset
 ``` {r}
-# This data will be used in 2_Topic_Modeling, 4_Language_analysis
+# These data will be used in 2_Topic_Modeling, 4_Language_analysis
 write_csv(data_words, "./output/created_datasets/cleaned_data.csv")
 ```
 
