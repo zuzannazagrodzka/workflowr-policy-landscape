@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "Methodology for “Accelerating the Open Research agenda to solve global challenges"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
@@ -7,24 +7,23 @@ output:
 editor_options:
   chunk_output_type: console
 ---
-Methodology for "Accelerating the Open Research agenda to solve global challenges"
 
-1. Methodology - Topic modeling
-2. Methodology - Text similarities
-3. Methodology - Language usage
-4. Methodology - other
-5. Data 
-6. Data preprocessing
-7. License
+1. Data and Data pre-processing
+
+- All mission statements (raw text data) are in the `./data/mission_statements` folder as txt files.
+- All dictionary data are in the `./data/dictionaries` folder.
+- [List of the organisations](./data/ListMissionVision.html)
+- [Dictionaries_preparation](./docs/1b_Dictionaries_preparation.html)
+- [Data_preprocessing](./docs/1a_Data_preprocessing.html)
+
+2. [Methodology - Topic modelling (Fig 2A)](./code/2_Topic_modeling.html)
+3. [Methodology - Text similarities (Fig 2B)](./code/3_Text_similarities_Fig2B.html)
+4. [Methodology - Language usage Fig 2C](./code/4_Language_analysis_Fig2C.html)
+5. Methodology - other
+7. [Licence](./docs/license.html)
 
 <!-- wflow_publish("analysis/_site.yml", "Change the theme", republish = TRUE) -->
 
 <br>
-[1a_Data_preprocessing](./docs/1a_Data_preprocessing.html)
-<br>
-[1b_Dictionaries_preparation](./docs/1b_Dictionaries_preparation.html)
-<br>
-[List of the organisations](./data/README.html)
-<br>
-[Licence](./docs/license.html)
+
 

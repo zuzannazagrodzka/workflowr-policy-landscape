@@ -23,6 +23,7 @@ library("workflowr")
 # wflow_build()
 # View the website without buiding it first
 wflow_view()
+
 # View the status of the workflowr project
 wflow_status()
 

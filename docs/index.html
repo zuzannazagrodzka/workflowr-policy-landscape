@@ -11,9 +11,9 @@
 
 
 
-<title>Home</title>
+<title>Methodology for “Accelerating the Open Research agenda to solve global challenges</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -72,6 +72,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -92,6 +93,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -149,11 +153,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -244,7 +252,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -280,7 +288,8 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Methodology for “Accelerating the Open
+Research agenda to solve global challenges</h1>
 
 </div>
 
@@ -288,7 +297,7 @@ $(document).ready(function () {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -299,8 +308,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -309,16 +318,17 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-09-21
+<strong>Last updated:</strong> 2022-11-09
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
-<strong>Knit directory:</strong> <code>myproject/</code> <span
+<strong>Knit directory:</strong>
+<code>workflowr-policy-landscape/</code> <span
 class="glyphicon glyphicon-question-sign" aria-hidden="true"
 title="This is the local directory in which the code in this file was executed.">
 </span>
@@ -338,33 +348,36 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetree460bad0c39a5d88853d090e1873076d3fcb4a575targetblank460bad0a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreeff9426f4b33533e4cf9d44b200a6437af5926b26targetblankff9426fa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/460bad0c39a5d88853d090e1873076d3fcb4a575" target="_blank">460bad0</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/ff9426f4b33533e4cf9d44b200a6437af5926b26" target="_blank">ff9426f</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetree460bad0c39a5d88853d090e1873076d3fcb4a575targetblank460bad0a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreeff9426f4b33533e4cf9d44b200a6437af5926b26targetblankff9426fa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -374,7 +387,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/460bad0c39a5d88853d090e1873076d3fcb4a575" target="_blank">460bad0</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/ff9426f4b33533e4cf9d44b200a6437af5926b26" target="_blank">ff9426f</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -389,46 +402,19 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .DS_Store
-    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/.DS_Store
-    Ignored:    code/.DS_Store
-    Ignored:    data/.DS_Store
-    Ignored:    data/dictionaries/.DS_Store
-    Ignored:    data/mission_statements/.DS_Store
-    Ignored:    data/mission_statements/advocates/.DS_Store
-    Ignored:    data/mission_statements/funders/.DS_Store
-    Ignored:    data/mission_statements/journals_OA/.DS_Store
-    Ignored:    data/mission_statements/journals_nonOA/.DS_Store
-    Ignored:    data/mission_statements/publishers_Profit/.DS_Store
-    Ignored:    data/mission_statements/publishers_nonProfit/.DS_Store
-    Ignored:    data/mission_statements/repositories/.DS_Store
-    Ignored:    data/mission_statements/societies/.DS_Store
-    Ignored:    output/.DS_Store
 
 Untracked files:
-    Untracked:  Policy_landscape_workflowr.R
-    Untracked:  code/1a_Data_preprocessing.html
-    Untracked:  code/1b_Dictionaries_preparation.html
-    Untracked:  code/2_Topic_modeling.html
-    Untracked:  code/3_Text_similarities_Figure_2B.html
-    Untracked:  code/4_Language_analysis_Figure_2C.html
-    Untracked:  code/5_For_and_not_for_profit_comparison.html
-    Untracked:  code/Figure_2A.html
-    Untracked:  code/figure/
-    Untracked:  data/mission_statements/repositories/~$nodo_Principles.doc
-    Untracked:  data/mission_statements/~$RC_Vision and purpose.txt
-    Untracked:  output/Figure_2A/
-    Untracked:  output/Figure_2B/
-    Untracked:  output/Figure_2C/
-    Untracked:  output/Other_figures/
-    Untracked:  output/created_datasets/
+    Untracked:  OpenResLandscape.Rproj
+    Untracked:  data/mission_statements/ListMissionVision.Rmd
+    Untracked:  data/mission_statements/ListMissionVision.html
 
 Unstaged changes:
-    Deleted:    code/1a_Data_preprocessing.Rmd
-    Deleted:    code/1b_Dictionaries_preparation.Rmd
-    Modified:   code/README.md
+    Modified:   Policy_landscape_workflowr.R
+    Modified:   analysis/1b_Dictionaries_preparation.Rmd
+    Modified:   analysis/index.Rmd
+    Deleted:    data/mission_statements/~$RC_Vision and purpose.txt
+    Deleted:    myproject.Rproj
 
 </code></pre>
 <p>
@@ -478,7 +464,24 @@ Message
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/052dacdef181caaf2ca8447aa19214e8990045a9/docs/index.html" target="_blank">052dacd</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/0a21152a465ac56ab49b95ab1754c03552fd9f61/docs/index.html" target="_blank">0a21152</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2022-09-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/052dacdef181caaf2ca8447aa19214e8990045a9/docs/index.html" target="_blank">052dacd</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -495,7 +498,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/e9218cc260a254048ca06183a80f9282357bff97/analysis/index.Rmd" target="_blank">e9218cc</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e9218cc260a254048ca06183a80f9282357bff97/analysis/index.Rmd" target="_blank">e9218cc</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -512,7 +515,7 @@ wflow_publish("analysis/index.Rmd")
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/796aa8e52d5b1ef939301014acb1df11969def99/docs/index.html" target="_blank">796aa8e</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/796aa8e52d5b1ef939301014acb1df11969def99/docs/index.html" target="_blank">796aa8e</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -529,7 +532,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/efb12025b35db2b4e815bc575445216d20c0d6f0/analysis/index.Rmd" target="_blank">efb1202</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/efb12025b35db2b4e815bc575445216d20c0d6f0/analysis/index.Rmd" target="_blank">efb1202</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -546,7 +549,7 @@ Publish other files
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/e6302f414356c432cb16f77cdd006837178fa6ba/docs/index.html" target="_blank">e6302f4</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/e6302f414356c432cb16f77cdd006837178fa6ba/docs/index.html" target="_blank">e6302f4</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -563,7 +566,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/7bf3f617598d54b0749ae348e1ffa96d648280ea/analysis/index.Rmd" target="_blank">7bf3f61</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/7bf3f617598d54b0749ae348e1ffa96d648280ea/analysis/index.Rmd" target="_blank">7bf3f61</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -580,7 +583,7 @@ wflow_publish("analysis/index.Rmd")
 Rmd
 </td>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/2e2a60a66bdbca652cffb34f916971bc2915f997/analysis/index.Rmd" target="_blank">2e2a60a</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/2e2a60a66bdbca652cffb34f916971bc2915f997/analysis/index.Rmd" target="_blank">2e2a60a</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -597,7 +600,7 @@ test
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/87863c96a5898644b1de4ce33b2609ac0cb0d0df/docs/index.html" target="_blank">87863c9</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/87863c96a5898644b1de4ce33b2609ac0cb0d0df/docs/index.html" target="_blank">87863c9</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -614,7 +617,7 @@ Build site.
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/c99cf0416b3831895a81bd2b7c2b6406f3d00d01/docs/index.html" target="_blank">c99cf04</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/c99cf0416b3831895a81bd2b7c2b6406f3d00d01/docs/index.html" target="_blank">c99cf04</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -631,7 +634,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/2a2476c29787c12cc5445ff9464a58d902ee6f97/analysis/index.Rmd" target="_blank">2a2476c</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/2a2476c29787c12cc5445ff9464a58d902ee6f97/analysis/index.Rmd" target="_blank">2a2476c</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -648,7 +651,7 @@ Publish the initial files for myproject
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/5940eeed6ad8d0a48df671c0a4cd55b5d390ae86/docs/index.html" target="_blank">5940eee</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/5940eeed6ad8d0a48df671c0a4cd55b5d390ae86/docs/index.html" target="_blank">5940eee</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -665,7 +668,7 @@ Build site.
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/2801870f4ff359b0cfc9c1de7c217919b0f2829a/docs/index.html" target="_blank">2801870</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/2801870f4ff359b0cfc9c1de7c217919b0f2829a/docs/index.html" target="_blank">2801870</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -682,7 +685,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/bcea69510aca9a5f5e8c19e39c497fd13a093f71/analysis/index.Rmd" target="_blank">bcea695</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/bcea69510aca9a5f5e8c19e39c497fd13a093f71/analysis/index.Rmd" target="_blank">bcea695</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -699,7 +702,7 @@ Publish the initial files for myproject
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/98ec1e0df2313fe5de24373ced17e03be9a6eab6/docs/index.html" target="_blank">98ec1e0</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/98ec1e0df2313fe5de24373ced17e03be9a6eab6/docs/index.html" target="_blank">98ec1e0</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -716,7 +719,7 @@ Build site.
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/4e2a2928935e84401f75616fc214f1f77df5f56b/docs/index.html" target="_blank">4e2a292</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/4e2a2928935e84401f75616fc214f1f77df5f56b/docs/index.html" target="_blank">4e2a292</a>
 </td>
 <td>
 ZZ
@@ -733,7 +736,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/80629efd641ff58fea3696d7a13de96e997e24f7/analysis/index.Rmd" target="_blank">80629ef</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/80629efd641ff58fea3696d7a13de96e997e24f7/analysis/index.Rmd" target="_blank">80629ef</a>
 </td>
 <td>
 ZZ
@@ -752,24 +755,33 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>Methodology for “Accelerating the Open Research agenda to solve
-global challenges”</p>
 <ol style="list-style-type: decimal">
-<li>Methodology - Topic modeling</li>
-<li>Methodology - Text similarities</li>
-<li>Methodology - Language usage</li>
+<li>Data and Data pre-processing</li>
+</ol>
+<ul>
+<li>All mission statements (raw text data) are in the
+<code>./data/mission_statements</code> folder as txt files.</li>
+<li>All dictionary data are in the <code>./data/dictionaries</code>
+folder.</li>
+<li><a href="./data/ListMissionVision.html">List of the
+organisations</a></li>
+<li><a
+href="./docs/1b_Dictionaries_preparation.html">Dictionaries_preparation</a></li>
+<li><a
+href="./docs/1a_Data_preprocessing.html">Data_preprocessing</a></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><a href="./code/2_Topic_modeling.html">Methodology - Topic modelling
+(Fig 2A)</a></li>
+<li><a href="./code/3_Text_similarities_Fig2B.html">Methodology - Text
+similarities (Fig 2B)</a></li>
+<li><a href="./code/4_Language_analysis_Fig2C.html">Methodology -
+Language usage Fig 2C</a></li>
 <li>Methodology - other</li>
-<li>Data</li>
-<li>Data preprocessing</li>
-<li>License</li>
+<li><a href="./docs/license.html">Licence</a></li>
 </ol>
 <!-- wflow_publish("analysis/_site.yml", "Change the theme", republish = TRUE) -->
-<p><br> <a
-href="./docs/1a_Data_preprocessing.html">1a_Data_preprocessing</a> <br>
-<a
-href="./docs/1b_Dictionaries_preparation.html">1b_Dictionaries_preparation</a>
-<br> <a href="./data/README.html">List of the organisations</a> <br> <a
-href="./docs/license.html">Licence</a></p>
+<p><br></p>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using

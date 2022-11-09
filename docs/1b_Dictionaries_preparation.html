@@ -9,13 +9,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="zuzannazagrodzka" />
+<meta name="author" content="zuzannazagrodzka, APB, TFJ" />
 
 <meta name="date" content="2022-05-13" />
 
-<title>1b_Dictionaries_preparation</title>
+<title>Dictionaries_preparation</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -79,6 +79,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -99,6 +100,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -156,11 +160,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -324,7 +332,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -360,8 +368,8 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">1b_Dictionaries_preparation</h1>
-<h4 class="author">zuzannazagrodzka</h4>
+<h1 class="title toc-ignore">Dictionaries_preparation</h1>
+<h4 class="author">zuzannazagrodzka, APB, TFJ</h4>
 <h4 class="date">2022-05-13</h4>
 
 </div>
@@ -370,7 +378,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -381,8 +389,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -391,16 +399,17 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-09-21
+<strong>Last updated:</strong> 2022-11-09
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
-<strong>Knit directory:</strong> <code>myproject/</code> <span
+<strong>Knit directory:</strong>
+<code>workflowr-policy-landscape/</code> <span
 class="glyphicon glyphicon-question-sign" aria-hidden="true"
 title="This is the local directory in which the code in this file was executed.">
 </span>
@@ -420,18 +429,21 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
@@ -522,15 +534,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetree460bad0c39a5d88853d090e1873076d3fcb4a575targetblank460bad0a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreeff9426f4b33533e4cf9d44b200a6437af5926b26targetblankff9426fa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/460bad0c39a5d88853d090e1873076d3fcb4a575" target="_blank">460bad0</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/ff9426f4b33533e4cf9d44b200a6437af5926b26" target="_blank">ff9426f</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetree460bad0c39a5d88853d090e1873076d3fcb4a575targetblank460bad0a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreeff9426f4b33533e4cf9d44b200a6437af5926b26targetblankff9426fa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +552,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/460bad0c39a5d88853d090e1873076d3fcb4a575" target="_blank">460bad0</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/ff9426f4b33533e4cf9d44b200a6437af5926b26" target="_blank">ff9426f</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -555,46 +567,19 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .DS_Store
-    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/.DS_Store
-    Ignored:    code/.DS_Store
-    Ignored:    data/.DS_Store
-    Ignored:    data/dictionaries/.DS_Store
-    Ignored:    data/mission_statements/.DS_Store
-    Ignored:    data/mission_statements/advocates/.DS_Store
-    Ignored:    data/mission_statements/funders/.DS_Store
-    Ignored:    data/mission_statements/journals_OA/.DS_Store
-    Ignored:    data/mission_statements/journals_nonOA/.DS_Store
-    Ignored:    data/mission_statements/publishers_Profit/.DS_Store
-    Ignored:    data/mission_statements/publishers_nonProfit/.DS_Store
-    Ignored:    data/mission_statements/repositories/.DS_Store
-    Ignored:    data/mission_statements/societies/.DS_Store
-    Ignored:    output/.DS_Store
 
 Untracked files:
-    Untracked:  Policy_landscape_workflowr.R
-    Untracked:  code/1a_Data_preprocessing.html
-    Untracked:  code/1b_Dictionaries_preparation.html
-    Untracked:  code/2_Topic_modeling.html
-    Untracked:  code/3_Text_similarities_Figure_2B.html
-    Untracked:  code/4_Language_analysis_Figure_2C.html
-    Untracked:  code/5_For_and_not_for_profit_comparison.html
-    Untracked:  code/Figure_2A.html
-    Untracked:  code/figure/
-    Untracked:  data/mission_statements/repositories/~$nodo_Principles.doc
-    Untracked:  data/mission_statements/~$RC_Vision and purpose.txt
-    Untracked:  output/Figure_2A/
-    Untracked:  output/Figure_2B/
-    Untracked:  output/Figure_2C/
-    Untracked:  output/Other_figures/
-    Untracked:  output/created_datasets/
+    Untracked:  OpenResLandscape.Rproj
+    Untracked:  data/mission_statements/ListMissionVision.Rmd
+    Untracked:  data/mission_statements/ListMissionVision.html
 
 Unstaged changes:
-    Deleted:    code/1a_Data_preprocessing.Rmd
-    Deleted:    code/1b_Dictionaries_preparation.Rmd
-    Modified:   code/README.md
+    Modified:   Policy_landscape_workflowr.R
+    Modified:   analysis/1b_Dictionaries_preparation.Rmd
+    Modified:   analysis/index.Rmd
+    Deleted:    data/mission_statements/~$RC_Vision and purpose.txt
+    Deleted:    myproject.Rproj
 
 </code></pre>
 <p>
@@ -646,7 +631,7 @@ Message
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/796aa8e52d5b1ef939301014acb1df11969def99/docs/1b_Dictionaries_preparation.html" target="_blank">796aa8e</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/0a21152a465ac56ab49b95ab1754c03552fd9f61/docs/1b_Dictionaries_preparation.html" target="_blank">0a21152</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -663,7 +648,24 @@ Build site.
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/91d5fb6083c84c1f0c775656994924ccadc7f061/docs/1b_Dictionaries_preparation.html" target="_blank">91d5fb6</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/796aa8e52d5b1ef939301014acb1df11969def99/docs/1b_Dictionaries_preparation.html" target="_blank">796aa8e</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2022-09-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/91d5fb6083c84c1f0c775656994924ccadc7f061/docs/1b_Dictionaries_preparation.html" target="_blank">91d5fb6</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -680,7 +682,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/e8852f1d204cbbd8e1c60bf892ac407907bbc72e/analysis/1b_Dictionaries_preparation.Rmd" target="_blank">e8852f1</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e8852f1d204cbbd8e1c60bf892ac407907bbc72e/analysis/1b_Dictionaries_preparation.Rmd" target="_blank">e8852f1</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -700,19 +702,26 @@ wflow_publish(c("analysis/1a_Data_preprocessing.Rmd",
 </div>
 </div>
 </div>
-<p>1b. Dictionaries preparation</p>
 <p>We created three dictionaries: UNESCO dictionary, business dictionary
 and book dictionary.</p>
-<p>UNESCO (Open Research) dictionary <br> The first dictionary (UNESCO
-(Open Research) dictionary) was created by removing stop words and
-choosing 100 most frequent words in the UNESCO Recommendations on Open
-Science (<a
+<p>These are ultimately combined into the master dictionary file
+<code>dictionaries_dataset_all_words</code> and several
+subset/subsidiary files in the <code>./output/created_datasets</code>
+folder.</p>
+<div id="unesco-open-research-dictionary" class="section level3">
+<h3>UNESCO (Open Research) dictionary <br></h3>
+<p>The first dictionary (UNESCO (Open Research) dictionary) was created
+by removing stop words and choosing 100 most frequent words in the
+UNESCO Recommendations on Open Science (<a
 href="https://unesdoc.unesco.org/ark:/48223/pf0000379949.locale=en"
 class="uri">https://unesdoc.unesco.org/ark:/48223/pf0000379949.locale=en</a>).</p>
-<p>Business dictionary <br> The second one (Business dictionary) was
-created by importing business glossaries from four websites (see below).
-100 words that occurred the most frequent were used to create this
-dictionary. Websites: <a
+</div>
+<div id="business-dictionary" class="section level3">
+<h3>Business dictionary <br></h3>
+<p>The second one (Business dictionary) was created by importing
+business glossaries from four websites (see below). 100 words that
+occurred the most frequent were used to create this dictionary.
+Websites: <a
 href="https://www.theguardian.com/business/glossary-business-terms-a-z-jargon"
 class="uri">https://www.theguardian.com/business/glossary-business-terms-a-z-jargon</a>
 <a href="https://www.investopedia.com/"
@@ -727,74 +736,33 @@ the ecology book “Our Vanishing Wildlife” downloaded from the online
 library Project Gutenberg. <a
 href="https://www.goodreads.com/book/show/1302950.Our_Vanishing_Wildlife"
 class="uri">https://www.goodreads.com/book/show/1302950.Our_Vanishing_Wildlife</a></p>
+</div>
+<div id="setup-for-working-with-the-data" class="section level1">
+<h1>Setup for working with the data</h1>
 <pre class="r"><code># Libraries used for text/data analysis
+
+# Non CRAN Things
+# devtools::install_github(&quot;ropensci/gutenbergr&quot;) # avoid CRAN ISSUES
+# devtools::install_github(&quot;kbenoit/quanteda.dictionaries&quot;) 
+
 library(gutenbergr)
-library(tidyverse) </code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-✓ tibble  3.1.6     ✓ dplyr   1.0.7
-✓ tidyr   1.1.4     ✓ stringr 1.4.0
-✓ readr   2.0.2     ✓ forcats 0.5.1</code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-x dplyr::filter() masks stats::filter()
-x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(stopwords)
+library(tidyverse) 
+library(stopwords)
 library(dplyr)
 library(tidytext)
-library(quanteda)</code></pre>
-<pre><code>Package version: 3.1.0
-Unicode version: 13.0
-ICU version: 69.1</code></pre>
-<pre><code>Parallel computing: 8 of 8 threads used.</code></pre>
-<pre><code>See https://quanteda.io for tutorials and examples.</code></pre>
-<pre class="r"><code>library(quanteda.dictionaries)
+library(quanteda)
+library(quanteda.dictionaries)
 
 # Libraries used to create plots
 library(ggwordcloud)
-library(compositions)</code></pre>
-<pre><code>Welcome to compositions, a package for compositional data analysis.
-Find an intro with &quot;? compositions&quot;</code></pre>
-<pre><code>
-Attaching package: &#39;compositions&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:stats&#39;:
+library(compositions)
+library(ggtern)
+library(ggalt)     
+library(ggplot2)
+library(ggvenn)
 
-    anova, cor, cov, dist, var</code></pre>
-<pre><code>The following objects are masked from &#39;package:base&#39;:
-
-    %*%, norm, scale, scale.default</code></pre>
-<pre class="r"><code>library(ggtern)</code></pre>
-<pre><code>Registered S3 methods overwritten by &#39;ggtern&#39;:
-  method           from   
-  grid.draw.ggplot ggplot2
-  plot.ggplot      ggplot2
-  print.ggplot     ggplot2</code></pre>
-<pre><code>--
-Remember to cite, run citation(package = &#39;ggtern&#39;) for further info.
---</code></pre>
-<pre><code>
-Attaching package: &#39;ggtern&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:ggplot2&#39;:
-
-    aes, annotate, ggplot, ggplot_build, ggplot_gtable, ggplotGrob,
-    ggsave, layer_data, theme_bw, theme_classic, theme_dark,
-    theme_gray, theme_light, theme_linedraw, theme_minimal, theme_void</code></pre>
-<pre class="r"><code>library(ggalt)     </code></pre>
-<pre><code>Registered S3 methods overwritten by &#39;ggalt&#39;:
-  method                  from   
-  grid.draw.absoluteGrob  ggplot2
-  grobHeight.absoluteGrob ggplot2
-  grobWidth.absoluteGrob  ggplot2
-  grobX.absoluteGrob      ggplot2
-  grobY.absoluteGrob      ggplot2</code></pre>
-<pre class="r"><code>library(ggplot2)
-library(ggvenn)</code></pre>
-<pre><code>Loading required package: grid</code></pre>
-<pre class="r"><code>library(&quot;kableExtra&quot;) # to create a table when converting to html</code></pre>
-<pre><code>
-Attaching package: &#39;kableExtra&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:dplyr&#39;:
-
-    group_rows</code></pre>
+library(&quot;kableExtra&quot;) # to create a table when converting to html</code></pre>
+</div>
 <div id="preparing-the-dictionary-dataset" class="section level1">
 <h1>Preparing the dictionary dataset</h1>
 <pre class="r"><code># Dictionaries
@@ -816,9 +784,7 @@ bus_lang &lt;- read.csv(file = &quot;./data/dictionaries/business_lexicon_ZZ.csv
 # Importing UNESCO Recommendation on Open Science_Recommendation.txt as my UNESCO (Open Science dictionary)
 unesco_rec &lt;- data_frame(txt = read_file(&quot;./data/dictionaries/UNESCO Recommendation Open Science 2021.txt&quot;)) </code></pre>
 <pre><code>Warning: `data_frame()` was deprecated in tibble 1.1.0.
-Please use `tibble()` instead.
-This warning is displayed once every 8 hours.
-Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+ℹ Please use `tibble()` instead.</code></pre>
 <pre class="r"><code># Adding relevant columns
 unesco_rec$name &lt;- &quot;UNESCO&quot;
 unesco_rec$source_link &lt;- &quot;UNESCO Recommendation on Open Science&quot;
@@ -891,6 +857,9 @@ class="section level1">
 <h1>Saving “book” dataset to .csv file in case the book would not be
 available anymore in the future</h1>
 <pre class="r"><code># write_csv(book, &quot;./data/dictionaries/book.csv&quot;) # saving the dataset </code></pre>
+</div>
+<div id="basic-statistics-of-dictionary-data" class="section level1">
+<h1>Basic statistics of dictionary data</h1>
 <pre class="r"><code># Venn diagram to show how many unique words are shared between dictionaries
 
 dict_venn &lt;- all_dict %&gt;% 
@@ -935,7 +904,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/91d5fb6083c84c1f0c775656994924ccadc7f061/docs/figure/1b_Dictionaries_preparation.Rmd/unnamed-chunk-4-1.png" target="_blank">91d5fb6</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/91d5fb6083c84c1f0c775656994924ccadc7f061/docs/figure/1b_Dictionaries_preparation.Rmd/unnamed-chunk-4-1.png" target="_blank">91d5fb6</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -955,7 +924,8 @@ all_dict_total &lt;- all_dict %&gt;%
   select(name, dictionary, present, word) %&gt;% 
   group_by(word, dictionary) %&gt;% 
   summarize(in_dict_total = sum(present)) </code></pre>
-<pre><code>`summarise()` has grouped output by &#39;word&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;word&#39;. You can override using the
+`.groups` argument.</code></pre>
 <pre class="r"><code>all_dict_total &lt;- as.data.frame(all_dict_total)
 
 # Choosing a number of words to extract from the dictionaries
@@ -1384,8 +1354,9 @@ business_language
 </tbody>
 </table>
 </div>
-<div id="saving-the-data" class="section level1">
-<h1>Saving the data</h1>
+<div id="saving-the-total-data-freq_dict_total_all"
+class="section level1">
+<h1>Saving the total data (freq_dict_total_all)</h1>
 <pre class="r"><code># Saving the data/ It will be used in 4_Language_analysis and 5_For_and_not_for_profit
 freq_dict_total_all &lt;- freq_dict_total
 write_csv(freq_dict_total_all, &quot;./output/created_datasets/freq_dict_total_all.csv&quot;)</code></pre>
@@ -1400,7 +1371,8 @@ all_dict_total &lt;- all_dict %&gt;%
   select(name, dictionary, present, word) %&gt;% 
   group_by(word, dictionary) %&gt;% 
   summarize(in_dict_total = sum(present)) </code></pre>
-<pre><code>`summarise()` has grouped output by &#39;word&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;word&#39;. You can override using the
+`.groups` argument.</code></pre>
 <pre class="r"><code>all_dict_total &lt;- as.data.frame(all_dict_total)
 
 freq_dict_table_all &lt;- all_dict_total %&gt;% 
@@ -153824,6 +153796,7 @@ dictionaries_added &lt;- dictionaries_added %&gt;%
 dictionaries &lt;- dictionaries_added
 
 # Saving the dataset with all words in the dictionary (it will be used in 4_Language_analysis and 5_For_and_not_for_profit)
+
 dictionaries_all &lt;- dictionaries %&gt;% 
     select(-rank_BUS, -rank_UNESCO, -rank_book)
 write_csv(dictionaries_all, &quot;./output/created_datasets/freq_dict_total_all.csv&quot;)
@@ -153858,8 +153831,8 @@ head(dictionaries_100, 3)</code></pre>
 <pre class="r"><code>dictionaries_100 &lt;- dictionaries_100 %&gt;% 
   select(-rank_BUS, -rank_UNESCO, -rank_book)</code></pre>
 </div>
-<div id="saving-the-data-1" class="section level1">
-<h1>Saving the data</h1>
+<div id="saving-freq_dict_total_100-data" class="section level1">
+<h1>Saving freq_dict_total_100 data</h1>
 <pre class="r"><code># Saving the data/ It will be used in 4_Language_analysis and 5_For_and_not_for_profit
 freq_dict_total_100 &lt;- dictionaries_100
 write_csv(freq_dict_total_100, &quot;./output/created_datasets/freq_dict_total_100.csv&quot;)</code></pre>
@@ -153867,13 +153840,13 @@ write_csv(freq_dict_total_100, &quot;./output/created_datasets/freq_dict_total_1
 <div id="session-information" class="section level1">
 <h1>Session information</h1>
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.3 (2020-10-10)
+<pre><code>R version 4.2.1 (2022-06-23)
 Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur 10.16
+Running under: macOS Big Sur ... 10.16
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
 
 locale:
 [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
@@ -153883,54 +153856,53 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] kableExtra_1.3.4          ggvenn_0.1.9             
- [3] ggalt_0.4.0               ggtern_3.3.5             
- [5] compositions_2.0-2        ggwordcloud_0.5.0        
- [7] quanteda.dictionaries_0.3 quanteda_3.1.0           
- [9] tidytext_0.3.2            stopwords_2.3            
-[11] forcats_0.5.1             stringr_1.4.0            
-[13] dplyr_1.0.7               purrr_0.3.4              
-[15] readr_2.0.2               tidyr_1.1.4              
-[17] tibble_3.1.6              ggplot2_3.3.5            
-[19] tidyverse_1.3.1           gutenbergr_0.2.1         
-[21] workflowr_1.7.0          
+ [1] kableExtra_1.3.4           ggvenn_0.1.9              
+ [3] ggalt_0.4.0                ggtern_3.3.5              
+ [5] compositions_2.0-4         ggwordcloud_0.5.0         
+ [7] quanteda.dictionaries_0.31 quanteda_3.2.3            
+ [9] tidytext_0.3.4             stopwords_2.3             
+[11] forcats_0.5.2              stringr_1.4.1             
+[13] dplyr_1.0.10               purrr_0.3.5               
+[15] readr_2.1.3                tidyr_1.2.1               
+[17] tibble_3.1.8               ggplot2_3.3.6             
+[19] tidyverse_1.3.2            gutenbergr_0.2.1          
 
 loaded via a namespace (and not attached):
-  [1] colorspace_2.0-2   ellipsis_0.3.2     rprojroot_2.0.2   
-  [4] fs_1.5.0           rstudioapi_0.13    farver_2.1.0      
-  [7] SnowballC_0.7.0    bit64_4.0.5        fansi_0.5.0       
- [10] lubridate_1.7.10   xml2_1.3.2         extrafont_0.17    
- [13] robustbase_0.93-9  knitr_1.36         jsonlite_1.7.2    
- [16] broom_0.7.9        Rttf2pt1_1.3.9     dbplyr_2.1.1      
- [19] png_0.1-7          latex2exp_0.5.0    compiler_4.0.3    
- [22] httr_1.4.2         backports_1.2.1    assertthat_0.2.1  
- [25] Matrix_1.3-4       fastmap_1.1.0      cli_3.1.0         
- [28] later_1.3.0        htmltools_0.5.2    tools_4.0.3       
- [31] gtable_0.3.0       glue_1.5.0         maps_3.4.0        
- [34] fastmatch_1.1-3    Rcpp_1.0.7         lexicon_1.2.1     
- [37] cellranger_1.1.0   jquerylib_0.1.4    vctrs_0.3.8       
- [40] svglite_2.0.0      extrafontdb_1.0    tensorA_0.36.2    
- [43] xfun_0.31          ps_1.6.0           proto_1.0.0       
- [46] rvest_1.0.1        lifecycle_1.0.1    DEoptimR_1.0-10   
- [49] getPass_0.2-2      MASS_7.3-54        scales_1.1.1      
- [52] vroom_1.5.5        hms_1.1.1          promises_1.2.0.1  
- [55] parallel_4.0.3     proj4_1.0-10.1     RColorBrewer_1.1-2
- [58] yaml_2.2.1         gridExtra_2.3      sass_0.4.0        
- [61] stringi_1.7.5      highr_0.9          tokenizers_0.2.1  
- [64] rlang_0.4.12       pkgconfig_2.0.3    systemfonts_1.0.2 
- [67] evaluate_0.14      lattice_0.20-45    labeling_0.4.2    
- [70] bit_4.0.4          processx_3.5.2     tidyselect_1.1.1  
- [73] plyr_1.8.6         magrittr_2.0.3     R6_2.5.1          
- [76] generics_0.1.1     DBI_1.1.1          pillar_1.6.4      
- [79] haven_2.4.3        whisker_0.4        withr_2.4.2       
- [82] ash_1.0-15         bayesm_3.1-4       janeaustenr_0.1.5 
- [85] modelr_0.1.8       crayon_1.4.2       KernSmooth_2.23-20
- [88] utf8_1.2.2         tzdb_0.1.2         rmarkdown_2.11    
- [91] syuzhet_1.0.6      readxl_1.3.1       data.table_1.14.2 
- [94] callr_3.7.0        git2r_0.29.0       reprex_2.0.1      
- [97] digest_0.6.28      webshot_0.5.2      httpuv_1.6.3      
-[100] RcppParallel_5.1.4 munsell_0.5.0      viridisLite_0.4.0 
-[103] bslib_0.3.0       </code></pre>
+  [1] googledrive_2.0.0   colorspace_2.0-3    ellipsis_0.3.2     
+  [4] rprojroot_2.0.3     fs_1.5.2            rstudioapi_0.14    
+  [7] farver_2.1.1        SnowballC_0.7.0     bit64_4.0.5        
+ [10] fansi_1.0.3         lubridate_1.8.0     xml2_1.3.3         
+ [13] extrafont_0.18      cachem_1.0.6        robustbase_0.95-0  
+ [16] knitr_1.40          jsonlite_1.8.1      workflowr_1.7.0    
+ [19] broom_1.0.1         Rttf2pt1_1.3.11     dbplyr_2.2.1       
+ [22] png_0.1-7           latex2exp_0.9.5     compiler_4.2.1     
+ [25] httr_1.4.4          backports_1.4.1     assertthat_0.2.1   
+ [28] Matrix_1.4-1        fastmap_1.1.0       gargle_1.2.1       
+ [31] cli_3.4.1           later_1.3.0         htmltools_0.5.3    
+ [34] tools_4.2.1         gtable_0.3.1        glue_1.6.2         
+ [37] maps_3.4.1          fastmatch_1.1-3     Rcpp_1.0.9         
+ [40] lexicon_1.2.1       cellranger_1.1.0    jquerylib_0.1.4    
+ [43] vctrs_0.5.0         svglite_2.1.0       extrafontdb_1.0    
+ [46] tensorA_0.36.2      xfun_0.33           proto_1.0.0        
+ [49] rvest_1.0.3         lifecycle_1.0.3     googlesheets4_1.0.1
+ [52] DEoptimR_1.0-11     MASS_7.3-57         scales_1.2.1       
+ [55] vroom_1.6.0         hms_1.1.2           promises_1.2.0.1   
+ [58] parallel_4.2.1      proj4_1.0-11        RColorBrewer_1.1-3 
+ [61] yaml_2.3.6          gridExtra_2.3       sass_0.4.2         
+ [64] stringi_1.7.8       highr_0.9           tokenizers_0.2.3   
+ [67] rlang_1.0.6         pkgconfig_2.0.3     systemfonts_1.0.4  
+ [70] evaluate_0.16       lattice_0.20-45     labeling_0.4.2     
+ [73] bit_4.0.4           tidyselect_1.2.0    plyr_1.8.7         
+ [76] magrittr_2.0.3      R6_2.5.1            generics_0.1.3     
+ [79] DBI_1.1.3           pillar_1.8.1        haven_2.5.1        
+ [82] whisker_0.4         withr_2.5.0         ash_1.0-15         
+ [85] bayesm_3.1-4        janeaustenr_1.0.0   modelr_0.1.9       
+ [88] crayon_1.5.2        KernSmooth_2.23-20  utf8_1.2.2         
+ [91] tzdb_0.3.0          rmarkdown_2.16      syuzhet_1.0.6      
+ [94] readxl_1.4.1        data.table_1.14.2   git2r_0.30.1       
+ [97] webshot_0.5.4       reprex_2.0.2        digest_0.6.29      
+[100] httpuv_1.6.6        RcppParallel_5.1.5  munsell_0.5.0      
+[103] viridisLite_0.4.1   bslib_0.4.0        </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -153940,13 +153912,13 @@ Session information
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.3 (2020-10-10)
+<pre><code>R version 4.2.1 (2022-06-23)
 Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur 10.16
+Running under: macOS Big Sur ... 10.16
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
 
 locale:
 [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
@@ -153956,54 +153928,53 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] kableExtra_1.3.4          ggvenn_0.1.9             
- [3] ggalt_0.4.0               ggtern_3.3.5             
- [5] compositions_2.0-2        ggwordcloud_0.5.0        
- [7] quanteda.dictionaries_0.3 quanteda_3.1.0           
- [9] tidytext_0.3.2            stopwords_2.3            
-[11] forcats_0.5.1             stringr_1.4.0            
-[13] dplyr_1.0.7               purrr_0.3.4              
-[15] readr_2.0.2               tidyr_1.1.4              
-[17] tibble_3.1.6              ggplot2_3.3.5            
-[19] tidyverse_1.3.1           gutenbergr_0.2.1         
-[21] workflowr_1.7.0          
+ [1] kableExtra_1.3.4           ggvenn_0.1.9              
+ [3] ggalt_0.4.0                ggtern_3.3.5              
+ [5] compositions_2.0-4         ggwordcloud_0.5.0         
+ [7] quanteda.dictionaries_0.31 quanteda_3.2.3            
+ [9] tidytext_0.3.4             stopwords_2.3             
+[11] forcats_0.5.2              stringr_1.4.1             
+[13] dplyr_1.0.10               purrr_0.3.5               
+[15] readr_2.1.3                tidyr_1.2.1               
+[17] tibble_3.1.8               ggplot2_3.3.6             
+[19] tidyverse_1.3.2            gutenbergr_0.2.1          
 
 loaded via a namespace (and not attached):
-  [1] colorspace_2.0-2   ellipsis_0.3.2     rprojroot_2.0.2   
-  [4] fs_1.5.0           rstudioapi_0.13    farver_2.1.0      
-  [7] SnowballC_0.7.0    bit64_4.0.5        fansi_0.5.0       
- [10] lubridate_1.7.10   xml2_1.3.2         extrafont_0.17    
- [13] robustbase_0.93-9  knitr_1.36         jsonlite_1.7.2    
- [16] broom_0.7.9        Rttf2pt1_1.3.9     dbplyr_2.1.1      
- [19] png_0.1-7          latex2exp_0.5.0    compiler_4.0.3    
- [22] httr_1.4.2         backports_1.2.1    assertthat_0.2.1  
- [25] Matrix_1.3-4       fastmap_1.1.0      cli_3.1.0         
- [28] later_1.3.0        htmltools_0.5.2    tools_4.0.3       
- [31] gtable_0.3.0       glue_1.5.0         maps_3.4.0        
- [34] fastmatch_1.1-3    Rcpp_1.0.7         lexicon_1.2.1     
- [37] cellranger_1.1.0   jquerylib_0.1.4    vctrs_0.3.8       
- [40] svglite_2.0.0      extrafontdb_1.0    tensorA_0.36.2    
- [43] xfun_0.31          ps_1.6.0           proto_1.0.0       
- [46] rvest_1.0.1        lifecycle_1.0.1    DEoptimR_1.0-10   
- [49] getPass_0.2-2      MASS_7.3-54        scales_1.1.1      
- [52] vroom_1.5.5        hms_1.1.1          promises_1.2.0.1  
- [55] parallel_4.0.3     proj4_1.0-10.1     RColorBrewer_1.1-2
- [58] yaml_2.2.1         gridExtra_2.3      sass_0.4.0        
- [61] stringi_1.7.5      highr_0.9          tokenizers_0.2.1  
- [64] rlang_0.4.12       pkgconfig_2.0.3    systemfonts_1.0.2 
- [67] evaluate_0.14      lattice_0.20-45    labeling_0.4.2    
- [70] bit_4.0.4          processx_3.5.2     tidyselect_1.1.1  
- [73] plyr_1.8.6         magrittr_2.0.3     R6_2.5.1          
- [76] generics_0.1.1     DBI_1.1.1          pillar_1.6.4      
- [79] haven_2.4.3        whisker_0.4        withr_2.4.2       
- [82] ash_1.0-15         bayesm_3.1-4       janeaustenr_0.1.5 
- [85] modelr_0.1.8       crayon_1.4.2       KernSmooth_2.23-20
- [88] utf8_1.2.2         tzdb_0.1.2         rmarkdown_2.11    
- [91] syuzhet_1.0.6      readxl_1.3.1       data.table_1.14.2 
- [94] callr_3.7.0        git2r_0.29.0       reprex_2.0.1      
- [97] digest_0.6.28      webshot_0.5.2      httpuv_1.6.3      
-[100] RcppParallel_5.1.4 munsell_0.5.0      viridisLite_0.4.0 
-[103] bslib_0.3.0       </code></pre>
+  [1] googledrive_2.0.0   colorspace_2.0-3    ellipsis_0.3.2     
+  [4] rprojroot_2.0.3     fs_1.5.2            rstudioapi_0.14    
+  [7] farver_2.1.1        SnowballC_0.7.0     bit64_4.0.5        
+ [10] fansi_1.0.3         lubridate_1.8.0     xml2_1.3.3         
+ [13] extrafont_0.18      cachem_1.0.6        robustbase_0.95-0  
+ [16] knitr_1.40          jsonlite_1.8.1      workflowr_1.7.0    
+ [19] broom_1.0.1         Rttf2pt1_1.3.11     dbplyr_2.2.1       
+ [22] png_0.1-7           latex2exp_0.9.5     compiler_4.2.1     
+ [25] httr_1.4.4          backports_1.4.1     assertthat_0.2.1   
+ [28] Matrix_1.4-1        fastmap_1.1.0       gargle_1.2.1       
+ [31] cli_3.4.1           later_1.3.0         htmltools_0.5.3    
+ [34] tools_4.2.1         gtable_0.3.1        glue_1.6.2         
+ [37] maps_3.4.1          fastmatch_1.1-3     Rcpp_1.0.9         
+ [40] lexicon_1.2.1       cellranger_1.1.0    jquerylib_0.1.4    
+ [43] vctrs_0.5.0         svglite_2.1.0       extrafontdb_1.0    
+ [46] tensorA_0.36.2      xfun_0.33           proto_1.0.0        
+ [49] rvest_1.0.3         lifecycle_1.0.3     googlesheets4_1.0.1
+ [52] DEoptimR_1.0-11     MASS_7.3-57         scales_1.2.1       
+ [55] vroom_1.6.0         hms_1.1.2           promises_1.2.0.1   
+ [58] parallel_4.2.1      proj4_1.0-11        RColorBrewer_1.1-3 
+ [61] yaml_2.3.6          gridExtra_2.3       sass_0.4.2         
+ [64] stringi_1.7.8       highr_0.9           tokenizers_0.2.3   
+ [67] rlang_1.0.6         pkgconfig_2.0.3     systemfonts_1.0.4  
+ [70] evaluate_0.16       lattice_0.20-45     labeling_0.4.2     
+ [73] bit_4.0.4           tidyselect_1.2.0    plyr_1.8.7         
+ [76] magrittr_2.0.3      R6_2.5.1            generics_0.1.3     
+ [79] DBI_1.1.3           pillar_1.8.1        haven_2.5.1        
+ [82] whisker_0.4         withr_2.5.0         ash_1.0-15         
+ [85] bayesm_3.1-4        janeaustenr_1.0.0   modelr_0.1.9       
+ [88] crayon_1.5.2        KernSmooth_2.23-20  utf8_1.2.2         
+ [91] tzdb_0.3.0          rmarkdown_2.16      syuzhet_1.0.6      
+ [94] readxl_1.4.1        data.table_1.14.2   git2r_0.30.1       
+ [97] webshot_0.5.4       reprex_2.0.2        digest_0.6.29      
+[100] httpuv_1.6.6        RcppParallel_5.1.5  munsell_0.5.0      
+[103] viridisLite_0.4.1   bslib_0.4.0        </code></pre>
 </div>
 </div>
 

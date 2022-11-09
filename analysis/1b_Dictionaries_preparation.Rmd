@@ -1,20 +1,20 @@
 ---
-title: "1b_Dictionaries_preparation"
-author: "zuzannazagrodzka"
+title: "Dictionaries_preparation"
+author: "zuzannazagrodzka, APB, TFJ"
 date: '2022-05-13'
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
 ---
 
-1b. Dictionaries preparation
-
 We created three dictionaries: UNESCO dictionary, business dictionary and book dictionary.
 
-UNESCO (Open Research) dictionary <br>
+These are ultimately combined into the master dictionary file `dictionaries_dataset_all_words` and several subset/subsidiary files in the `./output/created_datasets` folder.
+
+### UNESCO (Open Research) dictionary <br>
 The first dictionary (UNESCO (Open Research) dictionary) was created by removing stop words and choosing 100 most frequent words in the UNESCO Recommendations on Open Science (https://unesdoc.unesco.org/ark:/48223/pf0000379949.locale=en). 
 
-Business dictionary <br>
+### Business dictionary <br>
 The second one (Business dictionary) was created by importing business glossaries from four websites (see below). 100 words that occurred the most frequent were used to create this dictionary. 
 Websites:
 https://www.theguardian.com/business/glossary-business-terms-a-z-jargon
@@ -33,9 +33,15 @@ rm(list=ls())
 
 ```
 
+# Setup for working with the data
 
-```{r Libraries}
+```{r Libraries, message = FALSE}
 # Libraries used for text/data analysis
+
+# Non CRAN Things
+# devtools::install_github("ropensci/gutenbergr") # avoid CRAN ISSUES
+# devtools::install_github("kbenoit/quanteda.dictionaries") 
+
 library(gutenbergr)
 library(tidyverse) 
 library(stopwords)
@@ -147,9 +153,12 @@ write_excel_csv(all_dict, "./output/created_datasets/dictionaries_dataset_all_wo
 
 
 # Saving "book" dataset to .csv file in case the book would not be available anymore in the future
+
 ``` {r}
 # write_csv(book, "./data/dictionaries/book.csv") # saving the dataset 
 ```
+
+# Basic statistics of dictionary data
 
 ```{r}
 # Venn diagram to show how many unique words are shared between dictionaries
@@ -227,8 +236,8 @@ freq_dict_table_business %>%
   kable_classic("hover", full_width = F)
 ``` 
 
+# Saving the total data (freq_dict_total_all)
 
-# Saving the data
 ``` {r}
 # Saving the data/ It will be used in 4_Language_analysis and 5_For_and_not_for_profit
 freq_dict_total_all <- freq_dict_total
@@ -323,6 +332,7 @@ dictionaries_added <- dictionaries_added %>%
 dictionaries <- dictionaries_added
 
 # Saving the dataset with all words in the dictionary (it will be used in 4_Language_analysis and 5_For_and_not_for_profit)
+
 dictionaries_all <- dictionaries %>% 
     select(-rank_BUS, -rank_UNESCO, -rank_book)
 write_csv(dictionaries_all, "./output/created_datasets/freq_dict_total_all.csv")
@@ -352,15 +362,13 @@ dictionaries_100 <- dictionaries_100 %>%
 
 ``` 
 
+# Saving freq_dict_total_100 data
 
-# Saving the data
 ``` {r}
 # Saving the data/ It will be used in 4_Language_analysis and 5_For_and_not_for_profit
 freq_dict_total_100 <- dictionaries_100
 write_csv(freq_dict_total_100, "./output/created_datasets/freq_dict_total_100.csv")
 ```
-
-
 
 
 # Session information

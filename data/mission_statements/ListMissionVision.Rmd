@@ -1,0 +1,166 @@
+---
+title: "List of Mission and Vision Statement Sources"
+author: "ZZ, TFJ, APB"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The files are available in the `./data/mission_statements` folder.
+
+###./advocates:
+
+- Africa Open Science and Hardware_About.txt
+- Amelica_About.txt
+- Bioline International_About.txt
+- COPDESS_About.txt
+- Center for Open Science_Mission.txt
+- CoData_About.txt
+- Coko_About.txt
+- DOAJ_About.txt
+- DataCite_About.txt
+- FAIRsharing_About.txt
+- FORCE11_About.txt
+- FOSTER_About.txt
+- Free our knowledge_About.txt
+- Gitlab_About.txt
+- Jisc_About.txt
+- Open Access Australasia_About.txt
+- Peer Community In_About.txt
+- RDA_About.txt
+- ROpenSci_About.txt
+- Reference Center for Environmental Information_About.txt
+- Research Data Canada_About.txt
+- Research4life_About.txt
+- SPARC_About.txt
+- coalitionS_About.txt
+
+###./funders:
+
+- Alexander von Humboldt Foundation_About.txt
+- Australian Research Council_About.txt
+- CNPq_About.txt
+- CONICYT_About.txt
+- CSIR South Africa_About.txt
+- Chinese Academy of Sciences_About.txt
+- Conacyt_About.txt
+- Consortium of African Funds for the Environment_About.txt
+- Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior_About.txt
+- Deutsche Forschungsgemeinschaft_About.txt
+- ERC_About.txt
+- FORMAS_About.txt
+- French National Centre for Scientific Research_About.txt
+- Helmholtz-Gemeinschaft_About.txt
+- JST_About.txt
+- MOE China_About.txt
+- Max Planck Society_About.txt
+- NERC_About.txt
+- NRC Egypt_About.txt
+- NRF South Africa_About.txt
+- NSERC_About.txt
+- National Natural Science Foundation_About.txt
+- National Research Council Italy_About.txt
+- National Science Foundation_About.txt
+- Russian Academy of Science_About.txt
+- Sea World Research and Rescue Foundation_About.txt
+- Spanish National Research Council_About.txt
+- The Daimler and Benz Foundation_About.txt
+- The French National Research Agency_About.txt
+- Wellcome_About.txt
+
+###./journals_OA:
+
+- Arctic, Antarctic, and Alpine Research_Aims.txt
+- Biogeosciences_Aims.txt
+- Conservation Letters_Aims.txt
+- Diversity and Distributions_Aims.txt
+- Ecology and Evolution_Aims.txt
+- Ecology and Society_Aims.txt
+- Evolution Letters_Aims.txt
+- Evolutionary Applications_Aims.txt
+- Frontiers in Ecology and Evolution_Aims.txt
+- Neobiota_About.txt
+- PeerJJournal_Aims.txt
+- Plos Biology_Aims.txt
+- Remote Sensing in Ecology and Conservation_Aims.txt
+- eLifeJournal_Aims.txt
+
+###./journals_nonOA:
+
+- American Naturalist_Aims.txt
+- Annual Review of Ecology Evolution and Systematics_Aims.txt
+- BioSciences_About.txt
+- Biological Conservation_Aims.txt
+- Conservation Biology_Aims.txt
+- Ecological Applications_Aims.txt
+- Ecology Letters_Aims.txt
+- Ecology_Aims.txt
+- Evolution_Aims.txt
+- Frontiers in Ecology and the Environment_Aims.txt
+- Global Change Biology_Aims.txt
+- Journal of Applied Ecology_Aims.txt
+- Nature Ecology and Evolution_Aims.txt
+- Philosophical Transactions of the Royal Society B_Aims.txt
+- Proceedings of the Royal Society B Biological Sciences_Aims.txt
+- Trends in Ecology & Evolution_Aims.txt
+
+###./publishers_Profit:
+
+- Cell Press_About.txt		
+- Pensoft_About.txt
+- Elsevier_About.txt		
+- Springer Nature_About.txt
+- PLOS_About.txt			
+- Wiley_About.txt
+- PeerJ_About.txt
+
+###./publishers_nonProfit:
+
+- AIBS_About.txt
+- Annual Reviews_About.txt
+- BioOne_About.txt
+- Frontiers_About.txt
+- Resilience Alliance_About.txt
+- The Royal Society Publishing_About.txt
+- The University of Chicago Press_About.txt
+- eLife_About.txt
+
+###./repositories:
+
+- Australian Antarctic Data Centre_About.txt
+- BCO-DMO_About.txt
+- DNA Databank of Japan_About.txt
+- Dryad_About.txt
+- EcoEvoRxiv_About.txt
+- European Bioinformatics Institute_About.txt
+- Figshare_About.txt
+- GBIF_About.txt
+- Harvard Dataverse_About.txt
+- KNB_About.txt
+- Marine Data Archive_About.txt
+- NCBI_About.txt
+- OSF_About.txt
+- TERN_About.txt
+- World Data Center for Climate_About.txt
+- Zenodo_About.txt
+- bioRxiv_About.txt
+- nodo_Principles.doc
+
+###./societies:
+
+- American Society of Naturalists_About.txt
+- Australasian Evolution Society_About.txt
+- British Ecological Society_About.txt
+- Ecological Society of America_About.txt
+- Ecological Society of Australia_About.txt
+- European Society for Evolutionary Biology_About.txt
+- National Academy of Sciences_About.txt
+- Royal Society Te Aparangi_About.txt
+- SORTEE_About.txt
+- Society for the Study of Evolution_About.txt
+- The Royal Society_About.txt
+- The Society for Conservation Biology_About.txt
+- The Zoological Society of London_About.txt
