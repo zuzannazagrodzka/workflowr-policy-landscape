@@ -12,43 +12,68 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-1a. Data preprocessing
+# Mission and aim statement overview
 
-Converting mission and aim statements documents into a table to use it in the further analysis.
+###  General information 
 
-# General information 
-We collected in total 129 mission and aim statements of stakeholders involved in the research landscape in ecology and evolutionary biology. We identified six groups: advocates (24 documents), funders (30), journals (non Open Access = 16, journals Open Access = 14), publishers (for-profit = 7, not-for-profit = 8), repositories (17) and learned societies (13). 
+We collected in total 129 mission and aim statements among six stakeholder groups involved in the research landscape in ecology and evolutionary biology. 
 
-# Identifying stakeholders
-The stakeholders were identified in advance in various ways. 
+- advocates (24 documents)
+- funders (30 documents)
+- journals (non Open Access = 16 documents, journals Open Access = 14 documents)
+- publishers (for-profit = 7 documents, not-for-profit = 8 documents)
+- repositories (17 documents)
+- learned societies (13 documents). 
 
-Journals <br>
-We used Scimago Journal & Country Rank website (https://www.scimagojr.com/) to search for the journals with the highest journal's impact value in 2020 (subject areas such as: Environmental Science, Agricultural and Biological Sciences, Biochemistry, Genetics and Molecular Biology) that publish articles relevant for fields: ecology and evolutionary biology. We aimed to identified ~ 15 journals for both categories: only open access (OA) journals and non-open access (non-OA) journals. We included some journals that were not on the list but were identified as relevant journals by others.
-We made sure that we had journals which are owned by identified by us learned societies. 
+### Stakeholder characteristic and identities
 
-Publishers <br>
-We identified publishers based on the list of our journals.
+#### Journals
 
-Funders <br>
-We looked what funders were mentioned in "Acknowledgments" sections of some scientific articles published in 2019 and 2020 in high impact factor journals (OA and non-OA). We focused on finding funders from all continents with a limit to max. 3 per country (only when appeared frequently in Acknowledgments). Moreover, we contacted some colleges for information on the funding source in their country. 
+We used Scimago Journal & Country Rank website (https://www.scimagojr.com/) to search for the journals with the highest journal's impact value in 2020 (subject areas such as: Environmental Science, Agricultural and Biological Sciences, Biochemistry, Genetics and Molecular Biology) that publish articles relevant for fields: ecology and evolutionary biology. 
 
-Repositories <br>
-We looked at the Data availability statements of the articles published in 2019 and 2020 in high impact factor journals (OA and non-OA) and collected information on where the data and code were archived. Our list includes generalist repositories and subject specific repositories. 
+We identified ~ 15 journals for both open access (OA) journals and non-open access (non-OA) journals. We included some journals that were not on the list but were identified as relevant journals by others.
 
-Societies <br>
+We made sure that we had journals which are owned by learned societies. 
+
+#### Publishers
+
+We identified publishers as the owner or production unit of the journals.
+
+#### Funders
+
+We looked what funders were mentioned in "Acknowledgments" sections of some scientific articles published in 2019 and 2020 in high impact factor journals (OA and non-OA). 
+
+We focused on finding funders from all continents with a limit to maximum 3 per country (only when appeared frequently in Acknowledgments). Moreover, we contacted some colleges/universities for information on the funding source in their country. 
+
+#### Repositories
+
+We looked at the Data availability statements of the articles published in 2019 and 2020 in high impact factor journals (OA and non-OA) and collected information on where the data and code were archived. 
+
+Our list includes generalist repositories and subject specific repositories. 
+
+#### Societies
+
 We identified societies based on the journals they own and by word-of-mouth. 
 
-Advocates <br>
+#### Advocates
+
 Advocated is a group of organisations that actively support or promote good quality and accessible research (open research).
-<br>
-We have considered different aspects of open research (open access, open data, open methods) when looking for the organisations. They might support research in different than ecology and evolutionary biology discipline but should be relevant for these two as well. 
+
+We considered different aspects of open research (open access, open data, open methods) when looking for the organisations. They might support research in different than ecology and evolutionary biology discipline but should be relevant for these two as well. 
 
 # Aims and missions statements 
-In August 2021 we collected the Aims and Mission Statements on the official website of each of the stakeholder. We did not contact anyone associated with the stakeholders to request more information. If there was no separate section but the aims or missions were described in "About" section, we chose it instead. The text from these websites were manually copied and separately saved for each of the stakeholders as .txt. The first line in the documents is a source website. 
+
+In August 2021 we collected the Aims and Mission Statements on the official website of each of the stakeholder. 
+
+We did not contact anyone associated with the stakeholders to request more information. If there was no separate section but the aims or missions were described in "About" section, we chose used this. 
+
+The text from these websites were manually copied and separately saved for each of the stakeholders ([List of the organisations](./data/ListMissionVision.html). 
+
+The first line in the documents is a source website. 
 
 # Documents preprocessing
-To be able to analyse the content of the statements we preprocessed the documents 
-to create one dataset with one word per row and information about the word source and position in the text/sentence. Some irrelevant words were removed and each of the word was lemmatizationed or stemminged. We followed a cleaning process suggested in Maier et al. 2018 "Applying LDA Topic Modelling in Communication Research: Toward a Valid and Reliable Methodology".
+
+To be able to analyse the content of the statements we preprocessed the documents to create one dataset with one word per row and information about the word source and position in the text/sentence. Some irrelevant words were removed and each of the word was lemmatizationed or stemminged. We followed a cleaning process suggested in Maier et al. 2018 "Applying LDA Topic Modelling in Communication Research: Toward a Valid and Reliable Methodology".
 
 We followed these steps:
 
@@ -77,7 +102,7 @@ rm(list=ls())
 
 # Libraries
 
-```{r Libraries, echo=FALSE}
+```{r Libraries, echo=FALSE, message = FALSE}
 library(tidyverse)
 library(purrr)
 library(tidyr)
