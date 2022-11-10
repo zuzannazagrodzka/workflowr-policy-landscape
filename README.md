@@ -1,4 +1,4 @@
-# myproject
+# The Policy Lanscape
 
 A [workflowr][] project.
 

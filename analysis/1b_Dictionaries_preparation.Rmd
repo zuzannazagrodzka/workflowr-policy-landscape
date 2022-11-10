@@ -7,24 +7,38 @@ editor_options:
   chunk_output_type: console
 ---
 
-We created three dictionaries: UNESCO dictionary, business dictionary and book dictionary.
+We created three dictionaries to support our analyses: 
+- A UNESCO dictionary as a master reference for best practice
+- A business dictionary to test hypotheses about stakeholder values
+- A book dictionary, as a control reference for 'random' language found in ecology and evolutionary biology text
 
-These are ultimately combined into the master dictionary file `dictionaries_dataset_all_words` and several subset/subsidiary files in the `./output/created_datasets` folder.
+We created several subsets of these, typically around the top 100 words.
+The code below documents the import, manipulation and ulimate creation of the word-sets we've use.
 
-### UNESCO (Open Research) dictionary <br>
-The first dictionary (UNESCO (Open Research) dictionary) was created by removing stop words and choosing 100 most frequent words in the UNESCO Recommendations on Open Science (https://unesdoc.unesco.org/ark:/48223/pf0000379949.locale=en). 
+### UNESCO (Open Research) dictionary
 
-### Business dictionary <br>
-The second one (Business dictionary) was created by importing business glossaries from four websites (see below). 100 words that occurred the most frequent were used to create this dictionary. 
-Websites:
-https://www.theguardian.com/business/glossary-business-terms-a-z-jargon
-https://www.investopedia.com/ 
-https://www.economist.com/economics-a-to-z
-https://www.workspace.co.uk/content-hub/business-insight/glossary-of-business-terminology
+The UNESCO (Open Research) dictionary was created by removing stop words and choosing 100 most frequent words in the UNESCO Recommendations on Open Science (https://unesdoc.unesco.org/ark:/48223/pf0000379949.locale=en). The text of this document is found in `UNESCO Recommendation Open Science 2021.txt`.
 
-Control dictionary <br>
-The third one (Control dictionary) was created by removing stop words and identifying 100 most common words in the ecology book "Our Vanishing Wildlife" downloaded from the online library Project Gutenberg.
+### Business dictionary
+
+The Business dictionary was created by creating the `business_lexicon_ZZ.csv` file from four websites. 
+
+Websites
+
+- https://www.theguardian.com/business/glossary-business-terms-a-z-jargon
+- https://www.investopedia.com/ 
+- https://www.economist.com/economics-a-to-z
+- https://www.workspace.co.uk/content-hub/business-insight/glossary-of-business-terminology
+
+We selected the top 100 most frequent words from among these sources to create the dictionary.
+
+### Control dictionary
+
+The Control dictionary was created by removing stop words and identifying 100 most common words in the ecology book "Our Vanishing Wildlife" downloaded from the online library Project Gutenberg.  The code to access this is below.
+
 https://www.goodreads.com/book/show/1302950.Our_Vanishing_Wildlife
+
+_Note that all `write_csv` code is commented out as all files are available in the `output` folder._
 
 
 ```{r setup, include=FALSE}
@@ -33,7 +47,7 @@ rm(list=ls())
 
 ```
 
-# Setup for working with the data
+# Setup (packages needed) for working with the data
 
 ```{r Libraries, message = FALSE}
 # Libraries used for text/data analysis
@@ -62,7 +76,7 @@ library("kableExtra") # to create a table when converting to html
 
 ```
 
-# Preparing the dictionary dataset
+# Preparing and cleaning the dictionaries
 
 ``` {r}
 # Dictionaries
@@ -110,8 +124,6 @@ tw_out <- tokens_replace(token_words,
                replacement = lexicon::hash_lemmas$lemma)
 tw_out_df<- as.data.frame(unlist(tw_out))
 
-
-
 all_dict <- cbind(all_dict, tw_out_df$"unlist(tw_out)")
 colnames(all_dict)[which(names(all_dict) == "word")] <- "orig_word"
 colnames(all_dict)[which(names(all_dict) == "tw_out_df$\"unlist(tw_out)\"")] <- "word_mix"
@@ -148,17 +160,18 @@ all_dict$word <-gsub("_","",as.character(all_dict$word))
 # removing numbers again after lemmatization
 all_dict$word <- gsub("[0-9]+","",all_dict$word)
 
-write_excel_csv(all_dict, "./output/created_datasets/dictionaries_dataset_all_words.csv") 
-```
-
+# write_excel_csv(all_dict, "./output/created_datasets/dictionaries_dataset_all_words.csv") 
 
 # Saving "book" dataset to .csv file in case the book would not be available anymore in the future
 
-``` {r}
-# write_csv(book, "./data/dictionaries/book.csv") # saving the dataset 
+# write_csv(book, "./data/dictionaries/book.csv") # saving the dataset
+
 ```
 
-# Basic statistics of dictionary data
+# Calculate some basic statistics of the dictionary data
+
+- Unique and shared words
+- Top 10 words with tables
 
 ```{r}
 # Venn diagram to show how many unique words are shared between dictionaries
@@ -234,18 +247,15 @@ freq_dict_table_business <- freq_dict_table %>%
 freq_dict_table_business %>% 
   kbl(caption = "Ten most common words in the business dictionary") %>% 
   kable_classic("hover", full_width = F)
+
+
+# Saving the data/ It will be used in 4_Language_analysis and 5_For_and_not_for_profit
+
+# freq_dict_total_all <- freq_dict_total
+# write_csv(freq_dict_total_all, "./output/created_datasets/freq_dict_total_all.csv")
 ``` 
 
-# Saving the total data (freq_dict_total_all)
-
-``` {r}
-# Saving the data/ It will be used in 4_Language_analysis and 5_For_and_not_for_profit
-freq_dict_total_all <- freq_dict_total
-write_csv(freq_dict_total_all, "./output/created_datasets/freq_dict_total_all.csv")
-```
-
-
-# Creating dictionaries (all words, 100 unique words)
+# Generating top 100 unique words
 
 ``` {r}
 # Looking at the most frequent words in each of the dictionary
@@ -335,8 +345,8 @@ dictionaries <- dictionaries_added
 
 dictionaries_all <- dictionaries %>% 
     select(-rank_BUS, -rank_UNESCO, -rank_book)
-write_csv(dictionaries_all, "./output/created_datasets/freq_dict_total_all.csv")
 
+# write_csv(dictionaries_all, "./output/created_datasets/freq_dict_total_all.csv")
 
 # Choosing 100 most frequent words in the dictionaries based on "ranks" columns
 
@@ -352,24 +362,18 @@ dictionaries_100_book <- dictionaries %>%
   arrange(desc(rank_book)) %>%
   slice_head(n=100)
 
-
-
 dictionaries_100 <- rbind(dictionaries_100_UNESCO, dictionaries_100_BUS, dictionaries_100_book)
 head(dictionaries_100, 3)
 
 dictionaries_100 <- dictionaries_100 %>% 
   select(-rank_BUS, -rank_UNESCO, -rank_book)
 
-``` 
-
-# Saving freq_dict_total_100 data
-
-``` {r}
 # Saving the data/ It will be used in 4_Language_analysis and 5_For_and_not_for_profit
 freq_dict_total_100 <- dictionaries_100
 write_csv(freq_dict_total_100, "./output/created_datasets/freq_dict_total_100.csv")
-```
 
+
+``` 
 
 # Session information
 ``` {r}
