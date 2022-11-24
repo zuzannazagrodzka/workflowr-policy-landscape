@@ -14,15 +14,15 @@ editor_options:
 
 - All mission statements (raw text data) are in the `./data/mission_statements` folder as txt files.
 - All dictionary data are in the `./data/dictionaries` folder.
-- [List of the organisations](./data/ListMissionVision.html)
+- [List of the organisations](./docs/ListMissionVision.html)
 - [Dictionaries_preparation](./docs/1b_Dictionaries_preparation.html)
 - [Data_preprocessing](./docs/1a_Data_preprocessing.html)
 
-2. [Methodology - Topic modelling- analysis](./analysis/2_Topic_modeling.html)
-3. [Methodology - Topic modeling - produce Fig 2A](./analysis/Figure_2A.html)
-4. [Methodology - Text similarities - analysis and Fig 2B)](./analysis/3_Text_similarities_Fig2B.html)
-5. [Methodology - Language usage - analysis and Fig 2C](./analysis/4_Language_analysis_Fig2C.html)
-6. [Methodology - For and Not-for-Profit Assessment - analysis - not included in manuscript](./analysis/5_For_and_not_for_profit_comparison.html)
+2. [Methodology - Topic modelling- analysis](./docs/2_Topic_modeling.html)
+3. [Methodology - Topic modeling - produce Fig 2A](./docs/Figure_2A.html)
+4. [Methodology - Text similarities - analysis and Fig 2B)](./docs/3_Text_similarities_Fig2B.html)
+5. [Methodology - Language usage - analysis and Fig 2C](./docs/4_Language_analysis_Fig2C.html)
+6. [Methodology - For and Not-for-Profit Assessment - analysis - not included in manuscript](./docs/5_For_and_not_for_profit_comparison.html)
 7. [Licence](./docs/license.html)
 
 <!-- wflow_publish("analysis/_site.yml", "Change the theme", republish = TRUE) -->
