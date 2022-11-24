@@ -14,7 +14,7 @@ editor_options:
 
 - All mission statements (raw text data) are in the `./data/mission_statements` folder as txt files.
 - All dictionary data are in the `./data/dictionaries` folder.
-- [List of the organisations](docs/ListMissionVision.html)
+- [List of the organisations](ListMissionVision.html)
 - [Dictionaries_preparation](docs/1b_Dictionaries_preparation.html)
 - [Data_preprocessing](docs/1a_Data_preprocessing.html)
 
