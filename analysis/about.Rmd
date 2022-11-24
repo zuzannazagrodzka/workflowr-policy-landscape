@@ -1,5 +1,7 @@
 ---
-title: "About"
+title: "Accelerating the Open Research agenda to solve global challenges"
+authors: "ZZ, APB, TFJ"
+date: "`r Sys.Date()`"
 output:
   workflowr::wflow_html:
     toc: false
@@ -7,4 +9,4 @@ editor_options:
   chunk_output_type: console
 ---
 
-Description of the project.
+This is a collection of reproducible files for the manuscript “Accelerating the Open Research agenda to solve global challenges" by Zuzanna Zagrodzka, Andrew P Beckerman and Thomas F Johnson.
