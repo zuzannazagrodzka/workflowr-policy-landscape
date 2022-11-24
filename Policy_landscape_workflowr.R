@@ -34,26 +34,21 @@ wflow_status()
 # The more informative the commit message the better
 # (so that future you knows what you were trying to accomplish).
 
+wflow_publish()
+
 wflow_publish(files = c("analysis/index.Rmd",
                 "analysis/about.Rmd",
+                "analysis/1a_Data_preprocessing.Rmd",
+                "analysis/1b_Dictionaries_preparation.Rmd",
+                "analysis/2_Topic_modeling.Rmd",
+                "analysis/Figure_2A.Rmd",
+                "analysis/3_Text_similarities_Figure_2B.Rmd",
+                "analysis/4_Language_analysis_Figure_2C.Rmd",
+                "analysis/5_For_and_not_for_profit_comparison.Rmd",
                 "analysis/license.Rmd"),
-              message = "Publish the files for myproject")
+              message = "Publish the updated files for all analysis and figures")
 
 wflow_status()
 
 
 # Deploy the website
-
-
-# Next you need to tell your local Git repository about this new GitHub repository. Run the wflow_remotes() command below in the R console, replacing “myname” with your GitHub username:
-# It can be run only once for the project
-
-# wflow_git_remote("origin", user = "zuzannazagrodzka", repo = "workflowr-policy-landscape", action = "set_url")
-
-# ?wflow_git_remote()
-
-# Using dry_run = TRUE previews what the function will do.
-# Remove this argument to actually push to GitHub.
-wflow_git_push(dry_run = TRUE)
-
-wflow_git_push() # This doesn't work
