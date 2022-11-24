@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The files are available in the `./data/mission_statements` folder.
 
-###./advocates:
+### advocates:
 
 - Africa Open Science and Hardware_About.txt
 - Amelica_About.txt
@@ -38,7 +38,7 @@ The files are available in the `./data/mission_statements` folder.
 - SPARC_About.txt
 - coalitionS_About.txt
 
-###./funders:
+### funders:
 
 - Alexander von Humboldt Foundation_About.txt
 - Australian Research Council_About.txt
@@ -71,7 +71,7 @@ The files are available in the `./data/mission_statements` folder.
 - The French National Research Agency_About.txt
 - Wellcome_About.txt
 
-###./journals_OA:
+### journals_OA:
 
 - Arctic, Antarctic, and Alpine Research_Aims.txt
 - Biogeosciences_Aims.txt
@@ -88,7 +88,7 @@ The files are available in the `./data/mission_statements` folder.
 - Remote Sensing in Ecology and Conservation_Aims.txt
 - eLifeJournal_Aims.txt
 
-###./journals_nonOA:
+### journals_nonOA:
 
 - American Naturalist_Aims.txt
 - Annual Review of Ecology Evolution and Systematics_Aims.txt
@@ -107,7 +107,7 @@ The files are available in the `./data/mission_statements` folder.
 - Proceedings of the Royal Society B Biological Sciences_Aims.txt
 - Trends in Ecology & Evolution_Aims.txt
 
-###./publishers_Profit:
+### publishers_Profit:
 
 - Cell Press_About.txt		
 - Pensoft_About.txt
@@ -117,7 +117,7 @@ The files are available in the `./data/mission_statements` folder.
 - Wiley_About.txt
 - PeerJ_About.txt
 
-###./publishers_nonProfit:
+### publishers_nonProfit:
 
 - AIBS_About.txt
 - Annual Reviews_About.txt
@@ -128,7 +128,7 @@ The files are available in the `./data/mission_statements` folder.
 - The University of Chicago Press_About.txt
 - eLife_About.txt
 
-###./repositories:
+### repositories:
 
 - Australian Antarctic Data Centre_About.txt
 - BCO-DMO_About.txt
@@ -149,7 +149,7 @@ The files are available in the `./data/mission_statements` folder.
 - bioRxiv_About.txt
 - nodo_Principles.doc
 
-###./societies:
+### societies:
 
 - American Society of Naturalists_About.txt
 - Australasian Evolution Society_About.txt
