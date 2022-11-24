@@ -1,8 +1,8 @@
 ---
 title: "Text_similarities"
-author: "ZZ"
+author: "ZZ, APB, TFJ"
 # author: "zuzannazagrodzka"
-date: "2022-05-05"
+date: "`r Sys.Date()`"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
@@ -23,7 +23,7 @@ The three primary steps were followed:
 
 
 # Libraries
-``` {r}
+``` {r, message = FALSE}
 # remotes::install_github('talgalili/dendextend')
 library(dendextend)
 library(igraph)
@@ -36,7 +36,13 @@ library(tidytext)
 ```
 
 
-# Below chunk contain functions which were used to create words similarities matrix. Source of the code: 
+# The chunk of code below contains functions which were used to create words similarities matrix. 
+
+- cosine_matrix
+- Walktrap_topics
+- 
+
+Source of the code: 
 https://www.markhw.com/blog/word-similarity-graphs
 
 ``` {r}
@@ -92,9 +98,8 @@ walktrap_topics <- function(g, ...) {
 }
 ```
 
-
-
 # Importing data
+
 ``` {r}
 corpus_df <- read.csv("./output/created_datasets/dataset_words_stm_5topics.csv")
 ```

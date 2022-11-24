@@ -1,7 +1,7 @@
 ---
 title: "Dictionaries_preparation"
-author: "zuzannazagrodzka, APB, TFJ"
-date: '2022-05-13'
+author: "ZZ, APB, TFJ"
+date: "`r Sys.Date()`"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console

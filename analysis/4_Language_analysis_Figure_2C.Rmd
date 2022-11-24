@@ -1,8 +1,8 @@
 ---
 title: "4_Language_analysis"
-author: "ZZ"
+author: "ZZ, APB, TFJ"
 # author: "zuzannazagrodzka"
-date: "2021-11-10"
+date: "`r Sys.Date()`"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console

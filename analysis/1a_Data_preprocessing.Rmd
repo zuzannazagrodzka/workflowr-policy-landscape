@@ -1,8 +1,8 @@
 ---
 title: "1a_Data_preprocessing"
-author: "ZZ"
+author: "ZZ, APB, TFJ"
 # author: "zuzannazagrodzka"
-date: "2022-05-05"
+date: "`r Sys.Date()`"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
