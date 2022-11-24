@@ -64,7 +64,7 @@ wflow_publish(files = c("analysis/index.Rmd",
               message = "Update the file paths for all analysis and figures")
 
 
-# wflow_publish(c("analysis/index.Rmd"))
+# wflow_publish(c("analysis/ListMissionVision.Rmd"))
 
 wflow_status()
 
