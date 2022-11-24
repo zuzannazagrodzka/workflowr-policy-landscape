@@ -7,30 +7,36 @@ output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
 ---
+# Language Analyis Overview
 
-Application of text analyses to reveal association between stakeholders and Open Research (UNESCO) and business language. The code below includes control (book). We decided to keep only words that are unique for each of the dictionary. 
-It will enable us see the association and the divergence across the documents. We plotted the percentage of words that documents in the stakeholders groups share with the created by us dictionaries. 
+Here we implement the application of text analyses to reveal association between stakeholders and Open Research (UNESCO) and business language. 
+
+This produces Fig 2c.
+
+The code below includes the use of our control text corpus (book). 
+
+We use only words that are unique for each of the dictionaries. This enables us see the association and the divergence across the documents. We plotted the percentage of words that documents in the stakeholders groups share with the created by us dictionaries. 
 
 RATIO = number of words from one document present in one dictionary / total number of words in the document
 
 Note: duplicates were not removed (it matters how many times a certain word occurs in a document)
 
-Meaning of the columns in the final dataframe: 
-"document" - name of the document
-"present_BUS" - a word is present (1) or absent (0) in the business dictionary
-"present_UNESCO" - a word is present (1) or absent (0) in the UNESCO Recommendations
-"present_book" - a word is present (1) or absent (0) in the book
-"doc_pres" - total number of words present in the document (1)
-"sum" - a total number of words that are present in our dictionaries 
-"stakeholder" - name of the stakeholder (funder/publisher/advocate/society/repository/journal)
-"proc_BUS" - % of number of words present in the certain document and business dictionary / total number of words in the certain document
-"proc_UNESCO" - % of number of words present in the certain document and UNESCO dictionary / total number of words in the certain document
-"proc_book" - % of number of words present in the certain document and book / total number of words in the certain document
+Meaning of the columns in the final dataframe used for plotting: 
 
+- "document" - name of the document
+- "present_BUS" - a word is present (1) or absent (0) in the business dictionary
+- "present_UNESCO" - a word is present (1) or absent (0) in the UNESCO Recommendations
+- "present_book" - a word is present (1) or absent (0) in the book
+- "doc_pres" - total number of words present in the document (1)
+- "sum" - a total number of words that are present in our dictionaries 
+- "stakeholder" - name of the stakeholder (funder/publisher/advocate/society/repository/journal)
+- "proc_BUS" - % of number of words present in the certain document and business dictionary / total number of words in the certain document
+- "proc_UNESCO" - % of number of words present in the certain document and UNESCO dictionary / total number of words in the certain document
+- "proc_book" - % of number of words present in the certain document and book / total number of words in the certain document
 
+# R Setup and Packages
 
-
-```{r}
+```{r, message = FALSE}
 # Clearing R
 rm(list=ls())
 
@@ -48,7 +54,6 @@ library("kableExtra")
 
 ```
 
-
 # Importing data
 
 ```{r}
@@ -62,6 +67,7 @@ data_words <- df_corpuses
 all_dict <- read_csv("./output/created_datasets/freq_dict_total_all.csv")
 ```
 
+## Data preparation and cleaing
 
 ``` {r}
 # Data preparation
@@ -165,8 +171,7 @@ book_stak_top %>%
 
 ```
 
-
-# Graphs
+# Graph generation
 
 ```{r}
 no <- nrow(df_sum_proc_ND)
@@ -253,9 +258,10 @@ fig_unesco <- ggplot() +
 fig_unesco
 
 # Saving the figure
-figure_name <- paste0("./output/Figure_2C/language_unesco.png")
-ggsave(filename = figure_name, fig_unesco  + theme_bw(base_size = 5),
-     width = 10, height = 5, dpi = 600, units = "in", device='png')  
+# UNCOMMENT TO SAVE FIGURE
+# figure_name <- paste0("./output/Figure_2C/language_unesco.png")
+# ggsave(filename = figure_name, fig_unesco  + theme_bw(base_size = 5),
+#      width = 10, height = 5, dpi = 600, units = "in", device='png')  
 
 ```
 

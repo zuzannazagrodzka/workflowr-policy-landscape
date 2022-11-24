@@ -1,8 +1,8 @@
 ---
 title: "Figure_2A"
-author: "ZZ"
+author: "ZZ, APB, TFJ"
 # author: "zuzannazagrodzka"
-date: "2022-05-05"
+date: "`r Sys.Date()`"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
@@ -13,10 +13,17 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Creating Figure 2A
-Figure 2A shows gamma values (x-axis, means ± sd) that are the strength of association between a set of stakeholder documents (y-axis) and the corresponding topic. High gamma values are strong associations. We plotted the values for four main topics (side labels): Open Research (green), Community and Support (red), Innovation and Solutions (yellow) and Publication Process (blue). 
 
+Figure 2A shows gamma values (x-axis, means ± sd) that are the strength of association between a set of stakeholder documents (y-axis) and the corresponding topic. 
 
-# Cleaning R 
+High gamma values are strong associations. 
+
+We plotted the values for four main topics (side labels): Open Research (green), Community and Support (red), Innovation and Solutions (yellow) and Publication Process (blue). 
+
+The data for this are produced in `2_Topic_modeling`
+
+# R Setup and packages
+
 ```{r Cleaning R}
 rm(list=ls())
 ```
@@ -24,17 +31,17 @@ rm(list=ls())
 # Libraries
 ``` {r}
 library(tidyverse)
-library(dplyr)
-library(ggplot2)
 ```
 
 # Import data to create Figure 2A
+
+The data are produced in `2_Topic_modeling`
 
 ``` {r}
 df_doc_level_stm_gamma <- read_csv(file = "./output/created_datasets/df_doc_level_stm_gamma.csv")
 ```
 
-
+# Data management
 
 ``` {r}
 df_figure1_gamma <- df_doc_level_stm_gamma %>% 
@@ -66,7 +73,11 @@ sum_figure1_gamma_wide2 =
   group_by(stakeholder, type) %>%
   dplyr::summarize(lower = quantile(perc, probs = .25), upper = quantile(perc, probs = .75), perc_fin = mean(perc)) %>% 
   rename(perc = perc_fin)
+```
 
+# Graph production
+
+``` {r}
 figure_topics <- ggplot() +
   geom_point(data = df_figure1_gamma_wide2, aes(x = perc, y = stakeholder, colour = type), alpha = 0.2, position = position_jitter(), show.legend = FALSE) +
   geom_pointrange(data = sum_figure1_gamma_wide2, aes(x = perc, xmin = lower, xmax = upper, y = stakeholder, colour = type), show.legend = FALSE) +
@@ -77,11 +88,17 @@ figure_topics <- ggplot() +
 
 figure_topics
 
+# # UNCOMMENT TO SAVE FIGURES
 
-figure_name <- paste0("./output/Figure_2A/Figure_2A.png")
-png(file=figure_name,
-  width= 3000, height= 2000, res=400)
-  figure_topics
-  dev.off()
+# figure_name <- paste0("./output/Figure_2A/Figure_2A.png")
+# png(file=figure_name,
+#   width= 3000, height= 2000, res=400)
+#   figure_topics
+#   dev.off()
 
+```
+
+# Session information
+``` {r}
+sessionInfo()
 ```

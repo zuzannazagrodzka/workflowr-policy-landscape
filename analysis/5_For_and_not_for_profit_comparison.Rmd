@@ -1,8 +1,8 @@
 ---
 title: "5_For_and_not_for_profit_comparison"
-author: "ZZ"
+author: "ZZ, APB, TFJ"
 # author: "zuzannazagrodzka"
-date: "2022-05-24"
+date: "`r Sys.Date()`"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
@@ -12,15 +12,16 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Questions not addressed in the manuscript because of too small sample size. 
+There are two questions we did not address formally in the manuscript because of too small sample size. 
 
-What language do for-profit and not-for-profit publishers use in their mission statements and aims?
-What organisations use more common language to the UNESCO Recommendations in Open Science and which use business words? 
+- What language do for-profit and not-for-profit publishers use in their mission statements and aims?
+- What organisations use more common language to the UNESCO Recommendations in Open Science and which use business words? 
 
 We conducted the same language analysis that were conducted on the main stakeholders groups to compare for-profit vs. not-for-profit publishers and nonOA journals vs. OA journals. 
 
+# R Step and Packages
 
-```{r}
+```{r, message=FALSE}
 # Clearing R
 rm(list=ls())
 
@@ -52,7 +53,7 @@ all_dict <- read_csv("./output/created_datasets/freq_dict_total_all.csv")
 
 ```
 
-
+# Data Prep and Cleaning
 
 ``` {r}
 # Data preparation
@@ -159,7 +160,6 @@ book_stak_top %>%
 
 ```
 
-
 # Creating graphs
 
 ```{r}
@@ -185,7 +185,7 @@ ggplot() +
   geom_pointrange(data = sum_df_sum_proc_ND_book, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = org_subgroups)) +
   facet_grid(type~.) +
   labs(x = "Document words occuring in dictionary (%)", y = "") +
-  scale_colour_discrete(guide = F) +
+  scale_colour_discrete(guide = "none") +
   theme_classic()
 
 # Plotting them separately Business
@@ -207,7 +207,7 @@ ggplot() +
   geom_pointrange(data = sum_df_sum_proc_ND_BUS, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = org_subgroups)) +
   facet_grid(type~.) +
   labs(x = "Document words occuring in dictionary (%)", y = "") +
-  scale_colour_discrete(guide = F) +
+  scale_colour_discrete(guide = "none") +
   theme_classic()
 
 
@@ -230,7 +230,7 @@ ggplot() +
   geom_pointrange(data = sum_df_sum_proc_ND_UNESCO, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = org_subgroups)) +
   facet_grid(type~.) +
   labs(x = "Document words occuring in dictionary (%)", y = "") +
-  scale_colour_discrete(guide = F) +
+  scale_colour_discrete(guide = "none") +
   theme_classic()
 
 

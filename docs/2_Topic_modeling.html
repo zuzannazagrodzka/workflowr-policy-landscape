@@ -9,9 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="ZZ" />
+<meta name="author" content="ZZ, APB, TFJ" />
 
-<meta name="date" content="2022-05-05" />
+<meta name="date" content="2022-11-24" />
 
 <title>2_Topic_modeling</title>
 
@@ -369,8 +369,8 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">2_Topic_modeling</h1>
-<h4 class="author">ZZ</h4>
-<h4 class="date">2022-05-05</h4>
+<h4 class="author">ZZ, APB, TFJ</h4>
+<h4 class="date">2022-11-24</h4>
 
 </div>
 
@@ -378,7 +378,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -389,8 +389,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -403,9 +403,9 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong>
@@ -429,18 +429,21 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
@@ -567,6 +570,12 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
+Unstaged changes:
+    Modified:   analysis/2_Topic_modeling.Rmd
+    Modified:   analysis/3_Text_similarities_Figure_2B.Rmd
+    Modified:   output/created_datasets/dataset_words_stm_5topics.csv
+    Modified:   output/created_datasets/df_doc_level_stm_gamma.csv
+
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not
@@ -671,10 +680,8 @@ Publish other files
 </div>
 <div id="topic-modeling" class="section level1">
 <h1>Topic modeling</h1>
-</div>
-<div id="methods" class="section level1">
-<h1>Methods</h1>
-<p>Topic Modeling</p>
+<div id="topic-modeling-methods-overview" class="section level2">
+<h2>Topic Modeling Methods Overview</h2>
 <p>To investigate the relationship to our research questions regarding
 the topics of our interest and the language choice in the stakeholders’
 statements, the study employs a computational text analysis called the
@@ -684,113 +691,181 @@ Models) but also enables the discovery of topics and their prevalence
 based on document metadata, such as stakeholder group. The topic
 modeling was conducted on a sentence level and the metadata variable
 contained information about the stakeholders group and the document each
-work comes from. After generating the topics, we used the ground theory
-method of analysing qualitative data (Corbin and Strauss, 1990) to
-identify the main categories that are present in the topics.</p>
-<p>The more detailed protocol of condensation multiple topics into a few
-more defined. 1. Open coding a) obtaining codes by performing STM and
-choosing the setting that enable the algorithm of Lee and Mimno (2014)
-to find the number of topics (from now on: codes). The metadata used in
-the modelling was the information on documents and stakeholders. The
-model calculates highest probability, Score, Lift and FLEX values for
-each word and assigns words to one or multiple topics. b) we looked at
-the seven words with the highest value for these four categories/values
-and followed a coding paradigm that enabled us to create a descriptive
-label for each of the code c) our paradigm contains enable us to search
-for words what describe or belong to missions and aims, functions,
-discipline and scale - Missions and aims - words are related to
-stakeholders’ visions, goals, statements or objectives e.g. open, free.
-- Functions - words associated with their roles and processes they are
-responsible in the research landscape e.g. publish, data, review, train
-- Discipline - words describing the discipline e.g. multidisciplinary,
-biology, ecology, evolution - Scale - words associated with the time and
-scale e.g. worldwide, global, long d) these will be used to create
-labels to describe each code</p>
+work comes from.</p>
+<p>After generating the topics, we used the ground theory method of
+analysing qualitative data (Corbin and Strauss, 1990) to identify the
+main categories that are present in the topics.</p>
+</div>
+<div
+id="a-detailed-protocol-of-condensing-multiple-topics-into-a-set-of-more-defined-topics-more-defined."
+class="section level2">
+<h2>A detailed protocol of condensing multiple topics into a set of more
+defined topics more defined.</h2>
+<ol style="list-style-type: decimal">
+<li>Open coding</li>
+</ol>
+<ul>
+<li>obtaining codes by performing STM and choosing the setting that
+enable the algorithm of Lee and Mimno (2014) to find the number of
+topics (from now on: codes). The metadata used in the modelling was the
+information on documents and stakeholders. The model calculates highest
+probability, Score, Lift and FLEX values for each word and assigns words
+to one or multiple topics.</li>
+<li>we looked at the seven words with the highest value for these four
+categories/values and followed a coding paradigm that enabled us to
+create a descriptive label for each of the code</li>
+<li>our paradigm contains enable us to search for words what describe or
+belong to missions and aims, functions, discipline and scale
+<ul>
+<li>Missions and aims - words are related to stakeholders’ visions,
+goals, statements or objectives e.g. open, free.</li>
+<li>Functions - words associated with their roles and processes they are
+responsible in the research landscape e.g. publish, data, review,
+train</li>
+<li>Discipline - words describing the discipline e.g. multidisciplinary,
+biology, ecology, evolution</li>
+<li>Scale - words associated with the time and scale e.g. worldwide,
+global, long</li>
+<li>these are used to create labels to describe each code</li>
+</ul></li>
+</ul>
 <ol start="2" style="list-style-type: decimal">
-<li>Axial coding a) finding connections and relationships with broader
-categories by identifying and drawing the connections between them. It
-has been done by carefully going through labels and finding codes that
-have the same or similar descriptive labels and intuitively they are
-connected b) aggregating and condensing codes into broader categories
-based on criteria that the codes with the same or similar labels cluster
+<li>Axial coding
+<ul>
+<li>finding connections and relationships with broader categories by
+identifying and drawing the connections between them. It has been done
+by carefully going through labels and finding codes that have the same
+or similar descriptive labels and intuitively they are connected</li>
+<li>aggregating and condensing codes into broader categories based on
+criteria that the codes with the same or similar labels cluster
 together. Our aim was to end up with the smallest number of categories
 that we could identified.</li>
-<li>Selective coding a) identifying the connections between the
-identified categories and the rest of the codes b) removing some of the
-categories that we are not interested in. Many stakeholders can share
-topics with each other and that’s because their function in the research
-landscape is similar or the same. Therefore, we expect that we would not
-be interested in some of the codes since they would not be related to
-our research questions c) going through the codes again and coding
-accordingly to the identified main categories</li>
+</ul></li>
+<li>Selective coding</li>
 </ol>
-<p>There were three categories of our interests that we expected to find
-in the statements: 1. Related to Open Research (defined by UNESCO) 2.
-Related to research impact and solving global challenges 3. Related to
-business model or profit</p>
+<ul>
+<li>identifying the connections between the identified categories and
+the rest of the codes</li>
+<li>removing some of the categories that we are not interested in. Many
+stakeholders can share topics with each other and that’s because their
+function in the research landscape is similar or the same. Therefore, we
+expect that we would not be interested in some of the codes since they
+would not be related to our research questions</li>
+<li>going through the codes again and coding accordingly to the
+identified main categories</li>
+</ul>
+</div>
+<div
+id="predictedexpected-categories-we-expected-to-find-in-the-statements"
+class="section level2">
+<h2>Predicted/Expected categories we expected to find in the
+statements</h2>
+<ol style="list-style-type: decimal">
+<li>Related to Open Research (defined by UNESCO)</li>
+<li>Related to research impact and solving global challenges</li>
+<li>Related to business model or profit</li>
+</ol>
 <p>Open Research and the values that it brings seems to be necessary
 approach to maximise impact of science and help to solve global
 challenges. We expect that stakeholders that care about the Open
-Research agenda will frequently use words such as: open, research,
-science, datum, access, accessibility, share, transparency</p>
+Research agenda will frequently use words such as:</p>
+<blockquote>
+<p>open, research, science, datum, access, accessibility, share,
+transparency</p>
+</blockquote>
 <p>Research results and findings should be used to understand and solve
 challenges but also to educate people. Some stakeholders might emphasise
 the importance of it but not necessary seen the importance of Open
 Research in the process. The words that we could expect to be associated
-with the topic are: impact, solve, development, sustainable, education,
-policy, climate, change, wildlife. We also expect that words such as
-open, access will be absent.</p>
+with the topic are:</p>
+<blockquote>
+<p>impact, solve, development, sustainable, education, policy, climate,
+change, wildlife. We also expect that words such as open, access will be
+absent.</p>
+</blockquote>
 <p>In our work, we hypothesise that some organisations are run as a for
 profit business. Their approach could be more monetary/profit driven and
 therefore, they would use a business language or financial terms in
 their aim and mission statements. We could expect in these topics to
-find words such as: profit, fund, service, management, pay,
-financially</p>
+find words such as:</p>
+<blockquote>
+<p>profit, fund, service, management, pay, financially</p>
+</blockquote>
+</div>
+<div id="topic-overview-ii" class="section level2">
+<h2>Topic Overview II</h2>
 <p>The stm model generated 73 topics which later were characterised and
 categorised following the above description. In the end we were able to
-identify four main topics that we called: 1. Open Research, 2. Community
-and Support, 3. Innovation and Solutions and 4. Publication Process.
-Only Open Research topic was identified as predicted beforehand.</p>
+identify four main topics that we called:</p>
 <ol style="list-style-type: decimal">
-<li>Open Research topic contains: Topic 1, Topic 13, Topic 58, Topic 69,
-Topic 43, Topic 25, Topic 32, Topic 54, Topic 52, Topic 60</li>
-<li>Community &amp; Support topic contains: Topic 5, Topic 7, Topic 10,
-Topic 11, Topic 21, Topic 23, Topic 26, Topic 39, Topic 41, Topic 42,
-Topic 63, Topic 65 3.Innovation &amp; Solution topic contains: Topic 17,
-Topic 24, Topic 30, Topic 14, Topic 2, Topic 34, Topic 38, Topic 4,
-Topic 44, Topic 48, Topic 50, Topic 51, Topic 55, Topic 61, Topic 66,
-Topic 71, Topic 20, Topic 57, Topic 62</li>
-<li>Publication process topic contains: Topic 3, Topic 12, Topic 16,
-Topic 22, Topic 35, Topic 49, Topic 47, Topic 53 Rest of the topics that
-were not able to be categorised to any of our topics were not included
-in our analysis and interpretation.</li>
+<li>Open Research</li>
+<li>Community and Support</li>
+<li>Innovation and Solutions</li>
+<li>Publication Process.</li>
 </ol>
-<p>Topic modeling generated beta and gamma values that we later used in
-our analysis. Beta value is a calculated for each word and for each
-topic and gives information on a probability that a certain word belongs
-to a certain topic. Score value gives us measure how exclusive the each
-word is to a certain topic. For example, if a word has a low value, it
-means that it’s equally used in all topics. The score was calculated by
-a word beta value divided by a sum of beta values for this word across
-all topics. After merging topics into new topics that were categorised
-by us, we calculated mean value of the merged topics beta and score
-values. Later we used these values in our text similarities analysis to
-create Fig. 2B (3_Text_similarities, Figure_2B).</p>
+<p>Only the <em>Open Research</em> topic was identified as predicted
+beforehand.</p>
+<ol style="list-style-type: decimal">
+<li>Open Research topic contains:</li>
+</ol>
+<blockquote>
+<p>Topic 1, Topic 13, Topic 58, Topic 69, Topic 43, Topic 25, Topic 32,
+Topic 54, Topic 52, Topic 60</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>Community &amp; Support topic contains:</li>
+</ol>
+<blockquote>
+<p>Topic 5, Topic 7, Topic 10, Topic 11, Topic 21, Topic 23, Topic 26,
+Topic 39, Topic 41, Topic 42, Topic 63, Topic 65</p>
+</blockquote>
+<p>3.Innovation &amp; Solution topic contains:</p>
+<blockquote>
+<p>Topic 17, Topic 24, Topic 30, Topic 14, Topic 2, Topic 34, Topic 38,
+Topic 4, Topic 44, Topic 48, Topic 50, Topic 51, Topic 55, Topic 61,
+Topic 66, Topic 71, Topic 20, Topic 57, Topic 62</p>
+</blockquote>
+<ol start="4" style="list-style-type: decimal">
+<li>Publication process topic contains:</li>
+</ol>
+<blockquote>
+<p>Topic 3, Topic 12, Topic 16, Topic 22, Topic 35, Topic 49, Topic 47,
+Topic 53</p>
+</blockquote>
+<p>The rest of the topics that were not able to be categorised to any of
+our topics were not included in our analysis and interpretation.</p>
+</div>
+<div
+id="topic-modeling-generated-beta-and-gamma-values-that-we-later-used-in-our-analysis."
+class="section level2">
+<h2>Topic modeling generated beta and gamma values that we later used in
+our analysis.</h2>
+<p>Beta value is a calculated for each word and for each topic and gives
+information on a probability that a certain word belongs to a certain
+topic. Score value gives us measure how exclusive the each word is to a
+certain topic. For example, if a word has a low value, it means that
+it’s equally used in all topics. The score was calculated by a word beta
+value divided by a sum of beta values for this word across all
+topics.</p>
+<p>After merging topics into new topics that were categorised by us, we
+calculated mean value of the merged topics beta and score values. Later
+we used these values in our text similarities analysis to create Fig. 2B
+(3_Text_similarities, Figure_2B).</p>
 <p>Next, we calculated the proportion of the topics appearing in all of
 the documents by using a mean gamma value for each sentence and new
 topics. The gamma value informs what is a probability that certain
-document (here: sentence) belongs to a certain topic. We chose one topic
-with the highest mean gamma value as a dominant topic for each of the
-sentence and later calculated the proportion of the sentences belonging
-to the new topics. This data set was used to create Fig. 2A
-(Figure_2A).</p>
+document (here: sentence) belongs to a certain topic.</p>
+<p>We chose one topic with the highest mean gamma value as a dominant
+topic for each of the sentence and later calculated the proportion of
+the sentences belonging to the new topics.</p>
+<p>This data set was used to create Fig. 2A (Figure_2A).</p>
 </div>
-<div id="cleaning-r" class="section level1">
-<h1>Cleaning R</h1>
+</div>
+<div id="r-setup-and-packages" class="section level1">
+<h1>R Setup and packages</h1>
 <pre class="r"><code>rm(list=ls())</code></pre>
-</div>
-<div id="libraries" class="section level1">
-<h1>Libraries</h1>
+<div id="libraries" class="section level2">
+<h2>Libraries</h2>
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
 ✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
 ✔ tibble  3.1.8      ✔ dplyr   1.0.10
@@ -893,6 +968,7 @@ The following object is masked from &#39;package:dplyr&#39;:
 
     group_rows</code></pre>
 </div>
+</div>
 <div id="importing-data" class="section level1">
 <h1>Importing data</h1>
 <pre class="r"><code>data_words &lt;- read.csv(file = &quot;./output/created_datasets/cleaned_data.csv&quot;)</code></pre>
@@ -900,8 +976,11 @@ The following object is masked from &#39;package:dplyr&#39;:
 <div id="structural-topic-models-on-stakeholders"
 class="section level1">
 <h1>Structural Topic Models on stakeholders</h1>
-<p>followed: <a href="https://juliasilge.com/blog/sherlock-holmes-stm/"
+<p>Code follows: <a
+href="https://juliasilge.com/blog/sherlock-holmes-stm/"
 class="uri">https://juliasilge.com/blog/sherlock-holmes-stm/</a></p>
+<div id="data-management" class="section level2">
+<h2>Data management</h2>
 <pre class="r"><code># Creating metadata and connecting it with my data to perform topic modeling on the documents. Metadata includes: document name and stakeholder name
 
 data_dfm &lt;- data_words %&gt;%
@@ -923,8 +1002,8 @@ covs = left_join(covs, data_metadata)</code></pre>
 <pre><code>Joining, by = &quot;sentence_doc&quot;</code></pre>
 </div>
 <div id="topic-modeling---no-predetermined-number-of-topics"
-class="section level1">
-<h1>Topic modeling - no predetermined number of topics</h1>
+class="section level2">
+<h2>Topic modeling - no predetermined number of topics</h2>
 <pre class="r"><code>data_beta &lt;- data_words
 
 topic_model &lt;- stm(data_dfm, K = 0, verbose = FALSE, init.type = &quot;Spectral&quot;, prevalence = ~ name + stakeholder, data = covs, seed = 1) # running stm() function to fit a model and generate topics
@@ -955,6 +1034,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/31239cdb6f2a315ad1b40f96f4dd983aaa397d87/docs/figure/2_Topic_modeling.Rmd/unnamed-chunk-5-1.png" target="_blank">31239cd</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/2_Topic_modeling.Rmd/unnamed-chunk-5-1.png" target="_blank">796aa8e</a>
 </td>
 <td>
@@ -968,6 +1058,9 @@ zuzannazagrodzka
 </table>
 </div>
 </div>
+</div>
+<div id="getting-beta-values" class="section level2">
+<h2>Getting beta values</h2>
 <pre class="r"><code># Getting beta values from the topic modeling and adding beta value to the data_words 
 
 td_beta &lt;- tidy(topic_model) # getting beta values
@@ -990,9 +1083,9 @@ td_beta %&gt;%
 10    55 abide 2.99e-289
 # … with 220,886 more rows</code></pre>
 </div>
-<div id="merging-topics-into-new-topics-cathegories"
-class="section level1">
-<h1>Merging topics into new topics cathegories</h1>
+<div id="merging-topics-into-new-topics-categories"
+class="section level2">
+<h2>Merging topics into new topics categories</h2>
 <pre class="r"><code># Topics generated by the model were coded and categorised into five defined by us topics. Below, new &quot;topic&quot; column was created and topics were assigned  
 
 td_beta$stm_topic &lt;- td_beta$topic
@@ -1084,6 +1177,9 @@ td_beta_score_mean_max &lt;- td_beta_score_mean %&gt;%
   left_join(td_beta_sum_w, by = c(&quot;merge_col&quot; = &quot;merge_col&quot;)) %&gt;% 
   select(-merge_col) %&gt;% 
   rename(sum_beta = beta)</code></pre>
+</div>
+<div id="obtaining-the-highest-beta-values" class="section level2">
+<h2>Obtaining the highest beta values</h2>
 <pre class="r"><code># Getting highest beta value for each of the word with the information about the Topic number
 
 td_beta_select &lt;- td_beta_score_mean_max
@@ -1127,9 +1223,11 @@ td_beta_topic &lt;- td_beta_select %&gt;%
   top_n(1, mean_beta) %&gt;% 
   rename(highest_mean_beta = mean_beta)</code></pre>
 </div>
-<div id="creating-a-new-dataset-by-merging-datasets-with-new-values"
+</div>
+<div
+id="creating-a-new-dataset-by-merging-datasets-with-new-beta-values"
 class="section level1">
-<h1>Creating a new dataset by merging datasets with new values</h1>
+<h1>Creating a new dataset by merging datasets with new beta values</h1>
 <pre class="r"><code># Merging data_words with: td_beta_mean_wide, td_score_mean_wide, td_beta_sum_wide, td_score_topic
 data_words$word &lt;- as.factor(data_words$word)
 
@@ -1152,10 +1250,9 @@ write_csv(data_words_stm, file = &quot;./output/created_datasets/dataset_words_s
 <div id="creating-a-document-sentence-level-dataset"
 class="section level1">
 <h1>Creating a document (sentence) level dataset</h1>
-</div>
 <div id="gamma-values---followed-the-same-logic-as-with-beta-values"
-class="section level1">
-<h1>Gamma values - followed the same logic as with beta values</h1>
+class="section level2">
+<h2>Gamma values - followed the same logic as with beta values</h2>
 <pre class="r"><code># Getting gamma values from topic_modeling
 td_gamma &lt;- tidy(topic_model, matrix = &quot;gamma&quot;,                    
                  document_names = rownames(data_dfm))
@@ -1200,7 +1297,8 @@ td_gamma_prog_info_keep &lt;- td_gamma_prog_info %&gt;%
 td_gamma_prog_info &lt;- td_gamma_prog_info_keep %&gt;% 
   left_join(td_gamma_prog_info, by= c(&quot;sentence_doc&quot; = &quot;sentence_doc&quot;))
 
-# Calculating a proportion of sentences in each of the document, for that I need to add columns: document and stakeholder
+# Calculating a proportion of sentences in each of the document, 
+# for that I need to add columns: document and stakeholder
 
 # Adding info:
 info_sentence_doc &lt;- data_words %&gt;% 
@@ -1211,7 +1309,9 @@ td_gamma_prog_info &lt;- td_gamma_prog_info %&gt;%
   left_join(info_sentence_doc, by= c(&quot;sentence_doc&quot;=&quot;sentence_doc&quot;))
 
 # Calculating proportion
-# I will do so by counting name (document) to get a number of sentences in each document, then I will count a number of each topic for a document and then I will create a column with the proportion
+# I will do so by counting name (document) to get a number of sentences 
+# in each document, then I will count a number of each topic for a document 
+# and then I will create a column with the proportion
 
 sentence_count_gamma &lt;- data_words %&gt;% 
   distinct(sentence_doc, .keep_all = TRUE) %&gt;% 
@@ -1252,13 +1352,16 @@ df_doc_level_stm_gamma &lt;- df_doc_level_stm_gamma %&gt;%
     mutate_at(vars(prop), ~replace_na(., 0)) # replacing NA with 0, when a topic not present</code></pre>
 <pre class="r"><code>write_excel_csv(df_doc_level_stm_gamma, &quot;./output/created_datasets/df_doc_level_stm_gamma.csv&quot;) </code></pre>
 </div>
+</div>
 <div id="additional-information" class="section level1">
 <h1>Additional information</h1>
+<div
+id="the-code-below-provides-summary-statistics-on-each-of-the-topics."
+class="section level2">
+<h2>The code below provides summary statistics on each of the
+topics.</h2>
 <p>Topic 1: Open Research Topic 2: Community &amp; Support Topic 3:
 Innovation &amp; Solution Topic 4: Publication process</p>
-</div>
-<div id="information-about-the-datatopics" class="section level1">
-<h1>Information about the data/topics</h1>
 <pre class="r"><code># Number of words belonging to new topics
 no_words_topics &lt;- data_words_stm %&gt;% 
   select(word, topic) %&gt;% 
@@ -1579,8 +1682,11 @@ open
 </tbody>
 </table>
 </div>
-<div id="information-about-the-stakeholders" class="section level1">
-<h1>Information about the stakeholders</h1>
+<div
+id="the-code-below-provides-summary-statistics-on-each-of-the-stakeholders"
+class="section level2">
+<h2>The code below provides summary statistics on each of the
+stakeholders</h2>
 <pre class="r"><code># Advocates
 advocates_info &lt;- df_doc_level_stm_gamma %&gt;% 
   select(-total_topic, - total_sent) %&gt;%
@@ -2680,6 +2786,7 @@ National Academy of Sciences
 </tbody>
 </table>
 </div>
+</div>
 <div id="session-information" class="section level1">
 <h1>Session information</h1>
 <pre class="r"><code>sessionInfo()</code></pre>
@@ -2715,38 +2822,37 @@ loaded via a namespace (and not attached):
   [1] Rtsne_0.16          googledrive_2.0.0   colorspace_2.0-3   
   [4] ellipsis_0.3.2      modeltools_0.2-23   rprojroot_2.0.3    
   [7] fs_1.5.2            rstudioapi_0.14     farver_2.1.1       
- [10] graphlayouts_0.8.3  SnowballC_0.7.0     bit64_4.0.5        
- [13] ggrepel_0.9.2       fansi_1.0.3         lubridate_1.8.0    
- [16] xml2_1.3.3          cachem_1.0.6        knitr_1.40         
- [19] polyclip_1.10-4     jsonlite_1.8.3      workflowr_1.7.0    
- [22] broom_1.0.1         dbplyr_2.2.1        ggforce_0.4.1      
- [25] compiler_4.2.1      httr_1.4.4          backports_1.4.1    
- [28] assertthat_0.2.1    Matrix_1.4-1        fastmap_1.1.0      
- [31] gargle_1.2.1        cli_3.4.1           later_1.3.0        
- [34] tweenr_2.0.2        htmltools_0.5.3     tools_4.2.1        
- [37] rsvd_1.0.5          gtable_0.3.1        glue_1.6.2         
- [40] fastmatch_1.1-3     Rcpp_1.0.9          slam_0.1-50        
- [43] cellranger_1.1.0    jquerylib_0.1.4     vctrs_0.5.0        
- [46] svglite_2.1.0       xfun_0.33           stopwords_2.3      
- [49] rvest_1.0.3         lifecycle_1.0.3     googlesheets4_1.0.1
- [52] MASS_7.3-57         scales_1.2.1        tidygraph_1.2.2    
- [55] vroom_1.6.0         hms_1.1.2           promises_1.2.0.1   
- [58] parallel_4.2.1      yaml_2.3.6          gridExtra_2.3      
- [61] sass_0.4.2          stringi_1.7.8       highr_0.9          
- [64] tokenizers_0.2.3    geometry_0.4.6.1    systemfonts_1.0.4  
- [67] rlang_1.0.6         pkgconfig_2.0.3     evaluate_0.16      
- [70] lattice_0.20-45     bit_4.0.4           tidyselect_1.2.0   
- [73] plyr_1.8.7          magrittr_2.0.3      R6_2.5.1           
- [76] generics_0.1.3      DBI_1.1.3           pillar_1.8.1       
- [79] haven_2.5.1         whisker_0.4         withr_2.5.0        
- [82] abind_1.4-5         janeaustenr_1.0.0   modelr_0.1.9       
- [85] crayon_1.5.2        utf8_1.2.2          tzdb_0.3.0         
- [88] rmarkdown_2.16      viridis_0.6.2       grid_4.2.1         
- [91] readxl_1.4.1        data.table_1.14.6   git2r_0.30.1       
- [94] webshot_0.5.4       reprex_2.0.2        digest_0.6.29      
- [97] httpuv_1.6.6        RcppParallel_5.1.5  stats4_4.2.1       
-[100] munsell_0.5.0       viridisLite_0.4.1   bslib_0.4.0        
-[103] magic_1.6-1        </code></pre>
+ [10] graphlayouts_0.8.3  SnowballC_0.7.0     ggrepel_0.9.2      
+ [13] fansi_1.0.3         lubridate_1.8.0     xml2_1.3.3         
+ [16] cachem_1.0.6        knitr_1.40          polyclip_1.10-4    
+ [19] jsonlite_1.8.3      workflowr_1.7.0     broom_1.0.1        
+ [22] dbplyr_2.2.1        ggforce_0.4.1       compiler_4.2.1     
+ [25] httr_1.4.4          backports_1.4.1     assertthat_0.2.1   
+ [28] Matrix_1.4-1        fastmap_1.1.0       gargle_1.2.1       
+ [31] cli_3.4.1           later_1.3.0         tweenr_2.0.2       
+ [34] htmltools_0.5.3     tools_4.2.1         rsvd_1.0.5         
+ [37] gtable_0.3.1        glue_1.6.2          fastmatch_1.1-3    
+ [40] Rcpp_1.0.9          slam_0.1-50         cellranger_1.1.0   
+ [43] jquerylib_0.1.4     vctrs_0.5.0         svglite_2.1.0      
+ [46] xfun_0.33           stopwords_2.3       rvest_1.0.3        
+ [49] lifecycle_1.0.3     googlesheets4_1.0.1 MASS_7.3-57        
+ [52] scales_1.2.1        tidygraph_1.2.2     hms_1.1.2          
+ [55] promises_1.2.0.1    parallel_4.2.1      yaml_2.3.6         
+ [58] gridExtra_2.3       sass_0.4.2          stringi_1.7.8      
+ [61] highr_0.9           tokenizers_0.2.3    geometry_0.4.6.1   
+ [64] systemfonts_1.0.4   rlang_1.0.6         pkgconfig_2.0.3    
+ [67] evaluate_0.16       lattice_0.20-45     tidyselect_1.2.0   
+ [70] plyr_1.8.7          magrittr_2.0.3      R6_2.5.1           
+ [73] generics_0.1.3      DBI_1.1.3           pillar_1.8.1       
+ [76] haven_2.5.1         whisker_0.4         withr_2.5.0        
+ [79] abind_1.4-5         janeaustenr_1.0.0   modelr_0.1.9       
+ [82] crayon_1.5.2        utf8_1.2.2          tzdb_0.3.0         
+ [85] rmarkdown_2.16      viridis_0.6.2       grid_4.2.1         
+ [88] readxl_1.4.1        data.table_1.14.6   git2r_0.30.1       
+ [91] webshot_0.5.4       reprex_2.0.2        digest_0.6.29      
+ [94] httpuv_1.6.6        RcppParallel_5.1.5  stats4_4.2.1       
+ [97] munsell_0.5.0       viridisLite_0.4.1   bslib_0.4.0        
+[100] magic_1.6-1        </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -2788,38 +2894,37 @@ loaded via a namespace (and not attached):
   [1] Rtsne_0.16          googledrive_2.0.0   colorspace_2.0-3   
   [4] ellipsis_0.3.2      modeltools_0.2-23   rprojroot_2.0.3    
   [7] fs_1.5.2            rstudioapi_0.14     farver_2.1.1       
- [10] graphlayouts_0.8.3  SnowballC_0.7.0     bit64_4.0.5        
- [13] ggrepel_0.9.2       fansi_1.0.3         lubridate_1.8.0    
- [16] xml2_1.3.3          cachem_1.0.6        knitr_1.40         
- [19] polyclip_1.10-4     jsonlite_1.8.3      workflowr_1.7.0    
- [22] broom_1.0.1         dbplyr_2.2.1        ggforce_0.4.1      
- [25] compiler_4.2.1      httr_1.4.4          backports_1.4.1    
- [28] assertthat_0.2.1    Matrix_1.4-1        fastmap_1.1.0      
- [31] gargle_1.2.1        cli_3.4.1           later_1.3.0        
- [34] tweenr_2.0.2        htmltools_0.5.3     tools_4.2.1        
- [37] rsvd_1.0.5          gtable_0.3.1        glue_1.6.2         
- [40] fastmatch_1.1-3     Rcpp_1.0.9          slam_0.1-50        
- [43] cellranger_1.1.0    jquerylib_0.1.4     vctrs_0.5.0        
- [46] svglite_2.1.0       xfun_0.33           stopwords_2.3      
- [49] rvest_1.0.3         lifecycle_1.0.3     googlesheets4_1.0.1
- [52] MASS_7.3-57         scales_1.2.1        tidygraph_1.2.2    
- [55] vroom_1.6.0         hms_1.1.2           promises_1.2.0.1   
- [58] parallel_4.2.1      yaml_2.3.6          gridExtra_2.3      
- [61] sass_0.4.2          stringi_1.7.8       highr_0.9          
- [64] tokenizers_0.2.3    geometry_0.4.6.1    systemfonts_1.0.4  
- [67] rlang_1.0.6         pkgconfig_2.0.3     evaluate_0.16      
- [70] lattice_0.20-45     bit_4.0.4           tidyselect_1.2.0   
- [73] plyr_1.8.7          magrittr_2.0.3      R6_2.5.1           
- [76] generics_0.1.3      DBI_1.1.3           pillar_1.8.1       
- [79] haven_2.5.1         whisker_0.4         withr_2.5.0        
- [82] abind_1.4-5         janeaustenr_1.0.0   modelr_0.1.9       
- [85] crayon_1.5.2        utf8_1.2.2          tzdb_0.3.0         
- [88] rmarkdown_2.16      viridis_0.6.2       grid_4.2.1         
- [91] readxl_1.4.1        data.table_1.14.6   git2r_0.30.1       
- [94] webshot_0.5.4       reprex_2.0.2        digest_0.6.29      
- [97] httpuv_1.6.6        RcppParallel_5.1.5  stats4_4.2.1       
-[100] munsell_0.5.0       viridisLite_0.4.1   bslib_0.4.0        
-[103] magic_1.6-1        </code></pre>
+ [10] graphlayouts_0.8.3  SnowballC_0.7.0     ggrepel_0.9.2      
+ [13] fansi_1.0.3         lubridate_1.8.0     xml2_1.3.3         
+ [16] cachem_1.0.6        knitr_1.40          polyclip_1.10-4    
+ [19] jsonlite_1.8.3      workflowr_1.7.0     broom_1.0.1        
+ [22] dbplyr_2.2.1        ggforce_0.4.1       compiler_4.2.1     
+ [25] httr_1.4.4          backports_1.4.1     assertthat_0.2.1   
+ [28] Matrix_1.4-1        fastmap_1.1.0       gargle_1.2.1       
+ [31] cli_3.4.1           later_1.3.0         tweenr_2.0.2       
+ [34] htmltools_0.5.3     tools_4.2.1         rsvd_1.0.5         
+ [37] gtable_0.3.1        glue_1.6.2          fastmatch_1.1-3    
+ [40] Rcpp_1.0.9          slam_0.1-50         cellranger_1.1.0   
+ [43] jquerylib_0.1.4     vctrs_0.5.0         svglite_2.1.0      
+ [46] xfun_0.33           stopwords_2.3       rvest_1.0.3        
+ [49] lifecycle_1.0.3     googlesheets4_1.0.1 MASS_7.3-57        
+ [52] scales_1.2.1        tidygraph_1.2.2     hms_1.1.2          
+ [55] promises_1.2.0.1    parallel_4.2.1      yaml_2.3.6         
+ [58] gridExtra_2.3       sass_0.4.2          stringi_1.7.8      
+ [61] highr_0.9           tokenizers_0.2.3    geometry_0.4.6.1   
+ [64] systemfonts_1.0.4   rlang_1.0.6         pkgconfig_2.0.3    
+ [67] evaluate_0.16       lattice_0.20-45     tidyselect_1.2.0   
+ [70] plyr_1.8.7          magrittr_2.0.3      R6_2.5.1           
+ [73] generics_0.1.3      DBI_1.1.3           pillar_1.8.1       
+ [76] haven_2.5.1         whisker_0.4         withr_2.5.0        
+ [79] abind_1.4-5         janeaustenr_1.0.0   modelr_0.1.9       
+ [82] crayon_1.5.2        utf8_1.2.2          tzdb_0.3.0         
+ [85] rmarkdown_2.16      viridis_0.6.2       grid_4.2.1         
+ [88] readxl_1.4.1        data.table_1.14.6   git2r_0.30.1       
+ [91] webshot_0.5.4       reprex_2.0.2        digest_0.6.29      
+ [94] httpuv_1.6.6        RcppParallel_5.1.5  stats4_4.2.1       
+ [97] munsell_0.5.0       viridisLite_0.4.1   bslib_0.4.0        
+[100] magic_1.6-1        </code></pre>
 </div>
 </div>
 

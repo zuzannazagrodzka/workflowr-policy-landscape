@@ -8,13 +8,16 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Source of the functions: https://www.markhw.com/blog/word-similarity-graphs
+# Visualising Text Similarities (Fig 2b)
 
+Source of the functions: https://www.markhw.com/blog/word-similarity-graphs
 
-We combined two methods to be able visually explore topics and words' connections in the aims and missions documents.
+We combined two methods - word similarity graphs and stm modelling) to be able visually explore topics and words' connections in the aims and missions documents.
+
 We used the word similarity method (https://www.markhw.com/blog/word-similarity-graphs) to calculate similarities between words and later to be able to plot them with topic modeling score values (package stm)
 
-The three primary steps were followed: 
+The three primary steps are: 
+
 1. Calculating the similarities between words (Cosine matrix). 
 
 2. Formatting these similarity scores into a symmetric matrix, where the diagonal contains 0s and the off-diagonal cells are similarities between words.
@@ -23,6 +26,7 @@ The three primary steps were followed:
 
 
 # Libraries
+
 ``` {r, message = FALSE}
 # remotes::install_github('talgalili/dendextend')
 library(dendextend)
@@ -36,11 +40,10 @@ library(tidytext)
 ```
 
 
-# The chunk of code below contains functions which were used to create words similarities matrix. 
+# Functions to create words similarities matrix. 
 
 - cosine_matrix
 - Walktrap_topics
-- 
 
 Source of the code: 
 https://www.markhw.com/blog/word-similarity-graphs
@@ -98,13 +101,13 @@ walktrap_topics <- function(g, ...) {
 }
 ```
 
-# Importing data
+# Importing data (created in `2_topic_modeling`)
 
 ``` {r}
 corpus_df <- read.csv("./output/created_datasets/dataset_words_stm_5topics.csv")
 ```
 
-# Running above functions for each stakeholder seperately
+# Running above functions for each stakeholder
 
 ```{r}
 corpus_df <- read.csv("./output/created_datasets/dataset_words_stm_5topics.csv")
@@ -325,7 +328,9 @@ for (stake in stake_names) {
 
 ```
 
-```{r}
+## Figure production
+
+```{r, eval = FALSE}
 # Saving figures individually 
 
 figure_list
@@ -369,9 +374,8 @@ png(file=figure_name,
 
 ```
 
-
-
 # Additional analysis
+
 Circular graph created on all documents (all stakeholders)
 
 ``` {r}
@@ -554,12 +558,15 @@ figure_tosave <- ggraph(mygraph, layout = 'dendrogram', circular = T) +
   expand_limits(x = c(-1.6, 1.6), y = c(-1.6, 1.6))
 
 figure_name <- paste0("./output/Other_figures/All_stakeholders_5topics_figure.png")
-png(file=figure_name,
-  width=3000, height=3000, res = 500)
-  figure_tosave
-  dev.off()
+
+# uncomment to generate file
+
+# png(file=figure_name,
+#   width=3000, height=3000, res = 500)
+#   figure_tosave
+#   dev.off()
   
-figure_tosave
+# figure_tosave
 
 ```
 

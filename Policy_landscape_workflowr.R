@@ -27,9 +27,18 @@ wflow_view()
 # View the status of the workflowr project
 wflow_status()
 
-#  The first argument to wflow_publish() is a character vector of the R Markdown files to publish. The second is a message that will recorded by the version control system Git when it commits (i.e. saves a snapshot of) these files. The more informative the commit message the better (so that future you knows what you were trying to accomplish).
+#  The first argument to wflow_publish() is a character vector
+# of the R Markdown files to publish.
+# The second is a message that will recorded by the version control system
+# Git when it commits (i.e. saves a snapshot of) these files.
+# The more informative the commit message the better
+# (so that future you knows what you were trying to accomplish).
 
-wflow_publish(c("analysis/index.Rmd", "analysis/about.Rmd", "analysis/license.Rmd"), "Publish the initial files for myproject")
+wflow_publish(files = c("analysis/index.Rmd",
+                "analysis/about.Rmd",
+                "analysis/license.Rmd"),
+              message = "Publish the files for myproject")
+
 wflow_status()
 
 
@@ -38,14 +47,13 @@ wflow_status()
 
 # Next you need to tell your local Git repository about this new GitHub repository. Run the wflow_remotes() command below in the R console, replacing “myname” with your GitHub username:
 # It can be run only once for the project
-wflow_git_remote("origin", user = "zuzannazagrodzka", repo = "workflowr-policy-landscape", action = "set_url")
+
+# wflow_git_remote("origin", user = "zuzannazagrodzka", repo = "workflowr-policy-landscape", action = "set_url")
+
 # ?wflow_git_remote()
 
+# Using dry_run = TRUE previews what the function will do.
+# Remove this argument to actually push to GitHub.
+wflow_git_push(dry_run = TRUE)
 
-wflow_git_push(dry_run = TRUE) # Using dry_run = TRUE previews what the function will do. Remove this argument to actually push to GitHub.
 wflow_git_push() # This doesn't work
-
-
-# Add a new analysis file
-wflow_open("./analysis/Data_prep_Topic_modeling_copy.Rmd")
-wflow_open("./analysis/test.Rmd")

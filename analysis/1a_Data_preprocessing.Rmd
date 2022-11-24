@@ -94,15 +94,13 @@ Columns:
 We worked on a relatively small number of documents and because of that we did not perform relative prunning (stripping very rare and extremely frequent word occurrences from the observed data).
 
 
-# Cleaning R 
+# Setup and R packages
 
 ```{r Cleaning R}
 rm(list=ls())
 ```
 
-# Libraries
-
-```{r Libraries, echo=FALSE, message = FALSE}
+```{r Libraries, message = FALSE}
 library(tidyverse)
 library(purrr)
 library(tidyr)
@@ -127,6 +125,7 @@ library("kableExtra") # to create a table when converting to html
 ```
 
 # Importing data
+
 ```{r Importing data}
 dirs <- list.dirs(path = "./data/mission_statements", recursive = FALSE)
 getwd()
@@ -207,7 +206,8 @@ corpus_df$stakeholder[corpus_df$stakeholder%in% c("Center for Open Science", "co
 
 ```
 
-Creating corpus_df_website_info which is going to be used later to get a list of the websites 
+## Creating corpus_df_website_info which is going to be used later to get a list of the websites 
+
 ``` {r}
 corpus_df_website_info <- corpus_df
 ```

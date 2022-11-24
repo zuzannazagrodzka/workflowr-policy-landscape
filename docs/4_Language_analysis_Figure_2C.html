@@ -9,13 +9,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="ZZ" />
+<meta name="author" content="ZZ, APB, TFJ" />
 
-<meta name="date" content="2021-11-10" />
+<meta name="date" content="2022-11-24" />
 
 <title>4_Language_analysis</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -79,6 +79,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -99,6 +100,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -156,11 +160,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -324,7 +332,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -361,8 +369,8 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">4_Language_analysis</h1>
-<h4 class="author">ZZ</h4>
-<h4 class="date">2021-11-10</h4>
+<h4 class="author">ZZ, APB, TFJ</h4>
+<h4 class="date">2022-11-24</h4>
 
 </div>
 
@@ -370,7 +378,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -381,8 +389,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -391,16 +399,17 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-09-21
+<strong>Last updated:</strong> 2022-11-24
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
-<strong>Knit directory:</strong> <code>myproject/</code> <span
+<strong>Knit directory:</strong>
+<code>workflowr-policy-landscape/</code> <span
 class="glyphicon glyphicon-question-sign" aria-hidden="true"
 title="This is the local directory in which the code in this file was executed.">
 </span>
@@ -420,18 +429,21 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
@@ -522,15 +534,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetree460bad0c39a5d88853d090e1873076d3fcb4a575targetblank460bad0a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree31239cdb6f2a315ad1b40f96f4dd983aaa397d87targetblank31239cda">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/460bad0c39a5d88853d090e1873076d3fcb4a575" target="_blank">460bad0</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/31239cdb6f2a315ad1b40f96f4dd983aaa397d87" target="_blank">31239cd</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomzuzannazagrodzkaworkflowrpolicylandscapetree460bad0c39a5d88853d090e1873076d3fcb4a575targetblank460bad0a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree31239cdb6f2a315ad1b40f96f4dd983aaa397d87targetblank31239cda"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +552,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/tree/460bad0c39a5d88853d090e1873076d3fcb4a575" target="_blank">460bad0</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/31239cdb6f2a315ad1b40f96f4dd983aaa397d87" target="_blank">31239cd</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -555,46 +567,18 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/.DS_Store
-    Ignored:    code/.DS_Store
-    Ignored:    data/.DS_Store
-    Ignored:    data/dictionaries/.DS_Store
-    Ignored:    data/mission_statements/.DS_Store
-    Ignored:    data/mission_statements/advocates/.DS_Store
-    Ignored:    data/mission_statements/funders/.DS_Store
-    Ignored:    data/mission_statements/journals_OA/.DS_Store
-    Ignored:    data/mission_statements/journals_nonOA/.DS_Store
-    Ignored:    data/mission_statements/publishers_Profit/.DS_Store
-    Ignored:    data/mission_statements/publishers_nonProfit/.DS_Store
-    Ignored:    data/mission_statements/repositories/.DS_Store
-    Ignored:    data/mission_statements/societies/.DS_Store
-    Ignored:    output/.DS_Store
-
-Untracked files:
-    Untracked:  Policy_landscape_workflowr.R
-    Untracked:  code/1a_Data_preprocessing.html
-    Untracked:  code/1b_Dictionaries_preparation.html
-    Untracked:  code/2_Topic_modeling.html
-    Untracked:  code/3_Text_similarities_Figure_2B.html
-    Untracked:  code/4_Language_analysis_Figure_2C.html
-    Untracked:  code/5_For_and_not_for_profit_comparison.html
-    Untracked:  code/Figure_2A.html
-    Untracked:  code/figure/
-    Untracked:  data/mission_statements/repositories/~$nodo_Principles.doc
-    Untracked:  data/mission_statements/~$RC_Vision and purpose.txt
-    Untracked:  output/Figure_2A/
-    Untracked:  output/Figure_2B/
-    Untracked:  output/Figure_2C/
-    Untracked:  output/Other_figures/
-    Untracked:  output/created_datasets/
 
 Unstaged changes:
-    Deleted:    code/1a_Data_preprocessing.Rmd
-    Deleted:    code/1b_Dictionaries_preparation.Rmd
-    Modified:   code/README.md
+    Modified:   analysis/1a_Data_preprocessing.Rmd
+    Modified:   analysis/2_Topic_modeling.Rmd
+    Modified:   analysis/3_Text_similarities_Figure_2B.Rmd
+    Modified:   analysis/4_Language_analysis_Figure_2C.Rmd
+    Modified:   analysis/5_For_and_not_for_profit_comparison.Rmd
+    Modified:   analysis/index.Rmd
+    Modified:   output/Figure_2C/language_business.png
+    Modified:   output/Other_figures/language_book.png
 
 </code></pre>
 <p>
@@ -643,10 +627,44 @@ Message
 <tbody>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/31239cdb6f2a315ad1b40f96f4dd983aaa397d87/analysis/4_Language_analysis_Figure_2C.Rmd" target="_blank">31239cd</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+<td>
+more organising and editing of workflowR mappings
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/zuzannazagrodzka/workflowr-policy-landscape/796aa8e52d5b1ef939301014acb1df11969def99/docs/4_Language_analysis_Figure_2C.html" target="_blank">796aa8e</a>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/0a21152a465ac56ab49b95ab1754c03552fd9f61/docs/4_Language_analysis_Figure_2C.html" target="_blank">0a21152</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2022-09-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/796aa8e52d5b1ef939301014acb1df11969def99/docs/4_Language_analysis_Figure_2C.html" target="_blank">796aa8e</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -663,7 +681,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/efb12025b35db2b4e815bc575445216d20c0d6f0/analysis/4_Language_analysis_Figure_2C.Rmd" target="_blank">efb1202</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/efb12025b35db2b4e815bc575445216d20c0d6f0/analysis/4_Language_analysis_Figure_2C.Rmd" target="_blank">efb1202</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -682,46 +700,55 @@ Publish other files
 </div>
 </div>
 </div>
-<p>Application of text analyses to reveal association between
-stakeholders and Open Research (UNESCO) and business language. The code
-below includes control (book). We decided to keep only words that are
-unique for each of the dictionary. It will enable us see the association
-and the divergence across the documents. We plotted the percentage of
-words that documents in the stakeholders groups share with the created
-by us dictionaries.</p>
+<div id="language-analyis-overview" class="section level1">
+<h1>Language Analyis Overview</h1>
+<p>Here we implement the application of text analyses to reveal
+association between stakeholders and Open Research (UNESCO) and business
+language.</p>
+<p>This produces Fig 2c.</p>
+<p>The code below includes the use of our control text corpus
+(book).</p>
+<p>We use only words that are unique for each of the dictionaries. This
+enables us see the association and the divergence across the documents.
+We plotted the percentage of words that documents in the stakeholders
+groups share with the created by us dictionaries.</p>
 <p>RATIO = number of words from one document present in one dictionary /
 total number of words in the document</p>
 <p>Note: duplicates were not removed (it matters how many times a
 certain word occurs in a document)</p>
-<p>Meaning of the columns in the final dataframe: “document” - name of
-the document “present_BUS” - a word is present (1) or absent (0) in the
-business dictionary “present_UNESCO” - a word is present (1) or absent
-(0) in the UNESCO Recommendations “present_book” - a word is present (1)
-or absent (0) in the book “doc_pres” - total number of words present in
-the document (1) “sum” - a total number of words that are present in our
-dictionaries “stakeholder” - name of the stakeholder
-(funder/publisher/advocate/society/repository/journal) “proc_BUS” - % of
-number of words present in the certain document and business dictionary
-/ total number of words in the certain document “proc_UNESCO” - % of
-number of words present in the certain document and UNESCO dictionary /
-total number of words in the certain document “proc_book” - % of number
-of words present in the certain document and book / total number of
-words in the certain document</p>
+<p>Meaning of the columns in the final dataframe used for plotting:</p>
+<ul>
+<li>“document” - name of the document</li>
+<li>“present_BUS” - a word is present (1) or absent (0) in the business
+dictionary</li>
+<li>“present_UNESCO” - a word is present (1) or absent (0) in the UNESCO
+Recommendations</li>
+<li>“present_book” - a word is present (1) or absent (0) in the
+book</li>
+<li>“doc_pres” - total number of words present in the document (1)</li>
+<li>“sum” - a total number of words that are present in our
+dictionaries</li>
+<li>“stakeholder” - name of the stakeholder
+(funder/publisher/advocate/society/repository/journal)</li>
+<li>“proc_BUS” - % of number of words present in the certain document
+and business dictionary / total number of words in the certain
+document</li>
+<li>“proc_UNESCO” - % of number of words present in the certain document
+and UNESCO dictionary / total number of words in the certain
+document</li>
+<li>“proc_book” - % of number of words present in the certain document
+and book / total number of words in the certain document</li>
+</ul>
+</div>
+<div id="r-setup-and-packages" class="section level1">
+<h1>R Setup and Packages</h1>
 <pre class="r"><code># Clearing R
 rm(list=ls())
 
 
 # Libraries used for text/data analysis
-library(tidyverse) </code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-✓ tibble  3.1.6     ✓ dplyr   1.0.7
-✓ tidyr   1.1.4     ✓ stringr 1.4.0
-✓ readr   2.0.2     ✓ forcats 0.5.1</code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-x dplyr::filter() masks stats::filter()
-x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(dplyr)
+library(tidyverse) 
+library(dplyr)
 library(tidytext)
 
 # Libraries used to create plots
@@ -729,20 +756,16 @@ library(ggplot2)
 
 # Library to create a table when converting to html
 library(&quot;kableExtra&quot;) </code></pre>
-<pre><code>
-Attaching package: &#39;kableExtra&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:dplyr&#39;:
-
-    group_rows</code></pre>
+</div>
 <div id="importing-data" class="section level1">
 <h1>Importing data</h1>
 <pre class="r"><code># Data: words, stakeholder, documents...
 df_corpuses &lt;- read_csv(&quot;./output/created_datasets/cleaned_data.csv&quot;)</code></pre>
-<pre><code>Rows: 22822 Columns: 10</code></pre>
-<pre><code>── Column specification ────────────────────────────────────────────────────────
+<pre><code>Rows: 22822 Columns: 10
+── Column specification ────────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
-chr (10): txt, filename, name, doc_type, stakeholder, sentence_doc, orig_wor...</code></pre>
-<pre><code>
+chr (10): txt, filename, name, doc_type, stakeholder, sentence_doc, orig_wor...
+
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>data_words &lt;- df_corpuses
@@ -751,14 +774,16 @@ chr (10): txt, filename, name, doc_type, stakeholder, sentence_doc, orig_wor...<
 # all_dict &lt;- read_csv(&quot;./output/created_datasets/freq_dict_total_100.csv&quot;)
 # All words
 all_dict &lt;- read_csv(&quot;./output/created_datasets/freq_dict_total_all.csv&quot;)</code></pre>
-<pre><code>Rows: 9587 Columns: 6</code></pre>
-<pre><code>── Column specification ────────────────────────────────────────────────────────
+<pre><code>Rows: 9587 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
 chr (1): word
-dbl (5): present_in_dict, present_BUS, present_UNESCO, present_book, sum</code></pre>
-<pre><code>
+dbl (5): present_in_dict, present_BUS, present_UNESCO, present_book, sum
+
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div id="data-preparation-and-cleaing" class="section level2">
+<h2>Data preparation and cleaing</h2>
 <pre class="r"><code># Data preparation
 
 # Changing name of the dictionary variable
@@ -1320,8 +1345,9 @@ European Society for Evolutionary Biology
 </tbody>
 </table>
 </div>
-<div id="graphs" class="section level1">
-<h1>Graphs</h1>
+</div>
+<div id="graph-generation" class="section level1">
+<h1>Graph generation</h1>
 <pre class="r"><code>no &lt;- nrow(df_sum_proc_ND)
 no</code></pre>
 <pre><code>[1] 129</code></pre>
@@ -1338,7 +1364,8 @@ sum_df_sum_proc_ND_book =
   group_by(stakeholder, type) %&gt;%
   # dplyr::summarise(perc = mean(perc), SD = sd(perc2))
   dplyr::summarise(perc = median(perc), SD = sd(perc2))</code></pre>
-<pre><code>`summarise()` has grouped output by &#39;stakeholder&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;stakeholder&#39;. You can override using the
+`.groups` argument.</code></pre>
 <pre class="r"><code>fig_book &lt;- ggplot() +
   geom_point(data = df_sum_proc_ND_book, aes(x = perc, y = stakeholder), alpha = 0.1, position = position_jitter()) +
   geom_pointrange(data = sum_df_sum_proc_ND_book, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = stakeholder)) +
@@ -1374,7 +1401,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-1.png" target="_blank">796aa8e</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-1.png" target="_blank">796aa8e</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -1406,7 +1433,8 @@ sum_df_sum_proc_ND_BUS =
   group_by(stakeholder, type) %&gt;%
   # dplyr::summarise(perc = mean(perc), SD = sd(perc2))
   dplyr::summarise(perc = median(perc), SD = sd(perc2))</code></pre>
-<pre><code>`summarise()` has grouped output by &#39;stakeholder&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;stakeholder&#39;. You can override using the
+`.groups` argument.</code></pre>
 <pre class="r"><code>fig_bus &lt;- ggplot() +
   geom_point(data = df_sum_proc_ND_BUS, aes(x = perc, y = stakeholder), alpha = 0.1, position = position_jitter()) +
   geom_pointrange(data = sum_df_sum_proc_ND_BUS, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = stakeholder)) +
@@ -1443,7 +1471,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-2.png" target="_blank">796aa8e</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-2.png" target="_blank">796aa8e</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -1475,7 +1503,8 @@ sum_df_sum_proc_ND_UNESCO =
   group_by(stakeholder, type) %&gt;%
   # dplyr::summarise(perc = mean(perc), SD = sd(perc2))
   dplyr::summarise(perc = median(perc), SD = sd(perc2))</code></pre>
-<pre><code>`summarise()` has grouped output by &#39;stakeholder&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;stakeholder&#39;. You can override using the
+`.groups` argument.</code></pre>
 <pre class="r"><code>fig_unesco &lt;- ggplot() +
   geom_point(data = df_sum_proc_ND_UNESCO, aes(x = perc, y = stakeholder), alpha = 0.1, position = position_jitter()) +
   geom_pointrange(data = sum_df_sum_proc_ND_UNESCO, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = stakeholder)) +
@@ -1511,7 +1540,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/zuzannazagrodzka/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-3.png" target="_blank">796aa8e</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-3.png" target="_blank">796aa8e</a>
 </td>
 <td>
 zuzannazagrodzka
@@ -1525,22 +1554,21 @@ zuzannazagrodzka
 </div>
 </div>
 <pre class="r"><code># Saving the figure
-figure_name &lt;- paste0(&quot;./output/Figure_2C/language_unesco.png&quot;)
-ggsave(filename = figure_name, fig_unesco  + theme_bw(base_size = 5),
-     width = 10, height = 5, dpi = 600, units = &quot;in&quot;, device=&#39;png&#39;)  </code></pre>
-<pre><code>Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
-use `guide = &quot;none&quot;` instead.</code></pre>
+# UNCOMMENT TO SAVE FIGURE
+# figure_name &lt;- paste0(&quot;./output/Figure_2C/language_unesco.png&quot;)
+# ggsave(filename = figure_name, fig_unesco  + theme_bw(base_size = 5),
+#      width = 10, height = 5, dpi = 600, units = &quot;in&quot;, device=&#39;png&#39;)  </code></pre>
 </div>
 <div id="session-information" class="section level1">
 <h1>Session information</h1>
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.3 (2020-10-10)
+<pre><code>R version 4.2.1 (2022-06-23)
 Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur 10.16
+Running under: macOS Big Sur ... 10.16
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
 
 locale:
 [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
@@ -1549,32 +1577,39 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.3.4 tidytext_0.3.2   forcats_0.5.1    stringr_1.4.0   
- [5] dplyr_1.0.7      purrr_0.3.4      readr_2.0.2      tidyr_1.1.4     
- [9] tibble_3.1.6     ggplot2_3.3.5    tidyverse_1.3.1  workflowr_1.7.0 
+ [1] kableExtra_1.3.4 tidytext_0.3.4   forcats_0.5.2    stringr_1.4.1   
+ [5] dplyr_1.0.10     purrr_0.3.5      readr_2.1.3      tidyr_1.2.1     
+ [9] tibble_3.1.8     ggplot2_3.3.6    tidyverse_1.3.2 
 
 loaded via a namespace (and not attached):
- [1] fs_1.5.0          lubridate_1.7.10  bit64_4.0.5       webshot_0.5.2    
- [5] httr_1.4.2        rprojroot_2.0.2   SnowballC_0.7.0   tools_4.0.3      
- [9] backports_1.2.1   bslib_0.3.0       utf8_1.2.2        R6_2.5.1         
-[13] DBI_1.1.1         colorspace_2.0-2  withr_2.4.2       tidyselect_1.1.1 
-[17] processx_3.5.2    bit_4.0.4         compiler_4.0.3    git2r_0.29.0     
-[21] textshaping_0.3.5 cli_3.1.0         rvest_1.0.1       xml2_1.3.2       
-[25] labeling_0.4.2    sass_0.4.0        scales_1.1.1      callr_3.7.0      
-[29] systemfonts_1.0.2 digest_0.6.28     rmarkdown_2.11    svglite_2.0.0    
-[33] pkgconfig_2.0.3   htmltools_0.5.2   dbplyr_2.1.1      fastmap_1.1.0    
-[37] highr_0.9         rlang_0.4.12      readxl_1.3.1      rstudioapi_0.13  
-[41] farver_2.1.0      jquerylib_0.1.4   generics_0.1.1    jsonlite_1.7.2   
-[45] vroom_1.5.5       tokenizers_0.2.1  magrittr_2.0.3    Matrix_1.3-4     
-[49] Rcpp_1.0.7        munsell_0.5.0     fansi_0.5.0       lifecycle_1.0.1  
-[53] stringi_1.7.5     whisker_0.4       yaml_2.2.1        grid_4.0.3       
-[57] parallel_4.0.3    promises_1.2.0.1  crayon_1.4.2      lattice_0.20-45  
-[61] haven_2.4.3       hms_1.1.1         knitr_1.36        ps_1.6.0         
-[65] pillar_1.6.4      reprex_2.0.1      glue_1.5.0        evaluate_0.14    
-[69] getPass_0.2-2     modelr_0.1.8      vctrs_0.3.8       tzdb_0.1.2       
-[73] httpuv_1.6.3      cellranger_1.1.0  gtable_0.3.0      assertthat_0.2.1 
-[77] xfun_0.31         broom_0.7.9       janeaustenr_0.1.5 later_1.3.0      
-[81] ragg_1.1.3        viridisLite_0.4.0 ellipsis_0.3.2   </code></pre>
+ [1] fs_1.5.2            lubridate_1.8.0     bit64_4.0.5        
+ [4] webshot_0.5.4       httr_1.4.4          rprojroot_2.0.3    
+ [7] SnowballC_0.7.0     tools_4.2.1         backports_1.4.1    
+[10] bslib_0.4.0         utf8_1.2.2          R6_2.5.1           
+[13] DBI_1.1.3           colorspace_2.0-3    withr_2.5.0        
+[16] tidyselect_1.2.0    bit_4.0.4           compiler_4.2.1     
+[19] git2r_0.30.1        textshaping_0.3.6   cli_3.4.1          
+[22] rvest_1.0.3         xml2_1.3.3          labeling_0.4.2     
+[25] sass_0.4.2          scales_1.2.1        systemfonts_1.0.4  
+[28] digest_0.6.29       rmarkdown_2.16      svglite_2.1.0      
+[31] pkgconfig_2.0.3     htmltools_0.5.3     dbplyr_2.2.1       
+[34] fastmap_1.1.0       highr_0.9           rlang_1.0.6        
+[37] readxl_1.4.1        rstudioapi_0.14     farver_2.1.1       
+[40] jquerylib_0.1.4     generics_0.1.3      jsonlite_1.8.3     
+[43] vroom_1.6.0         tokenizers_0.2.3    googlesheets4_1.0.1
+[46] magrittr_2.0.3      Matrix_1.4-1        Rcpp_1.0.9         
+[49] munsell_0.5.0       fansi_1.0.3         lifecycle_1.0.3    
+[52] stringi_1.7.8       whisker_0.4         yaml_2.3.6         
+[55] grid_4.2.1          parallel_4.2.1      promises_1.2.0.1   
+[58] crayon_1.5.2        lattice_0.20-45     haven_2.5.1        
+[61] hms_1.1.2           knitr_1.40          pillar_1.8.1       
+[64] reprex_2.0.2        glue_1.6.2          evaluate_0.16      
+[67] modelr_0.1.9        vctrs_0.5.0         tzdb_0.3.0         
+[70] httpuv_1.6.6        cellranger_1.1.0    gtable_0.3.1       
+[73] assertthat_0.2.1    cachem_1.0.6        xfun_0.33          
+[76] broom_1.0.1         janeaustenr_1.0.0   later_1.3.0        
+[79] ragg_1.2.4          googledrive_2.0.0   viridisLite_0.4.1  
+[82] gargle_1.2.1        workflowr_1.7.0     ellipsis_0.3.2     </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1584,13 +1619,13 @@ Session information
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.3 (2020-10-10)
+<pre><code>R version 4.2.1 (2022-06-23)
 Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur 10.16
+Running under: macOS Big Sur ... 10.16
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
 
 locale:
 [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
@@ -1599,32 +1634,39 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.3.4 tidytext_0.3.2   forcats_0.5.1    stringr_1.4.0   
- [5] dplyr_1.0.7      purrr_0.3.4      readr_2.0.2      tidyr_1.1.4     
- [9] tibble_3.1.6     ggplot2_3.3.5    tidyverse_1.3.1  workflowr_1.7.0 
+ [1] kableExtra_1.3.4 tidytext_0.3.4   forcats_0.5.2    stringr_1.4.1   
+ [5] dplyr_1.0.10     purrr_0.3.5      readr_2.1.3      tidyr_1.2.1     
+ [9] tibble_3.1.8     ggplot2_3.3.6    tidyverse_1.3.2 
 
 loaded via a namespace (and not attached):
- [1] fs_1.5.0          lubridate_1.7.10  bit64_4.0.5       webshot_0.5.2    
- [5] httr_1.4.2        rprojroot_2.0.2   SnowballC_0.7.0   tools_4.0.3      
- [9] backports_1.2.1   bslib_0.3.0       utf8_1.2.2        R6_2.5.1         
-[13] DBI_1.1.1         colorspace_2.0-2  withr_2.4.2       tidyselect_1.1.1 
-[17] processx_3.5.2    bit_4.0.4         compiler_4.0.3    git2r_0.29.0     
-[21] textshaping_0.3.5 cli_3.1.0         rvest_1.0.1       xml2_1.3.2       
-[25] labeling_0.4.2    sass_0.4.0        scales_1.1.1      callr_3.7.0      
-[29] systemfonts_1.0.2 digest_0.6.28     rmarkdown_2.11    svglite_2.0.0    
-[33] pkgconfig_2.0.3   htmltools_0.5.2   dbplyr_2.1.1      fastmap_1.1.0    
-[37] highr_0.9         rlang_0.4.12      readxl_1.3.1      rstudioapi_0.13  
-[41] farver_2.1.0      jquerylib_0.1.4   generics_0.1.1    jsonlite_1.7.2   
-[45] vroom_1.5.5       tokenizers_0.2.1  magrittr_2.0.3    Matrix_1.3-4     
-[49] Rcpp_1.0.7        munsell_0.5.0     fansi_0.5.0       lifecycle_1.0.1  
-[53] stringi_1.7.5     whisker_0.4       yaml_2.2.1        grid_4.0.3       
-[57] parallel_4.0.3    promises_1.2.0.1  crayon_1.4.2      lattice_0.20-45  
-[61] haven_2.4.3       hms_1.1.1         knitr_1.36        ps_1.6.0         
-[65] pillar_1.6.4      reprex_2.0.1      glue_1.5.0        evaluate_0.14    
-[69] getPass_0.2-2     modelr_0.1.8      vctrs_0.3.8       tzdb_0.1.2       
-[73] httpuv_1.6.3      cellranger_1.1.0  gtable_0.3.0      assertthat_0.2.1 
-[77] xfun_0.31         broom_0.7.9       janeaustenr_0.1.5 later_1.3.0      
-[81] ragg_1.1.3        viridisLite_0.4.0 ellipsis_0.3.2   </code></pre>
+ [1] fs_1.5.2            lubridate_1.8.0     bit64_4.0.5        
+ [4] webshot_0.5.4       httr_1.4.4          rprojroot_2.0.3    
+ [7] SnowballC_0.7.0     tools_4.2.1         backports_1.4.1    
+[10] bslib_0.4.0         utf8_1.2.2          R6_2.5.1           
+[13] DBI_1.1.3           colorspace_2.0-3    withr_2.5.0        
+[16] tidyselect_1.2.0    bit_4.0.4           compiler_4.2.1     
+[19] git2r_0.30.1        textshaping_0.3.6   cli_3.4.1          
+[22] rvest_1.0.3         xml2_1.3.3          labeling_0.4.2     
+[25] sass_0.4.2          scales_1.2.1        systemfonts_1.0.4  
+[28] digest_0.6.29       rmarkdown_2.16      svglite_2.1.0      
+[31] pkgconfig_2.0.3     htmltools_0.5.3     dbplyr_2.2.1       
+[34] fastmap_1.1.0       highr_0.9           rlang_1.0.6        
+[37] readxl_1.4.1        rstudioapi_0.14     farver_2.1.1       
+[40] jquerylib_0.1.4     generics_0.1.3      jsonlite_1.8.3     
+[43] vroom_1.6.0         tokenizers_0.2.3    googlesheets4_1.0.1
+[46] magrittr_2.0.3      Matrix_1.4-1        Rcpp_1.0.9         
+[49] munsell_0.5.0       fansi_1.0.3         lifecycle_1.0.3    
+[52] stringi_1.7.8       whisker_0.4         yaml_2.3.6         
+[55] grid_4.2.1          parallel_4.2.1      promises_1.2.0.1   
+[58] crayon_1.5.2        lattice_0.20-45     haven_2.5.1        
+[61] hms_1.1.2           knitr_1.40          pillar_1.8.1       
+[64] reprex_2.0.2        glue_1.6.2          evaluate_0.16      
+[67] modelr_0.1.9        vctrs_0.5.0         tzdb_0.3.0         
+[70] httpuv_1.6.6        cellranger_1.1.0    gtable_0.3.1       
+[73] assertthat_0.2.1    cachem_1.0.6        xfun_0.33          
+[76] broom_1.0.1         janeaustenr_1.0.0   later_1.3.0        
+[79] ragg_1.2.4          googledrive_2.0.0   viridisLite_0.4.1  
+[82] gargle_1.2.1        workflowr_1.7.0     ellipsis_0.3.2     </code></pre>
 </div>
 </div>
 
