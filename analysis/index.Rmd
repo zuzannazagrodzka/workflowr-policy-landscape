@@ -27,6 +27,4 @@ editor_options:
 
 <!-- wflow_publish("analysis/_site.yml", "Change the theme", republish = TRUE) -->
 
-<br>
-
 
