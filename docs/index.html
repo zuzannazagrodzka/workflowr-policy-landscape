@@ -302,7 +302,7 @@ Johnson</h4>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -313,8 +313,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -327,9 +327,9 @@ aria-hidden="true"></span> </a>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong>
@@ -353,21 +353,18 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
@@ -458,15 +455,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree31239cdb6f2a315ad1b40f96f4dd983aaa397d87targetblank31239cda">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree211acd576aee33be0cbe6872e19d9cb2648e1f2dtargetblank211acd5a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/31239cdb6f2a315ad1b40f96f4dd983aaa397d87" target="_blank">31239cd</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/211acd576aee33be0cbe6872e19d9cb2648e1f2d" target="_blank">211acd5</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree31239cdb6f2a315ad1b40f96f4dd983aaa397d87targetblank31239cda"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree211acd576aee33be0cbe6872e19d9cb2648e1f2dtargetblank211acd5a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -476,7 +473,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/31239cdb6f2a315ad1b40f96f4dd983aaa397d87" target="_blank">31239cd</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/211acd576aee33be0cbe6872e19d9cb2648e1f2d" target="_blank">211acd5</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -495,15 +492,7 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Unstaged changes:
-    Modified:   analysis/1a_Data_preprocessing.Rmd
-    Modified:   analysis/2_Topic_modeling.Rmd
-    Modified:   analysis/3_Text_similarities_Figure_2B.Rmd
-    Modified:   analysis/4_Language_analysis_Figure_2C.Rmd
-    Modified:   analysis/5_For_and_not_for_profit_comparison.Rmd
-    Modified:   analysis/Figure_2A.Rmd
-    Modified:   analysis/index.Rmd
-    Modified:   output/Figure_2C/language_business.png
-    Modified:   output/Other_figures/language_book.png
+    Modified:   Policy_landscape_workflowr.R
 
 </code></pre>
 <p>
@@ -548,6 +537,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/analysis/index.Rmd" target="_blank">e08d7ac</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+<td>
+more organising and editing of workflowR mappings
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/index.html" target="_blank">e08d7ac</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+<td>
+more organising and editing of workflowR mappings
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -933,17 +956,21 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+[1] workflowr_1.7.0
+
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.9       rstudioapi_0.14  whisker_0.4      knitr_1.40      
- [5] magrittr_2.0.3   workflowr_1.7.0  R6_2.5.1         rlang_1.0.6     
- [9] fastmap_1.1.0    fansi_1.0.3      stringr_1.4.1    tools_4.2.1     
-[13] xfun_0.33        utf8_1.2.2       cli_3.4.1        git2r_0.30.1    
-[17] jquerylib_0.1.4  htmltools_0.5.3  rprojroot_2.0.3  yaml_2.3.6      
-[21] digest_0.6.29    tibble_3.1.8     lifecycle_1.0.3  later_1.3.0     
-[25] sass_0.4.2       vctrs_0.5.0      promises_1.2.0.1 fs_1.5.2        
-[29] cachem_1.0.6     glue_1.6.2       evaluate_0.16    rmarkdown_2.16  
-[33] stringi_1.7.8    bslib_0.4.0      compiler_4.2.1   pillar_1.8.1    
-[37] jsonlite_1.8.3   httpuv_1.6.6     pkgconfig_2.0.3 </code></pre>
+ [1] Rcpp_1.0.9       compiler_4.2.1   pillar_1.8.1     bslib_0.4.0     
+ [5] later_1.3.0      git2r_0.30.1     jquerylib_0.1.4  tools_4.2.1     
+ [9] getPass_0.2-2    digest_0.6.29    jsonlite_1.8.3   evaluate_0.16   
+[13] tibble_3.1.8     lifecycle_1.0.3  pkgconfig_2.0.3  rlang_1.0.6     
+[17] cli_3.4.1        rstudioapi_0.14  yaml_2.3.6       xfun_0.33       
+[21] fastmap_1.1.0    httr_1.4.4       stringr_1.4.1    knitr_1.40      
+[25] fs_1.5.2         vctrs_0.5.0      sass_0.4.2       rprojroot_2.0.3 
+[29] glue_1.6.2       R6_2.5.1         processx_3.7.0   fansi_1.0.3     
+[33] rmarkdown_2.16   callr_3.7.2      magrittr_2.0.3   whisker_0.4     
+[37] ps_1.7.1         promises_1.2.0.1 htmltools_0.5.3  httpuv_1.6.6    
+[41] utf8_1.2.2       stringi_1.7.8    cachem_1.0.6    </code></pre>
 </div>
 
 

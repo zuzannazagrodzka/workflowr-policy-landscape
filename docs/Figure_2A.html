@@ -376,7 +376,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -387,8 +387,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -401,9 +401,9 @@ aria-hidden="true"></span> </a>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong>
@@ -427,21 +427,18 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
@@ -532,15 +529,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree31239cdb6f2a315ad1b40f96f4dd983aaa397d87targetblank31239cda">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree211acd576aee33be0cbe6872e19d9cb2648e1f2dtargetblank211acd5a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/31239cdb6f2a315ad1b40f96f4dd983aaa397d87" target="_blank">31239cd</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/211acd576aee33be0cbe6872e19d9cb2648e1f2d" target="_blank">211acd5</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree31239cdb6f2a315ad1b40f96f4dd983aaa397d87targetblank31239cda"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree211acd576aee33be0cbe6872e19d9cb2648e1f2dtargetblank211acd5a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -550,7 +547,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/31239cdb6f2a315ad1b40f96f4dd983aaa397d87" target="_blank">31239cd</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/211acd576aee33be0cbe6872e19d9cb2648e1f2d" target="_blank">211acd5</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -569,15 +566,7 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Unstaged changes:
-    Modified:   analysis/1a_Data_preprocessing.Rmd
-    Modified:   analysis/2_Topic_modeling.Rmd
-    Modified:   analysis/3_Text_similarities_Figure_2B.Rmd
-    Modified:   analysis/4_Language_analysis_Figure_2C.Rmd
-    Modified:   analysis/5_For_and_not_for_profit_comparison.Rmd
-    Modified:   analysis/Figure_2A.Rmd
-    Modified:   analysis/index.Rmd
-    Modified:   output/Figure_2C/language_business.png
-    Modified:   output/Other_figures/language_book.png
+    Modified:   Policy_landscape_workflowr.R
 
 </code></pre>
 <p>
@@ -623,6 +612,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/analysis/Figure_2A.Rmd" target="_blank">e08d7ac</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+<td>
+more organising and editing of workflowR mappings
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/Figure_2A.html" target="_blank">e08d7ac</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+<td>
+more organising and editing of workflowR mappings
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -767,6 +790,43 @@ sum_figure1_gamma_wide2 =
 
 figure_topics</code></pre>
 <p><img src="figure/Figure_2A.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/figure/Figure_2A.Rmd/unnamed-chunk-4-1.png" target="_blank">e08d7ac</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># # UNCOMMENT TO SAVE FIGURES
 
 # figure_name &lt;- paste0(&quot;./output/Figure_2A/Figure_2A.png&quot;)
@@ -793,36 +853,37 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] forcats_0.5.2   stringr_1.4.1   dplyr_1.0.10    purrr_0.3.5    
-[5] readr_2.1.3     tidyr_1.2.1     tibble_3.1.8    ggplot2_3.3.6  
-[9] tidyverse_1.3.2
+ [1] forcats_0.5.2   stringr_1.4.1   dplyr_1.0.10    purrr_0.3.5    
+ [5] readr_2.1.3     tidyr_1.2.1     tibble_3.1.8    ggplot2_3.3.6  
+ [9] tidyverse_1.3.2 workflowr_1.7.0
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.9          lubridate_1.8.0     assertthat_0.2.1   
- [4] rprojroot_2.0.3     digest_0.6.29       utf8_1.2.2         
- [7] R6_2.5.1            cellranger_1.1.0    backports_1.4.1    
-[10] reprex_2.0.2        evaluate_0.16       highr_0.9          
-[13] httr_1.4.4          pillar_1.8.1        rlang_1.0.6        
-[16] googlesheets4_1.0.1 readxl_1.4.1        rstudioapi_0.14    
-[19] whisker_0.4         jquerylib_0.1.4     rmarkdown_2.16     
-[22] labeling_0.4.2      googledrive_2.0.0   bit_4.0.4          
-[25] munsell_0.5.0       broom_1.0.1         compiler_4.2.1     
-[28] httpuv_1.6.6        modelr_0.1.9        xfun_0.33          
-[31] pkgconfig_2.0.3     htmltools_0.5.3     tidyselect_1.2.0   
-[34] workflowr_1.7.0     fansi_1.0.3         crayon_1.5.2       
-[37] withr_2.5.0         tzdb_0.3.0          dbplyr_2.2.1       
-[40] later_1.3.0         grid_4.2.1          jsonlite_1.8.3     
-[43] gtable_0.3.1        lifecycle_1.0.3     DBI_1.1.3          
-[46] git2r_0.30.1        magrittr_2.0.3      scales_1.2.1       
-[49] vroom_1.6.0         cli_3.4.1           stringi_1.7.8      
-[52] cachem_1.0.6        farver_2.1.1        fs_1.5.2           
-[55] promises_1.2.0.1    xml2_1.3.3          bslib_0.4.0        
-[58] ellipsis_0.3.2      generics_0.1.3      vctrs_0.5.0        
-[61] tools_4.2.1         bit64_4.0.5         glue_1.6.2         
-[64] hms_1.1.2           parallel_4.2.1      fastmap_1.1.0      
-[67] yaml_2.3.6          colorspace_2.0-3    gargle_1.2.1       
-[70] rvest_1.0.3         knitr_1.40          haven_2.5.1        
-[73] sass_0.4.2         </code></pre>
+ [1] httr_1.4.4          sass_0.4.2          bit64_4.0.5        
+ [4] vroom_1.6.0         jsonlite_1.8.3      modelr_0.1.9       
+ [7] bslib_0.4.0         assertthat_0.2.1    getPass_0.2-2      
+[10] highr_0.9           googlesheets4_1.0.1 cellranger_1.1.0   
+[13] yaml_2.3.6          pillar_1.8.1        backports_1.4.1    
+[16] glue_1.6.2          digest_0.6.29       promises_1.2.0.1   
+[19] rvest_1.0.3         colorspace_2.0-3    htmltools_0.5.3    
+[22] httpuv_1.6.6        pkgconfig_2.0.3     broom_1.0.1        
+[25] haven_2.5.1         scales_1.2.1        processx_3.7.0     
+[28] whisker_0.4         later_1.3.0         tzdb_0.3.0         
+[31] git2r_0.30.1        googledrive_2.0.0   generics_0.1.3     
+[34] farver_2.1.1        ellipsis_0.3.2      cachem_1.0.6       
+[37] withr_2.5.0         cli_3.4.1           magrittr_2.0.3     
+[40] crayon_1.5.2        readxl_1.4.1        evaluate_0.16      
+[43] ps_1.7.1            fs_1.5.2            fansi_1.0.3        
+[46] xml2_1.3.3          tools_4.2.1         hms_1.1.2          
+[49] gargle_1.2.1        lifecycle_1.0.3     munsell_0.5.0      
+[52] reprex_2.0.2        callr_3.7.2         compiler_4.2.1     
+[55] jquerylib_0.1.4     rlang_1.0.6         grid_4.2.1         
+[58] rstudioapi_0.14     labeling_0.4.2      rmarkdown_2.16     
+[61] gtable_0.3.1        DBI_1.1.3           R6_2.5.1           
+[64] lubridate_1.8.0     knitr_1.40          fastmap_1.1.0      
+[67] bit_4.0.4           utf8_1.2.2          rprojroot_2.0.3    
+[70] stringi_1.7.8       parallel_4.2.1      Rcpp_1.0.9         
+[73] vctrs_0.5.0         dbplyr_2.2.1        tidyselect_1.2.0   
+[76] xfun_0.33          </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -847,36 +908,37 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] forcats_0.5.2   stringr_1.4.1   dplyr_1.0.10    purrr_0.3.5    
-[5] readr_2.1.3     tidyr_1.2.1     tibble_3.1.8    ggplot2_3.3.6  
-[9] tidyverse_1.3.2
+ [1] forcats_0.5.2   stringr_1.4.1   dplyr_1.0.10    purrr_0.3.5    
+ [5] readr_2.1.3     tidyr_1.2.1     tibble_3.1.8    ggplot2_3.3.6  
+ [9] tidyverse_1.3.2 workflowr_1.7.0
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.9          lubridate_1.8.0     assertthat_0.2.1   
- [4] rprojroot_2.0.3     digest_0.6.29       utf8_1.2.2         
- [7] R6_2.5.1            cellranger_1.1.0    backports_1.4.1    
-[10] reprex_2.0.2        evaluate_0.16       highr_0.9          
-[13] httr_1.4.4          pillar_1.8.1        rlang_1.0.6        
-[16] googlesheets4_1.0.1 readxl_1.4.1        rstudioapi_0.14    
-[19] whisker_0.4         jquerylib_0.1.4     rmarkdown_2.16     
-[22] labeling_0.4.2      googledrive_2.0.0   bit_4.0.4          
-[25] munsell_0.5.0       broom_1.0.1         compiler_4.2.1     
-[28] httpuv_1.6.6        modelr_0.1.9        xfun_0.33          
-[31] pkgconfig_2.0.3     htmltools_0.5.3     tidyselect_1.2.0   
-[34] workflowr_1.7.0     fansi_1.0.3         crayon_1.5.2       
-[37] withr_2.5.0         tzdb_0.3.0          dbplyr_2.2.1       
-[40] later_1.3.0         grid_4.2.1          jsonlite_1.8.3     
-[43] gtable_0.3.1        lifecycle_1.0.3     DBI_1.1.3          
-[46] git2r_0.30.1        magrittr_2.0.3      scales_1.2.1       
-[49] vroom_1.6.0         cli_3.4.1           stringi_1.7.8      
-[52] cachem_1.0.6        farver_2.1.1        fs_1.5.2           
-[55] promises_1.2.0.1    xml2_1.3.3          bslib_0.4.0        
-[58] ellipsis_0.3.2      generics_0.1.3      vctrs_0.5.0        
-[61] tools_4.2.1         bit64_4.0.5         glue_1.6.2         
-[64] hms_1.1.2           parallel_4.2.1      fastmap_1.1.0      
-[67] yaml_2.3.6          colorspace_2.0-3    gargle_1.2.1       
-[70] rvest_1.0.3         knitr_1.40          haven_2.5.1        
-[73] sass_0.4.2         </code></pre>
+ [1] httr_1.4.4          sass_0.4.2          bit64_4.0.5        
+ [4] vroom_1.6.0         jsonlite_1.8.3      modelr_0.1.9       
+ [7] bslib_0.4.0         assertthat_0.2.1    getPass_0.2-2      
+[10] highr_0.9           googlesheets4_1.0.1 cellranger_1.1.0   
+[13] yaml_2.3.6          pillar_1.8.1        backports_1.4.1    
+[16] glue_1.6.2          digest_0.6.29       promises_1.2.0.1   
+[19] rvest_1.0.3         colorspace_2.0-3    htmltools_0.5.3    
+[22] httpuv_1.6.6        pkgconfig_2.0.3     broom_1.0.1        
+[25] haven_2.5.1         scales_1.2.1        processx_3.7.0     
+[28] whisker_0.4         later_1.3.0         tzdb_0.3.0         
+[31] git2r_0.30.1        googledrive_2.0.0   generics_0.1.3     
+[34] farver_2.1.1        ellipsis_0.3.2      cachem_1.0.6       
+[37] withr_2.5.0         cli_3.4.1           magrittr_2.0.3     
+[40] crayon_1.5.2        readxl_1.4.1        evaluate_0.16      
+[43] ps_1.7.1            fs_1.5.2            fansi_1.0.3        
+[46] xml2_1.3.3          tools_4.2.1         hms_1.1.2          
+[49] gargle_1.2.1        lifecycle_1.0.3     munsell_0.5.0      
+[52] reprex_2.0.2        callr_3.7.2         compiler_4.2.1     
+[55] jquerylib_0.1.4     rlang_1.0.6         grid_4.2.1         
+[58] rstudioapi_0.14     labeling_0.4.2      rmarkdown_2.16     
+[61] gtable_0.3.1        DBI_1.1.3           R6_2.5.1           
+[64] lubridate_1.8.0     knitr_1.40          fastmap_1.1.0      
+[67] bit_4.0.4           utf8_1.2.2          rprojroot_2.0.3    
+[70] stringi_1.7.8       parallel_4.2.1      Rcpp_1.0.9         
+[73] vctrs_0.5.0         dbplyr_2.2.1        tidyselect_1.2.0   
+[76] xfun_0.33          </code></pre>
 </div>
 </div>
 

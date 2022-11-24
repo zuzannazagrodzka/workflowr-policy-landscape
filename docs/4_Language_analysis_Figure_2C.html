@@ -378,7 +378,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -389,8 +389,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -403,9 +403,9 @@ aria-hidden="true"></span> </a>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong>
@@ -429,21 +429,18 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
@@ -534,15 +531,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree31239cdb6f2a315ad1b40f96f4dd983aaa397d87targetblank31239cda">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree211acd576aee33be0cbe6872e19d9cb2648e1f2dtargetblank211acd5a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/31239cdb6f2a315ad1b40f96f4dd983aaa397d87" target="_blank">31239cd</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/211acd576aee33be0cbe6872e19d9cb2648e1f2d" target="_blank">211acd5</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree31239cdb6f2a315ad1b40f96f4dd983aaa397d87targetblank31239cda"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree211acd576aee33be0cbe6872e19d9cb2648e1f2dtargetblank211acd5a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -552,7 +549,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/31239cdb6f2a315ad1b40f96f4dd983aaa397d87" target="_blank">31239cd</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/211acd576aee33be0cbe6872e19d9cb2648e1f2d" target="_blank">211acd5</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -571,14 +568,7 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Unstaged changes:
-    Modified:   analysis/1a_Data_preprocessing.Rmd
-    Modified:   analysis/2_Topic_modeling.Rmd
-    Modified:   analysis/3_Text_similarities_Figure_2B.Rmd
-    Modified:   analysis/4_Language_analysis_Figure_2C.Rmd
-    Modified:   analysis/5_For_and_not_for_profit_comparison.Rmd
-    Modified:   analysis/index.Rmd
-    Modified:   output/Figure_2C/language_business.png
-    Modified:   output/Other_figures/language_book.png
+    Modified:   Policy_landscape_workflowr.R
 
 </code></pre>
 <p>
@@ -625,6 +615,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/analysis/4_Language_analysis_Figure_2C.Rmd" target="_blank">e08d7ac</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+<td>
+more organising and editing of workflowR mappings
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/4_Language_analysis_Figure_2C.html" target="_blank">e08d7ac</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+<td>
+more organising and editing of workflowR mappings
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1579,7 +1603,7 @@ attached base packages:
 other attached packages:
  [1] kableExtra_1.3.4 tidytext_0.3.4   forcats_0.5.2    stringr_1.4.1   
  [5] dplyr_1.0.10     purrr_0.3.5      readr_2.1.3      tidyr_1.2.1     
- [9] tibble_3.1.8     ggplot2_3.3.6    tidyverse_1.3.2 
+ [9] tibble_3.1.8     ggplot2_3.3.6    tidyverse_1.3.2  workflowr_1.7.0 
 
 loaded via a namespace (and not attached):
  [1] fs_1.5.2            lubridate_1.8.0     bit64_4.0.5        
@@ -1587,29 +1611,30 @@ loaded via a namespace (and not attached):
  [7] SnowballC_0.7.0     tools_4.2.1         backports_1.4.1    
 [10] bslib_0.4.0         utf8_1.2.2          R6_2.5.1           
 [13] DBI_1.1.3           colorspace_2.0-3    withr_2.5.0        
-[16] tidyselect_1.2.0    bit_4.0.4           compiler_4.2.1     
-[19] git2r_0.30.1        textshaping_0.3.6   cli_3.4.1          
-[22] rvest_1.0.3         xml2_1.3.3          labeling_0.4.2     
-[25] sass_0.4.2          scales_1.2.1        systemfonts_1.0.4  
-[28] digest_0.6.29       rmarkdown_2.16      svglite_2.1.0      
-[31] pkgconfig_2.0.3     htmltools_0.5.3     dbplyr_2.2.1       
-[34] fastmap_1.1.0       highr_0.9           rlang_1.0.6        
-[37] readxl_1.4.1        rstudioapi_0.14     farver_2.1.1       
-[40] jquerylib_0.1.4     generics_0.1.3      jsonlite_1.8.3     
-[43] vroom_1.6.0         tokenizers_0.2.3    googlesheets4_1.0.1
-[46] magrittr_2.0.3      Matrix_1.4-1        Rcpp_1.0.9         
-[49] munsell_0.5.0       fansi_1.0.3         lifecycle_1.0.3    
-[52] stringi_1.7.8       whisker_0.4         yaml_2.3.6         
-[55] grid_4.2.1          parallel_4.2.1      promises_1.2.0.1   
-[58] crayon_1.5.2        lattice_0.20-45     haven_2.5.1        
-[61] hms_1.1.2           knitr_1.40          pillar_1.8.1       
-[64] reprex_2.0.2        glue_1.6.2          evaluate_0.16      
-[67] modelr_0.1.9        vctrs_0.5.0         tzdb_0.3.0         
-[70] httpuv_1.6.6        cellranger_1.1.0    gtable_0.3.1       
-[73] assertthat_0.2.1    cachem_1.0.6        xfun_0.33          
-[76] broom_1.0.1         janeaustenr_1.0.0   later_1.3.0        
-[79] ragg_1.2.4          googledrive_2.0.0   viridisLite_0.4.1  
-[82] gargle_1.2.1        workflowr_1.7.0     ellipsis_0.3.2     </code></pre>
+[16] tidyselect_1.2.0    processx_3.7.0      bit_4.0.4          
+[19] compiler_4.2.1      git2r_0.30.1        textshaping_0.3.6  
+[22] cli_3.4.1           rvest_1.0.3         xml2_1.3.3         
+[25] labeling_0.4.2      sass_0.4.2          scales_1.2.1       
+[28] callr_3.7.2         systemfonts_1.0.4   digest_0.6.29      
+[31] rmarkdown_2.16      svglite_2.1.0       pkgconfig_2.0.3    
+[34] htmltools_0.5.3     highr_0.9           dbplyr_2.2.1       
+[37] fastmap_1.1.0       rlang_1.0.6         readxl_1.4.1       
+[40] rstudioapi_0.14     farver_2.1.1        jquerylib_0.1.4    
+[43] generics_0.1.3      jsonlite_1.8.3      vroom_1.6.0        
+[46] tokenizers_0.2.3    googlesheets4_1.0.1 magrittr_2.0.3     
+[49] Matrix_1.4-1        Rcpp_1.0.9          munsell_0.5.0      
+[52] fansi_1.0.3         lifecycle_1.0.3     stringi_1.7.8      
+[55] whisker_0.4         yaml_2.3.6          grid_4.2.1         
+[58] parallel_4.2.1      promises_1.2.0.1    crayon_1.5.2       
+[61] lattice_0.20-45     haven_2.5.1         hms_1.1.2          
+[64] knitr_1.40          ps_1.7.1            pillar_1.8.1       
+[67] reprex_2.0.2        glue_1.6.2          evaluate_0.16      
+[70] getPass_0.2-2       modelr_0.1.9        vctrs_0.5.0        
+[73] tzdb_0.3.0          httpuv_1.6.6        cellranger_1.1.0   
+[76] gtable_0.3.1        assertthat_0.2.1    cachem_1.0.6       
+[79] xfun_0.33           broom_1.0.1         janeaustenr_1.0.0  
+[82] later_1.3.0         ragg_1.2.4          googledrive_2.0.0  
+[85] viridisLite_0.4.1   gargle_1.2.1        ellipsis_0.3.2     </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1636,7 +1661,7 @@ attached base packages:
 other attached packages:
  [1] kableExtra_1.3.4 tidytext_0.3.4   forcats_0.5.2    stringr_1.4.1   
  [5] dplyr_1.0.10     purrr_0.3.5      readr_2.1.3      tidyr_1.2.1     
- [9] tibble_3.1.8     ggplot2_3.3.6    tidyverse_1.3.2 
+ [9] tibble_3.1.8     ggplot2_3.3.6    tidyverse_1.3.2  workflowr_1.7.0 
 
 loaded via a namespace (and not attached):
  [1] fs_1.5.2            lubridate_1.8.0     bit64_4.0.5        
@@ -1644,29 +1669,30 @@ loaded via a namespace (and not attached):
  [7] SnowballC_0.7.0     tools_4.2.1         backports_1.4.1    
 [10] bslib_0.4.0         utf8_1.2.2          R6_2.5.1           
 [13] DBI_1.1.3           colorspace_2.0-3    withr_2.5.0        
-[16] tidyselect_1.2.0    bit_4.0.4           compiler_4.2.1     
-[19] git2r_0.30.1        textshaping_0.3.6   cli_3.4.1          
-[22] rvest_1.0.3         xml2_1.3.3          labeling_0.4.2     
-[25] sass_0.4.2          scales_1.2.1        systemfonts_1.0.4  
-[28] digest_0.6.29       rmarkdown_2.16      svglite_2.1.0      
-[31] pkgconfig_2.0.3     htmltools_0.5.3     dbplyr_2.2.1       
-[34] fastmap_1.1.0       highr_0.9           rlang_1.0.6        
-[37] readxl_1.4.1        rstudioapi_0.14     farver_2.1.1       
-[40] jquerylib_0.1.4     generics_0.1.3      jsonlite_1.8.3     
-[43] vroom_1.6.0         tokenizers_0.2.3    googlesheets4_1.0.1
-[46] magrittr_2.0.3      Matrix_1.4-1        Rcpp_1.0.9         
-[49] munsell_0.5.0       fansi_1.0.3         lifecycle_1.0.3    
-[52] stringi_1.7.8       whisker_0.4         yaml_2.3.6         
-[55] grid_4.2.1          parallel_4.2.1      promises_1.2.0.1   
-[58] crayon_1.5.2        lattice_0.20-45     haven_2.5.1        
-[61] hms_1.1.2           knitr_1.40          pillar_1.8.1       
-[64] reprex_2.0.2        glue_1.6.2          evaluate_0.16      
-[67] modelr_0.1.9        vctrs_0.5.0         tzdb_0.3.0         
-[70] httpuv_1.6.6        cellranger_1.1.0    gtable_0.3.1       
-[73] assertthat_0.2.1    cachem_1.0.6        xfun_0.33          
-[76] broom_1.0.1         janeaustenr_1.0.0   later_1.3.0        
-[79] ragg_1.2.4          googledrive_2.0.0   viridisLite_0.4.1  
-[82] gargle_1.2.1        workflowr_1.7.0     ellipsis_0.3.2     </code></pre>
+[16] tidyselect_1.2.0    processx_3.7.0      bit_4.0.4          
+[19] compiler_4.2.1      git2r_0.30.1        textshaping_0.3.6  
+[22] cli_3.4.1           rvest_1.0.3         xml2_1.3.3         
+[25] labeling_0.4.2      sass_0.4.2          scales_1.2.1       
+[28] callr_3.7.2         systemfonts_1.0.4   digest_0.6.29      
+[31] rmarkdown_2.16      svglite_2.1.0       pkgconfig_2.0.3    
+[34] htmltools_0.5.3     highr_0.9           dbplyr_2.2.1       
+[37] fastmap_1.1.0       rlang_1.0.6         readxl_1.4.1       
+[40] rstudioapi_0.14     farver_2.1.1        jquerylib_0.1.4    
+[43] generics_0.1.3      jsonlite_1.8.3      vroom_1.6.0        
+[46] tokenizers_0.2.3    googlesheets4_1.0.1 magrittr_2.0.3     
+[49] Matrix_1.4-1        Rcpp_1.0.9          munsell_0.5.0      
+[52] fansi_1.0.3         lifecycle_1.0.3     stringi_1.7.8      
+[55] whisker_0.4         yaml_2.3.6          grid_4.2.1         
+[58] parallel_4.2.1      promises_1.2.0.1    crayon_1.5.2       
+[61] lattice_0.20-45     haven_2.5.1         hms_1.1.2          
+[64] knitr_1.40          ps_1.7.1            pillar_1.8.1       
+[67] reprex_2.0.2        glue_1.6.2          evaluate_0.16      
+[70] getPass_0.2-2       modelr_0.1.9        vctrs_0.5.0        
+[73] tzdb_0.3.0          httpuv_1.6.6        cellranger_1.1.0   
+[76] gtable_0.3.1        assertthat_0.2.1    cachem_1.0.6       
+[79] xfun_0.33           broom_1.0.1         janeaustenr_1.0.0  
+[82] later_1.3.0         ragg_1.2.4          googledrive_2.0.0  
+[85] viridisLite_0.4.1   gargle_1.2.1        ellipsis_0.3.2     </code></pre>
 </div>
 </div>
 
