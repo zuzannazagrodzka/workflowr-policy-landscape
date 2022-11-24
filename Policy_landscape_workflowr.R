@@ -61,10 +61,10 @@ wflow_publish(files = c("analysis/index.Rmd",
                 "analysis/5_For_and_not_for_profit_comparison.Rmd",
                 "analysis/license.Rmd"),
               update = TRUE,
-              message = "Update the files for all analysis and figures")
+              message = "Update the file paths for all analysis and figures")
 
 
-
+# wflow_publish(c("analysis/index.Rmd"))
 
 wflow_status()
 
