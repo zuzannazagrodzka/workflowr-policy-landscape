@@ -9,13 +9,7 @@ editor_options:
 ---
 # Language Analyis Overview
 
-Here we implement the application of text analyses to reveal association between stakeholders and Open Research (UNESCO) and business language. 
-
-This produces Fig 2c.
-
-The code below includes the use of our control text corpus (book). 
-
-We use only words that are unique for each of the dictionaries. This enables us see the association and the divergence across the documents. We plotted the percentage of words that documents in the stakeholders groups share with the created by us dictionaries. 
+Here we implement the application of text analyses to reveal language associations between stakeholders, Open Research (UNESCO), business language, our control text corpus (book). This produces Fig 2c. We use only words that are unique for each of the dictionaries. This enables us see the association and the divergence across the documents. We plotted the percentage of words conatined in stakeholder documents share with the  dictionaries. 
 
 RATIO = number of words from one document present in one dictionary / total number of words in the document
 
@@ -34,7 +28,8 @@ Meaning of the columns in the final dataframe used for plotting:
 - "proc_UNESCO" - % of number of words present in the certain document and UNESCO dictionary / total number of words in the certain document
 - "proc_book" - % of number of words present in the certain document and book / total number of words in the certain document
 
-# R Setup and Packages
+# Setup
+R Setup and Packages
 
 ```{r, message = FALSE}
 # Clearing R
@@ -54,7 +49,8 @@ library("kableExtra")
 
 ```
 
-# Importing data
+# Data
+Importing data and cleaning
 
 ```{r}
 # Data: words, stakeholder, documents...
@@ -65,11 +61,7 @@ data_words <- df_corpuses
 # all_dict <- read_csv("./output/created_datasets/freq_dict_total_100.csv")
 # All words
 all_dict <- read_csv("./output/created_datasets/freq_dict_total_all.csv")
-```
 
-## Data preparation and cleaing
-
-``` {r}
 # Data preparation
 
 # Changing name of the dictionary variable

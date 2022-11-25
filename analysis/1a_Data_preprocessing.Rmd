@@ -6,6 +6,8 @@ date: "`r Sys.Date()`"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
+  markdown: 
+    wrap: 72
 ---
 
 ```{r Setup, include=FALSE}
@@ -14,87 +16,121 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Mission and aim statement overview
 
-###  General information 
+### General information
 
-We collected in total 129 mission and aim statements among six stakeholder groups involved in the research landscape in ecology and evolutionary biology. 
+We collected 129 mission and aim statements among six stakeholder groups
+involved in the ecology and evolutionary biology research landscape.
 
-- advocates (24 documents)
-- funders (30 documents)
-- journals (non Open Access = 16 documents, journals Open Access = 14 documents)
-- publishers (for-profit = 7 documents, not-for-profit = 8 documents)
-- repositories (17 documents)
-- learned societies (13 documents). 
+-   advocates (24 documents)
+-   funders (30 documents)
+-   journals (non Open Access = 16 documents, journals Open Access = 14
+    documents)
+-   publishers (for-profit = 7 documents, not-for-profit = 8 documents)
+-   repositories (17 documents)
+-   learned societies (13 documents).
 
 ### Stakeholder characteristic and identities
 
 #### Journals
 
-We used Scimago Journal & Country Rank website (https://www.scimagojr.com/) to search for the journals with the highest journal's impact value in 2020 (subject areas such as: Environmental Science, Agricultural and Biological Sciences, Biochemistry, Genetics and Molecular Biology) that publish articles relevant for fields: ecology and evolutionary biology. 
-
-We identified ~ 15 journals for both open access (OA) journals and non-open access (non-OA) journals. We included some journals that were not on the list but were identified as relevant journals by others.
-
-We made sure that we had journals which are owned by learned societies. 
+We used the Scimago Journal & Country Rank website
+(<https://www.scimagojr.com/>) to search for the journals with the
+highest impact value in 2020 (subject areas include: Environmental
+Science, Agricultural and Biological Sciences, Biochemistry, Genetics
+and Molecular Biology); all of which publish ecology and evolutionary
+biology research. We identified a combined 14 open access (OA) journals
+and 16 non-open access (non-OA) journals. We included some journals that
+were priori aware of, but were not on the list. This collection of
+journals included both learned society and non-society journals.
 
 #### Publishers
 
-We identified publishers as the owner or production unit of the journals.
+We identified publishers as the owner or production unit of the
+journals.
 
 #### Funders
 
-We looked what funders were mentioned in "Acknowledgments" sections of some scientific articles published in 2019 and 2020 in high impact factor journals (OA and non-OA). 
-
-We focused on finding funders from all continents with a limit to maximum 3 per country (only when appeared frequently in Acknowledgments). Moreover, we contacted some colleges/universities for information on the funding source in their country. 
+To find funders we searched in the "Acknowledgments" sections of some
+scientific articles published in 2019 and 2020 in high impact factor
+journals (OA and non-OA). We focused on finding funders from all
+continents, with a limit of three national funders per country.
+Moreover, we contacted some colleagues/colleges/universities outside of
+the UK, for information on the funding sources in their country.
 
 #### Repositories
 
-We looked at the Data availability statements of the articles published in 2019 and 2020 in high impact factor journals (OA and non-OA) and collected information on where the data and code were archived. 
-
-Our list includes generalist repositories and subject specific repositories. 
+We looked at the Data availability statements of articles published in
+2019 and 2020 in high impact factor journals (OA and non-OA) and
+collected information on where the data and code were archived. Our list
+includes generalist repositories and subject specific repositories.
 
 #### Societies
 
-We identified societies based on the journals they own and by word-of-mouth. 
+We identified societies based on the journals they own and by priori
+experience.
 
 #### Advocates
 
-Advocated is a group of organisations that actively support or promote good quality and accessible research (open research).
+Advocates are a group of organisations that actively support or promote
+good quality and accessible research (open research). We considered
+different aspects of open research (open access, open data, open
+methods) when looking for these advocacy organisations. Most advocates
+are not exclusively supporting research in ecology and evolutionary
+biology.
 
-We considered different aspects of open research (open access, open data, open methods) when looking for the organisations. They might support research in different than ecology and evolutionary biology discipline but should be relevant for these two as well. 
+# Aims and missions statements
 
-# Aims and missions statements 
-
-In August 2021 we collected the Aims and Mission Statements on the official website of each of the stakeholder. 
-
-We did not contact anyone associated with the stakeholders to request more information. If there was no separate section but the aims or missions were described in "About" section, we chose used this. 
-
-The text from these websites were manually copied and separately saved for each of the stakeholders ([List of the organisations](./data/ListMissionVision.html). 
-
-The first line in the documents is a source website. 
+In August 2021 we collected the Aims and Mission Statements on the
+official website of each stakeholder. We did not contact anyone
+associated with the stakeholders to request more information. If there
+was no separate section for the aim or mission statements, but text
+resembling these statements was contained within an "About" section,
+this was deemed acceptable. The text from these websites were manually
+copied and separately saved for each of the stakeholders ([List of the
+organisations](./data/ListMissionVision.html). The first line in the
+documents is a source website.
 
 # Documents preprocessing
 
-To be able to analyse the content of the statements we preprocessed the documents to create one dataset with one word per row and information about the word source and position in the text/sentence. Some irrelevant words were removed and each of the word was lemmatizationed or stemminged. We followed a cleaning process suggested in Maier et al. 2018 "Applying LDA Topic Modelling in Communication Research: Toward a Valid and Reliable Methodology".
+To analyse the content of the statements, we first preprocessed the
+documents following the cleaning process suggested in Maier et al. 2018
+"Applying LDA Topic Modelling in Communication Research: Toward a Valid
+and Reliable Methodology":
 
-We followed these steps:
+1)  Importing all documents and converting them into a table. Columns:
+    name - name of the stakeholder filename - name of the file
+    (NameOfStakeholder_DocumentType) stakeholder - stakeholder group
+    (here: advocates, funders, journals,for-profit publishers,
+    not-for-profit publishers, repositories, societies) txt - text
+    (Statements) doc_type - type of the document (Mission Statement or
+    About)
 
-1) Importing all documents and converting them into a table.
-Columns:
-  name - name of the stakeholder
-  filename - name of the file (NameOfStakeholder_DocumentType)
-  stakeholder - stakeholder group (here: advocates, funders, journals,for-profit publishers, not-for-profit publishers, repositories, societies)
-  txt - text (Statements)
-  doc_type - type of the document (Mission Statement or About)
+2)  Removing link formatting from the text (<http://> and <https://>
+    links)
 
-2) Removing link formatting from the text (http:// and https:// links)
-3) Separating text into sentences and keeping information what document and stakeholder they belong to.
-4) Tokenisation - creating a tidy text, converting tokens to lowercase, removing punctuation, deleting special characters
-5) Removing stop-words, for this we used lexicons SMART and snowball in stop_words lexicon (library tidytext) and removing other not significant words like: numbering (ii, iii, iv, v), name of document type (aim, aims, mission...), name of the stakeholders (erc, nerc, wellcome)
-7) Lemmatization (library lexicon) - converting words to their lemma form/lexeme (e.g., "contaminating" and "contamination" become "contaminate") (Manning & Schütze, 2003, p. 132). 
+3)  Separating text into sentences and keeping information on what
+    document and stakeholder they belong to.
 
-We worked on a relatively small number of documents and because of that we did not perform relative prunning (stripping very rare and extremely frequent word occurrences from the observed data).
+4)  Tokenisation - creating a tidy text, converting tokens to lowercase,
+    removing punctuation, deleting special characters
 
+5)  Removing stop-words, for this we used lexicons SMART and snowball in
+    stop_words lexicon (library tidytext) and removing other not
+    significant words like: numbering (ii, iii, iv, v), name of document
+    type (aim, aims, mission...), name of the stakeholders (erc, nerc,
+    wellcome)
+
+6)  Lemmatization (library lexicon) - converting words to their lemma
+    form/lexeme (e.g., "contaminating" and "contamination" become
+    "contaminate") (Manning & Schütze, 2003, p. 132).
+
+We worked on a relatively small number of documents and because of that
+we did not perform relative prunning (stripping very rare and extremely
+frequent word occurrences from the observed data).
 
 # Setup and R packages
+
+Cleaning environment and loading R packages
 
 ```{r Cleaning R}
 rm(list=ls())
@@ -125,6 +161,9 @@ library("kableExtra") # to create a table when converting to html
 ```
 
 # Importing data
+
+Impotring stakeholder statements (.txt format), compiling them into a
+list, and converting this list into a corpus
 
 ```{r Importing data}
 dirs <- list.dirs(path = "./data/mission_statements", recursive = FALSE)
@@ -164,6 +203,9 @@ corpus_df$txt <- gsub("[^[:print:]]", " ", corpus_df$txt)
 ```
 
 # Adding columns to the corpus
+
+Add metadata to the corpus clarifying which stakeholder and stakeholder
+group each statement belongs to
 
 ```{r}
 # create new columns: name, stakeholder
@@ -206,13 +248,18 @@ corpus_df$stakeholder[corpus_df$stakeholder%in% c("Center for Open Science", "co
 
 ```
 
-## Creating corpus_df_website_info which is going to be used later to get a list of the websites 
+## Create workflowr corpus
 
-``` {r}
+Creating corpus_df_website_info which is going to be used later to get a
+list of the websites
+
+```{r}
 corpus_df_website_info <- corpus_df
 ```
 
-# Preprocessing 
+# Preprocessing
+
+Text cleaned and lemmatized. All stakeholder names are removed
 
 ```{r}
 # Cleaning the text from http:// and https:// links, removing numbers and "'s"
@@ -266,7 +313,9 @@ corpus_df$txt <- gsub("'s","",corpus_df$txt)
 
 ```
 
-# Tokenisation 
+# Tokenisation
+
+Each statements sentences tokenised. Stop words identified and removed
 
 ```{r}
 # Tokenisation - creating a tidy text: it convert tokens to lowercase, removes punctuation
@@ -322,9 +371,12 @@ colnames(data_tidy)[which(names(data_tidy) == "ukus_df$\"unlist(ukus_out)\"")] <
 
 ```
 
-# Creating a column that will include info about OA and nonOA journals or publisher for profit and non-profit
+# Adding metadata
 
-``` {r}
+Creating a column that will include info about OA and nonOA journals or
+publisher for profit and non-profit
+
+```{r}
 data_words <- data_tidy
 
 # Creating a column that will include info about OA and nonOA journals or publisher for profit and non-profit
@@ -333,9 +385,12 @@ data_words$stakeholder[data_words$stakeholder%in% c("journals_OA", "journals_non
 data_words$stakeholder[data_words$stakeholder%in% c("publishers_Profit", "publishers_nonProfit" )] <- "publishers"
 ```
 
-# Information and a table with the number of documents per stakeholder and list of documents
+# Stakeholder descriptives
 
-``` {r}
+Information and a table with the number of documents per stakeholder and
+list of documents
+
+```{r}
 # Number of documents per stakeholder
 number_of_documents <- data_tidy %>% 
   select(name, stakeholder) %>% 
@@ -349,7 +404,7 @@ number_of_documents %>%
   kable_classic("hover", full_width = F)
 ```
 
-``` {r}
+```{r}
 # Creating a table with a source links of the statements
 
 info <- corpus_df_website_info %>% 
@@ -373,14 +428,14 @@ website_info_table %>%
 ```
 
 # Saving dataset
-``` {r}
+
+```{r}
 # This data will be used in 2_Topic_Modeling, 4_Language_analysis
 write_csv(data_words, "./output/created_datasets/cleaned_data.csv")
 ```
 
 # Session information
-``` {r}
+
+```{r}
 sessionInfo()
 ```
-
-
