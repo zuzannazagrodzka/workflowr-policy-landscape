@@ -6,40 +6,36 @@ output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
 ---
+# Dictionary setup
 
-We created three dictionaries to support our analyses: 
-- A UNESCO dictionary as a master reference for best practice
-- A business dictionary to test hypotheses about stakeholder values
-- A book dictionary, as a control reference for 'random' language found in ecology and evolutionary biology text
+We created three dictionaries to support our analyses: - A UNESCO dictionary as a master reference for best practice - A business dictionary to test hypotheses about stakeholder values - A book dictionary, as a control reference for 'random' language found in ecology and evolutionary biology text
 
-We created several subsets of these, typically around the top 100 words.
-The code below documents the import, manipulation and ulimate creation of the word-sets we've use.
+We created several subsets of these, typically around the top 100 words. The code below documents the import, manipulation and ulimate creation of the word-sets we've used.
 
 ### UNESCO (Open Research) dictionary
 
-The UNESCO (Open Research) dictionary was created by removing stop words and choosing 100 most frequent words in the UNESCO Recommendations on Open Science (https://unesdoc.unesco.org/ark:/48223/pf0000379949.locale=en). The text of this document is found in `UNESCO Recommendation Open Science 2021.txt`.
+The UNESCO (Open Research) dictionary was created by removing stop words and choosing the 100 most frequent words in the UNESCO Recommendations on Open Science (<https://unesdoc.unesco.org/ark:/48223/pf0000379949.locale=en>). The text of this document is found in `UNESCO Recommendation Open Science 2021.txt`.
 
 ### Business dictionary
 
-The Business dictionary was created by creating the `business_lexicon_ZZ.csv` file from four websites. 
+The Business dictionary was created from four websites (see below) and is available at: `business_lexicon_ZZ.csv`
 
 Websites
 
-- https://www.theguardian.com/business/glossary-business-terms-a-z-jargon
-- https://www.investopedia.com/ 
-- https://www.economist.com/economics-a-to-z
-- https://www.workspace.co.uk/content-hub/business-insight/glossary-of-business-terminology
+-   <https://www.theguardian.com/business/glossary-business-terms-a-z-jargon>
+-   <https://www.investopedia.com/>
+-   <https://www.economist.com/economics-a-to-z>
+-   <https://www.workspace.co.uk/content-hub/business-insight/glossary-of-business-terminology>
 
 We selected the top 100 most frequent words from among these sources to create the dictionary.
 
 ### Control dictionary
 
-The Control dictionary was created by removing stop words and identifying 100 most common words in the ecology book "Our Vanishing Wildlife" downloaded from the online library Project Gutenberg.  The code to access this is below.
+The Control dictionary was created by removing stop words and identifying the 100 most common words in the ecology-themed book "Our Vanishing Wildlife", downloaded from the online library: Project Gutenberg. The code to access this is below.
 
-https://www.goodreads.com/book/show/1302950.Our_Vanishing_Wildlife
+<https://www.goodreads.com/book/show/1302950.Our_Vanishing_Wildlife>
 
-_Note that all `write_csv` code is commented out as all files are available in the `output` folder._
-
+*Note that all `write_csv` code is commented out as all files are available in the `output` folder.*
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -47,7 +43,8 @@ rm(list=ls())
 
 ```
 
-# Setup (packages needed) for working with the data
+# Setup
+Loading packages
 
 ```{r Libraries, message = FALSE}
 # Libraries used for text/data analysis
@@ -76,9 +73,10 @@ library("kableExtra") # to create a table when converting to html
 
 ```
 
-# Preparing and cleaning the dictionaries
+# Data
+Loading, preparing and cleaning the dictionaries
 
-``` {r}
+```{r}
 # Dictionaries
 # Importing business language lexicons, UNESCO recommendation on Open Science and a book (control)
 
@@ -130,7 +128,7 @@ colnames(all_dict)[which(names(all_dict) == "tw_out_df$\"unlist(tw_out)\"")] <- 
 
 ```
 
-``` {r} 
+```{r}
 # changing American English to British English
 ukus_out <-  tokens(all_dict$word_mix, remove_punct = TRUE)
 ukus_out <- quanteda::tokens_lookup(ukus_out, dictionary = data_dictionary_us2uk, exclusive = FALSE,capkeys = FALSE)
@@ -168,10 +166,11 @@ all_dict$word <- gsub("[0-9]+","",all_dict$word)
 
 ```
 
-# Calculate some basic statistics of the dictionary data
+# Descriptives
+Calculate basic statistics of the dictionary data
 
-- Unique and shared words
-- Top 10 words with tables
+-   Unique and shared words
+-   Top 10 words with tables
 
 ```{r}
 # Venn diagram to show how many unique words are shared between dictionaries
@@ -196,8 +195,7 @@ ggvenn(
 
 ```
 
-
-``` {r}
+```{r}
 # Looking at the most frequent words in each of the dictionary
 
 all_dict_total <- all_dict %>% 
@@ -253,11 +251,12 @@ freq_dict_table_business %>%
 
 # freq_dict_total_all <- freq_dict_total
 # write_csv(freq_dict_total_all, "./output/created_datasets/freq_dict_total_all.csv")
-``` 
+```
 
-# Generating top 100 unique words
+# Top 100
+Generating the top 100 unique words for each dictionary
 
-``` {r}
+```{r}
 # Looking at the most frequent words in each of the dictionary
 
 all_dict_total <- all_dict %>% 
@@ -373,10 +372,10 @@ freq_dict_total_100 <- dictionaries_100
 write_csv(freq_dict_total_100, "./output/created_datasets/freq_dict_total_100.csv")
 
 
-``` 
-
-# Session information
-``` {r}
-sessionInfo()
 ```
 
+# Session information
+
+```{r}
+sessionInfo()
+```

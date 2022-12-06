@@ -15,47 +15,24 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ##  Topic Modeling Methods Overview
 
-To investigate the relationship to our research questions regarding the topics of our interest and the language choice in the stakeholders' statements, the study employs a computational text analysis called the Structural Topic Modeling (STM) using library stm. We chose STM because it addresses the issue with the independence (like Correlated Topic Models) but also enables the discovery of topics and their prevalence based on document metadata, such as stakeholder group. The topic modeling was conducted on a sentence level and the metadata variable contained information about the stakeholders group and the document each work comes from. 
+To investigate the differing priorities of the stakeholder groups, we employ a computational text analysis called the Structural Topic Modeling (STM) using library stm. We chose STM because its capable of unsupervised text classification whilst controlling for sources of non-independence e.g. in our case, sentences are nested within stakeholders, and stakeholders within stakeholder groups. The topic modeling was conducted on a sentence level and the metadata variable contained information about the stakeholders group and the document each work comes from.  
 
-After generating the topics, we used the ground theory method of analysing qualitative data (Corbin and Strauss, 1990) to identify the main categories that are present in the topics. 
-
-## A detailed protocol of condensing multiple topics into a set of more defined topics more defined. 
+## Grounded theory
+After generating the topics, we used the ground theory method of analysing qualitative data (Corbin and Strauss, 1990) to identify the main categories that are present in the topics.
   
 1. Open coding 
-  - obtaining codes by performing STM and choosing the setting that enable the algorithm of Lee and Mimno (2014) to find the number of topics (from now on: codes). The metadata used in the modelling was the information on documents and stakeholders. The model calculates highest probability, Score, Lift and FLEX values for each word and assigns words to one or multiple topics. 
-  - we looked at the seven words with the highest value for these four categories/values and followed a coding paradigm that enabled us to create a descriptive label for each of the code
-  - our paradigm contains enable us to search for words what describe or belong to missions and aims, functions, discipline and scale
+  - obtained topics (codes hereafter) by performing STM with the Lee and Mimno (2014) optimisation, which finds the optimal number of topics. Our STM included two covariates: Stakeholder ID, Stakeholder group. 
+  -The STM calculates probability, Score, Lift and FLEX values for each word and assigns words to one or multiple topics, we looked at the seven words with the highest value across these four categories/values and described the codes based on the following coding paradigm:
       * Missions and aims - words are related to stakeholders’ visions, goals, statements or objectives e.g. open, free.
       * Functions - words associated with their roles and processes they are responsible in the research landscape e.g. publish, data, review, train
       * Discipline - words describing the discipline e.g. multidisciplinary, biology, ecology, evolution
       * Scale - words associated with the time and scale e.g. worldwide, global, long
-    - these are used to create labels to describe each code
 
 2. Axial coding
-    - finding connections and relationships with broader categories by identifying and drawing the connections between them. It has been done by carefully going through labels and finding codes that have the same or similar descriptive labels and intuitively they are connected
-    - aggregating and condensing codes into broader categories based on criteria that the codes with the same or similar labels cluster together. Our aim was to end up with the smallest number of categories that we could identified.
+    - axial coding involves finding connections and relationships between code descriptions e.g. similar descriptions would be linked.
 3. Selective coding
-  -  identifying the connections between the identified categories and the rest of the codes
-  -  removing some of the categories that we are not interested in. Many stakeholders can share topics with each other and that's because their function in the research landscape is similar or the same. Therefore, we expect that we would not be interested in some of the codes since they would not be related to our research questions
-  - going through the codes again and coding accordingly to the identified main categories
+  -  code links fell into four distinct clusters, and one hetergenous (messy) cluster made up of multiple very small clusters.
 
-## Predicted/Expected categories we expected to find in the statements 
-
-1. Related to Open Research (defined by UNESCO)
-2. Related to research impact and solving global challenges
-3. Related to business model or profit 
-
-Open Research and the values that it brings seems to be necessary approach to maximise impact of science and help to solve global challenges. We expect that stakeholders that care about the Open Research agenda will frequently use words such as: 
-
-> open, research, science, datum, access, accessibility, share, transparency
-
-Research results and findings should be used to understand and solve challenges but also to educate people. Some stakeholders might emphasise the importance of it but not necessary seen the importance of Open Research in the process. The words that we could expect to be associated with the topic are:
-
-> impact, solve, development, sustainable, education, policy, climate, change, wildlife. We also expect that words such as open, access will be absent. 
-
-In our work, we hypothesise that some organisations are run as a for profit business. Their approach could be more monetary/profit driven and therefore, they would use a business language or financial terms in their aim and mission statements. We could expect in these topics to find words such as: 
-
-> profit, fund, service, management, pay, financially
 
 ## Topic Overview II
 
@@ -66,7 +43,6 @@ The stm model generated 73 topics which later were characterised and categorised
 3. Innovation and Solutions
 4. Publication Process. 
 
-Only the _Open Research_ topic was identified as predicted beforehand.
 
 1. Open Research topic contains: 
 
@@ -86,25 +62,25 @@ Only the _Open Research_ topic was identified as predicted beforehand.
 
 The rest of the topics that were not able to be categorised to any of our topics were not included in our analysis and interpretation. 
 
-## Topic modeling generated beta and gamma values that we later used in our analysis. 
+### Beta and Gamma
 
-Beta value is a calculated for each word and for each topic and gives information on a probability that a certain word belongs to a certain topic. Score value gives us measure how exclusive the each word is to a certain topic. For example, if a word has a low value, it means that it's equally used in all topics. The score was calculated by a word beta value divided by a sum of beta values for this word across all topics.
+The beta value is calculated for each word and for each topic and gives information on a probability that a certain word belongs to a certain topic. Score value gives us measure how exclusive the each word is to a certain topic. For example, if a word has a low value, it means that it's equally used in all topics. The score was calculated by a word beta value divided by a sum of beta values for this word across all topics.
 
 After merging topics into new topics that were categorised by us, we calculated mean value of the merged topics beta and score values. Later we used these values in our text similarities analysis to create Fig. 2B (3_Text_similarities, Figure_2B). 
 
-Next, we calculated the proportion of the topics appearing in all of the documents by using a mean gamma value for each sentence and new topics. The gamma value informs what is a probability that certain document (here: sentence) belongs to a certain topic. 
+Next, we calculated the proportion of the topics appearing in all of the documents by using a mean gamma value for each sentence and new topics. The gamma value informs us of the probability that certain documents (here: sentence) belong to a certain topic. 
 
 We chose one topic with the highest mean gamma value as a dominant topic for each of the sentence and later calculated the proportion of the sentences belonging to the new topics.
 
 This data set was used to create Fig. 2A (Figure_2A).
 
-# R Setup and packages
+# Setup
+Clearing environment and loading packages
 
 ```{r}
 rm(list=ls())
 ```
 
-##  Libraries
 ```{r, message = FALSE}
 library(tidyverse)
 library(purrr)
@@ -139,6 +115,8 @@ data_words <- read.csv(file = "./output/created_datasets/cleaned_data.csv")
 Code follows: https://juliasilge.com/blog/sherlock-holmes-stm/
 
 ## Data management
+
+Creating metadata and connecting it with my data to perform topic modeling on the documents. Metadata includes: document name and stakeholder name
 ```{r}
 # Creating metadata and connecting it with my data to perform topic modeling on the documents. Metadata includes: document name and stakeholder name
 
@@ -169,11 +147,7 @@ topic_model <- stm(data_dfm, K = 0, verbose = FALSE, init.type = "Spectral", pre
 tpc = topicCorr(topic_model)
 plot(tpc) # plotting topic connections, there are no clear clustering among the topics
 
-```
 
-## Getting beta values
-
-``` {r}
 # Getting beta values from the topic modeling and adding beta value to the data_words 
 
 td_beta <- tidy(topic_model) # getting beta values
@@ -182,7 +156,9 @@ td_beta %>%
   arrange(term, -beta)
 ```
 
-## Merging topics into new topics categories
+## Grounded theory
+
+Topics generated by the model were coded and categorised into five grouping topics defined by us. Below, new "topic" column was created and topics were assigned  
 
 ``` {r}
 # Topics generated by the model were coded and categorised into five defined by us topics. Below, new "topic" column was created and topics were assigned  
@@ -267,7 +243,8 @@ td_beta_score_mean_max <- td_beta_score_mean %>%
 
 ```
 
-## Obtaining the highest beta values
+## Beta
+Obtaining the highest beta values
 
 ``` {r}
 # Getting highest beta value for each of the word with the information about the Topic number
@@ -305,11 +282,6 @@ td_beta_topic <- td_beta_select %>%
   top_n(1, mean_beta) %>% 
   rename(highest_mean_beta = mean_beta)
 
-```
-
-# Creating a new dataset by merging datasets with new beta values
-
-``` {r}
 # Merging data_words with: td_beta_mean_wide, td_score_mean_wide, td_beta_sum_wide, td_score_topic
 data_words$word <- as.factor(data_words$word)
 
@@ -335,7 +307,8 @@ write_csv(data_words_stm, file = "./output/created_datasets/dataset_words_stm_5t
 
 # Creating a document (sentence) level dataset
 
-## Gamma values - followed the same logic as with beta values
+## Gamma
+Finding which topics belong to each sentence - followed the same logic as with beta values
 
 ``` {r}
 # Getting gamma values from topic_modeling

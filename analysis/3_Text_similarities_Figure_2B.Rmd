@@ -26,6 +26,7 @@ The three primary steps are:
 
 
 # Libraries
+Loading packages
 
 ``` {r, message = FALSE}
 # remotes::install_github('talgalili/dendextend')
@@ -40,7 +41,8 @@ library(tidytext)
 ```
 
 
-# Functions to create words similarities matrix. 
+# Word similarity
+Functions to create words similarities matrix. 
 
 - cosine_matrix
 - Walktrap_topics
@@ -101,7 +103,8 @@ walktrap_topics <- function(g, ...) {
 }
 ```
 
-# Importing data (created in `2_topic_modeling`)
+# Data
+Importing data (created in `2_topic_modeling`)
 
 ``` {r}
 corpus_df <- read.csv("./output/created_datasets/dataset_words_stm_5topics.csv")
