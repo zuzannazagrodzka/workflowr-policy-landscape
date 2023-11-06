@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Zagrodzka"
+  given-names: "Zuzanna B"
+  orcid: "https://orcid.org/0000-0002-8640-414X"
+- family-names: "Beckerman"
+  given-names: "Andrew P"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Johnson"
+  given-names: "Thomas F"
+  orcid: "https://orcid.org/0000-0002-6363-1825"
+title: "accelerating-the-open-research-agenda"
+version: 1.0.0
+doi: 10.5281/zenodo.1234
+date-released: 2023-11-06
+url: "https://github.com/andbeck/workflowr-policy-landscape"
