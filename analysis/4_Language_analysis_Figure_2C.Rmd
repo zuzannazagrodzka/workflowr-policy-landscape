@@ -54,13 +54,21 @@ Importing data and cleaning
 
 ```{r}
 # Data: words, stakeholder, documents...
-df_corpuses <- read_csv("./output/created_datasets/cleaned_data.csv")
+
+# Importing dataset created in "1a_Data_preprocessing.Rmd"
+# df_corpuses <- read.csv(file = "./output/created_datasets/cleaned_data.csv")
+
+# Importing dataset that we originally created and used in our analysis
+df_corpuses <- read.csv(file = "./data/original_dataset_reproducibility_check/original_cleaned_data.csv")
+
 data_words <- df_corpuses
 
-# Dictionary data 100 words per dictionary
-# all_dict <- read_csv("./output/created_datasets/freq_dict_total_100.csv")
-# All words
-all_dict <- read_csv("./output/created_datasets/freq_dict_total_all.csv")
+# Importing dictionary data 
+# all_dict <- read_csv("./output/created_datasets/freq_dict_total_all.csv")
+
+# Importing dictionary data that we originally created and used in our analysis
+all_dict <- read.csv(file = "./data/original_dataset_reproducibility_check/original_freq_dict_total_all.csv")
+
 
 # Data preparation
 
