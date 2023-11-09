@@ -11,11 +11,11 @@
 
 <meta name="author" content="ZZ, APB, TFJ" />
 
-<meta name="date" content="2022-11-24" />
+<meta name="date" content="2023-11-09" />
 
 <title>4_Language_analysis</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -31,7 +31,7 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -39,8 +39,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -197,8 +197,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -206,16 +206,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -370,7 +363,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">4_Language_analysis</h1>
 <h4 class="author">ZZ, APB, TFJ</h4>
-<h4 class="date">2022-11-24</h4>
+<h4 class="date">2023-11-09</h4>
 
 </div>
 
@@ -399,7 +392,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-11-24
+<strong>Last updated:</strong> 2023-11-09
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -418,7 +411,7 @@ title="This is the local directory in which the code in this file was executed."
 This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
 analysis was created with <a
   href="https://github.com/workflowr/workflowr">workflowr</a> (version
-1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
 that were applied when the results were created. The <em>Past
 versions</em> tab lists the development history.
 </p>
@@ -531,15 +524,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreea365d904a0b442a813df60c259dff86b37599df0targetblanka365d90a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree03200f41ca2a99987abfec56b075ec31fd9db6a7targetblank03200f4a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/a365d904a0b442a813df60c259dff86b37599df0" target="_blank">a365d90</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/03200f41ca2a99987abfec56b075ec31fd9db6a7" target="_blank">03200f4</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreea365d904a0b442a813df60c259dff86b37599df0targetblanka365d90a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree03200f41ca2a99987abfec56b075ec31fd9db6a7targetblank03200f4a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -549,7 +542,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/a365d904a0b442a813df60c259dff86b37599df0" target="_blank">a365d90</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/03200f41ca2a99987abfec56b075ec31fd9db6a7" target="_blank">03200f4</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -564,14 +557,29 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/.DS_Store
-    Ignored:    code/
-    Ignored:    data/mission_statements/.DS_Store
+    Ignored:    data/.DS_Store
+    Ignored:    output/.DS_Store
+    Ignored:    output/Figure_Appendix_1A/
+    Ignored:    output/created_datasets/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/6_Subgroups_comparison_text_similarities.Rmd
+    Untracked:  analysis/Compare_datasets.Rmd
+    Untracked:  analysis/Original_Session_Info.Rmd
+    Untracked:  data/original_dataset_reproducibility_check/
+    Untracked:  gutenbergr_0.2.3.tar.gz
+    Untracked:  output/Figure_Appendix_1B/
 
 Unstaged changes:
-    Modified:   Policy_landscape_workflowr.R
+    Modified:   analysis/2_Topic_modeling.Rmd
+    Modified:   analysis/5_For_and_not_for_profit_comparison.Rmd
+    Modified:   analysis/index.Rmd
+    Modified:   output/Figure_2C/language_business.png
+    Modified:   output/Other_figures/language_book.png
+    Modified:   output/created_datasets/cleaned_data.csv
 
 </code></pre>
 <p>
@@ -618,6 +626,57 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/03200f41ca2a99987abfec56b075ec31fd9db6a7/analysis/4_Language_analysis_Figure_2C.Rmd" target="_blank">03200f4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-09
+</td>
+<td>
+wflow_publish(c("./analysis/4_Language_analysis_Figure_2C.Rmd"))
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/41dd1ca5c26c3b0b193d6f0af7cccd45f99d088f/analysis/4_Language_analysis_Figure_2C.Rmd" target="_blank">41dd1ca</a>
+</td>
+<td>
+Thomas Frederick Johnson
+</td>
+<td>
+2022-11-25
+</td>
+<td>
+Revisions to the text, and pushing the write thing this time…
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/5bdfc2a3528071efbaf2c6fa1129e5c017cf9524/docs/4_Language_analysis_Figure_2C.html" target="_blank">5bdfc2a</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -797,16 +856,13 @@ Publish other files
 </div>
 <div id="language-analyis-overview" class="section level1">
 <h1>Language Analyis Overview</h1>
-<p>Here we implement the application of text analyses to reveal
-association between stakeholders and Open Research (UNESCO) and business
-language.</p>
-<p>This produces Fig 2c.</p>
-<p>The code below includes the use of our control text corpus
-(book).</p>
-<p>We use only words that are unique for each of the dictionaries. This
-enables us see the association and the divergence across the documents.
-We plotted the percentage of words that documents in the stakeholders
-groups share with the created by us dictionaries.</p>
+<p>Here we implement the application of text analyses to reveal language
+associations between stakeholders, Open Research (UNESCO), business
+language, our control text corpus (book). This produces Fig 2c. We use
+only words that are unique for each of the dictionaries. This enables us
+see the association and the divergence across the documents. We plotted
+the percentage of words conatined in stakeholder documents share with
+the dictionaries.</p>
 <p>RATIO = number of words from one document present in one dictionary /
 total number of words in the document</p>
 <p>Note: duplicates were not removed (it matters how many times a
@@ -835,8 +891,9 @@ document</li>
 and book / total number of words in the certain document</li>
 </ul>
 </div>
-<div id="r-setup-and-packages" class="section level1">
-<h1>R Setup and Packages</h1>
+<div id="setup" class="section level1">
+<h1>Setup</h1>
+<p>R Setup and Packages</p>
 <pre class="r"><code># Clearing R
 rm(list=ls())
 
@@ -852,44 +909,35 @@ library(ggplot2)
 # Library to create a table when converting to html
 library(&quot;kableExtra&quot;) </code></pre>
 </div>
-<div id="importing-data" class="section level1">
-<h1>Importing data</h1>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<p>Importing data and cleaning</p>
 <pre class="r"><code># Data: words, stakeholder, documents...
-df_corpuses &lt;- read_csv(&quot;./output/created_datasets/cleaned_data.csv&quot;)</code></pre>
-<pre><code>Rows: 22822 Columns: 10
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: &quot;,&quot;
-chr (10): txt, filename, name, doc_type, stakeholder, sentence_doc, orig_wor...
 
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>data_words &lt;- df_corpuses
+# Importing dataset created in &quot;1a_Data_preprocessing.Rmd&quot;
+# df_corpuses &lt;- read.csv(file = &quot;./output/created_datasets/cleaned_data.csv&quot;)
 
-# Dictionary data 100 words per dictionary
-# all_dict &lt;- read_csv(&quot;./output/created_datasets/freq_dict_total_100.csv&quot;)
-# All words
-all_dict &lt;- read_csv(&quot;./output/created_datasets/freq_dict_total_all.csv&quot;)</code></pre>
-<pre><code>Rows: 9587 Columns: 6
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: &quot;,&quot;
-chr (1): word
-dbl (5): present_in_dict, present_BUS, present_UNESCO, present_book, sum
+# Importing dataset that we originally created and used in our analysis
+df_corpuses &lt;- read.csv(file = &quot;./data/original_dataset_reproducibility_check/original_cleaned_data.csv&quot;)
 
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div id="data-preparation-and-cleaing" class="section level2">
-<h2>Data preparation and cleaing</h2>
-<pre class="r"><code># Data preparation
+data_words &lt;- df_corpuses
+
+# Importing dictionary data 
+# all_dict &lt;- read_csv(&quot;./output/created_datasets/freq_dict_total_all.csv&quot;)
+
+# Importing dictionary data that we originally created and used in our analysis
+all_dict &lt;- read.csv(file = &quot;./data/original_dataset_reproducibility_check/original_freq_dict_total_all.csv&quot;)
+
+
+# Data preparation
 
 # Changing name of the dictionary variable
 new_dictionary &lt;- all_dict
 head(new_dictionary,3)</code></pre>
-<pre><code># A tibble: 3 × 6
-  present_in_dict word     present_BUS present_UNESCO present_book   sum
-            &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;
-1               1 deer               0              0            1     1
-2               1 preserve           0              0            1     1
-3               1 duck               0              0            1     1</code></pre>
+<pre><code>  present_in_dict     word present_BUS present_UNESCO present_book sum
+1               1     deer           0              0            1   1
+2               1 preserve           0              0            1   1
+3               1     duck           0              0            1   1</code></pre>
 <pre class="r"><code># new_dictionary &lt;- dictionaries
 ## Getting a data set with the words
 data_words &lt;- df_corpuses
@@ -1440,7 +1488,6 @@ European Society for Evolutionary Biology
 </tbody>
 </table>
 </div>
-</div>
 <div id="graph-generation" class="section level1">
 <h1>Graph generation</h1>
 <pre class="r"><code>no &lt;- nrow(df_sum_proc_ND)
@@ -1469,53 +1516,20 @@ sum_df_sum_proc_ND_book =
   scale_colour_discrete(guide = F) +
   theme_classic()
 fig_book</code></pre>
-<pre><code>Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
-use `guide = &quot;none&quot;` instead.</code></pre>
-<p><img src="figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
-Past versions of unnamed-chunk-4-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-1.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<pre><code>Warning: The `guide` argument in `scale_*()` cannot be `FALSE`. This was deprecated in
+ggplot2 3.3.4.
+ℹ Please use &quot;none&quot; instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.</code></pre>
+<p><img src="figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Saving the figure
 figure_name &lt;- paste0(&quot;./output/Other_figures/language_book.png&quot;)
 ggsave(filename = figure_name, fig_book + theme_bw(base_size = 5),
-     width = 10, height = 5, dpi = 600, units = &quot;in&quot;, device=&#39;png&#39;)  </code></pre>
-<pre><code>Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
-use `guide = &quot;none&quot;` instead.</code></pre>
-<pre class="r"><code># Plotting them separately Business
+     width = 10, height = 5, dpi = 600, units = &quot;in&quot;, device=&#39;png&#39;)  
+
+
+# Plotting them separately Business
 df_sum_proc_ND_BUS = data.frame(
   document = rep(df_sum_proc_ND$document,1),
   stakeholder = rep(df_sum_proc_ND$stakeholder,1),
@@ -1539,53 +1553,13 @@ sum_df_sum_proc_ND_BUS =
   theme_classic()
 
 fig_bus</code></pre>
-<pre><code>Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
-use `guide = &quot;none&quot;` instead.</code></pre>
-<p><img src="figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-2">
-Past versions of unnamed-chunk-4-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-2.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Saving the figure
 figure_name &lt;- paste0(&quot;./output/Figure_2C/language_business.png&quot;)
 ggsave(filename = figure_name, fig_bus + theme_bw(base_size = 5),
-     width = 10, height = 5, dpi = 600, units = &quot;in&quot;, device=&#39;png&#39;)  </code></pre>
-<pre><code>Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
-use `guide = &quot;none&quot;` instead.</code></pre>
-<pre class="r"><code># Plotting them separately UNESCO
+     width = 10, height = 5, dpi = 600, units = &quot;in&quot;, device=&#39;png&#39;)  
+
+# Plotting them separately UNESCO
 df_sum_proc_ND_UNESCO = data.frame(
   document = rep(df_sum_proc_ND$document,1),
   stakeholder = rep(df_sum_proc_ND$stakeholder,1),
@@ -1608,46 +1582,7 @@ sum_df_sum_proc_ND_UNESCO =
   scale_colour_discrete(guide = F) +
   theme_classic()
 fig_unesco</code></pre>
-<pre><code>Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
-use `guide = &quot;none&quot;` instead.</code></pre>
-<p><img src="figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-3">
-Past versions of unnamed-chunk-4-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-4-3.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/4_Language_analysis_Figure_2C.Rmd/unnamed-chunk-3-3.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Saving the figure
 # UNCOMMENT TO SAVE FIGURE
 # figure_name &lt;- paste0(&quot;./output/Figure_2C/language_unesco.png&quot;)
@@ -1657,55 +1592,48 @@ zuzannazagrodzka
 <div id="session-information" class="section level1">
 <h1>Session information</h1>
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.2.1 (2022-06-23)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur ... 10.16
+<pre><code>R version 4.3.1 (2023-06-16)
+Platform: x86_64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.6
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
 
 locale:
-[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/London
+tzcode source: internal
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.3.4 tidytext_0.3.4   forcats_0.5.2    stringr_1.4.1   
- [5] dplyr_1.0.10     purrr_0.3.5      readr_2.1.3      tidyr_1.2.1     
- [9] tibble_3.1.8     ggplot2_3.3.6    tidyverse_1.3.2  workflowr_1.7.0 
+ [1] kableExtra_1.3.4 tidytext_0.4.1   lubridate_1.9.3  forcats_1.0.0   
+ [5] stringr_1.5.0    dplyr_1.1.3      purrr_1.0.2      readr_2.1.4     
+ [9] tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.3    tidyverse_2.0.0 
+[13] workflowr_1.7.1 
 
 loaded via a namespace (and not attached):
- [1] fs_1.5.2            lubridate_1.8.0     bit64_4.0.5        
- [4] webshot_0.5.4       httr_1.4.4          rprojroot_2.0.3    
- [7] SnowballC_0.7.0     tools_4.2.1         backports_1.4.1    
-[10] bslib_0.4.0         utf8_1.2.2          R6_2.5.1           
-[13] DBI_1.1.3           colorspace_2.0-3    withr_2.5.0        
-[16] tidyselect_1.2.0    processx_3.7.0      bit_4.0.4          
-[19] compiler_4.2.1      git2r_0.30.1        textshaping_0.3.6  
-[22] cli_3.4.1           rvest_1.0.3         xml2_1.3.3         
-[25] labeling_0.4.2      sass_0.4.2          scales_1.2.1       
-[28] callr_3.7.2         systemfonts_1.0.4   digest_0.6.29      
-[31] rmarkdown_2.16      svglite_2.1.0       pkgconfig_2.0.3    
-[34] htmltools_0.5.3     highr_0.9           dbplyr_2.2.1       
-[37] fastmap_1.1.0       rlang_1.0.6         readxl_1.4.1       
-[40] rstudioapi_0.14     farver_2.1.1        jquerylib_0.1.4    
-[43] generics_0.1.3      jsonlite_1.8.3      vroom_1.6.0        
-[46] tokenizers_0.2.3    googlesheets4_1.0.1 magrittr_2.0.3     
-[49] Matrix_1.4-1        Rcpp_1.0.9          munsell_0.5.0      
-[52] fansi_1.0.3         lifecycle_1.0.3     stringi_1.7.8      
-[55] whisker_0.4         yaml_2.3.6          grid_4.2.1         
-[58] parallel_4.2.1      promises_1.2.0.1    crayon_1.5.2       
-[61] lattice_0.20-45     haven_2.5.1         hms_1.1.2          
-[64] knitr_1.40          ps_1.7.1            pillar_1.8.1       
-[67] reprex_2.0.2        glue_1.6.2          evaluate_0.16      
-[70] getPass_0.2-2       modelr_0.1.9        vctrs_0.5.0        
-[73] tzdb_0.3.0          httpuv_1.6.6        cellranger_1.1.0   
-[76] gtable_0.3.1        assertthat_0.2.1    cachem_1.0.6       
-[79] xfun_0.33           broom_1.0.1         janeaustenr_1.0.0  
-[82] later_1.3.0         ragg_1.2.4          googledrive_2.0.0  
-[85] viridisLite_0.4.1   gargle_1.2.1        ellipsis_0.3.2     </code></pre>
+ [1] gtable_0.3.4      xfun_0.40         bslib_0.5.1       processx_3.8.2   
+ [5] lattice_0.21-8    callr_3.7.3       tzdb_0.4.0        vctrs_0.6.3      
+ [9] tools_4.3.1       ps_1.7.5          generics_0.1.3    fansi_1.0.4      
+[13] highr_0.10        janeaustenr_1.0.0 pkgconfig_2.0.3   tokenizers_0.3.0 
+[17] Matrix_1.5-4.1    webshot_0.5.5     lifecycle_1.0.3   farver_2.1.1     
+[21] compiler_4.3.1    git2r_0.32.0      textshaping_0.3.6 munsell_0.5.0    
+[25] getPass_0.2-2     httpuv_1.6.11     htmltools_0.5.6   SnowballC_0.7.1  
+[29] sass_0.4.7        yaml_2.3.7        crayon_1.5.2      later_1.3.1      
+[33] pillar_1.9.0      jquerylib_0.1.4   whisker_0.4.1     cachem_1.0.8     
+[37] tidyselect_1.2.0  rvest_1.0.3       digest_0.6.33     stringi_1.7.12   
+[41] labeling_0.4.3    rprojroot_2.0.3   fastmap_1.1.1     grid_4.3.1       
+[45] colorspace_2.1-0  cli_3.6.1         magrittr_2.0.3    utf8_1.2.3       
+[49] withr_2.5.1       scales_1.2.1      promises_1.2.1    timechange_0.2.0 
+[53] rmarkdown_2.25    httr_1.4.7        ragg_1.2.5        hms_1.1.3        
+[57] evaluate_0.21     knitr_1.44        viridisLite_0.4.2 rlang_1.1.1      
+[61] Rcpp_1.0.11       glue_1.6.2        xml2_1.3.5        svglite_2.1.2    
+[65] rstudioapi_0.15.0 jsonlite_1.8.7    R6_2.5.1          systemfonts_1.0.4
+[69] fs_1.6.3         </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1715,55 +1643,48 @@ Session information
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.2.1 (2022-06-23)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur ... 10.16
+<pre><code>R version 4.3.1 (2023-06-16)
+Platform: x86_64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.6
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
 
 locale:
-[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/London
+tzcode source: internal
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.3.4 tidytext_0.3.4   forcats_0.5.2    stringr_1.4.1   
- [5] dplyr_1.0.10     purrr_0.3.5      readr_2.1.3      tidyr_1.2.1     
- [9] tibble_3.1.8     ggplot2_3.3.6    tidyverse_1.3.2  workflowr_1.7.0 
+ [1] kableExtra_1.3.4 tidytext_0.4.1   lubridate_1.9.3  forcats_1.0.0   
+ [5] stringr_1.5.0    dplyr_1.1.3      purrr_1.0.2      readr_2.1.4     
+ [9] tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.3    tidyverse_2.0.0 
+[13] workflowr_1.7.1 
 
 loaded via a namespace (and not attached):
- [1] fs_1.5.2            lubridate_1.8.0     bit64_4.0.5        
- [4] webshot_0.5.4       httr_1.4.4          rprojroot_2.0.3    
- [7] SnowballC_0.7.0     tools_4.2.1         backports_1.4.1    
-[10] bslib_0.4.0         utf8_1.2.2          R6_2.5.1           
-[13] DBI_1.1.3           colorspace_2.0-3    withr_2.5.0        
-[16] tidyselect_1.2.0    processx_3.7.0      bit_4.0.4          
-[19] compiler_4.2.1      git2r_0.30.1        textshaping_0.3.6  
-[22] cli_3.4.1           rvest_1.0.3         xml2_1.3.3         
-[25] labeling_0.4.2      sass_0.4.2          scales_1.2.1       
-[28] callr_3.7.2         systemfonts_1.0.4   digest_0.6.29      
-[31] rmarkdown_2.16      svglite_2.1.0       pkgconfig_2.0.3    
-[34] htmltools_0.5.3     highr_0.9           dbplyr_2.2.1       
-[37] fastmap_1.1.0       rlang_1.0.6         readxl_1.4.1       
-[40] rstudioapi_0.14     farver_2.1.1        jquerylib_0.1.4    
-[43] generics_0.1.3      jsonlite_1.8.3      vroom_1.6.0        
-[46] tokenizers_0.2.3    googlesheets4_1.0.1 magrittr_2.0.3     
-[49] Matrix_1.4-1        Rcpp_1.0.9          munsell_0.5.0      
-[52] fansi_1.0.3         lifecycle_1.0.3     stringi_1.7.8      
-[55] whisker_0.4         yaml_2.3.6          grid_4.2.1         
-[58] parallel_4.2.1      promises_1.2.0.1    crayon_1.5.2       
-[61] lattice_0.20-45     haven_2.5.1         hms_1.1.2          
-[64] knitr_1.40          ps_1.7.1            pillar_1.8.1       
-[67] reprex_2.0.2        glue_1.6.2          evaluate_0.16      
-[70] getPass_0.2-2       modelr_0.1.9        vctrs_0.5.0        
-[73] tzdb_0.3.0          httpuv_1.6.6        cellranger_1.1.0   
-[76] gtable_0.3.1        assertthat_0.2.1    cachem_1.0.6       
-[79] xfun_0.33           broom_1.0.1         janeaustenr_1.0.0  
-[82] later_1.3.0         ragg_1.2.4          googledrive_2.0.0  
-[85] viridisLite_0.4.1   gargle_1.2.1        ellipsis_0.3.2     </code></pre>
+ [1] gtable_0.3.4      xfun_0.40         bslib_0.5.1       processx_3.8.2   
+ [5] lattice_0.21-8    callr_3.7.3       tzdb_0.4.0        vctrs_0.6.3      
+ [9] tools_4.3.1       ps_1.7.5          generics_0.1.3    fansi_1.0.4      
+[13] highr_0.10        janeaustenr_1.0.0 pkgconfig_2.0.3   tokenizers_0.3.0 
+[17] Matrix_1.5-4.1    webshot_0.5.5     lifecycle_1.0.3   farver_2.1.1     
+[21] compiler_4.3.1    git2r_0.32.0      textshaping_0.3.6 munsell_0.5.0    
+[25] getPass_0.2-2     httpuv_1.6.11     htmltools_0.5.6   SnowballC_0.7.1  
+[29] sass_0.4.7        yaml_2.3.7        crayon_1.5.2      later_1.3.1      
+[33] pillar_1.9.0      jquerylib_0.1.4   whisker_0.4.1     cachem_1.0.8     
+[37] tidyselect_1.2.0  rvest_1.0.3       digest_0.6.33     stringi_1.7.12   
+[41] labeling_0.4.3    rprojroot_2.0.3   fastmap_1.1.1     grid_4.3.1       
+[45] colorspace_2.1-0  cli_3.6.1         magrittr_2.0.3    utf8_1.2.3       
+[49] withr_2.5.1       scales_1.2.1      promises_1.2.1    timechange_0.2.0 
+[53] rmarkdown_2.25    httr_1.4.7        ragg_1.2.5        hms_1.1.3        
+[57] evaluate_0.21     knitr_1.44        viridisLite_0.4.2 rlang_1.1.1      
+[61] Rcpp_1.0.11       glue_1.6.2        xml2_1.3.5        svglite_2.1.2    
+[65] rstudioapi_0.15.0 jsonlite_1.8.7    R6_2.5.1          systemfonts_1.0.4
+[69] fs_1.6.3         </code></pre>
 </div>
 </div>
 
