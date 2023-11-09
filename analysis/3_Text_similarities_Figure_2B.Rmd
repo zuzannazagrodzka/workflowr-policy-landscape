@@ -107,13 +107,18 @@ walktrap_topics <- function(g, ...) {
 Importing data (created in `2_topic_modeling`)
 
 ``` {r}
-corpus_df <- read.csv("./output/created_datasets/dataset_words_stm_5topics.csv")
+# Importing dataset that we originally created and used in our analysis
+corpus_df <- read.csv(file = "./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.csv")
+
+# Importing dataset created in 2_topic_modeling.Rmd
+# corpus_df <- read.csv("./output/created_datasets/dataset_words_stm_5topics.csv")
 ```
 
 # Running above functions for each stakeholder
 
 ```{r}
-corpus_df <- read.csv("./output/created_datasets/dataset_words_stm_5topics.csv")
+colnames(corpus_df)
+
 stake_names <- unique(corpus_df$stakeholder)
 count <- 1
 figure_list <- vector()
