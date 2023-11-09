@@ -11,11 +11,11 @@
 
 <meta name="author" content="ZZ, APB, TFJ" />
 
-<meta name="date" content="2022-11-24" />
+<meta name="date" content="2023-11-09" />
 
 <title>2_Topic_modeling</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -31,7 +31,7 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -39,8 +39,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -197,8 +197,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -206,16 +206,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -370,7 +363,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">2_Topic_modeling</h1>
 <h4 class="author">ZZ, APB, TFJ</h4>
-<h4 class="date">2022-11-24</h4>
+<h4 class="date">2023-11-09</h4>
 
 </div>
 
@@ -399,7 +392,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-11-24
+<strong>Last updated:</strong> 2023-11-09
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -418,7 +411,7 @@ title="This is the local directory in which the code in this file was executed."
 This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
 analysis was created with <a
   href="https://github.com/workflowr/workflowr">workflowr</a> (version
-1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
 that were applied when the results were created. The <em>Past
 versions</em> tab lists the development history.
 </p>
@@ -531,15 +524,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreea365d904a0b442a813df60c259dff86b37599df0targetblanka365d90a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreed0498be941eeb0f9a9b5979b291663e8d2955641targetblankd0498bea">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/a365d904a0b442a813df60c259dff86b37599df0" target="_blank">a365d90</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/d0498be941eeb0f9a9b5979b291663e8d2955641" target="_blank">d0498be</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreea365d904a0b442a813df60c259dff86b37599df0targetblanka365d90a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreed0498be941eeb0f9a9b5979b291663e8d2955641targetblankd0498bea"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -549,7 +542,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/a365d904a0b442a813df60c259dff86b37599df0" target="_blank">a365d90</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/d0498be941eeb0f9a9b5979b291663e8d2955641" target="_blank">d0498be</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -564,14 +557,24 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/.DS_Store
-    Ignored:    code/
-    Ignored:    data/mission_statements/.DS_Store
+    Ignored:    data/.DS_Store
+    Ignored:    output/.DS_Store
+    Ignored:    output/Figure_Appendix_1A/
+    Ignored:    output/created_datasets/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/6_Subgroups_comparison_text_similarities.Rmd
+    Untracked:  analysis/Compare_datasets.Rmd
+    Untracked:  data/original_dataset_reproducibility_check/
+    Untracked:  gutenbergr_0.2.3.tar.gz
+    Untracked:  output/Figure_Appendix_1B/
 
 Unstaged changes:
-    Modified:   Policy_landscape_workflowr.R
+    Modified:   analysis/index.Rmd
+    Modified:   output/created_datasets/cleaned_data.csv
 
 </code></pre>
 <p>
@@ -617,6 +620,57 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/d0498be941eeb0f9a9b5979b291663e8d2955641/analysis/2_Topic_modeling.Rmd" target="_blank">d0498be</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-09
+</td>
+<td>
+wflow_publish(c("./analysis/2_Topic_modeling.Rmd"))
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/41dd1ca5c26c3b0b193d6f0af7cccd45f99d088f/analysis/2_Topic_modeling.Rmd" target="_blank">41dd1ca</a>
+</td>
+<td>
+Thomas Frederick Johnson
+</td>
+<td>
+2022-11-25
+</td>
+<td>
+Revisions to the text, and pushing the write thing this time…
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/5bdfc2a3528071efbaf2c6fa1129e5c017cf9524/docs/2_Topic_modeling.html" target="_blank">5bdfc2a</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -815,40 +869,32 @@ Publish other files
 <h1>Topic modeling</h1>
 <div id="topic-modeling-methods-overview" class="section level2">
 <h2>Topic Modeling Methods Overview</h2>
-<p>To investigate the relationship to our research questions regarding
-the topics of our interest and the language choice in the stakeholders’
-statements, the study employs a computational text analysis called the
-Structural Topic Modeling (STM) using library stm. We chose STM because
-it addresses the issue with the independence (like Correlated Topic
-Models) but also enables the discovery of topics and their prevalence
-based on document metadata, such as stakeholder group. The topic
+<p>To investigate the differing priorities of the stakeholder groups, we
+employ a computational text analysis called the Structural Topic
+Modeling (STM) using library stm. We chose STM because its capable of
+unsupervised text classification whilst controlling for sources of
+non-independence e.g. in our case, sentences are nested within
+stakeholders, and stakeholders within stakeholder groups. The topic
 modeling was conducted on a sentence level and the metadata variable
 contained information about the stakeholders group and the document each
 work comes from.</p>
+</div>
+<div id="grounded-theory" class="section level2">
+<h2>Grounded theory</h2>
 <p>After generating the topics, we used the ground theory method of
 analysing qualitative data (Corbin and Strauss, 1990) to identify the
 main categories that are present in the topics.</p>
-</div>
-<div
-id="a-detailed-protocol-of-condensing-multiple-topics-into-a-set-of-more-defined-topics-more-defined."
-class="section level2">
-<h2>A detailed protocol of condensing multiple topics into a set of more
-defined topics more defined.</h2>
 <ol style="list-style-type: decimal">
 <li>Open coding</li>
 </ol>
 <ul>
-<li>obtaining codes by performing STM and choosing the setting that
-enable the algorithm of Lee and Mimno (2014) to find the number of
-topics (from now on: codes). The metadata used in the modelling was the
-information on documents and stakeholders. The model calculates highest
-probability, Score, Lift and FLEX values for each word and assigns words
-to one or multiple topics.</li>
-<li>we looked at the seven words with the highest value for these four
-categories/values and followed a coding paradigm that enabled us to
-create a descriptive label for each of the code</li>
-<li>our paradigm contains enable us to search for words what describe or
-belong to missions and aims, functions, discipline and scale
+<li>obtained topics (codes hereafter) by performing STM with the Lee and
+Mimno (2014) optimisation, which finds the optimal number of topics. Our
+STM included two covariates: Stakeholder ID, Stakeholder group. -The STM
+calculates probability, Score, Lift and FLEX values for each word and
+assigns words to one or multiple topics, we looked at the seven words
+with the highest value across these four categories/values and described
+the codes based on the following coding paradigm:
 <ul>
 <li>Missions and aims - words are related to stakeholders’ visions,
 goals, statements or objectives e.g. open, free.</li>
@@ -859,71 +905,20 @@ train</li>
 biology, ecology, evolution</li>
 <li>Scale - words associated with the time and scale e.g. worldwide,
 global, long</li>
-<li>these are used to create labels to describe each code</li>
 </ul></li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
 <li>Axial coding
 <ul>
-<li>finding connections and relationships with broader categories by
-identifying and drawing the connections between them. It has been done
-by carefully going through labels and finding codes that have the same
-or similar descriptive labels and intuitively they are connected</li>
-<li>aggregating and condensing codes into broader categories based on
-criteria that the codes with the same or similar labels cluster
-together. Our aim was to end up with the smallest number of categories
-that we could identified.</li>
+<li>axial coding involves finding connections and relationships between
+code descriptions e.g. similar descriptions would be linked.</li>
 </ul></li>
 <li>Selective coding</li>
 </ol>
 <ul>
-<li>identifying the connections between the identified categories and
-the rest of the codes</li>
-<li>removing some of the categories that we are not interested in. Many
-stakeholders can share topics with each other and that’s because their
-function in the research landscape is similar or the same. Therefore, we
-expect that we would not be interested in some of the codes since they
-would not be related to our research questions</li>
-<li>going through the codes again and coding accordingly to the
-identified main categories</li>
+<li>code links fell into four distinct clusters, and one hetergenous
+(messy) cluster made up of multiple very small clusters.</li>
 </ul>
-</div>
-<div
-id="predictedexpected-categories-we-expected-to-find-in-the-statements"
-class="section level2">
-<h2>Predicted/Expected categories we expected to find in the
-statements</h2>
-<ol style="list-style-type: decimal">
-<li>Related to Open Research (defined by UNESCO)</li>
-<li>Related to research impact and solving global challenges</li>
-<li>Related to business model or profit</li>
-</ol>
-<p>Open Research and the values that it brings seems to be necessary
-approach to maximise impact of science and help to solve global
-challenges. We expect that stakeholders that care about the Open
-Research agenda will frequently use words such as:</p>
-<blockquote>
-<p>open, research, science, datum, access, accessibility, share,
-transparency</p>
-</blockquote>
-<p>Research results and findings should be used to understand and solve
-challenges but also to educate people. Some stakeholders might emphasise
-the importance of it but not necessary seen the importance of Open
-Research in the process. The words that we could expect to be associated
-with the topic are:</p>
-<blockquote>
-<p>impact, solve, development, sustainable, education, policy, climate,
-change, wildlife. We also expect that words such as open, access will be
-absent.</p>
-</blockquote>
-<p>In our work, we hypothesise that some organisations are run as a for
-profit business. Their approach could be more monetary/profit driven and
-therefore, they would use a business language or financial terms in
-their aim and mission statements. We could expect in these topics to
-find words such as:</p>
-<blockquote>
-<p>profit, fund, service, management, pay, financially</p>
-</blockquote>
 </div>
 <div id="topic-overview-ii" class="section level2">
 <h2>Topic Overview II</h2>
@@ -931,15 +926,11 @@ find words such as:</p>
 categorised following the above description. In the end we were able to
 identify four main topics that we called:</p>
 <ol style="list-style-type: decimal">
-<li>Open Research</li>
-<li>Community and Support</li>
-<li>Innovation and Solutions</li>
-<li>Publication Process.</li>
-</ol>
-<p>Only the <em>Open Research</em> topic was identified as predicted
-beforehand.</p>
-<ol style="list-style-type: decimal">
-<li>Open Research topic contains:</li>
+<li><p>Open Research</p></li>
+<li><p>Community and Support</p></li>
+<li><p>Innovation and Solutions</p></li>
+<li><p>Publication Process.</p></li>
+<li><p>Open Research topic contains:</p></li>
 </ol>
 <blockquote>
 <p>Topic 1, Topic 13, Topic 58, Topic 69, Topic 43, Topic 25, Topic 32,
@@ -967,18 +958,14 @@ Topic 53</p>
 </blockquote>
 <p>The rest of the topics that were not able to be categorised to any of
 our topics were not included in our analysis and interpretation.</p>
-</div>
-<div
-id="topic-modeling-generated-beta-and-gamma-values-that-we-later-used-in-our-analysis."
-class="section level2">
-<h2>Topic modeling generated beta and gamma values that we later used in
-our analysis.</h2>
-<p>Beta value is a calculated for each word and for each topic and gives
-information on a probability that a certain word belongs to a certain
-topic. Score value gives us measure how exclusive the each word is to a
-certain topic. For example, if a word has a low value, it means that
-it’s equally used in all topics. The score was calculated by a word beta
-value divided by a sum of beta values for this word across all
+<div id="beta-and-gamma" class="section level3">
+<h3>Beta and Gamma</h3>
+<p>The beta value is calculated for each word and for each topic and
+gives information on a probability that a certain word belongs to a
+certain topic. Score value gives us measure how exclusive the each word
+is to a certain topic. For example, if a word has a low value, it means
+that it’s equally used in all topics. The score was calculated by a word
+beta value divided by a sum of beta values for this word across all
 topics.</p>
 <p>After merging topics into new topics that were categorised by us, we
 calculated mean value of the merged topics beta and score values. Later
@@ -986,19 +973,19 @@ we used these values in our text similarities analysis to create Fig. 2B
 (3_Text_similarities, Figure_2B).</p>
 <p>Next, we calculated the proportion of the topics appearing in all of
 the documents by using a mean gamma value for each sentence and new
-topics. The gamma value informs what is a probability that certain
-document (here: sentence) belongs to a certain topic.</p>
+topics. The gamma value informs us of the probability that certain
+documents (here: sentence) belong to a certain topic.</p>
 <p>We chose one topic with the highest mean gamma value as a dominant
 topic for each of the sentence and later calculated the proportion of
 the sentences belonging to the new topics.</p>
 <p>This data set was used to create Fig. 2A (Figure_2A).</p>
 </div>
 </div>
-<div id="r-setup-and-packages" class="section level1">
-<h1>R Setup and packages</h1>
-<pre class="r"><code>rm(list=ls())</code></pre>
-<div id="libraries" class="section level2">
-<h2>Libraries</h2>
+</div>
+<div id="setup" class="section level1">
+<h1>Setup</h1>
+<p>Clearing environment and loading packages</p>
+<pre class="r"><code># rm(list=ls())</code></pre>
 <pre class="r"><code>library(tidyverse)
 library(purrr)
 library(tidyr)
@@ -1006,8 +993,14 @@ library(stringr)
 library(tidytext)
 
 # Additional libraries
-library(quanteda)
-library(quanteda.textplots)
+library(quanteda)</code></pre>
+<pre><code>Warning in .recacheSubclasses(def@className, def, env): undefined subclass
+&quot;pcorMatrix&quot; of class &quot;replValueSp&quot;; definition not updated</code></pre>
+<pre><code>Warning in .recacheSubclasses(def@className, def, env): undefined subclass
+&quot;pcorMatrix&quot; of class &quot;xMatrix&quot;; definition not updated</code></pre>
+<pre><code>Warning in .recacheSubclasses(def@className, def, env): undefined subclass
+&quot;pcorMatrix&quot; of class &quot;mMatrix&quot;; definition not updated</code></pre>
+<pre class="r"><code>library(quanteda.textplots)
 library(quanteda.dictionaries)
 library(tm)
 library(topicmodels)
@@ -1021,10 +1014,13 @@ library(stm)
 
 library(&quot;kableExtra&quot;) # to create a table when converting to html</code></pre>
 </div>
-</div>
 <div id="importing-data" class="section level1">
 <h1>Importing data</h1>
-<pre class="r"><code>data_words &lt;- read.csv(file = &quot;./output/created_datasets/cleaned_data.csv&quot;)</code></pre>
+<pre class="r"><code># Importing dataset created in &quot;1a_Data_preprocessing.Rmd&quot;
+# data_words &lt;- read.csv(file = &quot;./output/created_datasets/cleaned_data.csv&quot;)
+
+# Importing dataset that we originally created and used in our analysis
+data_words &lt;- read.csv(file = &quot;./data/original_dataset_reproducibility_check/original_cleaned_data.csv&quot;)</code></pre>
 </div>
 <div id="structural-topic-models-on-stakeholders"
 class="section level1">
@@ -1034,6 +1030,9 @@ href="https://juliasilge.com/blog/sherlock-holmes-stm/"
 class="uri">https://juliasilge.com/blog/sherlock-holmes-stm/</a></p>
 <div id="data-management" class="section level2">
 <h2>Data management</h2>
+<p>Creating metadata and connecting it with my data to perform topic
+modeling on the documents. Metadata includes: document name and
+stakeholder name</p>
 <pre class="r"><code># Creating metadata and connecting it with my data to perform topic modeling on the documents. Metadata includes: document name and stakeholder name
 
 data_dfm &lt;- data_words %&gt;%
@@ -1052,13 +1051,12 @@ data_metadata &lt;- data_words %&gt;%
 # Connecting my metadata and data_dfm for stm()
 covs = data.frame(sentence_doc = data_dfm@docvars$docname, row = c(1:length(data_dfm@docvars$docname)))
 covs = left_join(covs, data_metadata)</code></pre>
-<pre><code>Joining, by = &quot;sentence_doc&quot;</code></pre>
+<pre><code>Joining with `by = join_by(sentence_doc)`</code></pre>
 </div>
 <div id="topic-modeling---no-predetermined-number-of-topics"
 class="section level2">
 <h2>Topic modeling - no predetermined number of topics</h2>
 <pre class="r"><code>data_beta &lt;- data_words
-
 topic_model &lt;- stm(data_dfm, K = 0, verbose = FALSE, init.type = &quot;Spectral&quot;, prevalence = ~ name + stakeholder, data = covs, seed = 1) # running stm() function to fit a model and generate topics
 tpc = topicCorr(topic_model)
 plot(tpc) # plotting topic connections, there are no clear clustering among the topics</code></pre>
@@ -1111,34 +1109,33 @@ zuzannazagrodzka
 </table>
 </div>
 </div>
-</div>
-<div id="getting-beta-values" class="section level2">
-<h2>Getting beta values</h2>
 <pre class="r"><code># Getting beta values from the topic modeling and adding beta value to the data_words 
 
 td_beta &lt;- tidy(topic_model) # getting beta values
 td_beta %&gt;% 
   group_by(term) %&gt;% 
   arrange(term, -beta)</code></pre>
-<pre><code># A tibble: 220,896 × 3
+<pre><code># A tibble: 192,576 × 3
 # Groups:   term [2,832]
    topic term       beta
    &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;
- 1    51 abide 3.55e-  3
- 2    33 abide 2.95e-  3
- 3    69 abide 2.10e-126
- 4    11 abide 3.55e-230
- 5    13 abide 3.68e-254
- 6    78 abide 6.10e-263
- 7    53 abide 1.38e-284
- 8    71 abide 1.34e-285
- 9    70 abide 4.02e-289
-10    55 abide 2.99e-289
-# … with 220,886 more rows</code></pre>
+ 1    32 abide 2.21e-  3
+ 2    41 abide 2.06e-  3
+ 3    48 abide 1.82e- 52
+ 4    23 abide 5.48e-145
+ 5    35 abide 1.62e-156
+ 6    68 abide 2.09e-157
+ 7    40 abide 1.48e-175
+ 8    55 abide 3.97e-180
+ 9     1 abide 1.24e-181
+10    29 abide 5.51e-185
+# ℹ 192,566 more rows</code></pre>
 </div>
-<div id="merging-topics-into-new-topics-categories"
-class="section level2">
-<h2>Merging topics into new topics categories</h2>
+<div id="grounded-theory-1" class="section level2">
+<h2>Grounded theory</h2>
+<p>Topics generated by the model were coded and categorised into five
+grouping topics defined by us. Below, new “topic” column was created and
+topics were assigned</p>
 <pre class="r"><code># Topics generated by the model were coded and categorised into five defined by us topics. Below, new &quot;topic&quot; column was created and topics were assigned  
 
 td_beta$stm_topic &lt;- td_beta$topic
@@ -1187,14 +1184,14 @@ td_beta_score &lt;- td_beta %&gt;%
 td_beta_score$score = td_beta_score$beta/td_beta_score$beta_word_total
 head(td_beta_score)</code></pre>
 <pre><code># A tibble: 6 × 6
-  topic term   beta stm_topic beta_word_total score
-  &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;     &lt;int&gt;           &lt;dbl&gt; &lt;dbl&gt;
-1     1 abide     0         1         0.00650     0
-2     3 abide     0         2         0.00650     0
-3     4 abide     0         3         0.00650     0
-4     3 abide     0         4         0.00650     0
-5     2 abide     0         5         0.00650     0
-6     5 abide     0         6         0.00650     0</code></pre>
+  topic term       beta stm_topic beta_word_total     score
+  &lt;int&gt; &lt;fct&gt;     &lt;dbl&gt;     &lt;int&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+1     1 abide 1.24e-181         1         0.00427 2.90e-179
+2     3 abide 0                 2         0.00427 0        
+3     4 abide 0                 3         0.00427 0        
+4     3 abide 0                 4         0.00427 0        
+5     2 abide 0                 5         0.00427 0        
+6     5 abide 0                 6         0.00427 0        </code></pre>
 <pre class="r"><code>td_beta_score &lt;- td_beta_score %&gt;% 
   select(topic, term, beta, score, stm_topic)
 
@@ -1231,8 +1228,9 @@ td_beta_score_mean_max &lt;- td_beta_score_mean %&gt;%
   select(-merge_col) %&gt;% 
   rename(sum_beta = beta)</code></pre>
 </div>
-<div id="obtaining-the-highest-beta-values" class="section level2">
-<h2>Obtaining the highest beta values</h2>
+<div id="beta" class="section level2">
+<h2>Beta</h2>
+<p>Obtaining the highest beta values</p>
 <pre class="r"><code># Getting highest beta value for each of the word with the information about the Topic number
 
 td_beta_select &lt;- td_beta_score_mean_max
@@ -1264,24 +1262,19 @@ td_score_topic %&gt;% group_by(topic) %&gt;% count()</code></pre>
 # Groups:   topic [5]
   topic     n
   &lt;int&gt; &lt;int&gt;
-1     1   491
-2     2   571
-3     3   662
-4     4   410
-5     5   698</code></pre>
+1     1   492
+2     2   579
+3     3   656
+4     4   473
+5     5   632</code></pre>
 <pre class="r"><code># Highest mean beta value
 td_beta_topic &lt;- td_beta_select %&gt;% 
   select(-sum_beta, -mean_score) %&gt;% 
   group_by(term) %&gt;% 
   top_n(1, mean_beta) %&gt;% 
-  rename(highest_mean_beta = mean_beta)</code></pre>
-</div>
-</div>
-<div
-id="creating-a-new-dataset-by-merging-datasets-with-new-beta-values"
-class="section level1">
-<h1>Creating a new dataset by merging datasets with new beta values</h1>
-<pre class="r"><code># Merging data_words with: td_beta_mean_wide, td_score_mean_wide, td_beta_sum_wide, td_score_topic
+  rename(highest_mean_beta = mean_beta)
+
+# Merging data_words with: td_beta_mean_wide, td_score_mean_wide, td_beta_sum_wide, td_score_topic
 data_words$word &lt;- as.factor(data_words$word)
 
 to_merge &lt;- td_beta_mean_wide %&gt;% 
@@ -1295,6 +1288,7 @@ data_words_stm &lt;- data_words %&gt;%
   select(-topic.y) %&gt;% 
   rename(topic = topic.x)</code></pre>
 </div>
+</div>
 <div id="saving-data" class="section level1">
 <h1>Saving data</h1>
 <pre class="r"><code># Saving the csv file
@@ -1303,9 +1297,10 @@ write_csv(data_words_stm, file = &quot;./output/created_datasets/dataset_words_s
 <div id="creating-a-document-sentence-level-dataset"
 class="section level1">
 <h1>Creating a document (sentence) level dataset</h1>
-<div id="gamma-values---followed-the-same-logic-as-with-beta-values"
-class="section level2">
-<h2>Gamma values - followed the same logic as with beta values</h2>
+<div id="gamma" class="section level2">
+<h2>Gamma</h2>
+<p>Finding which topics belong to each sentence - followed the same
+logic as with beta values</p>
 <pre class="r"><code># Getting gamma values from topic_modeling
 td_gamma &lt;- tidy(topic_model, matrix = &quot;gamma&quot;,                    
                  document_names = rownames(data_dfm))
@@ -1445,7 +1440,7 @@ n
 1
 </td>
 <td style="text-align:right;">
-491
+492
 </td>
 </tr>
 <tr>
@@ -1453,7 +1448,7 @@ n
 2
 </td>
 <td style="text-align:right;">
-571
+579
 </td>
 </tr>
 <tr>
@@ -1461,7 +1456,7 @@ n
 3
 </td>
 <td style="text-align:right;">
-662
+656
 </td>
 </tr>
 <tr>
@@ -1469,7 +1464,7 @@ n
 4
 </td>
 <td style="text-align:right;">
-410
+473
 </td>
 </tr>
 <tr>
@@ -1477,7 +1472,7 @@ n
 5
 </td>
 <td style="text-align:right;">
-698
+632
 </td>
 </tr>
 </tbody>
@@ -1514,178 +1509,57 @@ highest_mean_beta
 <tbody>
 <tr>
 <td style="text-align:left;">
+year
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0222178
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+discover
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0130905
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+paper
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0120697
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ecological
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0115060
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 datum
 </td>
 <td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0.0493624
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-share
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0.0262492
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-researcher
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0.0164228
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-tool
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0.0105743
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-scientific
-</td>
-<td style="text-align:right;">
 2
 </td>
 <td style="text-align:right;">
-0.0256745
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-technology
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0.0165909
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-high
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0.0114022
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-programme
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0.0099910
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-community
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0.0194908
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-contribute
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0.0138369
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-support
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0.0137941
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-fund
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0.0098685
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-research
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-0.0619931
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-member
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-0.0262439
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-biological
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-0.0145711
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-make
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-0.0139964
+0.0287545
 </td>
 </tr>
 <tr>
@@ -1693,32 +1567,76 @@ make
 science
 </td>
 <td style="text-align:right;">
-5
+2
 </td>
 <td style="text-align:right;">
-0.0198494
+0.0246052
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-work
+practise
 </td>
 <td style="text-align:right;">
-5
+2
 </td>
 <td style="text-align:right;">
-0.0158738
+0.0209310
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-publish
+researcher
 </td>
 <td style="text-align:right;">
-5
+2
 </td>
 <td style="text-align:right;">
-0.0139126
+0.0161207
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+change
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0149837
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+impact
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0122918
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+author
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0094370
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+resource
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0091833
 </td>
 </tr>
 <tr>
@@ -1726,10 +1644,87 @@ publish
 open
 </td>
 <td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.0322621
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+review
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.0292161
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+access
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.0239077
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+peer
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.0192811
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+research
+</td>
+<td style="text-align:right;">
 5
 </td>
 <td style="text-align:right;">
-0.0134846
+0.0795512
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+scientific
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0151194
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+community
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0126186
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+share
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0082430
 </td>
 </tr>
 </tbody>
@@ -1748,22 +1743,23 @@ advocates_info &lt;- df_doc_level_stm_gamma %&gt;%
   slice_max(order_by = prop, n = 3) %&gt;% 
   select(-stakeholder)
 advocates_info</code></pre>
-<pre><code># A tibble: 12 × 3
+<pre><code># A tibble: 13 × 3
 # Groups:   topic [4]
-   name                  topic  prop
-   &lt;chr&gt;                 &lt;chr&gt; &lt;dbl&gt;
- 1 CoData                1     1    
- 2 ROpenSci              1     1    
- 3 Free our knowledge    1     0.769
- 4 COPDESS               2     1    
- 5 Amelica               2     0.846
- 6 FAIRsharing           2     0.76 
- 7 DOAJ                  3     1    
- 8 Research4life         3     1    
- 9 Bioline International 3     0.818
-10 coalitionS            4     1    
-11 Jisc                  4     1    
-12 DataCite              4     0.833</code></pre>
+   name                                           topic  prop
+   &lt;chr&gt;                                          &lt;chr&gt; &lt;dbl&gt;
+ 1 Jisc                                           1     0.5  
+ 2 Gitlab                                         1     0.346
+ 3 SPARC                                          1     0.182
+ 4 CoData                                         2     1    
+ 5 COPDESS                                        2     1    
+ 6 ROpenSci                                       2     1    
+ 7 Reference Center for Environmental Information 3     1    
+ 8 Research4life                                  3     1    
+ 9 Africa Open Science and Hardware               3     0.667
+10 Amelica                                        4     0.692
+11 Bioline International                          4     0.455
+12 coalitionS                                     4     0.4  
+13 DOAJ                                           4     0.4  </code></pre>
 <pre class="r"><code>advocates_info %&gt;% 
   kbl(caption = &quot;Advocates associated with topics&quot;) %&gt;% 
   kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
@@ -1787,35 +1783,46 @@ prop
 <tbody>
 <tr>
 <td style="text-align:left;">
+Jisc
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.5000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gitlab
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.3461538
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SPARC
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.1818182
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 CoData
 </td>
 <td style="text-align:left;">
-1
+2
 </td>
 <td style="text-align:right;">
 1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ROpenSci
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Free our knowledge
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-0.7692308
 </td>
 </tr>
 <tr>
@@ -1831,29 +1838,18 @@ COPDESS
 </tr>
 <tr>
 <td style="text-align:left;">
-Amelica
+ROpenSci
 </td>
 <td style="text-align:left;">
 2
 </td>
 <td style="text-align:right;">
-0.8461538
+1.0000000
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-FAIRsharing
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-0.7600000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-DOAJ
+Reference Center for Environmental Information
 </td>
 <td style="text-align:left;">
 3
@@ -1875,13 +1871,35 @@ Research4life
 </tr>
 <tr>
 <td style="text-align:left;">
-Bioline International
+Africa Open Science and Hardware
 </td>
 <td style="text-align:left;">
 3
 </td>
 <td style="text-align:right;">
-0.8181818
+0.6666667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Amelica
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.6923077
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bioline International
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.4545455
 </td>
 </tr>
 <tr>
@@ -1892,29 +1910,18 @@ coalitionS
 4
 </td>
 <td style="text-align:right;">
-1.0000000
+0.4000000
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Jisc
+DOAJ
 </td>
 <td style="text-align:left;">
 4
 </td>
 <td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-DataCite
-</td>
-<td style="text-align:left;">
-4
-</td>
-<td style="text-align:right;">
-0.8333333
+0.4000000
 </td>
 </tr>
 </tbody>
@@ -1927,22 +1934,23 @@ funders_info &lt;- df_doc_level_stm_gamma %&gt;%
   slice_max(order_by = prop, n = 3) %&gt;% 
   select(-stakeholder)
 funders_info</code></pre>
-<pre><code># A tibble: 12 × 3
+<pre><code># A tibble: 13 × 3
 # Groups:   topic [4]
    name                                                        topic  prop
    &lt;chr&gt;                                                       &lt;chr&gt; &lt;dbl&gt;
  1 Russian Academy of Science                                  1     0.727
- 2 Alexander von Humboldt Foundation                           1     0.684
- 3 CONICYT                                                     1     0.667
- 4 JST                                                         2     0.9  
- 5 Wellcome                                                    2     0.794
- 6 National Science Foundation                                 2     0.692
- 7 Consortium of African Funds for the Environment             3     1    
- 8 Sea World Research and Rescue Foundation                    3     1    
- 9 Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior 3     0.833
-10 National Research Council Italy                             4     1    
-11 NRC Egypt                                                   4     0.571
-12 Helmholtz-Gemeinschaft                                      4     0.56 </code></pre>
+ 2 JST                                                         1     0.7  
+ 3 NSERC                                                       1     0.4  
+ 4 Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior 2     0.833
+ 5 Conacyt                                                     2     0.75 
+ 6 Consortium of African Funds for the Environment             2     0.75 
+ 7 CNPq                                                        3     1    
+ 8 CONICYT                                                     3     1    
+ 9 The Daimler and Benz Foundation                             3     0.833
+10 Sea World Research and Rescue Foundation                    4     0.625
+11 National Science Foundation                                 4     0.346
+12 ERC                                                         4     0.3  
+13 NSERC                                                       4     0.3  </code></pre>
 <pre class="r"><code>funders_info %&gt;% 
   kbl(caption = &quot;Funders associated with topics&quot;) %&gt;% 
   kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
@@ -1977,57 +1985,46 @@ Russian Academy of Science
 </tr>
 <tr>
 <td style="text-align:left;">
-Alexander von Humboldt Foundation
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-0.6842105
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CONICYT
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-0.6666667
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 JST
 </td>
 <td style="text-align:left;">
-2
+1
 </td>
 <td style="text-align:right;">
-0.9000000
+0.7000000
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Wellcome
+NSERC
 </td>
 <td style="text-align:left;">
-2
+1
 </td>
 <td style="text-align:right;">
-0.7941176
+0.4000000
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-National Science Foundation
+Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior
 </td>
 <td style="text-align:left;">
 2
 </td>
 <td style="text-align:right;">
-0.6923077
+0.8333333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Conacyt
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.7500000
 </td>
 </tr>
 <tr>
@@ -2035,6 +2032,17 @@ National Science Foundation
 Consortium of African Funds for the Environment
 </td>
 <td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.7500000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CNPq
+</td>
+<td style="text-align:left;">
 3
 </td>
 <td style="text-align:right;">
@@ -2043,7 +2051,7 @@ Consortium of African Funds for the Environment
 </tr>
 <tr>
 <td style="text-align:left;">
-Sea World Research and Rescue Foundation
+CONICYT
 </td>
 <td style="text-align:left;">
 3
@@ -2054,7 +2062,7 @@ Sea World Research and Rescue Foundation
 </tr>
 <tr>
 <td style="text-align:left;">
-Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior
+The Daimler and Benz Foundation
 </td>
 <td style="text-align:left;">
 3
@@ -2065,35 +2073,46 @@ Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior
 </tr>
 <tr>
 <td style="text-align:left;">
-National Research Council Italy
+Sea World Research and Rescue Foundation
 </td>
 <td style="text-align:left;">
 4
 </td>
 <td style="text-align:right;">
-1.0000000
+0.6250000
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-NRC Egypt
+National Science Foundation
 </td>
 <td style="text-align:left;">
 4
 </td>
 <td style="text-align:right;">
-0.5714286
+0.3461538
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Helmholtz-Gemeinschaft
+ERC
 </td>
 <td style="text-align:left;">
 4
 </td>
 <td style="text-align:right;">
-0.5600000
+0.3000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NSERC
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.3000000
 </td>
 </tr>
 </tbody>
@@ -2108,21 +2127,21 @@ journals_info &lt;- df_doc_level_stm_gamma %&gt;%
 journals_info</code></pre>
 <pre><code># A tibble: 13 × 3
 # Groups:   topic [4]
-   name                                                   topic  prop
-   &lt;chr&gt;                                                  &lt;chr&gt; &lt;dbl&gt;
- 1 eLifeJournal                                           1     1    
- 2 Ecology and Evolution                                  1     0.755
- 3 Neobiota                                               1     0.679
- 4 PeerJJournal                                           2     1    
- 5 BioSciences                                            2     0.6  
- 6 Evolutionary Applications                              2     0.538
- 7 Ecological Applications                                3     1    
- 8 Journal of Applied Ecology                             3     1    
- 9 Remote Sensing in Ecology and Conservation             3     1    
-10 American Naturalist                                    4     1    
-11 Conservation Biology                                   4     0.6  
-12 Proceedings of the Royal Society B Biological Sciences 4     0.6  
-13 Conservation Letters                                   4     0.6  </code></pre>
+   name                                               topic  prop
+   &lt;chr&gt;                                              &lt;chr&gt; &lt;dbl&gt;
+ 1 Evolution                                          1     1    
+ 2 Journal of Applied Ecology                         1     1    
+ 3 eLifeJournal                                       1     1    
+ 4 Nature Ecology and Evolution                       2     0.4  
+ 5 PeerJJournal                                       2     0.25 
+ 6 Conservation Letters                               2     0.2  
+ 7 Diversity and Distributions                        2     0.2  
+ 8 BioSciences                                        3     1    
+ 9 Biological Conservation                            3     0.857
+10 Ecology and Evolution                              3     0.774
+11 Annual Review of Ecology Evolution and Systematics 4     1    
+12 Neobiota                                           4     0.571
+13 Evolutionary Applications                          4     0.462</code></pre>
 <pre class="r"><code>journals_info %&gt;% 
   kbl(caption = &quot;Journals associated with topics&quot;) %&gt;% 
   kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
@@ -2146,6 +2165,28 @@ prop
 <tbody>
 <tr>
 <td style="text-align:left;">
+Evolution
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Journal of Applied Ecology
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 eLifeJournal
 </td>
 <td style="text-align:left;">
@@ -2157,24 +2198,13 @@ eLifeJournal
 </tr>
 <tr>
 <td style="text-align:left;">
-Ecology and Evolution
+Nature Ecology and Evolution
 </td>
 <td style="text-align:left;">
-1
+2
 </td>
 <td style="text-align:right;">
-0.7547170
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Neobiota
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-0.6785714
+0.4000000
 </td>
 </tr>
 <tr>
@@ -2185,95 +2215,7 @@ PeerJJournal
 2
 </td>
 <td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BioSciences
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-0.6000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Evolutionary Applications
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-0.5384615
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ecological Applications
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Journal of Applied Ecology
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Remote Sensing in Ecology and Conservation
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-American Naturalist
-</td>
-<td style="text-align:left;">
-4
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Conservation Biology
-</td>
-<td style="text-align:left;">
-4
-</td>
-<td style="text-align:right;">
-0.6000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Proceedings of the Royal Society B Biological Sciences
-</td>
-<td style="text-align:left;">
-4
-</td>
-<td style="text-align:right;">
-0.6000000
+0.2500000
 </td>
 </tr>
 <tr>
@@ -2281,10 +2223,87 @@ Proceedings of the Royal Society B Biological Sciences
 Conservation Letters
 </td>
 <td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.2000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Diversity and Distributions
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.2000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BioSciences
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Biological Conservation
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.8571429
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ecology and Evolution
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.7735849
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Annual Review of Ecology Evolution and Systematics
+</td>
+<td style="text-align:left;">
 4
 </td>
 <td style="text-align:right;">
-0.6000000
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Neobiota
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.5714286
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Evolutionary Applications
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.4615385
 </td>
 </tr>
 </tbody>
@@ -2301,18 +2320,18 @@ publishers_info</code></pre>
 # Groups:   topic [4]
    name                            topic  prop
    &lt;chr&gt;                           &lt;chr&gt; &lt;dbl&gt;
- 1 PLOS                            1     0.636
- 2 eLife                           1     0.4  
- 3 Wiley                           1     0.286
- 4 The Royal Society Publishing    2     1    
- 5 Cell Press                      2     0.652
- 6 eLife                           2     0.6  
+ 1 AIBS                            1     1    
+ 2 Springer Nature                 1     0.857
+ 3 eLife                           1     0.6  
+ 4 Wiley                           2     0.786
+ 5 The University of Chicago Press 2     0.636
+ 6 The Royal Society Publishing    2     0.5  
  7 BioOne                          3     1    
- 8 PeerJ                           3     0.667
- 9 Springer Nature                 3     0.571
-10 AIBS                            4     0.8  
-11 Elsevier                        4     0.517
-12 The University of Chicago Press 4     0.273</code></pre>
+ 8 PeerJ                           3     0.867
+ 9 Cell Press                      3     0.696
+10 PLOS                            4     0.455
+11 Pensoft                         4     0.429
+12 The University of Chicago Press 4     0.364</code></pre>
 <pre class="r"><code>publishers_info %&gt;% 
   kbl(caption = &quot;Publishers associated with topics&quot;) %&gt;% 
   kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
@@ -2336,13 +2355,24 @@ prop
 <tbody>
 <tr>
 <td style="text-align:left;">
-PLOS
+AIBS
 </td>
 <td style="text-align:left;">
 1
 </td>
 <td style="text-align:right;">
-0.6363636
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Springer Nature
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.8571429
 </td>
 </tr>
 <tr>
@@ -2353,7 +2383,7 @@ eLife
 1
 </td>
 <td style="text-align:right;">
-0.4000000
+0.6000000
 </td>
 </tr>
 <tr>
@@ -2361,10 +2391,21 @@ eLife
 Wiley
 </td>
 <td style="text-align:left;">
-1
+2
 </td>
 <td style="text-align:right;">
-0.2857143
+0.7857143
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The University of Chicago Press
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.6363636
 </td>
 </tr>
 <tr>
@@ -2375,29 +2416,7 @@ The Royal Society Publishing
 2
 </td>
 <td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cell Press
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-0.6521739
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-eLife
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-0.6000000
+0.5000000
 </td>
 </tr>
 <tr>
@@ -2419,40 +2438,40 @@ PeerJ
 3
 </td>
 <td style="text-align:right;">
-0.6666667
+0.8666667
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Springer Nature
+Cell Press
 </td>
 <td style="text-align:left;">
 3
 </td>
 <td style="text-align:right;">
-0.5714286
+0.6956522
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-AIBS
+PLOS
 </td>
 <td style="text-align:left;">
 4
 </td>
 <td style="text-align:right;">
-0.8000000
+0.4545455
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Elsevier
+Pensoft
 </td>
 <td style="text-align:left;">
 4
 </td>
 <td style="text-align:right;">
-0.5172414
+0.4285714
 </td>
 </tr>
 <tr>
@@ -2463,7 +2482,7 @@ The University of Chicago Press
 4
 </td>
 <td style="text-align:right;">
-0.2727273
+0.3636364
 </td>
 </tr>
 </tbody>
@@ -2476,22 +2495,23 @@ repositories_info &lt;- df_doc_level_stm_gamma %&gt;%
   slice_max(order_by = prop, n = 3) %&gt;% 
   select(-stakeholder)
 repositories_info</code></pre>
-<pre><code># A tibble: 12 × 3
+<pre><code># A tibble: 13 × 3
 # Groups:   topic [4]
-   name                              topic   prop
-   &lt;chr&gt;                             &lt;chr&gt;  &lt;dbl&gt;
- 1 Harvard Dataverse                 1     1     
- 2 TERN                              1     1     
- 3 Australian Antarctic Data Centre  1     0.875 
- 4 Marine Data Archive               2     1     
- 5 Dryad                             2     0.727 
- 6 NCBI                              2     0.7   
- 7 DNA Databank of Japan             3     0.923 
- 8 BCO-DMO                           3     0.75  
- 9 European Bioinformatics Institute 3     0.476 
-10 OSF                               4     0.3   
-11 NCBI                              4     0.1   
-12 European Bioinformatics Institute 4     0.0952</code></pre>
+   name                              topic  prop
+   &lt;chr&gt;                             &lt;chr&gt; &lt;dbl&gt;
+ 1 European Bioinformatics Institute 1     0.238
+ 2 DNA Databank of Japan             1     0.154
+ 3 KNB                               1     0.111
+ 4 TERN                              2     1    
+ 5 Australian Antarctic Data Centre  2     0.625
+ 6 European Bioinformatics Institute 2     0.476
+ 7 Zenodo                            2     0.476
+ 8 Marine Data Archive               3     1    
+ 9 GBIF                              3     0.833
+10 bioRxiv                           3     0.778
+11 EcoEvoRxiv                        4     0.8  
+12 BCO-DMO                           4     0.75 
+13 Harvard Dataverse                 4     0.75 </code></pre>
 <pre class="r"><code>repositories_info %&gt;% 
   kbl(caption = &quot;Repositories associated with topics&quot;) %&gt;% 
   kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
@@ -2515,13 +2535,35 @@ prop
 <tbody>
 <tr>
 <td style="text-align:left;">
-Harvard Dataverse
+European Bioinformatics Institute
 </td>
 <td style="text-align:left;">
 1
 </td>
 <td style="text-align:right;">
-1.0000000
+0.2380952
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DNA Databank of Japan
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.1538462
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+KNB
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.1111111
 </td>
 </tr>
 <tr>
@@ -2529,7 +2571,7 @@ Harvard Dataverse
 TERN
 </td>
 <td style="text-align:left;">
-1
+2
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -2540,65 +2582,10 @@ TERN
 Australian Antarctic Data Centre
 </td>
 <td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-0.8750000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Marine Data Archive
-</td>
-<td style="text-align:left;">
 2
 </td>
 <td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Dryad
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-0.7272727
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NCBI
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-0.7000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-DNA Databank of Japan
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-0.9230769
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BCO-DMO
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-0.7500000
+0.6250000
 </td>
 </tr>
 <tr>
@@ -2606,7 +2593,7 @@ BCO-DMO
 European Bioinformatics Institute
 </td>
 <td style="text-align:left;">
-3
+2
 </td>
 <td style="text-align:right;">
 0.4761905
@@ -2614,35 +2601,79 @@ European Bioinformatics Institute
 </tr>
 <tr>
 <td style="text-align:left;">
-OSF
+Zenodo
 </td>
 <td style="text-align:left;">
-4
+2
 </td>
 <td style="text-align:right;">
-0.3000000
+0.4761905
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-NCBI
+Marine Data Archive
 </td>
 <td style="text-align:left;">
-4
+3
 </td>
 <td style="text-align:right;">
-0.1000000
+1.0000000
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-European Bioinformatics Institute
+GBIF
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.8333333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bioRxiv
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.7777778
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EcoEvoRxiv
 </td>
 <td style="text-align:left;">
 4
 </td>
 <td style="text-align:right;">
-0.0952381
+0.8000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BCO-DMO
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.7500000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Harvard Dataverse
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0.7500000
 </td>
 </tr>
 </tbody>
@@ -2659,19 +2690,19 @@ societies_info</code></pre>
 # Groups:   topic [4]
    name                                      topic  prop
    &lt;chr&gt;                                     &lt;chr&gt; &lt;dbl&gt;
- 1 National Academy of Sciences              1     0.667
- 2 SORTEE                                    1     0.333
- 3 Royal Society Te Aparangi                 1     0.174
- 4 Australasian Evolution Society            2     1    
- 5 Society for the Study of Evolution        2     1    
- 6 The Zoological Society of London          2     0.643
- 7 Ecological Society of America             3     1    
- 8 European Society for Evolutionary Biology 3     1    
- 9 Ecological Society of Australia           3     0.929
-10 The Society for Conservation Biology      4     0.545
-11 The Royal Society                         4     0.333
-12 British Ecological Society                4     0.222
-13 National Academy of Sciences              4     0.222</code></pre>
+ 1 Australasian Evolution Society            1     1    
+ 2 Society for the Study of Evolution        1     0.667
+ 3 Ecological Society of Australia           1     0.571
+ 4 The Royal Society                         2     1    
+ 5 National Academy of Sciences              2     0.444
+ 6 Royal Society Te Aparangi                 2     0.348
+ 7 The Zoological Society of London          3     0.929
+ 8 SORTEE                                    3     0.667
+ 9 British Ecological Society                3     0.556
+10 National Academy of Sciences              3     0.556
+11 American Society of Naturalists           4     0.333
+12 European Society for Evolutionary Biology 4     0.333
+13 British Ecological Society                4     0.222</code></pre>
 <pre class="r"><code>societies_info %&gt;% 
   kbl(caption = &quot;Societies associated with topics&quot;) %&gt;% 
   kable_classic(&quot;hover&quot;, full_width = F)</code></pre>
@@ -2695,43 +2726,10 @@ prop
 <tbody>
 <tr>
 <td style="text-align:left;">
-National Academy of Sciences
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-0.6666667
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SORTEE
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-0.3333333
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Royal Society Te Aparangi
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-0.1739130
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 Australasian Evolution Society
 </td>
 <td style="text-align:left;">
-2
+1
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -2742,48 +2740,59 @@ Australasian Evolution Society
 Society for the Study of Evolution
 </td>
 <td style="text-align:left;">
-2
+1
 </td>
 <td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-The Zoological Society of London
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-0.6428571
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ecological Society of America
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-European Society for Evolutionary Biology
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-1.0000000
+0.6666667
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 Ecological Society of Australia
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.5714286
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Royal Society
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+National Academy of Sciences
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.4444444
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Royal Society Te Aparangi
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0.3478261
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Zoological Society of London
 </td>
 <td style="text-align:left;">
 3
@@ -2794,18 +2803,51 @@ Ecological Society of Australia
 </tr>
 <tr>
 <td style="text-align:left;">
-The Society for Conservation Biology
+SORTEE
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.6666667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+British Ecological Society
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.5555556
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+National Academy of Sciences
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0.5555556
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+American Society of Naturalists
 </td>
 <td style="text-align:left;">
 4
 </td>
 <td style="text-align:right;">
-0.5454545
+0.3333333
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-The Royal Society
+European Society for Evolutionary Biology
 </td>
 <td style="text-align:left;">
 4
@@ -2825,17 +2867,6 @@ British Ecological Society
 0.2222222
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-National Academy of Sciences
-</td>
-<td style="text-align:left;">
-4
-</td>
-<td style="text-align:right;">
-0.2222222
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -2843,70 +2874,61 @@ National Academy of Sciences
 <div id="session-information" class="section level1">
 <h1>Session information</h1>
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.2.1 (2022-06-23)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur ... 10.16
+<pre><code>R version 4.3.1 (2023-06-16)
+Platform: x86_64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.6
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
 
 locale:
-[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/London
+tzcode source: internal
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.3.4           stm_1.3.6                 
- [3] ggraph_2.1.0               igraph_1.3.5              
- [5] reshape2_1.4.4             wordcloud_2.6             
- [7] RColorBrewer_1.1-3         topicmodels_0.2-12        
- [9] tm_0.7-9                   NLP_0.2-1                 
-[11] quanteda.dictionaries_0.31 quanteda.textplots_0.94.2 
-[13] quanteda_3.2.3             tidytext_0.3.4            
-[15] forcats_0.5.2              stringr_1.4.1             
-[17] dplyr_1.0.10               purrr_0.3.5               
-[19] readr_2.1.3                tidyr_1.2.1               
-[21] tibble_3.1.8               ggplot2_3.3.6             
-[23] tidyverse_1.3.2            workflowr_1.7.0           
+ [1] kableExtra_1.3.4          stm_1.3.6.1              
+ [3] ggraph_2.1.0              igraph_1.5.1             
+ [5] reshape2_1.4.4            wordcloud_2.6            
+ [7] RColorBrewer_1.1-3        topicmodels_0.2-14       
+ [9] tm_0.7-11                 NLP_0.2-1                
+[11] quanteda.dictionaries_0.4 quanteda.textplots_0.94.3
+[13] quanteda_3.3.1            tidytext_0.4.1           
+[15] lubridate_1.9.3           forcats_1.0.0            
+[17] stringr_1.5.0             dplyr_1.1.3              
+[19] purrr_1.0.2               readr_2.1.4              
+[21] tidyr_1.3.0               tibble_3.2.1             
+[23] ggplot2_3.4.3             tidyverse_2.0.0          
+[25] workflowr_1.7.1          
 
 loaded via a namespace (and not attached):
-  [1] Rtsne_0.16          googledrive_2.0.0   colorspace_2.0-3   
-  [4] ellipsis_0.3.2      modeltools_0.2-23   rprojroot_2.0.3    
-  [7] fs_1.5.2            rstudioapi_0.14     farver_2.1.1       
- [10] graphlayouts_0.8.3  SnowballC_0.7.0     ggrepel_0.9.2      
- [13] fansi_1.0.3         lubridate_1.8.0     xml2_1.3.3         
- [16] cachem_1.0.6        knitr_1.40          polyclip_1.10-4    
- [19] jsonlite_1.8.3      broom_1.0.1         dbplyr_2.2.1       
- [22] ggforce_0.4.1       compiler_4.2.1      httr_1.4.4         
- [25] backports_1.4.1     assertthat_0.2.1    Matrix_1.4-1       
- [28] fastmap_1.1.0       gargle_1.2.1        cli_3.4.1          
- [31] later_1.3.0         tweenr_2.0.2        htmltools_0.5.3    
- [34] tools_4.2.1         rsvd_1.0.5          gtable_0.3.1       
- [37] glue_1.6.2          fastmatch_1.1-3     Rcpp_1.0.9         
- [40] slam_0.1-50         cellranger_1.1.0    jquerylib_0.1.4    
- [43] vctrs_0.5.0         svglite_2.1.0       xfun_0.33          
- [46] stopwords_2.3       ps_1.7.1            rvest_1.0.3        
- [49] lifecycle_1.0.3     googlesheets4_1.0.1 getPass_0.2-2      
- [52] MASS_7.3-57         scales_1.2.1        tidygraph_1.2.2    
- [55] hms_1.1.2           promises_1.2.0.1    parallel_4.2.1     
- [58] yaml_2.3.6          gridExtra_2.3       sass_0.4.2         
- [61] stringi_1.7.8       highr_0.9           tokenizers_0.2.3   
- [64] geometry_0.4.6.1    systemfonts_1.0.4   rlang_1.0.6        
- [67] pkgconfig_2.0.3     evaluate_0.16       lattice_0.20-45    
- [70] processx_3.7.0      tidyselect_1.2.0    plyr_1.8.7         
- [73] magrittr_2.0.3      R6_2.5.1            generics_0.1.3     
- [76] DBI_1.1.3           pillar_1.8.1        haven_2.5.1        
- [79] whisker_0.4         withr_2.5.0         abind_1.4-5        
- [82] janeaustenr_1.0.0   modelr_0.1.9        crayon_1.5.2       
- [85] utf8_1.2.2          tzdb_0.3.0          rmarkdown_2.16     
- [88] viridis_0.6.2       grid_4.2.1          readxl_1.4.1       
- [91] data.table_1.14.6   callr_3.7.2         git2r_0.30.1       
- [94] webshot_0.5.4       reprex_2.0.2        digest_0.6.29      
- [97] httpuv_1.6.6        RcppParallel_5.1.5  stats4_4.2.1       
-[100] munsell_0.5.0       viridisLite_0.4.1   bslib_0.4.0        
-[103] magic_1.6-1        </code></pre>
+ [1] gridExtra_2.3      rlang_1.1.1        magrittr_2.0.3     git2r_0.32.0      
+ [5] compiler_4.3.1     getPass_0.2-2      systemfonts_1.0.4  callr_3.7.3       
+ [9] vctrs_0.6.3        rvest_1.0.3        pkgconfig_2.0.3    fastmap_1.1.1     
+[13] magic_1.6-1        utf8_1.2.3         promises_1.2.1     rmarkdown_2.25    
+[17] tzdb_0.4.0         ps_1.7.5           xfun_0.40          modeltools_0.2-23 
+[21] cachem_1.0.8       jsonlite_1.8.7     highr_0.10         SnowballC_0.7.1   
+[25] later_1.3.1        tweenr_2.0.2       parallel_4.3.1     stopwords_2.3     
+[29] R6_2.5.1           bslib_0.5.1        stringi_1.7.12     jquerylib_0.1.4   
+[33] Rcpp_1.0.11        knitr_1.44         httpuv_1.6.11      Matrix_1.5-4.1    
+[37] timechange_0.2.0   tidyselect_1.2.0   abind_1.4-5        rstudioapi_0.15.0 
+[41] yaml_2.3.7         viridis_0.6.4      processx_3.8.2     lattice_0.21-8    
+[45] plyr_1.8.9         withr_2.5.1        evaluate_0.21      Rtsne_0.16        
+[49] RcppParallel_5.1.7 polyclip_1.10-6    xml2_1.3.5         pillar_1.9.0      
+[53] janeaustenr_1.0.0  whisker_0.4.1      stats4_4.3.1       geometry_0.4.7    
+[57] generics_0.1.3     rprojroot_2.0.3    hms_1.1.3          munsell_0.5.0     
+[61] scales_1.2.1       glue_1.6.2         slam_0.1-50        tools_4.3.1       
+[65] data.table_1.14.8  tokenizers_0.3.0   webshot_0.5.5      fs_1.6.3          
+[69] graphlayouts_1.0.2 fastmatch_1.1-4    tidygraph_1.2.3    grid_4.3.1        
+[73] colorspace_2.1-0   ggforce_0.4.1      cli_3.6.1          rsvd_1.0.5        
+[77] fansi_1.0.4        viridisLite_0.4.2  svglite_2.1.2      gtable_0.3.4      
+[81] sass_0.4.7         digest_0.6.33      ggrepel_0.9.4      farver_2.1.1      
+[85] htmltools_0.5.6    lifecycle_1.0.3    httr_1.4.7         MASS_7.3-60       </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -2916,70 +2938,61 @@ Session information
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.2.1 (2022-06-23)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur ... 10.16
+<pre><code>R version 4.3.1 (2023-06-16)
+Platform: x86_64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.6
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
 
 locale:
-[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/London
+tzcode source: internal
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.3.4           stm_1.3.6                 
- [3] ggraph_2.1.0               igraph_1.3.5              
- [5] reshape2_1.4.4             wordcloud_2.6             
- [7] RColorBrewer_1.1-3         topicmodels_0.2-12        
- [9] tm_0.7-9                   NLP_0.2-1                 
-[11] quanteda.dictionaries_0.31 quanteda.textplots_0.94.2 
-[13] quanteda_3.2.3             tidytext_0.3.4            
-[15] forcats_0.5.2              stringr_1.4.1             
-[17] dplyr_1.0.10               purrr_0.3.5               
-[19] readr_2.1.3                tidyr_1.2.1               
-[21] tibble_3.1.8               ggplot2_3.3.6             
-[23] tidyverse_1.3.2            workflowr_1.7.0           
+ [1] kableExtra_1.3.4          stm_1.3.6.1              
+ [3] ggraph_2.1.0              igraph_1.5.1             
+ [5] reshape2_1.4.4            wordcloud_2.6            
+ [7] RColorBrewer_1.1-3        topicmodels_0.2-14       
+ [9] tm_0.7-11                 NLP_0.2-1                
+[11] quanteda.dictionaries_0.4 quanteda.textplots_0.94.3
+[13] quanteda_3.3.1            tidytext_0.4.1           
+[15] lubridate_1.9.3           forcats_1.0.0            
+[17] stringr_1.5.0             dplyr_1.1.3              
+[19] purrr_1.0.2               readr_2.1.4              
+[21] tidyr_1.3.0               tibble_3.2.1             
+[23] ggplot2_3.4.3             tidyverse_2.0.0          
+[25] workflowr_1.7.1          
 
 loaded via a namespace (and not attached):
-  [1] Rtsne_0.16          googledrive_2.0.0   colorspace_2.0-3   
-  [4] ellipsis_0.3.2      modeltools_0.2-23   rprojroot_2.0.3    
-  [7] fs_1.5.2            rstudioapi_0.14     farver_2.1.1       
- [10] graphlayouts_0.8.3  SnowballC_0.7.0     ggrepel_0.9.2      
- [13] fansi_1.0.3         lubridate_1.8.0     xml2_1.3.3         
- [16] cachem_1.0.6        knitr_1.40          polyclip_1.10-4    
- [19] jsonlite_1.8.3      broom_1.0.1         dbplyr_2.2.1       
- [22] ggforce_0.4.1       compiler_4.2.1      httr_1.4.4         
- [25] backports_1.4.1     assertthat_0.2.1    Matrix_1.4-1       
- [28] fastmap_1.1.0       gargle_1.2.1        cli_3.4.1          
- [31] later_1.3.0         tweenr_2.0.2        htmltools_0.5.3    
- [34] tools_4.2.1         rsvd_1.0.5          gtable_0.3.1       
- [37] glue_1.6.2          fastmatch_1.1-3     Rcpp_1.0.9         
- [40] slam_0.1-50         cellranger_1.1.0    jquerylib_0.1.4    
- [43] vctrs_0.5.0         svglite_2.1.0       xfun_0.33          
- [46] stopwords_2.3       ps_1.7.1            rvest_1.0.3        
- [49] lifecycle_1.0.3     googlesheets4_1.0.1 getPass_0.2-2      
- [52] MASS_7.3-57         scales_1.2.1        tidygraph_1.2.2    
- [55] hms_1.1.2           promises_1.2.0.1    parallel_4.2.1     
- [58] yaml_2.3.6          gridExtra_2.3       sass_0.4.2         
- [61] stringi_1.7.8       highr_0.9           tokenizers_0.2.3   
- [64] geometry_0.4.6.1    systemfonts_1.0.4   rlang_1.0.6        
- [67] pkgconfig_2.0.3     evaluate_0.16       lattice_0.20-45    
- [70] processx_3.7.0      tidyselect_1.2.0    plyr_1.8.7         
- [73] magrittr_2.0.3      R6_2.5.1            generics_0.1.3     
- [76] DBI_1.1.3           pillar_1.8.1        haven_2.5.1        
- [79] whisker_0.4         withr_2.5.0         abind_1.4-5        
- [82] janeaustenr_1.0.0   modelr_0.1.9        crayon_1.5.2       
- [85] utf8_1.2.2          tzdb_0.3.0          rmarkdown_2.16     
- [88] viridis_0.6.2       grid_4.2.1          readxl_1.4.1       
- [91] data.table_1.14.6   callr_3.7.2         git2r_0.30.1       
- [94] webshot_0.5.4       reprex_2.0.2        digest_0.6.29      
- [97] httpuv_1.6.6        RcppParallel_5.1.5  stats4_4.2.1       
-[100] munsell_0.5.0       viridisLite_0.4.1   bslib_0.4.0        
-[103] magic_1.6-1        </code></pre>
+ [1] gridExtra_2.3      rlang_1.1.1        magrittr_2.0.3     git2r_0.32.0      
+ [5] compiler_4.3.1     getPass_0.2-2      systemfonts_1.0.4  callr_3.7.3       
+ [9] vctrs_0.6.3        rvest_1.0.3        pkgconfig_2.0.3    fastmap_1.1.1     
+[13] magic_1.6-1        utf8_1.2.3         promises_1.2.1     rmarkdown_2.25    
+[17] tzdb_0.4.0         ps_1.7.5           xfun_0.40          modeltools_0.2-23 
+[21] cachem_1.0.8       jsonlite_1.8.7     highr_0.10         SnowballC_0.7.1   
+[25] later_1.3.1        tweenr_2.0.2       parallel_4.3.1     stopwords_2.3     
+[29] R6_2.5.1           bslib_0.5.1        stringi_1.7.12     jquerylib_0.1.4   
+[33] Rcpp_1.0.11        knitr_1.44         httpuv_1.6.11      Matrix_1.5-4.1    
+[37] timechange_0.2.0   tidyselect_1.2.0   abind_1.4-5        rstudioapi_0.15.0 
+[41] yaml_2.3.7         viridis_0.6.4      processx_3.8.2     lattice_0.21-8    
+[45] plyr_1.8.9         withr_2.5.1        evaluate_0.21      Rtsne_0.16        
+[49] RcppParallel_5.1.7 polyclip_1.10-6    xml2_1.3.5         pillar_1.9.0      
+[53] janeaustenr_1.0.0  whisker_0.4.1      stats4_4.3.1       geometry_0.4.7    
+[57] generics_0.1.3     rprojroot_2.0.3    hms_1.1.3          munsell_0.5.0     
+[61] scales_1.2.1       glue_1.6.2         slam_0.1-50        tools_4.3.1       
+[65] data.table_1.14.8  tokenizers_0.3.0   webshot_0.5.5      fs_1.6.3          
+[69] graphlayouts_1.0.2 fastmatch_1.1-4    tidygraph_1.2.3    grid_4.3.1        
+[73] colorspace_2.1-0   ggforce_0.4.1      cli_3.6.1          rsvd_1.0.5        
+[77] fansi_1.0.4        viridisLite_0.4.2  svglite_2.1.2      gtable_0.3.4      
+[81] sass_0.4.7         digest_0.6.33      ggrepel_0.9.4      farver_2.1.1      
+[85] htmltools_0.5.6    lifecycle_1.0.3    httr_1.4.7         MASS_7.3-60       </code></pre>
 </div>
 </div>
 
