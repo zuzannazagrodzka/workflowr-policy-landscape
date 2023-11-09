@@ -106,9 +106,9 @@ unesco_rec$dictionary_type <- "UNESCO"
 all_dict <- rbind(bus_lang, unesco_rec, book)
 
 # removing numbers 
-all_dict$txt <- gsub("[0-9]+","",all_dict$txt)
+all_dict$txt <- gsub("[0-9]+","",all_dict$txt, useBytes = TRUE)
 # removing "'s"
-all_dict$txt <- gsub("'s","",all_dict$txt)
+all_dict$txt <- gsub("'s","",all_dict$txt, useBytes = TRUE)
 
 all_dict <- all_dict %>%  
   mutate_all(as.character) %>%
