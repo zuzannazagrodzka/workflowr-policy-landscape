@@ -42,14 +42,18 @@ library("kableExtra")
 # Importing data
 
 ```{r}
-# Documents data
-df_corpuses <- read_csv("./output/created_datasets/cleaned_data.csv")
+
+# Importing dataset created in "1a_Data_preprocessing.Rmd"
+# df_corpuses <- read.csv(file = "./output/created_datasets/cleaned_data.csv")
+
+# Importing dataset that we originally created and used in our analysis
+df_corpuses <- read.csv(file = "./data/original_dataset_reproducibility_check/original_cleaned_data.csv")
+
 data_words <- df_corpuses
 
-# Dictionary data 100 words per dictionary
-# all_dict <- read_csv("./output/created_datasets/freq_dict_total_100.csv")
-# All words
-all_dict <- read_csv("./output/created_datasets/freq_dict_total_all.csv")
+# Dictionary data 
+# Importing dictionary data that we originally created and used in our analysis
+all_dict <- read.csv(file = "./data/original_dataset_reproducibility_check/original_freq_dict_total_all.csv")
 
 ```
 
@@ -74,7 +78,11 @@ data_words <- data_words %>%
   left_join(new_dictionary, by = c("word" = "word")) %>% # merging
   filter(org_subgroups %in% c("publishers_nonProfit", "publishers_Profit", "journals_nonOA", "journals_OA"))
 
+```
 
+
+
+```{r}
 # Transforming the data frame
 # data_words <- transform(data_words, present_BUS = as.numeric(present_BUS), 
                     # present_UNESCO = as.numeric(present_UNESCO), 
@@ -92,7 +100,7 @@ data_words$doc_pres <- 1
 data_words_ND <- data_words %>%
   mutate_at(vars(present_BUS, present_UNESCO, present_book, sum), ~replace_na(., 0)) # replacing NAs
   
-head(as.data.frame(data_words_ND,3))
+head(data_words_ND,3)
 colnames(data_words_ND)
 
 ## Preparing columns used to creating ternary plots
