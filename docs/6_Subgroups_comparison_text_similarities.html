@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="ZBZ, APB, TFJ" />
+
+<meta name="date" content="2023-11-07" />
+
+<title>6_Subgroups_comparison_text_similarities</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Policy Landscape Methods</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/andbeck/workflowr-policy-landscape">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">6_Subgroups_comparison_text_similarities</h1>
+<h4 class="author">ZBZ, APB, TFJ</h4>
+<h4 class="date">2023-11-07</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-11-10
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong>
+<code>workflowr-policy-landscape/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20220505code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20220505)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20220505code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20220505)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreeffff9d6bca83b14869bf98f5357bd68de22d4e6btargetblankffff9d6a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/ffff9d6bca83b14869bf98f5357bd68de22d4e6b" target="_blank">ffff9d6</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreeffff9d6bca83b14869bf98f5357bd68de22d4e6btargetblankffff9d6a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/ffff9d6bca83b14869bf98f5357bd68de22d4e6b" target="_blank">ffff9d6</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    data/.DS_Store
+    Ignored:    output/.DS_Store
+    Ignored:    output/Figure_Appendix_1A/
+    Ignored:    output/created_datasets/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/Compare_datasets.Rmd
+    Untracked:  data/original_dataset_reproducibility_check/
+    Untracked:  gutenbergr_0.2.3.tar.gz
+    Untracked:  output/Figure_Appendix_1B/
+
+Unstaged changes:
+    Modified:   analysis/index.Rmd
+    Modified:   output/created_datasets/cleaned_data.csv
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown
+(<code>analysis/6_Subgroups_comparison_text_similarities.Rmd</code>) and
+HTML (<code>docs/6_Subgroups_comparison_text_similarities.html</code>)
+files. If you’ve configured a remote Git repository (see
+<code>?wflow_git_remote</code>), click on the hyperlinks in the table
+below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/ffff9d6bca83b14869bf98f5357bd68de22d4e6b/analysis/6_Subgroups_comparison_text_similarities.Rmd" target="_blank">ffff9d6</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+<td>
+wflow_publish("./analysis/6_Subgroups_comparison_text_similarities.Rmd")
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="visualising-text-similarities-figure-appendix-1"
+class="section level1">
+<h1>Visualising Text Similarities (Figure Appendix 1)</h1>
+</div>
+<div id="figure-appendix.1a" class="section level1">
+<h1>Figure Appendix.1A</h1>
+<p>Figure 1A in the Appendix shows gamma values (x-axis, means ± sd)
+that are the strength of association between a set of subgroups of some
+stakeholder documents (y-axis) and the corresponding topic.</p>
+<p>High gamma values are strong associations.</p>
+<p>We plotted the values for four main topics (side labels): Open
+Research (green), Community and Support (red), Innovation and Solutions
+(yellow) and Publication Process (blue).</p>
+<p>The data for this are produced in <code>2_Topic_modeling</code></p>
+</div>
+<div id="r-setup-and-packages" class="section level1">
+<h1>R Setup and packages</h1>
+<pre class="r"><code># rm(list=ls())</code></pre>
+</div>
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div id="import-data-to-create-figure-2a" class="section level1">
+<h1>Import data to create Figure 2A</h1>
+<pre class="r"><code># Importing data produced in &quot;2_Topic_modeling.Rmd&quot;
+
+# df_doc_level_stm_gamma &lt;- read_csv(file = &quot;./output/created_datasets/df_doc_level_stm_gamma.csv&quot;)
+
+# Importing data that we originally created and used in our analysis
+df_doc_level_stm_gamma &lt;- read.csv(file = &quot;./data/original_dataset_reproducibility_check/original_df_doc_level_stm_gamma.csv&quot;)</code></pre>
+<pre class="r"><code># Adding a column with subgroups of some stakeholders (publishers not-for-profit and for profit, and journals OA and not OA)
+
+# Using newly created dataset
+# df_subgroups &lt;- read_csv(file = &quot;./output/created_datasets/cleaned_data.csv&quot;)
+df_subgroups &lt;- read.csv(file = &quot;./data/original_dataset_reproducibility_check/original_cleaned_data.csv&quot;) 
+
+
+colnames(df_subgroups)</code></pre>
+<pre><code> [1] &quot;txt&quot;           &quot;filename&quot;      &quot;name&quot;          &quot;doc_type&quot;     
+ [5] &quot;stakeholder&quot;   &quot;sentence_doc&quot;  &quot;orig_word&quot;     &quot;word_mix&quot;     
+ [9] &quot;word&quot;          &quot;org_subgroups&quot;</code></pre>
+<pre class="r"><code>df_subgroups &lt;- df_subgroups %&gt;% 
+  select(name, org_subgroups) %&gt;% 
+  distinct(.keep_all = FALSE)
+
+
+
+df_doc_level_stm_gamma &lt;- df_doc_level_stm_gamma %&gt;% 
+  left_join(df_subgroups, by = c(&quot;name&quot; = &quot;name&quot;)) %&gt;% 
+  select(-stakeholder) </code></pre>
+</div>
+<div id="data-management" class="section level1">
+<h1>Data management</h1>
+<pre class="r"><code>df_figure1_gamma &lt;- df_doc_level_stm_gamma %&gt;% 
+  select(-total_topic, -total_sent) 
+
+df_figure1_gamma$prop &lt;- df_figure1_gamma$prop *100
+
+df_figure1_gamma_wide &lt;- df_figure1_gamma %&gt;% 
+  spread(topic, prop) %&gt;% 
+  rename(topic_1 = `1`, topic_2 = `2`, topic_3 = `3`, topic_4 = `4`)
+
+# Topic/Category 1: Open Research 
+# Topic/Category 2: Community &amp; Support
+# Topic/Category 3: Innovation &amp; Solution
+# Topic/Category 4: Publication process (control)
+
+# Selecting only subgroups we are interested in
+df_figure1_gamma_wide &lt;- df_figure1_gamma_wide %&gt;% 
+  filter(org_subgroups %in% c(&quot;publishers_nonProfit&quot;, &quot;publishers_Profit&quot;, &quot;journals_nonOA&quot;, &quot;journals_OA&quot;))
+
+dim(df_figure1_gamma_wide)</code></pre>
+<pre><code>[1] 45  6</code></pre>
+<pre class="r"><code>df_figure1_gamma_wide2 = data.frame(
+  document = rep(df_figure1_gamma_wide$name,4),
+  org_subgroups = rep(df_figure1_gamma_wide$org_subgroups,4),
+    type = c(rep(&quot;1. Open Research&quot;,45), rep(&quot;2. Community and Support&quot;,45),  rep(&quot;3. Innovation and Solutions&quot;,45), rep(&quot;4. Publication Process&quot;, 45)), # the number is the number of rows in the data
+    # type = c(rep(&quot;1. Open Research&quot;,129), rep(&quot;2. Community and Support&quot;,129),  rep(&quot;3. Innovation and Solutions&quot;,129), rep(&quot;4. Publication Process&quot;, 129)), # the number is the number of rows in the data
+  perc = c(df_figure1_gamma_wide$topic_1, df_figure1_gamma_wide$topic_2, df_figure1_gamma_wide$topic_3, df_figure1_gamma_wide$topic_4),
+  perc2 = c(df_figure1_gamma_wide$topic_1, df_figure1_gamma_wide$topic_2, df_figure1_gamma_wide$topic_3, df_figure1_gamma_wide$topic_4)
+)
+
+# adding quantiles values
+sum_figure1_gamma_wide2 = 
+  df_figure1_gamma_wide2 %&gt;%
+  group_by(org_subgroups, type) %&gt;%
+  dplyr::summarize(lower = quantile(perc, probs = .25), upper = quantile(perc, probs = .75), perc_fin = mean(perc)) %&gt;% 
+  rename(perc = perc_fin)</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;org_subgroups&#39;. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div id="graph-production" class="section level1">
+<h1>Graph production</h1>
+<pre class="r"><code>figure_topics &lt;- ggplot() +
+  geom_point(data = df_figure1_gamma_wide2, aes(x = perc, y = org_subgroups, colour = type), alpha = 0.2, position = position_jitter(), show.legend = FALSE) +
+  geom_pointrange(data = sum_figure1_gamma_wide2, aes(x = perc, xmin = lower, xmax = upper, y = org_subgroups, colour = type), show.legend = FALSE) +
+  facet_grid(.~type) + 
+  labs(x = &quot;Topics occuring in documents (%) gamma&quot;, y = &quot;&quot;) +
+  scale_color_manual(values = c(&quot;dark green&quot;, &quot;dark red&quot;, &quot;darkgoldenrod&quot;, &quot;dark blue&quot;)) +
+  theme_classic()
+
+figure_topics</code></pre>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># # UNCOMMENT TO SAVE FIGURES
+
+figure_name &lt;- paste0(&quot;./output/Figure_Appendix_1B/Figure_2A.png&quot;)
+png(file=figure_name,
+  width= 3000, height= 2000, res=400)
+  figure_topics
+  dev.off()</code></pre>
+<pre><code>quartz_off_screen 
+                2 </code></pre>
+</div>
+<div id="figure-appendix.1b" class="section level1">
+<h1>Figure Appendix.1B</h1>
+<p>The figures will be reproduced but for subgroups: journals nonOa and
+OA, publishers for- and not-for-profit.</p>
+<p>Source of the functions: <a
+href="https://www.markhw.com/blog/word-similarity-graphs"
+class="uri">https://www.markhw.com/blog/word-similarity-graphs</a> We
+combined two methods - word similarity graphs and stm modelling) to be
+able visually explore topics and words’ connections in the aims and
+missions documents. We used the word similarity method (<a
+href="https://www.markhw.com/blog/word-similarity-graphs"
+class="uri">https://www.markhw.com/blog/word-similarity-graphs</a>) to
+calculate similarities between words and later to be able to plot them
+with topic modeling score values (package stm)</p>
+<p>The three primary steps are: 1. Calculating the similarities between
+words (Cosine matrix). 2. Formatting these similarity scores into a
+symmetric matrix, where the diagonal contains 0s and the off-diagonal
+cells are similarities between words.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Clustering nodes using a community detection algorithm (here:
+Walktrap algorithm) and plotting the data into circular hierarchical
+dendrograms for each of the stakeholder group separately (Figure
+2B).</li>
+</ol>
+</div>
+<div id="libraries-1" class="section level1">
+<h1>Libraries</h1>
+<p>Loading packages</p>
+<pre class="r"><code># remotes::install_github(&#39;talgalili/dendextend&#39;)
+library(dendextend)
+library(igraph)
+library(ggraph)
+library(reshape2)
+library(dplyr)
+library(tidyverse)
+library(tidytext)</code></pre>
+</div>
+<div id="word-similarity" class="section level1">
+<h1>Word similarity</h1>
+<p>Functions to create words similarities matrix.</p>
+<ul>
+<li>cosine_matrix</li>
+<li>Walktrap_topics</li>
+</ul>
+<p>Source of the code: <a
+href="https://www.markhw.com/blog/word-similarity-graphs"
+class="uri">https://www.markhw.com/blog/word-similarity-graphs</a></p>
+<pre class="r"><code># Cosine matrix
+cosine_matrix &lt;- function(tokenized_data, lower = 0, upper = 1, filt = 0) {
+  
+  if (!all(c(&quot;word&quot;, &quot;id&quot;) %in% names(tokenized_data))) {
+    stop(&quot;tokenized_data must contain variables named word and id&quot;)
+  }
+  
+  if (lower &lt; 0 | lower &gt; 1 | upper &lt; 0 | upper &gt; 1 | filt &lt; 0 | filt &gt; 1) {
+    stop(&quot;lower, upper, and filt must be 0 &lt;= x &lt;= 1&quot;)
+  }
+  docs &lt;- length(unique(tokenized_data$id))
+  
+  out &lt;- tokenized_data %&gt;%
+    count(id, word) %&gt;%
+    group_by(word) %&gt;%
+    mutate(n_docs = n()) %&gt;%
+    ungroup() %&gt;%
+    filter(n_docs &lt;= (docs * upper) &amp; n_docs &gt; (docs * lower)) %&gt;%
+    select(-n_docs) %&gt;%
+    mutate(n = 1) %&gt;%
+    spread(word, n, fill = 0) %&gt;%
+    select(-id) %&gt;%
+    as.matrix() %&gt;%
+    lsa::cosine()
+  
+  filt &lt;- quantile(out[lower.tri(out)], filt)
+  out[out &lt; filt] &lt;- diag(out) &lt;- 0
+  out &lt;- out[rowSums(out) != 0, colSums(out) != 0]
+  
+  return(out)
+}
+
+
+# Walktrap_topics
+
+walktrap_topics &lt;- function(g, ...) {
+  wt &lt;- igraph::cluster_walktrap(g, ...)
+  
+  membership &lt;- igraph::cluster_walktrap(g, ...) %&gt;% 
+      igraph::membership() %&gt;% 
+      as.matrix() %&gt;% 
+      as.data.frame() %&gt;% 
+      rownames_to_column(&quot;word&quot;) %&gt;% 
+      arrange(V1) %&gt;% 
+      rename(group = V1)
+  
+  dendrogram &lt;- stats::as.dendrogram(wt)
+  
+  return(list(membership = membership, dendrogram = dendrogram))
+}</code></pre>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<pre class="r"><code># Importing data (created in `2_topic_modeling`)
+# topics_df &lt;- read.csv(&quot;./output/created_datasets/dataset_words_stm_5topics.csv&quot;)
+
+# Importing dataset that we originally created and used in our analysis
+topics_df &lt;- read.csv(file = &quot;./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.csv&quot;)</code></pre>
+<p>Creating a variable with the subgroups information</p>
+<pre class="r"><code>head(df_subgroups, 5)</code></pre>
+<pre><code>                              name org_subgroups
+1 Africa Open Science and Hardware     advocates
+2                          Amelica     advocates
+3            Bioline International     advocates
+4          Center for Open Science     advocates
+5                       coalitionS     advocates</code></pre>
+<pre class="r"><code>df_subgroups &lt;- df_subgroups %&gt;% 
+  select(&quot;org_subgroups&quot;,&quot;name&quot;) %&gt;% 
+  distinct(.keep_all= FALSE)</code></pre>
+<pre class="r"><code># Keeping only subgroups I am interested in
+topics_df &lt;- topics_df %&gt;% 
+  filter(org_subgroups %in% c(&quot;publishers_nonProfit&quot;, &quot;publishers_Profit&quot;, &quot;journals_nonOA&quot;, &quot;journals_OA&quot;))
+
+head(topics_df, 3)</code></pre>
+<pre><code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          txt
+1    Since its inception in , The  has maintained its position as one of the world s premier peer-reviewed publications in ecology, evolution, and behavior research. Its goals are to publish articles that are of broad interest to the readership, pose new and significant problems, introduce novel subjects, develop conceptual unification, and change the way people think. The  emphasizes sophisticated methodologies and innovative theoretical syntheses   all in an effort to advance the knowledge of organic evolution and other broad biological principles. 
+2    Since its inception in , The  has maintained its position as one of the world s premier peer-reviewed publications in ecology, evolution, and behavior research. Its goals are to publish articles that are of broad interest to the readership, pose new and significant problems, introduce novel subjects, develop conceptual unification, and change the way people think. The  emphasizes sophisticated methodologies and innovative theoretical syntheses   all in an effort to advance the knowledge of organic evolution and other broad biological principles. 
+3    Since its inception in , The  has maintained its position as one of the world s premier peer-reviewed publications in ecology, evolution, and behavior research. Its goals are to publish articles that are of broad interest to the readership, pose new and significant problems, introduce novel subjects, develop conceptual unification, and change the way people think. The  emphasizes sophisticated methodologies and innovative theoretical syntheses   all in an effort to advance the knowledge of organic evolution and other broad biological principles. 
+                      filename                name doc_type stakeholder
+1 American Naturalist_Aims.txt American Naturalist     Aims    journals
+2 American Naturalist_Aims.txt American Naturalist     Aims    journals
+3 American Naturalist_Aims.txt American Naturalist     Aims    journals
+           sentence_doc  orig_word  word_mix      word  org_subgroups
+1 American Naturalist_1  inception inception inception journals_nonOA
+2 American Naturalist_1 maintained  maintain  maintain journals_nonOA
+3 American Naturalist_1   position  position  position journals_nonOA
+  mean_beta_t1  mean_beta_t2 mean_beta_t3  mean_beta_t4 mean_beta_t5
+1 2.405878e-91 4.352779e-180  0.000424290 4.788456e-126 0.0002722336
+2 9.211223e-04  1.647354e-03  0.001511078  1.051811e-95 0.0007933616
+3 1.978509e-04  3.145697e-04  0.000516377  8.752072e-04 0.0008261841
+  mean_score_t1 mean_score_t2 mean_score_t3 mean_score_t4 mean_score_t5
+1  1.648413e-89 2.982353e-178    0.02907068 3.280862e-124    0.01865237
+2  1.200462e-02  2.146931e-02    0.01969328  1.370784e-94    0.01033957
+3  4.666891e-03  7.420044e-03    0.01218026  2.064432e-02    0.01948796
+   sum_beta_t1   sum_beta_t2 sum_beta_t3   sum_beta_t4 sum_beta_t5 topic
+1 2.405878e-90 5.223335e-179 0.008061510 3.830764e-125 0.006533606     3
+2 9.211223e-03  1.976825e-02 0.028710484  8.414491e-95 0.019040677     2
+3 1.978509e-03  3.774836e-03 0.009811162  7.001657e-03 0.019828419     4
+  highest_mean_score highest_mean_beta
+1         0.02907068      0.0004242900
+2         0.02146931      0.0016473540
+3         0.02064432      0.0008752072</code></pre>
+<pre class="r"><code>dim(topics_df)</code></pre>
+<pre><code>[1] 6659   28</code></pre>
+</div>
+<div id="running-above-functions-for-each-substakeholder"
+class="section level1">
+<h1>Running above functions for each substakeholder</h1>
+<pre class="r"><code>stake_names &lt;- unique(topics_df$org_subgroups)
+count &lt;- 1
+figure_list &lt;- vector()
+
+for (stake in stake_names) {
+  n &lt;- count # number of the subsubgroups in the list
+  stakeholder_name &lt;- stake_names[n] # substakeholder&#39;s name
+  
+  # selecting data with the right name of the substakeholder
+  dat &lt;- topics_df %&gt;%
+  select(org_subgroups, sentence_doc, word) %&gt;%
+  rename(id = sentence_doc) %&gt;% 
+  filter(org_subgroups %in% stakeholder_name) %&gt;% 
+  select(-org_subgroups)
+  ##################### 
+  
+  # Calculating similarity matrix
+  cos_mat &lt;- cosine_matrix(dat, lower = 0.050, upper = 1, filt = 0.9)
+  
+  # Getting words used in the network
+  word_list_net &lt;- rownames(cos_mat)
+  grep(&quot;workflow&quot;, word_list_net)
+
+  print(dim(cos_mat))
+  
+  # Creating a graph
+  g &lt;- graph_from_adjacency_matrix(cos_mat, mode = &quot;undirected&quot;, weighted = TRUE)
+  topics = walktrap_topics(g)
+  print(stakeholder_name)
+  plot(topics$dendrogram)
+
+  subtrees &lt;- partition_leaves(topics$dendrogram)
+  leaves &lt;- subtrees[[1]]  
+
+
+  pathRoutes &lt;- function(leaf) {
+    which(sapply(subtrees, function(x) leaf %in% x))
+  }
+
+  paths &lt;- lapply(leaves, pathRoutes)
+
+  edges = NULL
+  for(a in 1:length(paths)){
+    # print(a)
+    for(b in c(1:(length(paths[[a]])-1))){
+     if(b == (length(paths[[a]])-1)){
+        tmp_df = data.frame(
+         from = paths[[a]][b],
+         to = leaves[a]
+       )
+     } else {
+        tmp_df = data.frame(
+          from = paths[[a]][b],
+          to = paths[[a]][b+1]
+       )
+     }
+     edges = rbind(edges, tmp_df)
+   }
+  }
+
+
+  connect = melt(cos_mat) # library reshape required
+  colnames(connect) = c(&quot;from&quot;, &quot;to&quot;, &quot;value&quot;)
+  connect = subset(connect, value != 0)
+
+  # create a vertices data.frame. One line per object of our hierarchy
+  vertices  &lt;-  data.frame(
+    name = unique(c(as.character(edges$from), as.character(edges$to))) 
+  ) 
+  # Let&#39;s add a column with the group of each name. It will be useful later to color points
+  vertices$group  &lt;-  edges$from[ match( vertices$name, edges$to ) ]
+
+
+  #Let&#39;s add information concerning the label we are going to add: angle, horizontal adjustement and potential flip
+  #calculate the ANGLE of the labels
+  #vertices$id &lt;- NA
+  #myleaves &lt;- which(is.na( match(vertices$name, edges$from) ))
+  #nleaves &lt;- length(myleaves)
+  #vertices$id[ myleaves ] &lt;- seq(1:nleaves)
+  #vertices$angle &lt;- 90 - 360 * vertices$id / nleaves
+
+  # calculate the alignment of labels: right or left
+  # If I am on the left part of the plot, my labels have currently an angle &lt; -90
+  #vertices$hjust &lt;- ifelse( vertices$angle &lt; -90, 1, 0)
+
+  # flip angle BY to make them readable
+  #vertices$angle &lt;- ifelse(vertices$angle &lt; -90, vertices$angle+180, vertices$angle)
+  
+  # replacing &quot;group&quot; value with the topic numer from the STM
+  
+  # Colour words by topic modelling topics (STM)
+  # I have to change the group numbers in topics
+
+  
+  stm_top &lt;- topics_df %&gt;%
+    select(org_subgroups, word, topic = topic) %&gt;% 
+    filter(org_subgroups %in% stakeholder_name) %&gt;%
+    select(-org_subgroups)
+  
+
+  stm_top$topic &lt;- as.factor(stm_top$topic)
+  stm_top &lt;- unique(stm_top)
+
+
+  # Removing group column and creating a new one based on the stm info
+  vertices &lt;- vertices
+
+  vertices &lt;- vertices %&gt;% 
+    left_join(stm_top, by = c(&quot;name&quot; = &quot;word&quot;)) %&gt;% 
+    select(-group) %&gt;% 
+    rename(group = topic)
+
+  # Adding a beta value so I can use it in the graph
+  stm_beta &lt;- topics_df %&gt;% 
+    select(org_subgroups, word, beta = highest_mean_beta) %&gt;% 
+    filter(org_subgroups %in% stakeholder_name) %&gt;%
+    select(-org_subgroups)
+  
+  
+  stm_beta &lt;- unique(stm_beta)
+  dim(stm_beta)
+
+  vertices &lt;- vertices %&gt;% 
+   left_join(stm_beta, by = c(&quot;name&quot; = &quot;word&quot;)) 
+
+
+  vertices$beta_size = vertices$beta
+  
+  ##############################################################
+
+  # Create a graph object
+  mygraph &lt;- igraph::graph_from_data_frame(edges, vertices=vertices)
+
+  # The connection object must refer to the ids of the leaves:
+  from  &lt;-  match( connect$from, vertices$name)
+  to  &lt;-  match( connect$to, vertices$name)
+
+  # Basic usual argument
+  tmp_plt = ggraph(mygraph, layout = &#39;dendrogram&#39;, circular = T) + 
+    geom_node_point(aes(filter = leaf, x = x*1.05, y=y*1.05, alpha=0.2), size =0, colour = &quot;white&quot;) +
+    #colour=group, size=value
+          scale_colour_manual(values= c(&quot;dark green&quot;, &quot;dark red&quot;, &quot;darkgoldenrod&quot;, &quot;dark blue&quot;, &quot;black&quot;), na.value = &quot;black&quot;) +   
+    geom_conn_bundle(data = get_con(from = from, to = to, col = connect$value), tension = 0.9, aes(colour = col, alpha = col+0.5), width = 1.1) +
+    scale_edge_color_continuous(low=&quot;white&quot;, high=&quot;black&quot;) +
+    # geom_node_text(aes(x = x*1.1, y=y*1.1, filter = leaf, label=name, angle = angle, hjust=hjust), size=5, alpha=1) +
+    geom_node_text(aes(x = x*1.1, y=y*1.1, filter = leaf, label=name, colour = group, angle = 0, hjust = 0.5, size = beta_size),  alpha=1) +
+    
+     theme_void() +
+    theme(
+      legend.position=&quot;none&quot;,
+      plot.margin=unit(c(0,0,0,0),&quot;cm&quot;),
+    ) +
+    expand_limits(x = c(-1.5, 1.5), y = c(-1.5, 1.5)) 
+
+  g &lt;- ggplot_build(tmp_plt)
+  tmp_dat = g[[3]]$data
+  tmp_dat$position = NA
+  tmp_dat_a = subset(tmp_dat, x &gt;= 0)
+  tmp_dat_a = tmp_dat_a[order(-tmp_dat_a$y),]
+  tmp_dat_a = subset(tmp_dat_a, !is.na(beta))
+  tmp_dat_a$order = 1:nrow(tmp_dat_a)
+  
+  tmp_dat_b = subset(tmp_dat, x &lt; 0)
+  tmp_dat_b = tmp_dat_b[order(-tmp_dat_b$y),]
+  tmp_dat_b = subset(tmp_dat_b, !is.na(beta))
+  tmp_dat_b$order = (nrow(tmp_dat_a) +nrow(tmp_dat_b)) : (nrow(tmp_dat_a) +1)
+  
+  tmp_dat = rbind(tmp_dat_a, tmp_dat_b)
+  
+  vertices = left_join(vertices, tmp_dat[,c(&quot;name&quot;, &quot;order&quot;)], by = c(&quot;name&quot;))
+  vert_save = vertices
+  vertices = vert_save
+  
+  vertices$id &lt;- NA
+  vertices = vertices[order(vertices$order),]
+  myleaves &lt;- which(is.na( match(vertices$name, edges$from) ))
+  nleaves &lt;- length(myleaves)
+  vertices$id[ myleaves ] &lt;- seq(1:nleaves)
+  vertices$angle &lt;- 90 - 360 * vertices$id / nleaves
+  
+  # calculate the alignment of labels: right or left
+  # If I am on the left part of the plot, my labels have currently an angle &lt; -90
+  vertices$hjust &lt;- ifelse( vertices$angle &lt; -90, 1, 0)
+  
+  # flip angle BY to make them readable
+  vertices$angle &lt;- ifelse(vertices$angle &lt; -90, vertices$angle+180, vertices$angle)
+  vertices = vertices[order(as.numeric(rownames(vertices))),]
+  
+  mygraph &lt;- igraph::graph_from_data_frame(edges, vertices=vertices)
+  
+  figure_to_save &lt;- ggraph(mygraph, layout = &#39;dendrogram&#39;, circular = T) + 
+    geom_node_point(aes(filter = leaf, x = x*1.05, y=y*1.05, alpha=0.2, colour = group, size = beta_size)) +
+    #colour=group, size=value
+          scale_colour_manual(values= c(&quot;dark green&quot;, &quot;dark red&quot;, &quot;darkgoldenrod&quot;, &quot;dark blue&quot;, &quot;black&quot;), na.value = &quot;black&quot;) +   
+    geom_conn_bundle(data = get_con(from = from, to = to, col = connect$value), tension = 0.99, aes(colour = col, alpha = col+0.5), width = 1.1) +
+    scale_edge_color_continuous(low=&quot;grey90&quot;, high=&quot;black&quot;) +
+    geom_node_text(aes(x = x*1.1, y=y*1.1, filter = leaf, label=name, colour = group, angle = angle, hjust = hjust, size = beta_size)) +
+    
+    theme_void() +
+    theme(
+      legend.position=&quot;none&quot;,
+      plot.margin=unit(c(0,0,0,0),&quot;cm&quot;),
+    ) +
+    expand_limits(x = c(-1.5, 1.5), y = c(-1.5, 1.5))
+
+  assign(paste0(stake_names[n], &quot;_figure1B&quot;), figure_to_save)
+  # name_temp &lt;- assign(paste0(stake_names[n], &quot;_figure2b&quot;), figure_to_save)
+  figure_list &lt;- append(figure_list, paste0(stake_names[n], &quot;_figure1B&quot;))
+  
+  print(figure_to_save)
+
+  #####################
+  count &lt;-  count + 1 
+
+}</code></pre>
+<pre><code>[1] 71 71
+[1] &quot;journals_nonOA&quot;</code></pre>
+<pre><code>Warning: Using the `size` aesthetic in this geom was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` in the `default_aes` field and elsewhere instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.</code></pre>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] 29 29
+[1] &quot;journals_OA&quot;</code></pre>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] 80 80
+[1] &quot;publishers_nonProfit&quot;</code></pre>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-6.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] 43 43
+[1] &quot;publishers_Profit&quot;</code></pre>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-8.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="figure-production" class="section level2">
+<h2>Figure production</h2>
+<pre class="r"><code># Saving figures individually 
+
+figure_list
+
+figure_name &lt;- paste0(&quot;./output/Figure_Appendix_1B/journals_nonOA_figure1B.png&quot;)
+png(file=figure_name,
+  width= 3000, height= 3000, res=400)
+  journals_nonOA_figure1B
+  dev.off()
+
+
+figure_name &lt;- paste0(&quot;./output/Figure_Appendix_1B/journals_OA_figure1B.png&quot;)
+png(file=figure_name,
+  width= 3000, height= 3000, res=400)
+  journals_OA_figure1B
+  dev.off()
+  
+figure_name &lt;- paste0(&quot;./output/Figure_Appendix_1B/publishers_nonProfit_figure1B.png&quot;)
+png(file=figure_name,
+  width= 3000, height= 3000, res=400)
+  publishers_nonProfit_figure1B
+  dev.off()
+  
+  
+figure_name &lt;- paste0(&quot;./output/Figure_Appendix_1B/publishers_Profit_figure1B.png&quot;)
+png(file=figure_name,
+  width= 3000, height= 3000, res=400)
+  publishers_Profit_figure1B
+  dev.off()</code></pre>
+</div>
+</div>
+<div id="session-information" class="section level1">
+<h1>Session information</h1>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.3.1 (2023-06-16)
+Platform: x86_64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.6
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/London
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] tidytext_0.4.1    reshape2_1.4.4    ggraph_2.1.0      igraph_1.5.1     
+ [5] dendextend_1.17.1 lubridate_1.9.3   forcats_1.0.0     stringr_1.5.0    
+ [9] dplyr_1.1.3       purrr_1.0.2       readr_2.1.4       tidyr_1.3.0      
+[13] tibble_3.2.1      ggplot2_3.4.3     tidyverse_2.0.0   workflowr_1.7.1  
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.4       xfun_0.40          bslib_0.5.1        ggrepel_0.9.4     
+ [5] processx_3.8.2     lattice_0.21-8     callr_3.7.3        tzdb_0.4.0        
+ [9] vctrs_0.6.3        tools_4.3.1        ps_1.7.5           generics_0.1.3    
+[13] fansi_1.0.4        janeaustenr_1.0.0  tokenizers_0.3.0   pkgconfig_2.0.3   
+[17] Matrix_1.5-4.1     lifecycle_1.0.3    compiler_4.3.1     farver_2.1.1      
+[21] git2r_0.32.0       munsell_0.5.0      lsa_0.73.3         ggforce_0.4.1     
+[25] graphlayouts_1.0.2 getPass_0.2-2      httpuv_1.6.11      SnowballC_0.7.1   
+[29] htmltools_0.5.6    sass_0.4.7         yaml_2.3.7         crayon_1.5.2      
+[33] later_1.3.1        pillar_1.9.0       jquerylib_0.1.4    whisker_0.4.1     
+[37] MASS_7.3-60        cachem_1.0.8       viridis_0.6.4      tidyselect_1.2.0  
+[41] digest_0.6.33      stringi_1.7.12     labeling_0.4.3     polyclip_1.10-6   
+[45] rprojroot_2.0.3    fastmap_1.1.1      grid_4.3.1         colorspace_2.1-0  
+[49] cli_3.6.1          magrittr_2.0.3     tidygraph_1.2.3    utf8_1.2.3        
+[53] withr_2.5.1        scales_1.2.1       promises_1.2.1     timechange_0.2.0  
+[57] rmarkdown_2.25     httr_1.4.7         gridExtra_2.3      hms_1.1.3         
+[61] evaluate_0.21      knitr_1.44         viridisLite_0.4.2  rlang_1.1.1       
+[65] Rcpp_1.0.11        glue_1.6.2         tweenr_2.0.2       rstudioapi_0.15.0 
+[69] jsonlite_1.8.7     plyr_1.8.9         R6_2.5.1           fs_1.6.3          </code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.3.1 (2023-06-16)
+Platform: x86_64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.6
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/London
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] tidytext_0.4.1    reshape2_1.4.4    ggraph_2.1.0      igraph_1.5.1     
+ [5] dendextend_1.17.1 lubridate_1.9.3   forcats_1.0.0     stringr_1.5.0    
+ [9] dplyr_1.1.3       purrr_1.0.2       readr_2.1.4       tidyr_1.3.0      
+[13] tibble_3.2.1      ggplot2_3.4.3     tidyverse_2.0.0   workflowr_1.7.1  
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.4       xfun_0.40          bslib_0.5.1        ggrepel_0.9.4     
+ [5] processx_3.8.2     lattice_0.21-8     callr_3.7.3        tzdb_0.4.0        
+ [9] vctrs_0.6.3        tools_4.3.1        ps_1.7.5           generics_0.1.3    
+[13] fansi_1.0.4        janeaustenr_1.0.0  tokenizers_0.3.0   pkgconfig_2.0.3   
+[17] Matrix_1.5-4.1     lifecycle_1.0.3    compiler_4.3.1     farver_2.1.1      
+[21] git2r_0.32.0       munsell_0.5.0      lsa_0.73.3         ggforce_0.4.1     
+[25] graphlayouts_1.0.2 getPass_0.2-2      httpuv_1.6.11      SnowballC_0.7.1   
+[29] htmltools_0.5.6    sass_0.4.7         yaml_2.3.7         crayon_1.5.2      
+[33] later_1.3.1        pillar_1.9.0       jquerylib_0.1.4    whisker_0.4.1     
+[37] MASS_7.3-60        cachem_1.0.8       viridis_0.6.4      tidyselect_1.2.0  
+[41] digest_0.6.33      stringi_1.7.12     labeling_0.4.3     polyclip_1.10-6   
+[45] rprojroot_2.0.3    fastmap_1.1.1      grid_4.3.1         colorspace_2.1-0  
+[49] cli_3.6.1          magrittr_2.0.3     tidygraph_1.2.3    utf8_1.2.3        
+[53] withr_2.5.1        scales_1.2.1       promises_1.2.1     timechange_0.2.0  
+[57] rmarkdown_2.25     httr_1.4.7         gridExtra_2.3      hms_1.1.3         
+[61] evaluate_0.21      knitr_1.44         viridisLite_0.4.2  rlang_1.1.1       
+[65] Rcpp_1.0.11        glue_1.6.2         tweenr_2.0.2       rstudioapi_0.15.0 
+[69] jsonlite_1.8.7     plyr_1.8.9         R6_2.5.1           fs_1.6.3          </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
