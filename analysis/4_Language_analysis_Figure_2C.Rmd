@@ -258,7 +258,7 @@ fig_unesco <- ggplot() +
 fig_unesco
 
 # Saving the figure
-# UNCOMMENT TO SAVE FIGURE
+# UNCOMMENT TO SAVE THE FIGURE
 # figure_name <- paste0("./output/Figure_2C/language_unesco.png")
 # ggsave(filename = figure_name, fig_unesco  + theme_bw(base_size = 5),
 #      width = 10, height = 5, dpi = 600, units = "in", device='png')  
