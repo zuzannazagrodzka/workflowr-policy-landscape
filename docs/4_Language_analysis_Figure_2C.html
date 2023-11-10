@@ -524,15 +524,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree39628c3bab1f7dba0562b58429f4afa7924fb242targetblank39628c3a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreec85514b0d04a2ebd76854f5202bccb2dd0db5ef5targetblankc85514ba">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/39628c3bab1f7dba0562b58429f4afa7924fb242" target="_blank">39628c3</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/c85514b0d04a2ebd76854f5202bccb2dd0db5ef5" target="_blank">c85514b</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree39628c3bab1f7dba0562b58429f4afa7924fb242targetblank39628c3a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreec85514b0d04a2ebd76854f5202bccb2dd0db5ef5targetblankc85514ba"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -542,7 +542,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/39628c3bab1f7dba0562b58429f4afa7924fb242" target="_blank">39628c3</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/c85514b0d04a2ebd76854f5202bccb2dd0db5ef5" target="_blank">c85514b</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -568,11 +568,9 @@ Ignored files:
     Ignored:    output/created_datasets/.DS_Store
 
 Untracked files:
-    Untracked:  analysis/Compare_datasets.Rmd
     Untracked:  gutenbergr_0.2.3.tar.gz
 
 Unstaged changes:
-    Modified:   Policy_landscape_workflowr.R
     Modified:   output/created_datasets/cleaned_data.csv
 
 </code></pre>
@@ -620,6 +618,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/3015fd29bca4694e529ae22d2f70704180c98bd0/analysis/4_Language_analysis_Figure_2C.Rmd" target="_blank">3015fd2</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+<td>
+adding arrow to the library and changing the reading command
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/729fc52120d2126f7aaebea284e6b5f69be02806/docs/4_Language_analysis_Figure_2C.html" target="_blank">729fc52</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -952,7 +984,10 @@ library(tidytext)
 library(ggplot2)
 
 # Library to create a table when converting to html
-library(&quot;kableExtra&quot;) </code></pre>
+library(&quot;kableExtra&quot;) 
+
+# Library to read an arrow file
+library(arrow)</code></pre>
 </div>
 <div id="data" class="section level1">
 <h1>Data</h1>
@@ -963,7 +998,7 @@ library(&quot;kableExtra&quot;) </code></pre>
 # df_corpuses &lt;- read.csv(file = &quot;./output/created_datasets/cleaned_data.csv&quot;)
 
 # Importing dataset that we originally created and used in our analysis
-df_corpuses &lt;- read.csv(file = &quot;./data/original_dataset_reproducibility_check/original_cleaned_data.csv&quot;)
+df_corpuses &lt;- read_feather(file = &quot;./data/original_dataset_reproducibility_check/original_cleaned_data.arrow&quot;)
 
 data_words &lt;- df_corpuses
 
@@ -1766,30 +1801,30 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.3.4 tidytext_0.4.1   lubridate_1.9.3  forcats_1.0.0   
- [5] stringr_1.5.0    dplyr_1.1.3      purrr_1.0.2      readr_2.1.4     
- [9] tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.3    tidyverse_2.0.0 
-[13] workflowr_1.7.1 
+ [1] arrow_13.0.0.1   kableExtra_1.3.4 tidytext_0.4.1   lubridate_1.9.3 
+ [5] forcats_1.0.0    stringr_1.5.0    dplyr_1.1.3      purrr_1.0.2     
+ [9] readr_2.1.4      tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.3   
+[13] tidyverse_2.0.0  workflowr_1.7.1 
 
 loaded via a namespace (and not attached):
  [1] gtable_0.3.4      xfun_0.40         bslib_0.5.1       processx_3.8.2   
  [5] lattice_0.21-8    callr_3.7.3       tzdb_0.4.0        vctrs_0.6.3      
  [9] tools_4.3.1       ps_1.7.5          generics_0.1.3    fansi_1.0.4      
 [13] highr_0.10        janeaustenr_1.0.0 pkgconfig_2.0.3   tokenizers_0.3.0 
-[17] Matrix_1.5-4.1    webshot_0.5.5     lifecycle_1.0.3   farver_2.1.1     
-[21] compiler_4.3.1    git2r_0.32.0      textshaping_0.3.6 munsell_0.5.0    
-[25] getPass_0.2-2     httpuv_1.6.11     htmltools_0.5.6   SnowballC_0.7.1  
-[29] sass_0.4.7        yaml_2.3.7        crayon_1.5.2      later_1.3.1      
-[33] pillar_1.9.0      jquerylib_0.1.4   whisker_0.4.1     cachem_1.0.8     
-[37] tidyselect_1.2.0  rvest_1.0.3       digest_0.6.33     stringi_1.7.12   
-[41] labeling_0.4.3    rprojroot_2.0.3   fastmap_1.1.1     grid_4.3.1       
-[45] colorspace_2.1-0  cli_3.6.1         magrittr_2.0.3    utf8_1.2.3       
-[49] withr_2.5.1       scales_1.2.1      promises_1.2.1    timechange_0.2.0 
-[53] rmarkdown_2.25    httr_1.4.7        ragg_1.2.5        hms_1.1.3        
-[57] evaluate_0.21     knitr_1.44        viridisLite_0.4.2 rlang_1.1.1      
-[61] Rcpp_1.0.11       glue_1.6.2        xml2_1.3.5        svglite_2.1.2    
-[65] rstudioapi_0.15.0 jsonlite_1.8.7    R6_2.5.1          systemfonts_1.0.4
-[69] fs_1.6.3         </code></pre>
+[17] Matrix_1.5-4.1    assertthat_0.2.1  webshot_0.5.5     lifecycle_1.0.3  
+[21] farver_2.1.1      compiler_4.3.1    git2r_0.32.0      textshaping_0.3.6
+[25] munsell_0.5.0     getPass_0.2-2     httpuv_1.6.11     htmltools_0.5.6  
+[29] SnowballC_0.7.1   sass_0.4.7        yaml_2.3.7        crayon_1.5.2     
+[33] later_1.3.1       pillar_1.9.0      jquerylib_0.1.4   whisker_0.4.1    
+[37] cachem_1.0.8      tidyselect_1.2.0  rvest_1.0.3       digest_0.6.33    
+[41] stringi_1.7.12    labeling_0.4.3    rprojroot_2.0.3   fastmap_1.1.1    
+[45] grid_4.3.1        colorspace_2.1-0  cli_3.6.1         magrittr_2.0.3   
+[49] utf8_1.2.3        withr_2.5.1       scales_1.2.1      promises_1.2.1   
+[53] bit64_4.0.5       timechange_0.2.0  rmarkdown_2.25    httr_1.4.7       
+[57] bit_4.0.5         ragg_1.2.5        hms_1.1.3         evaluate_0.21    
+[61] knitr_1.44        viridisLite_0.4.2 rlang_1.1.1       Rcpp_1.0.11      
+[65] glue_1.6.2        xml2_1.3.5        svglite_2.1.2     rstudioapi_0.15.0
+[69] jsonlite_1.8.7    R6_2.5.1          systemfonts_1.0.4 fs_1.6.3         </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1817,30 +1852,30 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.3.4 tidytext_0.4.1   lubridate_1.9.3  forcats_1.0.0   
- [5] stringr_1.5.0    dplyr_1.1.3      purrr_1.0.2      readr_2.1.4     
- [9] tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.3    tidyverse_2.0.0 
-[13] workflowr_1.7.1 
+ [1] arrow_13.0.0.1   kableExtra_1.3.4 tidytext_0.4.1   lubridate_1.9.3 
+ [5] forcats_1.0.0    stringr_1.5.0    dplyr_1.1.3      purrr_1.0.2     
+ [9] readr_2.1.4      tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.3   
+[13] tidyverse_2.0.0  workflowr_1.7.1 
 
 loaded via a namespace (and not attached):
  [1] gtable_0.3.4      xfun_0.40         bslib_0.5.1       processx_3.8.2   
  [5] lattice_0.21-8    callr_3.7.3       tzdb_0.4.0        vctrs_0.6.3      
  [9] tools_4.3.1       ps_1.7.5          generics_0.1.3    fansi_1.0.4      
 [13] highr_0.10        janeaustenr_1.0.0 pkgconfig_2.0.3   tokenizers_0.3.0 
-[17] Matrix_1.5-4.1    webshot_0.5.5     lifecycle_1.0.3   farver_2.1.1     
-[21] compiler_4.3.1    git2r_0.32.0      textshaping_0.3.6 munsell_0.5.0    
-[25] getPass_0.2-2     httpuv_1.6.11     htmltools_0.5.6   SnowballC_0.7.1  
-[29] sass_0.4.7        yaml_2.3.7        crayon_1.5.2      later_1.3.1      
-[33] pillar_1.9.0      jquerylib_0.1.4   whisker_0.4.1     cachem_1.0.8     
-[37] tidyselect_1.2.0  rvest_1.0.3       digest_0.6.33     stringi_1.7.12   
-[41] labeling_0.4.3    rprojroot_2.0.3   fastmap_1.1.1     grid_4.3.1       
-[45] colorspace_2.1-0  cli_3.6.1         magrittr_2.0.3    utf8_1.2.3       
-[49] withr_2.5.1       scales_1.2.1      promises_1.2.1    timechange_0.2.0 
-[53] rmarkdown_2.25    httr_1.4.7        ragg_1.2.5        hms_1.1.3        
-[57] evaluate_0.21     knitr_1.44        viridisLite_0.4.2 rlang_1.1.1      
-[61] Rcpp_1.0.11       glue_1.6.2        xml2_1.3.5        svglite_2.1.2    
-[65] rstudioapi_0.15.0 jsonlite_1.8.7    R6_2.5.1          systemfonts_1.0.4
-[69] fs_1.6.3         </code></pre>
+[17] Matrix_1.5-4.1    assertthat_0.2.1  webshot_0.5.5     lifecycle_1.0.3  
+[21] farver_2.1.1      compiler_4.3.1    git2r_0.32.0      textshaping_0.3.6
+[25] munsell_0.5.0     getPass_0.2-2     httpuv_1.6.11     htmltools_0.5.6  
+[29] SnowballC_0.7.1   sass_0.4.7        yaml_2.3.7        crayon_1.5.2     
+[33] later_1.3.1       pillar_1.9.0      jquerylib_0.1.4   whisker_0.4.1    
+[37] cachem_1.0.8      tidyselect_1.2.0  rvest_1.0.3       digest_0.6.33    
+[41] stringi_1.7.12    labeling_0.4.3    rprojroot_2.0.3   fastmap_1.1.1    
+[45] grid_4.3.1        colorspace_2.1-0  cli_3.6.1         magrittr_2.0.3   
+[49] utf8_1.2.3        withr_2.5.1       scales_1.2.1      promises_1.2.1   
+[53] bit64_4.0.5       timechange_0.2.0  rmarkdown_2.25    httr_1.4.7       
+[57] bit_4.0.5         ragg_1.2.5        hms_1.1.3         evaluate_0.21    
+[61] knitr_1.44        viridisLite_0.4.2 rlang_1.1.1       Rcpp_1.0.11      
+[65] glue_1.6.2        xml2_1.3.5        svglite_2.1.2     rstudioapi_0.15.0
+[69] jsonlite_1.8.7    R6_2.5.1          systemfonts_1.0.4 fs_1.6.3         </code></pre>
 </div>
 </div>
 

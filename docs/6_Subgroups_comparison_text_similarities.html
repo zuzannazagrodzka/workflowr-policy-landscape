@@ -522,15 +522,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree39628c3bab1f7dba0562b58429f4afa7924fb242targetblank39628c3a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreec85514b0d04a2ebd76854f5202bccb2dd0db5ef5targetblankc85514ba">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/39628c3bab1f7dba0562b58429f4afa7924fb242" target="_blank">39628c3</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/c85514b0d04a2ebd76854f5202bccb2dd0db5ef5" target="_blank">c85514b</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree39628c3bab1f7dba0562b58429f4afa7924fb242targetblank39628c3a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreec85514b0d04a2ebd76854f5202bccb2dd0db5ef5targetblankc85514ba"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +540,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/39628c3bab1f7dba0562b58429f4afa7924fb242" target="_blank">39628c3</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/c85514b0d04a2ebd76854f5202bccb2dd0db5ef5" target="_blank">c85514b</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -566,11 +566,11 @@ Ignored files:
     Ignored:    output/created_datasets/.DS_Store
 
 Untracked files:
-    Untracked:  analysis/Compare_datasets.Rmd
     Untracked:  gutenbergr_0.2.3.tar.gz
 
 Unstaged changes:
-    Modified:   Policy_landscape_workflowr.R
+    Modified:   output/Figure_2C/language_business.png
+    Modified:   output/Other_figures/language_book.png
     Modified:   output/created_datasets/cleaned_data.csv
 
 </code></pre>
@@ -618,6 +618,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/3015fd29bca4694e529ae22d2f70704180c98bd0/analysis/6_Subgroups_comparison_text_similarities.Rmd" target="_blank">3015fd2</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+<td>
+adding arrow to the library and changing the reading command
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/729fc52120d2126f7aaebea284e6b5f69be02806/docs/6_Subgroups_comparison_text_similarities.html" target="_blank">729fc52</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -727,7 +761,7 @@ Research (green), Community and Support (red), Innovation and Solutions
 </div>
 <div id="r-setup-and-packages" class="section level1">
 <h1>R Setup and packages</h1>
-<pre class="r"><code># rm(list=ls())</code></pre>
+<pre class="r"><code>rm(list=ls())</code></pre>
 </div>
 <div id="libraries" class="section level1">
 <h1>Libraries</h1>
@@ -742,6 +776,17 @@ Research (green), Community and Support (red), Innovation and Solutions
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(arrow)</code></pre>
+<pre><code>
+Attaching package: &#39;arrow&#39;
+
+The following object is masked from &#39;package:lubridate&#39;:
+
+    duration
+
+The following object is masked from &#39;package:utils&#39;:
+
+    timestamp</code></pre>
 </div>
 <div id="import-data-to-create-figure-2a" class="section level1">
 <h1>Import data to create Figure 2A</h1>
@@ -755,7 +800,7 @@ df_doc_level_stm_gamma &lt;- read.csv(file = &quot;./data/original_dataset_repro
 
 # Using newly created dataset
 # df_subgroups &lt;- read_csv(file = &quot;./output/created_datasets/cleaned_data.csv&quot;)
-df_subgroups &lt;- read.csv(file = &quot;./data/original_dataset_reproducibility_check/original_cleaned_data.csv&quot;) 
+df_subgroups &lt;- read_feather(file = &quot;./data/original_dataset_reproducibility_check/original_cleaned_data.arrow&quot;) 
 
 
 colnames(df_subgroups)</code></pre>
@@ -975,15 +1020,17 @@ walktrap_topics &lt;- function(g, ...) {
 # topics_df &lt;- read.csv(&quot;./output/created_datasets/dataset_words_stm_5topics.csv&quot;)
 
 # Importing dataset that we originally created and used in our analysis
-topics_df &lt;- read.csv(file = &quot;./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.csv&quot;)</code></pre>
+topics_df &lt;- read_feather(file = &quot;./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.arrow&quot;)</code></pre>
 <p>Creating a variable with the subgroups information</p>
 <pre class="r"><code>head(df_subgroups, 5)</code></pre>
-<pre><code>                              name org_subgroups
-1 Africa Open Science and Hardware     advocates
-2                          Amelica     advocates
-3            Bioline International     advocates
-4          Center for Open Science     advocates
-5                       coalitionS     advocates</code></pre>
+<pre><code># A tibble: 5 × 2
+  name                             org_subgroups
+  &lt;chr&gt;                            &lt;chr&gt;        
+1 Africa Open Science and Hardware advocates    
+2 Amelica                          advocates    
+3 Bioline International            advocates    
+4 Center for Open Science          advocates    
+5 coalitionS                       advocates    </code></pre>
 <pre class="r"><code>df_subgroups &lt;- df_subgroups %&gt;% 
   select(&quot;org_subgroups&quot;,&quot;name&quot;) %&gt;% 
   distinct(.keep_all= FALSE)</code></pre>
@@ -992,34 +1039,19 @@ topics_df &lt;- topics_df %&gt;%
   filter(org_subgroups %in% c(&quot;publishers_nonProfit&quot;, &quot;publishers_Profit&quot;, &quot;journals_nonOA&quot;, &quot;journals_OA&quot;))
 
 head(topics_df, 3)</code></pre>
-<pre><code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          txt
-1    Since its inception in , The  has maintained its position as one of the world s premier peer-reviewed publications in ecology, evolution, and behavior research. Its goals are to publish articles that are of broad interest to the readership, pose new and significant problems, introduce novel subjects, develop conceptual unification, and change the way people think. The  emphasizes sophisticated methodologies and innovative theoretical syntheses   all in an effort to advance the knowledge of organic evolution and other broad biological principles. 
-2    Since its inception in , The  has maintained its position as one of the world s premier peer-reviewed publications in ecology, evolution, and behavior research. Its goals are to publish articles that are of broad interest to the readership, pose new and significant problems, introduce novel subjects, develop conceptual unification, and change the way people think. The  emphasizes sophisticated methodologies and innovative theoretical syntheses   all in an effort to advance the knowledge of organic evolution and other broad biological principles. 
-3    Since its inception in , The  has maintained its position as one of the world s premier peer-reviewed publications in ecology, evolution, and behavior research. Its goals are to publish articles that are of broad interest to the readership, pose new and significant problems, introduce novel subjects, develop conceptual unification, and change the way people think. The  emphasizes sophisticated methodologies and innovative theoretical syntheses   all in an effort to advance the knowledge of organic evolution and other broad biological principles. 
-                      filename                name doc_type stakeholder
-1 American Naturalist_Aims.txt American Naturalist     Aims    journals
-2 American Naturalist_Aims.txt American Naturalist     Aims    journals
-3 American Naturalist_Aims.txt American Naturalist     Aims    journals
-           sentence_doc  orig_word  word_mix      word  org_subgroups
-1 American Naturalist_1  inception inception inception journals_nonOA
-2 American Naturalist_1 maintained  maintain  maintain journals_nonOA
-3 American Naturalist_1   position  position  position journals_nonOA
-  mean_beta_t1  mean_beta_t2 mean_beta_t3  mean_beta_t4 mean_beta_t5
-1 2.405878e-91 4.352779e-180  0.000424290 4.788456e-126 0.0002722336
-2 9.211223e-04  1.647354e-03  0.001511078  1.051811e-95 0.0007933616
-3 1.978509e-04  3.145697e-04  0.000516377  8.752072e-04 0.0008261841
-  mean_score_t1 mean_score_t2 mean_score_t3 mean_score_t4 mean_score_t5
-1  1.648413e-89 2.982353e-178    0.02907068 3.280862e-124    0.01865237
-2  1.200462e-02  2.146931e-02    0.01969328  1.370784e-94    0.01033957
-3  4.666891e-03  7.420044e-03    0.01218026  2.064432e-02    0.01948796
-   sum_beta_t1   sum_beta_t2 sum_beta_t3   sum_beta_t4 sum_beta_t5 topic
-1 2.405878e-90 5.223335e-179 0.008061510 3.830764e-125 0.006533606     3
-2 9.211223e-03  1.976825e-02 0.028710484  8.414491e-95 0.019040677     2
-3 1.978509e-03  3.774836e-03 0.009811162  7.001657e-03 0.019828419     4
-  highest_mean_score highest_mean_beta
-1         0.02907068      0.0004242900
-2         0.02146931      0.0016473540
-3         0.02064432      0.0008752072</code></pre>
+<pre><code># A tibble: 3 × 28
+  txt        filename name  doc_type stakeholder sentence_doc orig_word word_mix
+  &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;   
+1 &quot;   Since… America… Amer… Aims     journals    American Na… inception incepti…
+2 &quot;   Since… America… Amer… Aims     journals    American Na… maintain… maintain
+3 &quot;   Since… America… Amer… Aims     journals    American Na… position  position
+# ℹ 20 more variables: word &lt;chr&gt;, org_subgroups &lt;chr&gt;, mean_beta_t1 &lt;dbl&gt;,
+#   mean_beta_t2 &lt;dbl&gt;, mean_beta_t3 &lt;dbl&gt;, mean_beta_t4 &lt;dbl&gt;,
+#   mean_beta_t5 &lt;dbl&gt;, mean_score_t1 &lt;dbl&gt;, mean_score_t2 &lt;dbl&gt;,
+#   mean_score_t3 &lt;dbl&gt;, mean_score_t4 &lt;dbl&gt;, mean_score_t5 &lt;dbl&gt;,
+#   sum_beta_t1 &lt;dbl&gt;, sum_beta_t2 &lt;dbl&gt;, sum_beta_t3 &lt;dbl&gt;, sum_beta_t4 &lt;dbl&gt;,
+#   sum_beta_t5 &lt;dbl&gt;, topic &lt;int&gt;, highest_mean_score &lt;dbl&gt;,
+#   highest_mean_beta &lt;dbl&gt;</code></pre>
 <pre class="r"><code>dim(topics_df)</code></pre>
 <pre><code>[1] 6659   28</code></pre>
 </div>
@@ -1613,29 +1645,31 @@ attached base packages:
 
 other attached packages:
  [1] tidytext_0.4.1    reshape2_1.4.4    ggraph_2.1.0      igraph_1.5.1     
- [5] dendextend_1.17.1 lubridate_1.9.3   forcats_1.0.0     stringr_1.5.0    
- [9] dplyr_1.1.3       purrr_1.0.2       readr_2.1.4       tidyr_1.3.0      
-[13] tibble_3.2.1      ggplot2_3.4.3     tidyverse_2.0.0   workflowr_1.7.1  
+ [5] dendextend_1.17.1 arrow_13.0.0.1    lubridate_1.9.3   forcats_1.0.0    
+ [9] stringr_1.5.0     dplyr_1.1.3       purrr_1.0.2       readr_2.1.4      
+[13] tidyr_1.3.0       tibble_3.2.1      ggplot2_3.4.3     tidyverse_2.0.0  
+[17] workflowr_1.7.1  
 
 loaded via a namespace (and not attached):
- [1] gtable_0.3.4       xfun_0.40          bslib_0.5.1        ggrepel_0.9.4     
- [5] processx_3.8.2     lattice_0.21-8     callr_3.7.3        tzdb_0.4.0        
- [9] vctrs_0.6.3        tools_4.3.1        ps_1.7.5           generics_0.1.3    
-[13] fansi_1.0.4        janeaustenr_1.0.0  tokenizers_0.3.0   pkgconfig_2.0.3   
-[17] Matrix_1.5-4.1     lifecycle_1.0.3    compiler_4.3.1     farver_2.1.1      
-[21] git2r_0.32.0       munsell_0.5.0      lsa_0.73.3         ggforce_0.4.1     
-[25] graphlayouts_1.0.2 getPass_0.2-2      httpuv_1.6.11      SnowballC_0.7.1   
-[29] htmltools_0.5.6    sass_0.4.7         yaml_2.3.7         crayon_1.5.2      
-[33] later_1.3.1        pillar_1.9.0       jquerylib_0.1.4    whisker_0.4.1     
-[37] MASS_7.3-60        cachem_1.0.8       viridis_0.6.4      tidyselect_1.2.0  
-[41] digest_0.6.33      stringi_1.7.12     labeling_0.4.3     polyclip_1.10-6   
-[45] rprojroot_2.0.3    fastmap_1.1.1      grid_4.3.1         colorspace_2.1-0  
-[49] cli_3.6.1          magrittr_2.0.3     tidygraph_1.2.3    utf8_1.2.3        
-[53] withr_2.5.1        scales_1.2.1       promises_1.2.1     timechange_0.2.0  
-[57] rmarkdown_2.25     httr_1.4.7         gridExtra_2.3      hms_1.1.3         
-[61] evaluate_0.21      knitr_1.44         viridisLite_0.4.2  rlang_1.1.1       
-[65] Rcpp_1.0.11        glue_1.6.2         tweenr_2.0.2       rstudioapi_0.15.0 
-[69] jsonlite_1.8.7     plyr_1.8.9         R6_2.5.1           fs_1.6.3          </code></pre>
+ [1] tidyselect_1.2.0   viridisLite_0.4.2  farver_2.1.1       viridis_0.6.4     
+ [5] fastmap_1.1.1      tweenr_2.0.2       janeaustenr_1.0.0  promises_1.2.1    
+ [9] digest_0.6.33      timechange_0.2.0   lifecycle_1.0.3    tokenizers_0.3.0  
+[13] processx_3.8.2     magrittr_2.0.3     compiler_4.3.1     rlang_1.1.1       
+[17] sass_0.4.7         tools_4.3.1        utf8_1.2.3         yaml_2.3.7        
+[21] knitr_1.44         labeling_0.4.3     graphlayouts_1.0.2 bit_4.0.5         
+[25] plyr_1.8.9         withr_2.5.1        grid_4.3.1         polyclip_1.10-6   
+[29] fansi_1.0.4        git2r_0.32.0       colorspace_2.1-0   scales_1.2.1      
+[33] MASS_7.3-60        cli_3.6.1          rmarkdown_2.25     crayon_1.5.2      
+[37] generics_0.1.3     rstudioapi_0.15.0  httr_1.4.7         tzdb_0.4.0        
+[41] cachem_1.0.8       ggforce_0.4.1      assertthat_0.2.1   vctrs_0.6.3       
+[45] Matrix_1.5-4.1     jsonlite_1.8.7     lsa_0.73.3         callr_3.7.3       
+[49] hms_1.1.3          bit64_4.0.5        ggrepel_0.9.4      jquerylib_0.1.4   
+[53] glue_1.6.2         ps_1.7.5           stringi_1.7.12     gtable_0.3.4      
+[57] later_1.3.1        munsell_0.5.0      pillar_1.9.0       htmltools_0.5.6   
+[61] R6_2.5.1           tidygraph_1.2.3    rprojroot_2.0.3    evaluate_0.21     
+[65] lattice_0.21-8     SnowballC_0.7.1    httpuv_1.6.11      bslib_0.5.1       
+[69] Rcpp_1.0.11        gridExtra_2.3      whisker_0.4.1      xfun_0.40         
+[73] fs_1.6.3           getPass_0.2-2      pkgconfig_2.0.3   </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1664,29 +1698,31 @@ attached base packages:
 
 other attached packages:
  [1] tidytext_0.4.1    reshape2_1.4.4    ggraph_2.1.0      igraph_1.5.1     
- [5] dendextend_1.17.1 lubridate_1.9.3   forcats_1.0.0     stringr_1.5.0    
- [9] dplyr_1.1.3       purrr_1.0.2       readr_2.1.4       tidyr_1.3.0      
-[13] tibble_3.2.1      ggplot2_3.4.3     tidyverse_2.0.0   workflowr_1.7.1  
+ [5] dendextend_1.17.1 arrow_13.0.0.1    lubridate_1.9.3   forcats_1.0.0    
+ [9] stringr_1.5.0     dplyr_1.1.3       purrr_1.0.2       readr_2.1.4      
+[13] tidyr_1.3.0       tibble_3.2.1      ggplot2_3.4.3     tidyverse_2.0.0  
+[17] workflowr_1.7.1  
 
 loaded via a namespace (and not attached):
- [1] gtable_0.3.4       xfun_0.40          bslib_0.5.1        ggrepel_0.9.4     
- [5] processx_3.8.2     lattice_0.21-8     callr_3.7.3        tzdb_0.4.0        
- [9] vctrs_0.6.3        tools_4.3.1        ps_1.7.5           generics_0.1.3    
-[13] fansi_1.0.4        janeaustenr_1.0.0  tokenizers_0.3.0   pkgconfig_2.0.3   
-[17] Matrix_1.5-4.1     lifecycle_1.0.3    compiler_4.3.1     farver_2.1.1      
-[21] git2r_0.32.0       munsell_0.5.0      lsa_0.73.3         ggforce_0.4.1     
-[25] graphlayouts_1.0.2 getPass_0.2-2      httpuv_1.6.11      SnowballC_0.7.1   
-[29] htmltools_0.5.6    sass_0.4.7         yaml_2.3.7         crayon_1.5.2      
-[33] later_1.3.1        pillar_1.9.0       jquerylib_0.1.4    whisker_0.4.1     
-[37] MASS_7.3-60        cachem_1.0.8       viridis_0.6.4      tidyselect_1.2.0  
-[41] digest_0.6.33      stringi_1.7.12     labeling_0.4.3     polyclip_1.10-6   
-[45] rprojroot_2.0.3    fastmap_1.1.1      grid_4.3.1         colorspace_2.1-0  
-[49] cli_3.6.1          magrittr_2.0.3     tidygraph_1.2.3    utf8_1.2.3        
-[53] withr_2.5.1        scales_1.2.1       promises_1.2.1     timechange_0.2.0  
-[57] rmarkdown_2.25     httr_1.4.7         gridExtra_2.3      hms_1.1.3         
-[61] evaluate_0.21      knitr_1.44         viridisLite_0.4.2  rlang_1.1.1       
-[65] Rcpp_1.0.11        glue_1.6.2         tweenr_2.0.2       rstudioapi_0.15.0 
-[69] jsonlite_1.8.7     plyr_1.8.9         R6_2.5.1           fs_1.6.3          </code></pre>
+ [1] tidyselect_1.2.0   viridisLite_0.4.2  farver_2.1.1       viridis_0.6.4     
+ [5] fastmap_1.1.1      tweenr_2.0.2       janeaustenr_1.0.0  promises_1.2.1    
+ [9] digest_0.6.33      timechange_0.2.0   lifecycle_1.0.3    tokenizers_0.3.0  
+[13] processx_3.8.2     magrittr_2.0.3     compiler_4.3.1     rlang_1.1.1       
+[17] sass_0.4.7         tools_4.3.1        utf8_1.2.3         yaml_2.3.7        
+[21] knitr_1.44         labeling_0.4.3     graphlayouts_1.0.2 bit_4.0.5         
+[25] plyr_1.8.9         withr_2.5.1        grid_4.3.1         polyclip_1.10-6   
+[29] fansi_1.0.4        git2r_0.32.0       colorspace_2.1-0   scales_1.2.1      
+[33] MASS_7.3-60        cli_3.6.1          rmarkdown_2.25     crayon_1.5.2      
+[37] generics_0.1.3     rstudioapi_0.15.0  httr_1.4.7         tzdb_0.4.0        
+[41] cachem_1.0.8       ggforce_0.4.1      assertthat_0.2.1   vctrs_0.6.3       
+[45] Matrix_1.5-4.1     jsonlite_1.8.7     lsa_0.73.3         callr_3.7.3       
+[49] hms_1.1.3          bit64_4.0.5        ggrepel_0.9.4      jquerylib_0.1.4   
+[53] glue_1.6.2         ps_1.7.5           stringi_1.7.12     gtable_0.3.4      
+[57] later_1.3.1        munsell_0.5.0      pillar_1.9.0       htmltools_0.5.6   
+[61] R6_2.5.1           tidygraph_1.2.3    rprojroot_2.0.3    evaluate_0.21     
+[65] lattice_0.21-8     SnowballC_0.7.1    httpuv_1.6.11      bslib_0.5.1       
+[69] Rcpp_1.0.11        gridExtra_2.3      whisker_0.4.1      xfun_0.40         
+[73] fs_1.6.3           getPass_0.2-2      pkgconfig_2.0.3   </code></pre>
 </div>
 </div>
 

@@ -522,15 +522,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree39628c3bab1f7dba0562b58429f4afa7924fb242targetblank39628c3a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreec85514b0d04a2ebd76854f5202bccb2dd0db5ef5targetblankc85514ba">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/39628c3bab1f7dba0562b58429f4afa7924fb242" target="_blank">39628c3</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/c85514b0d04a2ebd76854f5202bccb2dd0db5ef5" target="_blank">c85514b</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree39628c3bab1f7dba0562b58429f4afa7924fb242targetblank39628c3a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreec85514b0d04a2ebd76854f5202bccb2dd0db5ef5targetblankc85514ba"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +540,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/39628c3bab1f7dba0562b58429f4afa7924fb242" target="_blank">39628c3</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/c85514b0d04a2ebd76854f5202bccb2dd0db5ef5" target="_blank">c85514b</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -566,11 +566,9 @@ Ignored files:
     Ignored:    output/created_datasets/.DS_Store
 
 Untracked files:
-    Untracked:  analysis/Compare_datasets.Rmd
     Untracked:  gutenbergr_0.2.3.tar.gz
 
 Unstaged changes:
-    Modified:   Policy_landscape_workflowr.R
     Modified:   output/created_datasets/cleaned_data.csv
 
 </code></pre>
@@ -618,6 +616,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/3015fd29bca4694e529ae22d2f70704180c98bd0/analysis/3_Text_similarities_Figure_2B.Rmd" target="_blank">3015fd2</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+<td>
+adding arrow to the library and changing the reading command
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/729fc52120d2126f7aaebea284e6b5f69be02806/docs/3_Text_similarities_Figure_2B.html" target="_blank">729fc52</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -888,6 +920,7 @@ Walktrap algorithm) and plotting the data into circular hierarchical
 dendrograms for each of the stakeholder group separately (Figure
 2B).</p></li>
 </ol>
+<pre class="r"><code>rm(list=ls())</code></pre>
 </div>
 <div id="libraries" class="section level1">
 <h1>Libraries</h1>
@@ -899,7 +932,8 @@ library(ggraph)
 library(reshape2)
 library(dplyr)
 library(tidyverse)
-library(tidytext)</code></pre>
+library(tidytext)
+library(arrow)</code></pre>
 </div>
 <div id="word-similarity" class="section level1">
 <h1>Word similarity</h1>
@@ -966,7 +1000,8 @@ walktrap_topics &lt;- function(g, ...) {
 <h1>Data</h1>
 <p>Importing data (created in <code>2_topic_modeling</code>)</p>
 <pre class="r"><code># Importing dataset that we originally created and used in our analysis
-corpus_df &lt;- read.csv(file = &quot;./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.csv&quot;)
+corpus_df &lt;- read_feather(file = &quot;./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.arrow&quot;)
+
 
 # Importing dataset created in 2_topic_modeling.Rmd
 # corpus_df &lt;- read.csv(&quot;./output/created_datasets/dataset_words_stm_5topics.csv&quot;)</code></pre>
@@ -1206,626 +1241,22 @@ for (stake in stake_names) {
 This warning is displayed once every 8 hours.
 Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 generated.</code></pre>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
-Past versions of unnamed-chunk-4-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-1.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-2">
-Past versions of unnamed-chunk-4-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/120f965287f67d2b7480cf977be3be5efdc6c5be/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-2.png" target="_blank">120f965</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2023-11-09
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-2.png" target="_blank">e08d7ac</a>
-</td>
-<td>
-Andrew Beckerman
-</td>
-<td>
-2022-11-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-2.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>[1] 32 32
 [1] &quot;funders&quot;</code></pre>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-3">
-Past versions of unnamed-chunk-4-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/120f965287f67d2b7480cf977be3be5efdc6c5be/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-3.png" target="_blank">120f965</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2023-11-09
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-3.png" target="_blank">e08d7ac</a>
-</td>
-<td>
-Andrew Beckerman
-</td>
-<td>
-2022-11-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-3.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-4.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-4">
-Past versions of unnamed-chunk-4-4.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/120f965287f67d2b7480cf977be3be5efdc6c5be/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-4.png" target="_blank">120f965</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2023-11-09
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-4.png" target="_blank">e08d7ac</a>
-</td>
-<td>
-Andrew Beckerman
-</td>
-<td>
-2022-11-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-4.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-4.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>[1] 39 39
 [1] &quot;journals&quot;</code></pre>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-5.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-5">
-Past versions of unnamed-chunk-4-5.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-5.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-6.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-6">
-Past versions of unnamed-chunk-4-6.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-6" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/120f965287f67d2b7480cf977be3be5efdc6c5be/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-6.png" target="_blank">120f965</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2023-11-09
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-6.png" target="_blank">e08d7ac</a>
-</td>
-<td>
-Andrew Beckerman
-</td>
-<td>
-2022-11-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-6.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-6.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>[1] 48 48
 [1] &quot;publishers&quot;</code></pre>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-7.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-7">
-Past versions of unnamed-chunk-4-7.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-7" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-7.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-8.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-8">
-Past versions of unnamed-chunk-4-8.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-8" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/120f965287f67d2b7480cf977be3be5efdc6c5be/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-8.png" target="_blank">120f965</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2023-11-09
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-8.png" target="_blank">e08d7ac</a>
-</td>
-<td>
-Andrew Beckerman
-</td>
-<td>
-2022-11-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-8.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-8.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>[1] 35 35
 [1] &quot;repositories&quot;</code></pre>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-9.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-9">
-Past versions of unnamed-chunk-4-9.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-9" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-9.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-10.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-10">
-Past versions of unnamed-chunk-4-10.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-10" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/120f965287f67d2b7480cf977be3be5efdc6c5be/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-10.png" target="_blank">120f965</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2023-11-09
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-10.png" target="_blank">e08d7ac</a>
-</td>
-<td>
-Andrew Beckerman
-</td>
-<td>
-2022-11-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-10.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-9.png" width="672" style="display: block; margin: auto;" /><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-10.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>[1] 34 34
 [1] &quot;societies&quot;</code></pre>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-11.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-11">
-Past versions of unnamed-chunk-4-11.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-11" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-11.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-12.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-12">
-Past versions of unnamed-chunk-4-12.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-12" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/120f965287f67d2b7480cf977be3be5efdc6c5be/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-12.png" target="_blank">120f965</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2023-11-09
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-12.png" target="_blank">e08d7ac</a>
-</td>
-<td>
-Andrew Beckerman
-</td>
-<td>
-2022-11-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-4-12.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-11.png" width="672" style="display: block; margin: auto;" /><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-5-12.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="figure-production" class="section level2">
 <h2>Figure production</h2>
 <pre class="r"><code># Saving figures individually 
@@ -1889,66 +1320,7 @@ grep(&quot;workflow&quot;, word_list_net)</code></pre>
 g &lt;- graph_from_adjacency_matrix(cos_mat, mode = &quot;undirected&quot;, weighted = TRUE)
 topics = walktrap_topics(g)
 plot(topics$dendrogram)</code></pre>
-<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
-Past versions of unnamed-chunk-6-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-6-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/120f965287f67d2b7480cf977be3be5efdc6c5be/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-6-1.png" target="_blank">120f965</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2023-11-09
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/e08d7ac6e609548e71c8dcdabc103285a58956e4/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-6-1.png" target="_blank">e08d7ac</a>
-</td>
-<td>
-Andrew Beckerman
-</td>
-<td>
-2022-11-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/796aa8e52d5b1ef939301014acb1df11969def99/docs/figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-6-1.png" target="_blank">796aa8e</a>
-</td>
-<td>
-zuzannazagrodzka
-</td>
-<td>
-2022-09-21
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/3_Text_similarities_Figure_2B.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>subtrees &lt;- partition_leaves(topics$dendrogram)
 leaves &lt;- subtrees[[1]]  
 
@@ -2142,30 +1514,32 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] tidytext_0.4.1    lubridate_1.9.3   forcats_1.0.0     stringr_1.5.0    
- [5] purrr_1.0.2       readr_2.1.4       tidyr_1.3.0       tibble_3.2.1     
- [9] tidyverse_2.0.0   dplyr_1.1.3       reshape2_1.4.4    ggraph_2.1.0     
-[13] ggplot2_3.4.3     igraph_1.5.1      dendextend_1.17.1 workflowr_1.7.1  
+ [1] arrow_13.0.0.1    tidytext_0.4.1    lubridate_1.9.3   forcats_1.0.0    
+ [5] stringr_1.5.0     purrr_1.0.2       readr_2.1.4       tidyr_1.3.0      
+ [9] tibble_3.2.1      tidyverse_2.0.0   dplyr_1.1.3       reshape2_1.4.4   
+[13] ggraph_2.1.0      ggplot2_3.4.3     igraph_1.5.1      dendextend_1.17.1
+[17] workflowr_1.7.1  
 
 loaded via a namespace (and not attached):
  [1] gtable_0.3.4       xfun_0.40          bslib_0.5.1        processx_3.8.2    
  [5] ggrepel_0.9.4      lattice_0.21-8     tzdb_0.4.0         callr_3.7.3       
  [9] vctrs_0.6.3        tools_4.3.1        ps_1.7.5           generics_0.1.3    
 [13] fansi_1.0.4        janeaustenr_1.0.0  tokenizers_0.3.0   pkgconfig_2.0.3   
-[17] Matrix_1.5-4.1     lifecycle_1.0.3    compiler_4.3.1     farver_2.1.1      
-[21] git2r_0.32.0       munsell_0.5.0      lsa_0.73.3         ggforce_0.4.1     
-[25] getPass_0.2-2      graphlayouts_1.0.2 httpuv_1.6.11      SnowballC_0.7.1   
-[29] htmltools_0.5.6    sass_0.4.7         yaml_2.3.7         crayon_1.5.2      
-[33] later_1.3.1        pillar_1.9.0       jquerylib_0.1.4    whisker_0.4.1     
-[37] MASS_7.3-60        cachem_1.0.8       viridis_0.6.4      tidyselect_1.2.0  
-[41] digest_0.6.33      stringi_1.7.12     labeling_0.4.3     polyclip_1.10-6   
-[45] rprojroot_2.0.3    fastmap_1.1.1      grid_4.3.1         colorspace_2.1-0  
-[49] cli_3.6.1          magrittr_2.0.3     tidygraph_1.2.3    utf8_1.2.3        
-[53] withr_2.5.1        scales_1.2.1       promises_1.2.1     timechange_0.2.0  
-[57] rmarkdown_2.25     httr_1.4.7         gridExtra_2.3      hms_1.1.3         
-[61] evaluate_0.21      knitr_1.44         viridisLite_0.4.2  rlang_1.1.1       
-[65] Rcpp_1.0.11        glue_1.6.2         tweenr_2.0.2       rstudioapi_0.15.0 
-[69] jsonlite_1.8.7     R6_2.5.1           plyr_1.8.9         fs_1.6.3          </code></pre>
+[17] Matrix_1.5-4.1     assertthat_0.2.1   lifecycle_1.0.3    compiler_4.3.1    
+[21] farver_2.1.1       git2r_0.32.0       munsell_0.5.0      lsa_0.73.3        
+[25] ggforce_0.4.1      getPass_0.2-2      graphlayouts_1.0.2 httpuv_1.6.11     
+[29] SnowballC_0.7.1    htmltools_0.5.6    sass_0.4.7         yaml_2.3.7        
+[33] crayon_1.5.2       later_1.3.1        pillar_1.9.0       jquerylib_0.1.4   
+[37] whisker_0.4.1      MASS_7.3-60        cachem_1.0.8       viridis_0.6.4     
+[41] tidyselect_1.2.0   digest_0.6.33      stringi_1.7.12     labeling_0.4.3    
+[45] polyclip_1.10-6    rprojroot_2.0.3    fastmap_1.1.1      grid_4.3.1        
+[49] colorspace_2.1-0   cli_3.6.1          magrittr_2.0.3     tidygraph_1.2.3   
+[53] utf8_1.2.3         withr_2.5.1        scales_1.2.1       promises_1.2.1    
+[57] bit64_4.0.5        timechange_0.2.0   rmarkdown_2.25     httr_1.4.7        
+[61] bit_4.0.5          gridExtra_2.3      hms_1.1.3          evaluate_0.21     
+[65] knitr_1.44         viridisLite_0.4.2  rlang_1.1.1        Rcpp_1.0.11       
+[69] glue_1.6.2         tweenr_2.0.2       rstudioapi_0.15.0  jsonlite_1.8.7    
+[73] R6_2.5.1           plyr_1.8.9         fs_1.6.3          </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -2193,30 +1567,32 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] tidytext_0.4.1    lubridate_1.9.3   forcats_1.0.0     stringr_1.5.0    
- [5] purrr_1.0.2       readr_2.1.4       tidyr_1.3.0       tibble_3.2.1     
- [9] tidyverse_2.0.0   dplyr_1.1.3       reshape2_1.4.4    ggraph_2.1.0     
-[13] ggplot2_3.4.3     igraph_1.5.1      dendextend_1.17.1 workflowr_1.7.1  
+ [1] arrow_13.0.0.1    tidytext_0.4.1    lubridate_1.9.3   forcats_1.0.0    
+ [5] stringr_1.5.0     purrr_1.0.2       readr_2.1.4       tidyr_1.3.0      
+ [9] tibble_3.2.1      tidyverse_2.0.0   dplyr_1.1.3       reshape2_1.4.4   
+[13] ggraph_2.1.0      ggplot2_3.4.3     igraph_1.5.1      dendextend_1.17.1
+[17] workflowr_1.7.1  
 
 loaded via a namespace (and not attached):
  [1] gtable_0.3.4       xfun_0.40          bslib_0.5.1        processx_3.8.2    
  [5] ggrepel_0.9.4      lattice_0.21-8     tzdb_0.4.0         callr_3.7.3       
  [9] vctrs_0.6.3        tools_4.3.1        ps_1.7.5           generics_0.1.3    
 [13] fansi_1.0.4        janeaustenr_1.0.0  tokenizers_0.3.0   pkgconfig_2.0.3   
-[17] Matrix_1.5-4.1     lifecycle_1.0.3    compiler_4.3.1     farver_2.1.1      
-[21] git2r_0.32.0       munsell_0.5.0      lsa_0.73.3         ggforce_0.4.1     
-[25] getPass_0.2-2      graphlayouts_1.0.2 httpuv_1.6.11      SnowballC_0.7.1   
-[29] htmltools_0.5.6    sass_0.4.7         yaml_2.3.7         crayon_1.5.2      
-[33] later_1.3.1        pillar_1.9.0       jquerylib_0.1.4    whisker_0.4.1     
-[37] MASS_7.3-60        cachem_1.0.8       viridis_0.6.4      tidyselect_1.2.0  
-[41] digest_0.6.33      stringi_1.7.12     labeling_0.4.3     polyclip_1.10-6   
-[45] rprojroot_2.0.3    fastmap_1.1.1      grid_4.3.1         colorspace_2.1-0  
-[49] cli_3.6.1          magrittr_2.0.3     tidygraph_1.2.3    utf8_1.2.3        
-[53] withr_2.5.1        scales_1.2.1       promises_1.2.1     timechange_0.2.0  
-[57] rmarkdown_2.25     httr_1.4.7         gridExtra_2.3      hms_1.1.3         
-[61] evaluate_0.21      knitr_1.44         viridisLite_0.4.2  rlang_1.1.1       
-[65] Rcpp_1.0.11        glue_1.6.2         tweenr_2.0.2       rstudioapi_0.15.0 
-[69] jsonlite_1.8.7     R6_2.5.1           plyr_1.8.9         fs_1.6.3          </code></pre>
+[17] Matrix_1.5-4.1     assertthat_0.2.1   lifecycle_1.0.3    compiler_4.3.1    
+[21] farver_2.1.1       git2r_0.32.0       munsell_0.5.0      lsa_0.73.3        
+[25] ggforce_0.4.1      getPass_0.2-2      graphlayouts_1.0.2 httpuv_1.6.11     
+[29] SnowballC_0.7.1    htmltools_0.5.6    sass_0.4.7         yaml_2.3.7        
+[33] crayon_1.5.2       later_1.3.1        pillar_1.9.0       jquerylib_0.1.4   
+[37] whisker_0.4.1      MASS_7.3-60        cachem_1.0.8       viridis_0.6.4     
+[41] tidyselect_1.2.0   digest_0.6.33      stringi_1.7.12     labeling_0.4.3    
+[45] polyclip_1.10-6    rprojroot_2.0.3    fastmap_1.1.1      grid_4.3.1        
+[49] colorspace_2.1-0   cli_3.6.1          magrittr_2.0.3     tidygraph_1.2.3   
+[53] utf8_1.2.3         withr_2.5.1        scales_1.2.1       promises_1.2.1    
+[57] bit64_4.0.5        timechange_0.2.0   rmarkdown_2.25     httr_1.4.7        
+[61] bit_4.0.5          gridExtra_2.3      hms_1.1.3          evaluate_0.21     
+[65] knitr_1.44         viridisLite_0.4.2  rlang_1.1.1        Rcpp_1.0.11       
+[69] glue_1.6.2         tweenr_2.0.2       rstudioapi_0.15.0  jsonlite_1.8.7    
+[73] R6_2.5.1           plyr_1.8.9         fs_1.6.3          </code></pre>
 </div>
 </div>
 
