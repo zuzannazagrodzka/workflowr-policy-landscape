@@ -522,15 +522,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreeffff9d6bca83b14869bf98f5357bd68de22d4e6btargetblankffff9d6a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreeff6414307d6a0c76029504569a8f64a18326428ftargetblankff64143a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/ffff9d6bca83b14869bf98f5357bd68de22d4e6b" target="_blank">ffff9d6</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/ff6414307d6a0c76029504569a8f64a18326428f" target="_blank">ff64143</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreeffff9d6bca83b14869bf98f5357bd68de22d4e6btargetblankffff9d6a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreeff6414307d6a0c76029504569a8f64a18326428ftargetblankff64143a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +540,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/ffff9d6bca83b14869bf98f5357bd68de22d4e6b" target="_blank">ffff9d6</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/ff6414307d6a0c76029504569a8f64a18326428f" target="_blank">ff64143</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -560,14 +560,15 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
     Ignored:    output/.DS_Store
-    Ignored:    output/Figure_Appendix_1A/
     Ignored:    output/created_datasets/.DS_Store
 
 Untracked files:
     Untracked:  analysis/Compare_datasets.Rmd
     Untracked:  data/original_dataset_reproducibility_check/
     Untracked:  gutenbergr_0.2.3.tar.gz
+    Untracked:  output/Figure_Appendix_1A/
     Untracked:  output/Figure_Appendix_1B/
+    Untracked:  output/Figure_Appendix_1C/
 
 Unstaged changes:
     Modified:   analysis/index.Rmd
@@ -618,6 +619,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/ff6414307d6a0c76029504569a8f64a18326428f/analysis/6_Subgroups_comparison_text_similarities.Rmd" target="_blank">ff64143</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+<td>
+wflow_publish("./analysis/6_Subgroups_comparison_text_similarities.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/8a4c1d49495068403ee970a6739c3531e6a50b1a/docs/6_Subgroups_comparison_text_similarities.html" target="_blank">8a4c1d4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -756,9 +791,46 @@ sum_figure1_gamma_wide2 =
 
 figure_topics</code></pre>
 <p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/8a4c1d49495068403ee970a6739c3531e6a50b1a/docs/figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-5-1.png" target="_blank">8a4c1d4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># # UNCOMMENT TO SAVE FIGURES
 
-figure_name &lt;- paste0(&quot;./output/Figure_Appendix_1B/Figure_2A.png&quot;)
+figure_name &lt;- paste0(&quot;./output/Figure_Appendix_1A/Figure_1A.png&quot;)
 png(file=figure_name,
   width= 3000, height= 2000, res=400)
   figure_topics
@@ -1143,16 +1215,316 @@ for (stake in stake_names) {
 This warning is displayed once every 8 hours.
 Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 generated.</code></pre>
-<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/8a4c1d49495068403ee970a6739c3531e6a50b1a/docs/figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-1.png" target="_blank">8a4c1d4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-2">
+Past versions of unnamed-chunk-11-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/8a4c1d49495068403ee970a6739c3531e6a50b1a/docs/figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-2.png" target="_blank">8a4c1d4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>[1] 29 29
 [1] &quot;journals_OA&quot;</code></pre>
-<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-3">
+Past versions of unnamed-chunk-11-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/8a4c1d49495068403ee970a6739c3531e6a50b1a/docs/figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-3.png" target="_blank">8a4c1d4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-4">
+Past versions of unnamed-chunk-11-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/8a4c1d49495068403ee970a6739c3531e6a50b1a/docs/figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-4.png" target="_blank">8a4c1d4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>[1] 80 80
 [1] &quot;publishers_nonProfit&quot;</code></pre>
-<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-5">
+Past versions of unnamed-chunk-11-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/8a4c1d49495068403ee970a6739c3531e6a50b1a/docs/figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-5.png" target="_blank">8a4c1d4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-6">
+Past versions of unnamed-chunk-11-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/8a4c1d49495068403ee970a6739c3531e6a50b1a/docs/figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-6.png" target="_blank">8a4c1d4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>[1] 43 43
 [1] &quot;publishers_Profit&quot;</code></pre>
-<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-7">
+Past versions of unnamed-chunk-11-7.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/8a4c1d49495068403ee970a6739c3531e6a50b1a/docs/figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-7.png" target="_blank">8a4c1d4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-8">
+Past versions of unnamed-chunk-11-8.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/8a4c1d49495068403ee970a6739c3531e6a50b1a/docs/figure/6_Subgroups_comparison_text_similarities.Rmd/unnamed-chunk-11-8.png" target="_blank">8a4c1d4</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div id="figure-production" class="section level2">
 <h2>Figure production</h2>
 <pre class="r"><code># Saving figures individually 
