@@ -1,0 +1,48 @@
+---
+title: "Compare_datasets"
+author: "zuzannazagrodzka"
+date: "2023-11-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Comparing datasets
+
+This code is used to compare a dataset that we originally generated and the one that will be produced in "1a_Data_preprocessing" file. The results will be reproducible in the next steps only if the datasets are identical, otherwise, the topic modeling will generate different topics. 
+
+# Loading libraries
+
+```{r}
+library(arsenal) # for dataset comparison
+
+```
+
+
+# Importing datasets
+
+```{r}
+# Importing original dataset
+original_data <- read.csv(file = "./data/original_dataset_reproducibility_check/original_cleaned_data.csv")
+original_data <- original_data[order(word),]
+dim(original_data)
+
+# Importing a dataset I want to check 
+test_data <- read.csv(file = "./output/created_datasets/cleaned_data.csv")
+dim(test_data)
+```
+
+# Comparing datasets
+
+```{r}
+comparedf(original_data, test_data, by="word")
+summary(comparedf(original_data, test_data, by="word"))
+```
+
+# Session information
+
+```{r}
+sessionInfo()
+```

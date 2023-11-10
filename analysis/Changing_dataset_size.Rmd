@@ -1,0 +1,49 @@
+---
+title: "Changing_dataset_size"
+author: "zuzannazagrodzka"
+date: "2023-11-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+### Changing size of the datasets
+This script is to change the size of the datasets so they can be uploaded to the github (under the 50MB limit).
+
+
+Loading libraries
+```{r}
+library(arrow)
+```
+
+```{r}
+# Read, save and check the dataset
+
+df <- read_csv_arrow(file = "./data/original_dataset_reproducibility_check/original_cleaned_data.csv")
+
+write_feather(df, "./data/original_dataset_reproducibility_check/original_cleaned_data.arrow")
+
+df <- read_feather("./data/original_dataset_reproducibility_check/original_cleaned_data.arrow")
+
+# Another dataset
+
+df <- read_csv_arrow(file = "./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.csv")
+
+write_feather(df, "./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.arrow")
+
+df <- read_feather("./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.arrow")
+
+
+```
+
+
+
+```{r}
+sessionInfo()
+
+```
+
