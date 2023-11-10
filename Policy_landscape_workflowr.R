@@ -37,6 +37,8 @@ wflow_build(files = c("analysis/index.Rmd",
                       "analysis/3_Text_similarities_Figure_2B.Rmd",
                       "analysis/4_Language_analysis_Figure_2C.Rmd",
                       "analysis/5_For_and_not_for_profit_comparison.Rmd",
+                      "analysis/6_Subgroups_comparison_text_similarities.Rmd",
+                      "analysis/Original_Session_Info.Rmd"
                       "analysis/license.Rmd"))
 
 # View the status of the workflowr project
@@ -59,7 +61,9 @@ wflow_publish(files = c("analysis/index.Rmd",
                 "analysis/3_Text_similarities_Figure_2B.Rmd",
                 "analysis/4_Language_analysis_Figure_2C.Rmd",
                 "analysis/5_For_and_not_for_profit_comparison.Rmd",
-                "analysis/license.Rmd"),
+                "analysis/license.Rmd",
+                "./analysis/6_Subgroups_comparison_text_similarities.Rmd",
+                "./analysis/Original_Session_Info.Rmd"),
               update = TRUE,
               message = "Update the file paths for all analysis and figures")
 
