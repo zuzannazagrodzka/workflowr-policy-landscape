@@ -10,11 +10,11 @@
 
 
 
-<meta name="date" content="2022-11-24" />
+<meta name="date" content="2023-11-10" />
 
 <title>Accelerating the Open Research agenda to solve global challenges</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -33,8 +33,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -191,8 +191,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -200,16 +200,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -291,7 +284,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Accelerating the Open Research agenda to
 solve global challenges</h1>
-<h4 class="date">2022-11-24</h4>
+<h4 class="date">2023-11-10</h4>
 
 </div>
 
@@ -320,7 +313,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-11-24
+<strong>Last updated:</strong> 2023-11-10
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -339,7 +332,7 @@ title="This is the local directory in which the code in this file was executed."
 This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
 analysis was created with <a
   href="https://github.com/workflowr/workflowr">workflowr</a> (version
-1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
 that were applied when the results were created. The <em>Past
 versions</em> tab lists the development history.
 </p>
@@ -452,15 +445,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreea365d904a0b442a813df60c259dff86b37599df0targetblanka365d90a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree39628c3bab1f7dba0562b58429f4afa7924fb242targetblank39628c3a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/a365d904a0b442a813df60c259dff86b37599df0" target="_blank">a365d90</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/39628c3bab1f7dba0562b58429f4afa7924fb242" target="_blank">39628c3</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreea365d904a0b442a813df60c259dff86b37599df0targetblanka365d90a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree39628c3bab1f7dba0562b58429f4afa7924fb242targetblank39628c3a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -470,7 +463,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/a365d904a0b442a813df60c259dff86b37599df0" target="_blank">a365d90</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/39628c3bab1f7dba0562b58429f4afa7924fb242" target="_blank">39628c3</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -485,14 +478,23 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .RData
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/.DS_Store
-    Ignored:    code/
-    Ignored:    data/mission_statements/.DS_Store
+    Ignored:    data/.DS_Store
+    Ignored:    data/original_dataset_reproducibility_check/.DS_Store
+    Ignored:    output/.DS_Store
+    Ignored:    output/Figure_Appendix_1B/.DS_Store
+    Ignored:    output/created_datasets/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/Compare_datasets.Rmd
+    Untracked:  gutenbergr_0.2.3.tar.gz
 
 Unstaged changes:
     Modified:   Policy_landscape_workflowr.R
+    Modified:   output/created_datasets/cleaned_data.csv
 
 </code></pre>
 <p>
@@ -537,6 +539,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/5bdfc2a3528071efbaf2c6fa1129e5c017cf9524/docs/about.html" target="_blank">5bdfc2a</a>
+</td>
+<td>
+Andrew Beckerman
+</td>
+<td>
+2022-11-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -862,35 +881,38 @@ Session information
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.2.1 (2022-06-23)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur ... 10.16
+<pre><code>R version 4.3.1 (2023-06-16)
+Platform: x86_64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.6
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
 
 locale:
-[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/London
+tzcode source: internal
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.7.0
+[1] workflowr_1.7.1
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.9       compiler_4.2.1   pillar_1.8.1     bslib_0.4.0     
- [5] later_1.3.0      git2r_0.30.1     jquerylib_0.1.4  tools_4.2.1     
- [9] getPass_0.2-2    digest_0.6.29    jsonlite_1.8.3   evaluate_0.16   
-[13] tibble_3.1.8     lifecycle_1.0.3  pkgconfig_2.0.3  rlang_1.0.6     
-[17] cli_3.4.1        rstudioapi_0.14  yaml_2.3.6       xfun_0.33       
-[21] fastmap_1.1.0    httr_1.4.4       stringr_1.4.1    knitr_1.40      
-[25] fs_1.5.2         vctrs_0.5.0      sass_0.4.2       rprojroot_2.0.3 
-[29] glue_1.6.2       R6_2.5.1         processx_3.7.0   fansi_1.0.3     
-[33] rmarkdown_2.16   callr_3.7.2      magrittr_2.0.3   whisker_0.4     
-[37] ps_1.7.1         promises_1.2.0.1 htmltools_0.5.3  httpuv_1.6.6    
-[41] utf8_1.2.2       stringi_1.7.8    cachem_1.0.6    </code></pre>
+ [1] vctrs_0.6.3       httr_1.4.7        cli_3.6.1         knitr_1.44       
+ [5] rlang_1.1.1       xfun_0.40         stringi_1.7.12    processx_3.8.2   
+ [9] promises_1.2.1    jsonlite_1.8.7    glue_1.6.2        rprojroot_2.0.3  
+[13] git2r_0.32.0      htmltools_0.5.6   httpuv_1.6.11     ps_1.7.5         
+[17] sass_0.4.7        fansi_1.0.4       rmarkdown_2.25    jquerylib_0.1.4  
+[21] tibble_3.2.1      evaluate_0.21     fastmap_1.1.1     yaml_2.3.7       
+[25] lifecycle_1.0.3   whisker_0.4.1     stringr_1.5.0     compiler_4.3.1   
+[29] fs_1.6.3          pkgconfig_2.0.3   Rcpp_1.0.11       rstudioapi_0.15.0
+[33] later_1.3.1       digest_0.6.33     R6_2.5.1          utf8_1.2.3       
+[37] pillar_1.9.0      callr_3.7.3       magrittr_2.0.3    bslib_0.5.1      
+[41] tools_4.3.1       cachem_1.0.8      getPass_0.2-2    </code></pre>
 </div>
 
 
