@@ -1,0 +1,517 @@
+﻿"stakeholder","name","topic","total_topic","total_sent","prop"
+"advocates","Africa Open Science and Hardware","1",5,9,0.5555555555555556
+"advocates","Africa Open Science and Hardware","2",4,9,0.4444444444444444
+"advocates","Africa Open Science and Hardware","3",NA,NA,0
+"advocates","Africa Open Science and Hardware","4",NA,NA,0
+"advocates","Amelica","1",7,13,0.5384615384615384
+"advocates","Amelica","2",1,13,0.07692307692307693
+"advocates","Amelica","3",1,13,0.07692307692307693
+"advocates","Amelica","4",4,13,0.3076923076923077
+"advocates","Bioline International","1",7,11,0.6363636363636364
+"advocates","Bioline International","2",3,11,0.2727272727272727
+"advocates","Bioline International","3",1,11,0.09090909090909091
+"advocates","Bioline International","4",NA,NA,0
+"advocates","Center for Open Science","1",9,17,0.5294117647058824
+"advocates","Center for Open Science","2",3,17,0.17647058823529413
+"advocates","Center for Open Science","3",4,17,0.23529411764705882
+"advocates","Center for Open Science","4",1,17,0.058823529411764705
+"advocates","coalitionS","1",2,5,0.4
+"advocates","coalitionS","2",3,5,0.6
+"advocates","coalitionS","3",NA,NA,0
+"advocates","coalitionS","4",NA,NA,0
+"advocates","CoData","1",2,5,0.4
+"advocates","CoData","2",NA,NA,0
+"advocates","CoData","3",3,5,0.6
+"advocates","CoData","4",NA,NA,0
+"advocates","Coko","1",1,13,0.07692307692307693
+"advocates","Coko","2",7,13,0.5384615384615384
+"advocates","Coko","3",1,13,0.07692307692307693
+"advocates","Coko","4",4,13,0.3076923076923077
+"advocates","COPDESS","1",2,4,0.5
+"advocates","COPDESS","2",1,4,0.25
+"advocates","COPDESS","3",NA,NA,0
+"advocates","COPDESS","4",1,4,0.25
+"advocates","DataCite","1",3,12,0.25
+"advocates","DataCite","2",9,12,0.75
+"advocates","DataCite","3",NA,NA,0
+"advocates","DataCite","4",NA,NA,0
+"advocates","DOAJ","1",3,5,0.6
+"advocates","DOAJ","2",2,5,0.4
+"advocates","DOAJ","3",NA,NA,0
+"advocates","DOAJ","4",NA,NA,0
+"advocates","FAIRsharing","1",21,25,0.84
+"advocates","FAIRsharing","2",1,25,0.04
+"advocates","FAIRsharing","3",NA,NA,0
+"advocates","FAIRsharing","4",3,25,0.12
+"advocates","FORCE11","1",2,16,0.125
+"advocates","FORCE11","2",10,16,0.625
+"advocates","FORCE11","3",1,16,0.0625
+"advocates","FORCE11","4",3,16,0.1875
+"advocates","FOSTER","1",15,19,0.7894736842105263
+"advocates","FOSTER","2",NA,NA,0
+"advocates","FOSTER","3",4,19,0.21052631578947367
+"advocates","FOSTER","4",NA,NA,0
+"advocates","Free our knowledge","1",NA,NA,0
+"advocates","Free our knowledge","2",11,13,0.8461538461538461
+"advocates","Free our knowledge","3",2,13,0.15384615384615385
+"advocates","Free our knowledge","4",NA,NA,0
+"advocates","Gitlab","1",1,26,0.038461538461538464
+"advocates","Gitlab","2",6,26,0.23076923076923078
+"advocates","Gitlab","3",19,26,0.7307692307692307
+"advocates","Gitlab","4",NA,NA,0
+"advocates","Jisc","1",2,2,1
+"advocates","Jisc","2",NA,NA,0
+"advocates","Jisc","3",NA,NA,0
+"advocates","Jisc","4",NA,NA,0
+"advocates","Open Access Australasia","1",15,18,0.8333333333333334
+"advocates","Open Access Australasia","2",1,18,0.05555555555555555
+"advocates","Open Access Australasia","3",1,18,0.05555555555555555
+"advocates","Open Access Australasia","4",1,18,0.05555555555555555
+"advocates","Peer Community In","1",7,36,0.19444444444444445
+"advocates","Peer Community In","2",2,36,0.05555555555555555
+"advocates","Peer Community In","3",NA,NA,0
+"advocates","Peer Community In","4",27,36,0.75
+"advocates","RDA","1",7,12,0.5833333333333334
+"advocates","RDA","2",4,12,0.3333333333333333
+"advocates","RDA","3",1,12,0.08333333333333333
+"advocates","RDA","4",NA,NA,0
+"advocates","Reference Center for Environmental Information","1",NA,NA,0
+"advocates","Reference Center for Environmental Information","2",2,2,1
+"advocates","Reference Center for Environmental Information","3",NA,NA,0
+"advocates","Reference Center for Environmental Information","4",NA,NA,0
+"advocates","Research Data Canada","1",NA,NA,0
+"advocates","Research Data Canada","2",1,8,0.125
+"advocates","Research Data Canada","3",7,8,0.875
+"advocates","Research Data Canada","4",NA,NA,0
+"advocates","Research4life","1",2,5,0.4
+"advocates","Research4life","2",1,5,0.2
+"advocates","Research4life","3",2,5,0.4
+"advocates","Research4life","4",NA,NA,0
+"advocates","ROpenSci","1",1,1,1
+"advocates","ROpenSci","2",NA,NA,0
+"advocates","ROpenSci","3",NA,NA,0
+"advocates","ROpenSci","4",NA,NA,0
+"advocates","SPARC","1",3,11,0.2727272727272727
+"advocates","SPARC","2",5,11,0.45454545454545453
+"advocates","SPARC","3",3,11,0.2727272727272727
+"advocates","SPARC","4",NA,NA,0
+"funders","Alexander von Humboldt Foundation","1",NA,NA,0
+"funders","Alexander von Humboldt Foundation","2",8,19,0.42105263157894735
+"funders","Alexander von Humboldt Foundation","3",11,19,0.5789473684210527
+"funders","Alexander von Humboldt Foundation","4",NA,NA,0
+"funders","Australian Research Council","1",NA,NA,0
+"funders","Australian Research Council","2",9,14,0.6428571428571429
+"funders","Australian Research Council","3",5,14,0.35714285714285715
+"funders","Australian Research Council","4",NA,NA,0
+"funders","Chinese Academy of Sciences","1",NA,NA,0
+"funders","Chinese Academy of Sciences","2",1,2,0.5
+"funders","Chinese Academy of Sciences","3",1,2,0.5
+"funders","Chinese Academy of Sciences","4",NA,NA,0
+"funders","CNPq","1",NA,NA,0
+"funders","CNPq","2",NA,NA,0
+"funders","CNPq","3",2,2,1
+"funders","CNPq","4",NA,NA,0
+"funders","Conacyt","1",NA,NA,0
+"funders","Conacyt","2",1,4,0.25
+"funders","Conacyt","3",3,4,0.75
+"funders","Conacyt","4",NA,NA,0
+"funders","CONICYT","1",NA,NA,0
+"funders","CONICYT","2",NA,NA,0
+"funders","CONICYT","3",3,3,1
+"funders","CONICYT","4",NA,NA,0
+"funders","Consortium of African Funds for the Environment","1",1,4,0.25
+"funders","Consortium of African Funds for the Environment","2",NA,NA,0
+"funders","Consortium of African Funds for the Environment","3",3,4,0.75
+"funders","Consortium of African Funds for the Environment","4",NA,NA,0
+"funders","Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior","1",NA,NA,0
+"funders","Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior","2",5,6,0.8333333333333334
+"funders","Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior","3",1,6,0.16666666666666666
+"funders","Coordenacao de Aperfeicoamento de Pessoal de Nivel Superior","4",NA,NA,0
+"funders","CSIR South Africa","1",NA,NA,0
+"funders","CSIR South Africa","2",2,9,0.2222222222222222
+"funders","CSIR South Africa","3",7,9,0.7777777777777778
+"funders","CSIR South Africa","4",NA,NA,0
+"funders","Deutsche Forschungsgemeinschaft","1",2,25,0.08
+"funders","Deutsche Forschungsgemeinschaft","2",12,25,0.48
+"funders","Deutsche Forschungsgemeinschaft","3",11,25,0.44
+"funders","Deutsche Forschungsgemeinschaft","4",NA,NA,0
+"funders","ERC","1",7,20,0.35
+"funders","ERC","2",5,20,0.25
+"funders","ERC","3",8,20,0.4
+"funders","ERC","4",NA,NA,0
+"funders","FORMAS","1",3,29,0.10344827586206896
+"funders","FORMAS","2",9,29,0.3103448275862069
+"funders","FORMAS","3",17,29,0.5862068965517241
+"funders","FORMAS","4",NA,NA,0
+"funders","French National Centre for Scientific Research","1",1,25,0.04
+"funders","French National Centre for Scientific Research","2",7,25,0.28
+"funders","French National Centre for Scientific Research","3",17,25,0.68
+"funders","French National Centre for Scientific Research","4",NA,NA,0
+"funders","Helmholtz-Gemeinschaft","1",2,25,0.08
+"funders","Helmholtz-Gemeinschaft","2",4,25,0.16
+"funders","Helmholtz-Gemeinschaft","3",17,25,0.68
+"funders","Helmholtz-Gemeinschaft","4",2,25,0.08
+"funders","JST","1",1,10,0.1
+"funders","JST","2",NA,NA,0
+"funders","JST","3",9,10,0.9
+"funders","JST","4",NA,NA,0
+"funders","Max Planck Society","1",25,81,0.30864197530864196
+"funders","Max Planck Society","2",13,81,0.16049382716049382
+"funders","Max Planck Society","3",36,81,0.4444444444444444
+"funders","Max Planck Society","4",7,81,0.08641975308641975
+"funders","MOE China","1",2,21,0.09523809523809523
+"funders","MOE China","2",16,21,0.7619047619047619
+"funders","MOE China","3",3,21,0.14285714285714285
+"funders","MOE China","4",NA,NA,0
+"funders","National Natural Science Foundation","1",1,35,0.02857142857142857
+"funders","National Natural Science Foundation","2",4,35,0.11428571428571428
+"funders","National Natural Science Foundation","3",28,35,0.8
+"funders","National Natural Science Foundation","4",2,35,0.05714285714285714
+"funders","National Research Council Italy","1",NA,NA,0
+"funders","National Research Council Italy","2",NA,NA,0
+"funders","National Research Council Italy","3",6,6,1
+"funders","National Research Council Italy","4",NA,NA,0
+"funders","National Science Foundation","1",3,26,0.11538461538461539
+"funders","National Science Foundation","2",12,26,0.46153846153846156
+"funders","National Science Foundation","3",10,26,0.38461538461538464
+"funders","National Science Foundation","4",1,26,0.038461538461538464
+"funders","NERC","1",NA,NA,0
+"funders","NERC","2",1,30,0.03333333333333333
+"funders","NERC","3",29,30,0.9666666666666667
+"funders","NERC","4",NA,NA,0
+"funders","NRC Egypt","1",NA,NA,0
+"funders","NRC Egypt","2",NA,NA,0
+"funders","NRC Egypt","3",7,7,1
+"funders","NRC Egypt","4",NA,NA,0
+"funders","NRF South Africa","1",NA,NA,0
+"funders","NRF South Africa","2",2,10,0.2
+"funders","NRF South Africa","3",8,10,0.8
+"funders","NRF South Africa","4",NA,NA,0
+"funders","NSERC","1",NA,NA,0
+"funders","NSERC","2",9,20,0.45
+"funders","NSERC","3",11,20,0.55
+"funders","NSERC","4",NA,NA,0
+"funders","Russian Academy of Science","1",1,11,0.09090909090909091
+"funders","Russian Academy of Science","2",NA,NA,0
+"funders","Russian Academy of Science","3",10,11,0.9090909090909091
+"funders","Russian Academy of Science","4",NA,NA,0
+"funders","Sea World Research and Rescue Foundation","1",6,8,0.75
+"funders","Sea World Research and Rescue Foundation","2",NA,NA,0
+"funders","Sea World Research and Rescue Foundation","3",2,8,0.25
+"funders","Sea World Research and Rescue Foundation","4",NA,NA,0
+"funders","Spanish National Research Council","1",NA,NA,0
+"funders","Spanish National Research Council","2",NA,NA,0
+"funders","Spanish National Research Council","3",5,5,1
+"funders","Spanish National Research Council","4",NA,NA,0
+"funders","The Daimler and Benz Foundation","1",NA,NA,0
+"funders","The Daimler and Benz Foundation","2",NA,NA,0
+"funders","The Daimler and Benz Foundation","3",11,12,0.9166666666666666
+"funders","The Daimler and Benz Foundation","4",1,12,0.08333333333333333
+"funders","The French National Research Agency","1",NA,NA,0
+"funders","The French National Research Agency","2",12,14,0.8571428571428571
+"funders","The French National Research Agency","3",1,14,0.07142857142857142
+"funders","The French National Research Agency","4",1,14,0.07142857142857142
+"funders","Wellcome","1",NA,NA,0
+"funders","Wellcome","2",2,34,0.058823529411764705
+"funders","Wellcome","3",32,34,0.9411764705882353
+"funders","Wellcome","4",NA,NA,0
+"journals","American Naturalist","1",NA,NA,0
+"journals","American Naturalist","2",NA,NA,0
+"journals","American Naturalist","3",NA,NA,0
+"journals","American Naturalist","4",3,3,1
+"journals","Annual Review of Ecology Evolution and Systematics","1",NA,NA,0
+"journals","Annual Review of Ecology Evolution and Systematics","2",NA,NA,0
+"journals","Annual Review of Ecology Evolution and Systematics","3",1,2,0.5
+"journals","Annual Review of Ecology Evolution and Systematics","4",1,2,0.5
+"journals","Biological Conservation","1",1,7,0.14285714285714285
+"journals","Biological Conservation","2",NA,NA,0
+"journals","Biological Conservation","3",2,7,0.2857142857142857
+"journals","Biological Conservation","4",4,7,0.5714285714285714
+"journals","BioSciences","1",NA,NA,0
+"journals","BioSciences","2",1,5,0.2
+"journals","BioSciences","3",NA,NA,0
+"journals","BioSciences","4",4,5,0.8
+"journals","Conservation Biology","1",NA,NA,0
+"journals","Conservation Biology","2",1,10,0.1
+"journals","Conservation Biology","3",NA,NA,0
+"journals","Conservation Biology","4",9,10,0.9
+"journals","Ecological Applications","1",NA,NA,0
+"journals","Ecological Applications","2",NA,NA,0
+"journals","Ecological Applications","3",9,14,0.6428571428571429
+"journals","Ecological Applications","4",5,14,0.35714285714285715
+"journals","Ecology Letters","1",NA,NA,0
+"journals","Ecology Letters","2",NA,NA,0
+"journals","Ecology Letters","3",1,7,0.14285714285714285
+"journals","Ecology Letters","4",6,7,0.8571428571428571
+"journals","Ecology","1",1,16,0.0625
+"journals","Ecology","2",NA,NA,0
+"journals","Ecology","3",1,16,0.0625
+"journals","Ecology","4",14,16,0.875
+"journals","Evolution","1",NA,NA,0
+"journals","Evolution","2",NA,NA,0
+"journals","Evolution","3",NA,NA,0
+"journals","Evolution","4",3,3,1
+"journals","Frontiers in Ecology and the Environment","1",NA,NA,0
+"journals","Frontiers in Ecology and the Environment","2",NA,NA,0
+"journals","Frontiers in Ecology and the Environment","3",NA,NA,0
+"journals","Frontiers in Ecology and the Environment","4",4,4,1
+"journals","Global Change Biology","1",NA,NA,0
+"journals","Global Change Biology","2",1,6,0.16666666666666666
+"journals","Global Change Biology","3",5,6,0.8333333333333334
+"journals","Global Change Biology","4",NA,NA,0
+"journals","Journal of Applied Ecology","1",NA,NA,0
+"journals","Journal of Applied Ecology","2",NA,NA,0
+"journals","Journal of Applied Ecology","3",2,4,0.5
+"journals","Journal of Applied Ecology","4",2,4,0.5
+"journals","Nature Ecology and Evolution","1",1,5,0.2
+"journals","Nature Ecology and Evolution","2",NA,NA,0
+"journals","Nature Ecology and Evolution","3",2,5,0.4
+"journals","Nature Ecology and Evolution","4",2,5,0.4
+"journals","Philosophical Transactions of the Royal Society B","1",NA,NA,0
+"journals","Philosophical Transactions of the Royal Society B","2",NA,NA,0
+"journals","Philosophical Transactions of the Royal Society B","3",5,8,0.625
+"journals","Philosophical Transactions of the Royal Society B","4",3,8,0.375
+"journals","Proceedings of the Royal Society B Biological Sciences","1",1,10,0.1
+"journals","Proceedings of the Royal Society B Biological Sciences","2",NA,NA,0
+"journals","Proceedings of the Royal Society B Biological Sciences","3",1,10,0.1
+"journals","Proceedings of the Royal Society B Biological Sciences","4",8,10,0.8
+"journals","Trends in Ecology & Evolution","1",NA,NA,0
+"journals","Trends in Ecology & Evolution","2",NA,NA,0
+"journals","Trends in Ecology & Evolution","3",3,7,0.42857142857142855
+"journals","Trends in Ecology & Evolution","4",4,7,0.5714285714285714
+"journals","Arctic, Antarctic, and Alpine Research","1",4,10,0.4
+"journals","Arctic, Antarctic, and Alpine Research","2",1,10,0.1
+"journals","Arctic, Antarctic, and Alpine Research","3",2,10,0.2
+"journals","Arctic, Antarctic, and Alpine Research","4",3,10,0.3
+"journals","Biogeosciences","1",1,8,0.125
+"journals","Biogeosciences","2",NA,NA,0
+"journals","Biogeosciences","3",1,8,0.125
+"journals","Biogeosciences","4",6,8,0.75
+"journals","Conservation Letters","1",1,5,0.2
+"journals","Conservation Letters","2",NA,NA,0
+"journals","Conservation Letters","3",NA,NA,0
+"journals","Conservation Letters","4",4,5,0.8
+"journals","Diversity and Distributions","1",1,10,0.1
+"journals","Diversity and Distributions","2",NA,NA,0
+"journals","Diversity and Distributions","3",1,10,0.1
+"journals","Diversity and Distributions","4",8,10,0.8
+"journals","Ecology and Evolution","1",2,53,0.03773584905660377
+"journals","Ecology and Evolution","2",8,53,0.1509433962264151
+"journals","Ecology and Evolution","3",2,53,0.03773584905660377
+"journals","Ecology and Evolution","4",41,53,0.7735849056603774
+"journals","Ecology and Society","1",NA,NA,0
+"journals","Ecology and Society","2",1,16,0.0625
+"journals","Ecology and Society","3",4,16,0.25
+"journals","Ecology and Society","4",11,16,0.6875
+"journals","eLifeJournal","1",NA,NA,0
+"journals","eLifeJournal","2",NA,NA,0
+"journals","eLifeJournal","3",NA,NA,0
+"journals","eLifeJournal","4",1,1,1
+"journals","Evolution Letters","1",NA,NA,0
+"journals","Evolution Letters","2",NA,NA,0
+"journals","Evolution Letters","3",2,8,0.25
+"journals","Evolution Letters","4",6,8,0.75
+"journals","Evolutionary Applications","1",5,13,0.38461538461538464
+"journals","Evolutionary Applications","2",NA,NA,0
+"journals","Evolutionary Applications","3",2,13,0.15384615384615385
+"journals","Evolutionary Applications","4",6,13,0.46153846153846156
+"journals","Frontiers in Ecology and Evolution","1",2,8,0.25
+"journals","Frontiers in Ecology and Evolution","2",4,8,0.5
+"journals","Frontiers in Ecology and Evolution","3",1,8,0.125
+"journals","Frontiers in Ecology and Evolution","4",1,8,0.125
+"journals","Neobiota","1",3,28,0.10714285714285714
+"journals","Neobiota","2",NA,NA,0
+"journals","Neobiota","3",1,28,0.03571428571428571
+"journals","Neobiota","4",24,28,0.8571428571428571
+"journals","PeerJJournal","1",1,4,0.25
+"journals","PeerJJournal","2",NA,NA,0
+"journals","PeerJJournal","3",2,4,0.5
+"journals","PeerJJournal","4",1,4,0.25
+"journals","Plos Biology","1",2,32,0.0625
+"journals","Plos Biology","2",4,32,0.125
+"journals","Plos Biology","3",7,32,0.21875
+"journals","Plos Biology","4",19,32,0.59375
+"journals","Remote Sensing in Ecology and Conservation","1",2,6,0.3333333333333333
+"journals","Remote Sensing in Ecology and Conservation","2",NA,NA,0
+"journals","Remote Sensing in Ecology and Conservation","3",3,6,0.5
+"journals","Remote Sensing in Ecology and Conservation","4",1,6,0.16666666666666666
+"publishers","AIBS","1",NA,NA,0
+"publishers","AIBS","2",NA,NA,0
+"publishers","AIBS","3",5,5,1
+"publishers","AIBS","4",NA,NA,0
+"publishers","Annual Reviews","1",2,8,0.25
+"publishers","Annual Reviews","2",3,8,0.375
+"publishers","Annual Reviews","3",1,8,0.125
+"publishers","Annual Reviews","4",2,8,0.25
+"publishers","BioOne","1",NA,NA,0
+"publishers","BioOne","2",1,1,1
+"publishers","BioOne","3",NA,NA,0
+"publishers","BioOne","4",NA,NA,0
+"publishers","eLife","1",2,5,0.4
+"publishers","eLife","2",NA,NA,0
+"publishers","eLife","3",2,5,0.4
+"publishers","eLife","4",1,5,0.2
+"publishers","Frontiers","1",4,11,0.36363636363636365
+"publishers","Frontiers","2",2,11,0.18181818181818182
+"publishers","Frontiers","3",2,11,0.18181818181818182
+"publishers","Frontiers","4",3,11,0.2727272727272727
+"publishers","Resilience Alliance","1",1,5,0.2
+"publishers","Resilience Alliance","2",1,5,0.2
+"publishers","Resilience Alliance","3",3,5,0.6
+"publishers","Resilience Alliance","4",NA,NA,0
+"publishers","The Royal Society Publishing","1",NA,NA,0
+"publishers","The Royal Society Publishing","2",1,2,0.5
+"publishers","The Royal Society Publishing","3",NA,NA,0
+"publishers","The Royal Society Publishing","4",1,2,0.5
+"publishers","The University of Chicago Press","1",2,11,0.18181818181818182
+"publishers","The University of Chicago Press","2",2,11,0.18181818181818182
+"publishers","The University of Chicago Press","3",2,11,0.18181818181818182
+"publishers","The University of Chicago Press","4",5,11,0.45454545454545453
+"publishers","Cell Press","1",3,23,0.13043478260869565
+"publishers","Cell Press","2",NA,NA,0
+"publishers","Cell Press","3",17,23,0.7391304347826086
+"publishers","Cell Press","4",3,23,0.13043478260869565
+"publishers","Elsevier","1",6,29,0.20689655172413793
+"publishers","Elsevier","2",18,29,0.6206896551724138
+"publishers","Elsevier","3",2,29,0.06896551724137931
+"publishers","Elsevier","4",3,29,0.10344827586206896
+"publishers","PeerJ","1",8,15,0.5333333333333333
+"publishers","PeerJ","2",3,15,0.2
+"publishers","PeerJ","3",3,15,0.2
+"publishers","PeerJ","4",1,15,0.06666666666666667
+"publishers","Pensoft","1",3,7,0.42857142857142855
+"publishers","Pensoft","2",NA,NA,0
+"publishers","Pensoft","3",NA,NA,0
+"publishers","Pensoft","4",4,7,0.5714285714285714
+"publishers","PLOS","1",4,11,0.36363636363636365
+"publishers","PLOS","2",4,11,0.36363636363636365
+"publishers","PLOS","3",1,11,0.09090909090909091
+"publishers","PLOS","4",2,11,0.18181818181818182
+"publishers","Springer Nature","1",1,7,0.14285714285714285
+"publishers","Springer Nature","2",4,7,0.5714285714285714
+"publishers","Springer Nature","3",2,7,0.2857142857142857
+"publishers","Springer Nature","4",NA,NA,0
+"publishers","Wiley","1",NA,NA,0
+"publishers","Wiley","2",11,14,0.7857142857142857
+"publishers","Wiley","3",1,14,0.07142857142857142
+"publishers","Wiley","4",2,14,0.14285714285714285
+"repositories","Australian Antarctic Data Centre","1",1,8,0.125
+"repositories","Australian Antarctic Data Centre","2",5,8,0.625
+"repositories","Australian Antarctic Data Centre","3",2,8,0.25
+"repositories","Australian Antarctic Data Centre","4",NA,NA,0
+"repositories","BCO-DMO","1",2,4,0.5
+"repositories","BCO-DMO","2",2,4,0.5
+"repositories","BCO-DMO","3",NA,NA,0
+"repositories","BCO-DMO","4",NA,NA,0
+"repositories","bioRxiv","1",NA,NA,0
+"repositories","bioRxiv","2",NA,NA,0
+"repositories","bioRxiv","3",1,9,0.1111111111111111
+"repositories","bioRxiv","4",8,9,0.8888888888888888
+"repositories","DNA Databank of Japan","1",NA,NA,0
+"repositories","DNA Databank of Japan","2",1,13,0.07692307692307693
+"repositories","DNA Databank of Japan","3",12,13,0.9230769230769231
+"repositories","DNA Databank of Japan","4",NA,NA,0
+"repositories","Dryad","1",7,11,0.6363636363636364
+"repositories","Dryad","2",2,11,0.18181818181818182
+"repositories","Dryad","3",NA,NA,0
+"repositories","Dryad","4",2,11,0.18181818181818182
+"repositories","EcoEvoRxiv","1",3,5,0.6
+"repositories","EcoEvoRxiv","2",NA,NA,0
+"repositories","EcoEvoRxiv","3",NA,NA,0
+"repositories","EcoEvoRxiv","4",2,5,0.4
+"repositories","European Bioinformatics Institute","1",7,21,0.3333333333333333
+"repositories","European Bioinformatics Institute","2",10,21,0.47619047619047616
+"repositories","European Bioinformatics Institute","3",3,21,0.14285714285714285
+"repositories","European Bioinformatics Institute","4",1,21,0.047619047619047616
+"repositories","Figshare","1",9,25,0.36
+"repositories","Figshare","2",9,25,0.36
+"repositories","Figshare","3",7,25,0.28
+"repositories","Figshare","4",NA,NA,0
+"repositories","GBIF","1",4,6,0.6666666666666666
+"repositories","GBIF","2",2,6,0.3333333333333333
+"repositories","GBIF","3",NA,NA,0
+"repositories","GBIF","4",NA,NA,0
+"repositories","Harvard Dataverse","1",3,4,0.75
+"repositories","Harvard Dataverse","2",NA,NA,0
+"repositories","Harvard Dataverse","3",NA,NA,0
+"repositories","Harvard Dataverse","4",1,4,0.25
+"repositories","KNB","1",7,18,0.3888888888888889
+"repositories","KNB","2",2,18,0.1111111111111111
+"repositories","KNB","3",8,18,0.4444444444444444
+"repositories","KNB","4",1,18,0.05555555555555555
+"repositories","Marine Data Archive","1",2,2,1
+"repositories","Marine Data Archive","2",NA,NA,0
+"repositories","Marine Data Archive","3",NA,NA,0
+"repositories","Marine Data Archive","4",NA,NA,0
+"repositories","NCBI","1",1,10,0.1
+"repositories","NCBI","2",3,10,0.3
+"repositories","NCBI","3",5,10,0.5
+"repositories","NCBI","4",1,10,0.1
+"repositories","OSF","1",4,10,0.4
+"repositories","OSF","2",4,10,0.4
+"repositories","OSF","3",2,10,0.2
+"repositories","OSF","4",NA,NA,0
+"repositories","TERN","1",2,2,1
+"repositories","TERN","2",NA,NA,0
+"repositories","TERN","3",NA,NA,0
+"repositories","TERN","4",NA,NA,0
+"repositories","World Data Center for Climate","1",2,13,0.15384615384615385
+"repositories","World Data Center for Climate","2",7,13,0.5384615384615384
+"repositories","World Data Center for Climate","3",4,13,0.3076923076923077
+"repositories","World Data Center for Climate","4",NA,NA,0
+"repositories","Zenodo","1",16,21,0.7619047619047619
+"repositories","Zenodo","2",1,21,0.047619047619047616
+"repositories","Zenodo","3",1,21,0.047619047619047616
+"repositories","Zenodo","4",3,21,0.14285714285714285
+"societies","American Society of Naturalists","1",NA,NA,0
+"societies","American Society of Naturalists","2",13,15,0.8666666666666667
+"societies","American Society of Naturalists","3",2,15,0.13333333333333333
+"societies","American Society of Naturalists","4",NA,NA,0
+"societies","Australasian Evolution Society","1",NA,NA,0
+"societies","Australasian Evolution Society","2",NA,NA,0
+"societies","Australasian Evolution Society","3",4,4,1
+"societies","Australasian Evolution Society","4",NA,NA,0
+"societies","British Ecological Society","1",NA,NA,0
+"societies","British Ecological Society","2",NA,NA,0
+"societies","British Ecological Society","3",8,9,0.8888888888888888
+"societies","British Ecological Society","4",1,9,0.1111111111111111
+"societies","Ecological Society of America","1",NA,NA,0
+"societies","Ecological Society of America","2",NA,NA,0
+"societies","Ecological Society of America","3",4,4,1
+"societies","Ecological Society of America","4",NA,NA,0
+"societies","Ecological Society of Australia","1",1,14,0.07142857142857142
+"societies","Ecological Society of Australia","2",1,14,0.07142857142857142
+"societies","Ecological Society of Australia","3",12,14,0.8571428571428571
+"societies","Ecological Society of Australia","4",NA,NA,0
+"societies","European Society for Evolutionary Biology","1",NA,NA,0
+"societies","European Society for Evolutionary Biology","2",3,3,1
+"societies","European Society for Evolutionary Biology","3",NA,NA,0
+"societies","European Society for Evolutionary Biology","4",NA,NA,0
+"societies","National Academy of Sciences","1",NA,NA,0
+"societies","National Academy of Sciences","2",3,9,0.3333333333333333
+"societies","National Academy of Sciences","3",6,9,0.6666666666666666
+"societies","National Academy of Sciences","4",NA,NA,0
+"societies","Royal Society Te Aparangi","1",4,23,0.17391304347826086
+"societies","Royal Society Te Aparangi","2",7,23,0.30434782608695654
+"societies","Royal Society Te Aparangi","3",12,23,0.5217391304347826
+"societies","Royal Society Te Aparangi","4",NA,NA,0
+"societies","Society for the Study of Evolution","1",NA,NA,0
+"societies","Society for the Study of Evolution","2",1,3,0.3333333333333333
+"societies","Society for the Study of Evolution","3",2,3,0.6666666666666666
+"societies","Society for the Study of Evolution","4",NA,NA,0
+"societies","SORTEE","1",NA,NA,0
+"societies","SORTEE","2",2,3,0.6666666666666666
+"societies","SORTEE","3",NA,NA,0
+"societies","SORTEE","4",1,3,0.3333333333333333
+"societies","The Royal Society","1",NA,NA,0
+"societies","The Royal Society","2",NA,NA,0
+"societies","The Royal Society","3",3,3,1
+"societies","The Royal Society","4",NA,NA,0
+"societies","The Society for Conservation Biology","1",NA,NA,0
+"societies","The Society for Conservation Biology","2",4,22,0.18181818181818182
+"societies","The Society for Conservation Biology","3",18,22,0.8181818181818182
+"societies","The Society for Conservation Biology","4",NA,NA,0
+"societies","The Zoological Society of London","1",1,28,0.03571428571428571
+"societies","The Zoological Society of London","2",2,28,0.07142857142857142
+"societies","The Zoological Society of London","3",19,28,0.6785714285714286
+"societies","The Zoological Society of London","4",6,28,0.21428571428571427
