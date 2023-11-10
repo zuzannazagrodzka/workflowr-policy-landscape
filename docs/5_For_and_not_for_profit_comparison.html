@@ -11,7 +11,7 @@
 
 <meta name="author" content="ZZ, APB, TFJ" />
 
-<meta name="date" content="2023-11-09" />
+<meta name="date" content="2023-11-10" />
 
 <title>5_For_and_not_for_profit_comparison</title>
 
@@ -363,7 +363,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">5_For_and_not_for_profit_comparison</h1>
 <h4 class="author">ZZ, APB, TFJ</h4>
-<h4 class="date">2023-11-09</h4>
+<h4 class="date">2023-11-10</h4>
 
 </div>
 
@@ -392,7 +392,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-11-09
+<strong>Last updated:</strong> 2023-11-10
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -524,15 +524,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreefa557cf8ee630ab1e4b85c82174e3a101efee81ctargetblankfa557cfa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree7a9e6f79a21e0f919e03f1767d5eca8ec5fb7cf0targetblank7a9e6f7a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/fa557cf8ee630ab1e4b85c82174e3a101efee81c" target="_blank">fa557cf</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/7a9e6f79a21e0f919e03f1767d5eca8ec5fb7cf0" target="_blank">7a9e6f7</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetreefa557cf8ee630ab1e4b85c82174e3a101efee81ctargetblankfa557cfa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree7a9e6f79a21e0f919e03f1767d5eca8ec5fb7cf0targetblank7a9e6f7a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -542,7 +542,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/fa557cf8ee630ab1e4b85c82174e3a101efee81c" target="_blank">fa557cf</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/7a9e6f79a21e0f919e03f1767d5eca8ec5fb7cf0" target="_blank">7a9e6f7</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -562,19 +562,18 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
     Ignored:    output/.DS_Store
-    Ignored:    output/Figure_Appendix_1A/
     Ignored:    output/created_datasets/.DS_Store
 
 Untracked files:
-    Untracked:  analysis/6_Subgroups_comparison_text_similarities.Rmd
     Untracked:  analysis/Compare_datasets.Rmd
-    Untracked:  analysis/Original_Session_Info.Rmd
     Untracked:  data/original_dataset_reproducibility_check/
     Untracked:  gutenbergr_0.2.3.tar.gz
+    Untracked:  output/Figure_Appendix_1A/
     Untracked:  output/Figure_Appendix_1B/
+    Untracked:  output/Figure_Appendix_1C/
 
 Unstaged changes:
-    Modified:   analysis/2_Topic_modeling.Rmd
+    Modified:   analysis/6_Subgroups_comparison_text_similarities.Rmd
     Modified:   analysis/index.Rmd
     Modified:   output/created_datasets/cleaned_data.csv
 
@@ -623,6 +622,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/7a9e6f79a21e0f919e03f1767d5eca8ec5fb7cf0/analysis/5_For_and_not_for_profit_comparison.Rmd" target="_blank">7a9e6f7</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-10
+</td>
+<td>
+wflow_publish("./analysis/5_For_and_not_for_profit_comparison.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/3e8b1cd0092a6255dc4ae454eeff120d3c50debe/docs/5_For_and_not_for_profit_comparison.html" target="_blank">3e8b1cd</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1326,15 +1359,61 @@ sum_df_sum_proc_ND_book =
   dplyr::summarise(perc = median(perc), SD = sd(perc2))</code></pre>
 <pre><code>`summarise()` has grouped output by &#39;org_subgroups&#39;. You can override using the
 `.groups` argument.</code></pre>
-<pre class="r"><code>ggplot() +
+<pre class="r"><code>fig_book &lt;- ggplot() +
   geom_point(data = df_sum_proc_ND_book, aes(x = perc, y = org_subgroups), alpha = 0.1, position = position_jitter()) +
   geom_pointrange(data = sum_df_sum_proc_ND_book, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = org_subgroups)) +
   facet_grid(type~.) +
   labs(x = &quot;Document words occuring in dictionary (%)&quot;, y = &quot;&quot;) +
   scale_colour_discrete(guide = &quot;none&quot;) +
-  theme_classic()</code></pre>
+  theme_classic()
+
+fig_book</code></pre>
 <p><img src="figure/5_For_and_not_for_profit_comparison.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code># Plotting them separately Business
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/3e8b1cd0092a6255dc4ae454eeff120d3c50debe/docs/figure/5_For_and_not_for_profit_comparison.Rmd/unnamed-chunk-5-1.png" target="_blank">3e8b1cd</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code># Saving the figure
+# UNCOMMENT TO SAVE THE FIGURE
+figure_name &lt;- paste0(&quot;./output/Figure_Appendix_1C/Figure_1C_book.png&quot;)
+ggsave(filename = figure_name, fig_book  + theme_bw(base_size = 5),
+     width = 10, height = 5, dpi = 600, units = &quot;in&quot;, device=&#39;png&#39;)
+
+
+# Plotting them separately Business
 df_sum_proc_ND_BUS = data.frame(
   document = rep(df_sum_proc_ND$document,1),
   org_subgroups = rep(df_sum_proc_ND$org_subgroups,1),
@@ -1349,15 +1428,62 @@ sum_df_sum_proc_ND_BUS =
   dplyr::summarise(perc = median(perc), SD = sd(perc2))</code></pre>
 <pre><code>`summarise()` has grouped output by &#39;org_subgroups&#39;. You can override using the
 `.groups` argument.</code></pre>
-<pre class="r"><code>ggplot() +
+<pre class="r"><code>fig_bus &lt;- ggplot() +
   geom_point(data = df_sum_proc_ND_BUS, aes(x = perc, y = org_subgroups), alpha = 0.1, position = position_jitter()) +
   geom_pointrange(data = sum_df_sum_proc_ND_BUS, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = org_subgroups)) +
   facet_grid(type~.) +
   labs(x = &quot;Document words occuring in dictionary (%)&quot;, y = &quot;&quot;) +
   scale_colour_discrete(guide = &quot;none&quot;) +
-  theme_classic()</code></pre>
+  theme_classic()
+
+fig_bus</code></pre>
 <p><img src="figure/5_For_and_not_for_profit_comparison.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code># Plotting them separately UNESCO
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-2">
+Past versions of unnamed-chunk-5-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/3e8b1cd0092a6255dc4ae454eeff120d3c50debe/docs/figure/5_For_and_not_for_profit_comparison.Rmd/unnamed-chunk-5-2.png" target="_blank">3e8b1cd</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code># Saving the figure
+# UNCOMMENT TO SAVE THE FIGURE
+figure_name &lt;- paste0(&quot;./output/Figure_Appendix_1C/Figure_1C_bus.png&quot;)
+ggsave(filename = figure_name, fig_bus  + theme_bw(base_size = 5),
+     width = 10, height = 5, dpi = 600, units = &quot;in&quot;, device=&#39;png&#39;)
+
+
+
+# Plotting them separately UNESCO
 df_sum_proc_ND_UNESCO = data.frame(
   document = rep(df_sum_proc_ND$document,1),
   org_subgroups = rep(df_sum_proc_ND$org_subgroups,1),
@@ -1372,14 +1498,58 @@ sum_df_sum_proc_ND_UNESCO =
   dplyr::summarise(perc = median(perc), SD = sd(perc2))</code></pre>
 <pre><code>`summarise()` has grouped output by &#39;org_subgroups&#39;. You can override using the
 `.groups` argument.</code></pre>
-<pre class="r"><code>ggplot() +
+<pre class="r"><code>fig_unesco &lt;- ggplot() +
   geom_point(data = df_sum_proc_ND_UNESCO, aes(x = perc, y = org_subgroups), alpha = 0.1, position = position_jitter()) +
   geom_pointrange(data = sum_df_sum_proc_ND_UNESCO, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = org_subgroups)) +
   facet_grid(type~.) +
   labs(x = &quot;Document words occuring in dictionary (%)&quot;, y = &quot;&quot;) +
   scale_colour_discrete(guide = &quot;none&quot;) +
-  theme_classic()</code></pre>
+  theme_classic()
+
+fig_unesco</code></pre>
 <p><img src="figure/5_For_and_not_for_profit_comparison.Rmd/unnamed-chunk-5-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-3">
+Past versions of unnamed-chunk-5-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/3e8b1cd0092a6255dc4ae454eeff120d3c50debe/docs/figure/5_For_and_not_for_profit_comparison.Rmd/unnamed-chunk-5-3.png" target="_blank">3e8b1cd</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code># Saving the figure
+# UNCOMMENT TO SAVE THE FIGURE
+figure_name &lt;- paste0(&quot;./output/Figure_Appendix_1C/Figure_1C_unesco.png&quot;)
+ggsave(filename = figure_name, fig_unesco  + theme_bw(base_size = 5),
+     width = 10, height = 5, dpi = 600, units = &quot;in&quot;, device=&#39;png&#39;)</code></pre>
 </div>
 <div id="session-information" class="section level1">
 <h1>Session information</h1>
@@ -1413,18 +1583,18 @@ loaded via a namespace (and not attached):
  [9] tools_4.3.1       ps_1.7.5          generics_0.1.3    fansi_1.0.4      
 [13] highr_0.10        janeaustenr_1.0.0 pkgconfig_2.0.3   tokenizers_0.3.0 
 [17] Matrix_1.5-4.1    webshot_0.5.5     lifecycle_1.0.3   farver_2.1.1     
-[21] compiler_4.3.1    git2r_0.32.0      munsell_0.5.0     getPass_0.2-2    
-[25] httpuv_1.6.11     htmltools_0.5.6   SnowballC_0.7.1   sass_0.4.7       
-[29] yaml_2.3.7        later_1.3.1       pillar_1.9.0      jquerylib_0.1.4  
-[33] whisker_0.4.1     cachem_1.0.8      tidyselect_1.2.0  rvest_1.0.3      
-[37] digest_0.6.33     stringi_1.7.12    labeling_0.4.3    rprojroot_2.0.3  
-[41] fastmap_1.1.1     grid_4.3.1        colorspace_2.1-0  cli_3.6.1        
-[45] magrittr_2.0.3    utf8_1.2.3        withr_2.5.1       scales_1.2.1     
-[49] promises_1.2.1    timechange_0.2.0  rmarkdown_2.25    httr_1.4.7       
-[53] hms_1.1.3         evaluate_0.21     knitr_1.44        viridisLite_0.4.2
-[57] rlang_1.1.1       Rcpp_1.0.11       glue_1.6.2        xml2_1.3.5       
-[61] svglite_2.1.2     rstudioapi_0.15.0 jsonlite_1.8.7    R6_2.5.1         
-[65] systemfonts_1.0.4 fs_1.6.3         </code></pre>
+[21] compiler_4.3.1    git2r_0.32.0      textshaping_0.3.6 munsell_0.5.0    
+[25] getPass_0.2-2     httpuv_1.6.11     htmltools_0.5.6   SnowballC_0.7.1  
+[29] sass_0.4.7        yaml_2.3.7        later_1.3.1       pillar_1.9.0     
+[33] jquerylib_0.1.4   whisker_0.4.1     cachem_1.0.8      tidyselect_1.2.0 
+[37] rvest_1.0.3       digest_0.6.33     stringi_1.7.12    labeling_0.4.3   
+[41] rprojroot_2.0.3   fastmap_1.1.1     grid_4.3.1        colorspace_2.1-0 
+[45] cli_3.6.1         magrittr_2.0.3    utf8_1.2.3        withr_2.5.1      
+[49] scales_1.2.1      promises_1.2.1    timechange_0.2.0  rmarkdown_2.25   
+[53] httr_1.4.7        ragg_1.2.5        hms_1.1.3         evaluate_0.21    
+[57] knitr_1.44        viridisLite_0.4.2 rlang_1.1.1       Rcpp_1.0.11      
+[61] glue_1.6.2        xml2_1.3.5        svglite_2.1.2     rstudioapi_0.15.0
+[65] jsonlite_1.8.7    R6_2.5.1          systemfonts_1.0.4 fs_1.6.3         </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1463,18 +1633,18 @@ loaded via a namespace (and not attached):
  [9] tools_4.3.1       ps_1.7.5          generics_0.1.3    fansi_1.0.4      
 [13] highr_0.10        janeaustenr_1.0.0 pkgconfig_2.0.3   tokenizers_0.3.0 
 [17] Matrix_1.5-4.1    webshot_0.5.5     lifecycle_1.0.3   farver_2.1.1     
-[21] compiler_4.3.1    git2r_0.32.0      munsell_0.5.0     getPass_0.2-2    
-[25] httpuv_1.6.11     htmltools_0.5.6   SnowballC_0.7.1   sass_0.4.7       
-[29] yaml_2.3.7        later_1.3.1       pillar_1.9.0      jquerylib_0.1.4  
-[33] whisker_0.4.1     cachem_1.0.8      tidyselect_1.2.0  rvest_1.0.3      
-[37] digest_0.6.33     stringi_1.7.12    labeling_0.4.3    rprojroot_2.0.3  
-[41] fastmap_1.1.1     grid_4.3.1        colorspace_2.1-0  cli_3.6.1        
-[45] magrittr_2.0.3    utf8_1.2.3        withr_2.5.1       scales_1.2.1     
-[49] promises_1.2.1    timechange_0.2.0  rmarkdown_2.25    httr_1.4.7       
-[53] hms_1.1.3         evaluate_0.21     knitr_1.44        viridisLite_0.4.2
-[57] rlang_1.1.1       Rcpp_1.0.11       glue_1.6.2        xml2_1.3.5       
-[61] svglite_2.1.2     rstudioapi_0.15.0 jsonlite_1.8.7    R6_2.5.1         
-[65] systemfonts_1.0.4 fs_1.6.3         </code></pre>
+[21] compiler_4.3.1    git2r_0.32.0      textshaping_0.3.6 munsell_0.5.0    
+[25] getPass_0.2-2     httpuv_1.6.11     htmltools_0.5.6   SnowballC_0.7.1  
+[29] sass_0.4.7        yaml_2.3.7        later_1.3.1       pillar_1.9.0     
+[33] jquerylib_0.1.4   whisker_0.4.1     cachem_1.0.8      tidyselect_1.2.0 
+[37] rvest_1.0.3       digest_0.6.33     stringi_1.7.12    labeling_0.4.3   
+[41] rprojroot_2.0.3   fastmap_1.1.1     grid_4.3.1        colorspace_2.1-0 
+[45] cli_3.6.1         magrittr_2.0.3    utf8_1.2.3        withr_2.5.1      
+[49] scales_1.2.1      promises_1.2.1    timechange_0.2.0  rmarkdown_2.25   
+[53] httr_1.4.7        ragg_1.2.5        hms_1.1.3         evaluate_0.21    
+[57] knitr_1.44        viridisLite_0.4.2 rlang_1.1.1       Rcpp_1.0.11      
+[61] glue_1.6.2        xml2_1.3.5        svglite_2.1.2     rstudioapi_0.15.0
+[65] jsonlite_1.8.7    R6_2.5.1          systemfonts_1.0.4 fs_1.6.3         </code></pre>
 </div>
 </div>
 
