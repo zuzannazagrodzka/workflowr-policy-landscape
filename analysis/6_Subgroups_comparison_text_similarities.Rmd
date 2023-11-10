@@ -154,7 +154,7 @@ The three primary steps are:
 # Libraries
 Loading packages
 
-``` {r, message = FALSE}
+``` {r, message = FALSE} 
 # remotes::install_github('talgalili/dendextend')
 library(dendextend)
 library(igraph)
@@ -513,8 +513,8 @@ png(file=figure_name,
   width= 3000, height= 3000, res=400)
   publishers_Profit_figure1B
   dev.off()
+  
 ```
-
 
 
 # Session information
