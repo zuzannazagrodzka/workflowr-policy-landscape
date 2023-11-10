@@ -36,6 +36,9 @@ library(ggplot2)
 # Library to create a table when converting to html
 library("kableExtra") 
 
+# Library to read an arrow file
+library(arrow)
+
 ```
 
 
@@ -47,7 +50,7 @@ library("kableExtra")
 # df_corpuses <- read.csv(file = "./output/created_datasets/cleaned_data.csv")
 
 # Importing dataset that we originally created and used in our analysis
-df_corpuses <- read.csv(file = "./data/original_dataset_reproducibility_check/original_cleaned_data.csv")
+df_corpuses <- read_feather(file = "./data/original_dataset_reproducibility_check/original_cleaned_data.arrow")
 
 data_words <- df_corpuses
 

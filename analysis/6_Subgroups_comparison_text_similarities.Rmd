@@ -29,12 +29,15 @@ The data for this are produced in `2_Topic_modeling`
 # R Setup and packages
 
 ```{r Cleaning R}
-# rm(list=ls())
+rm(list=ls())
 ```
 
 # Libraries
 ``` {r}
 library(tidyverse)
+library(arrow)
+
+
 ```
 
 # Import data to create Figure 2A
@@ -57,7 +60,7 @@ df_doc_level_stm_gamma <- read.csv(file = "./data/original_dataset_reproducibili
 
 # Using newly created dataset
 # df_subgroups <- read_csv(file = "./output/created_datasets/cleaned_data.csv")
-df_subgroups <- read.csv(file = "./data/original_dataset_reproducibility_check/original_cleaned_data.csv") 
+df_subgroups <- read_feather(file = "./data/original_dataset_reproducibility_check/original_cleaned_data.arrow") 
 
 
 colnames(df_subgroups)
@@ -136,6 +139,8 @@ png(file=figure_name,
   dev.off()
 
 ```
+
+
 
 # Figure Appendix.1B
 The figures will be reproduced but for subgroups: journals nonOa and OA, publishers for- and not-for-profit.
@@ -237,7 +242,7 @@ walktrap_topics <- function(g, ...) {
 # topics_df <- read.csv("./output/created_datasets/dataset_words_stm_5topics.csv")
 
 # Importing dataset that we originally created and used in our analysis
-topics_df <- read.csv(file = "./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.csv")
+topics_df <- read_feather(file = "./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.arrow")
 
 
 ```

@@ -25,6 +25,10 @@ The three primary steps are:
 3. Clustering nodes  using a community detection algorithm (here: Walktrap algorithm) and plotting the data into circular hierarchical dendrograms for each of the stakeholder group separately (Figure 2B). 
 
 
+```{r}
+rm(list=ls())
+```
+
 # Libraries
 Loading packages
 
@@ -37,7 +41,7 @@ library(reshape2)
 library(dplyr)
 library(tidyverse)
 library(tidytext)
-
+library(arrow)
 ```
 
 
@@ -108,7 +112,8 @@ Importing data (created in `2_topic_modeling`)
 
 ``` {r}
 # Importing dataset that we originally created and used in our analysis
-corpus_df <- read.csv(file = "./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.csv")
+corpus_df <- read_feather(file = "./data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.arrow")
+
 
 # Importing dataset created in 2_topic_modeling.Rmd
 # corpus_df <- read.csv("./output/created_datasets/dataset_words_stm_5topics.csv")

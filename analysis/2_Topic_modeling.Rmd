@@ -78,7 +78,7 @@ This data set was used to create Fig. 2A (Figure_2A).
 Clearing environment and loading packages
 
 ```{r}
-# rm(list=ls())
+rm(list=ls())
 ```
 
 ```{r, message = FALSE}
@@ -103,6 +103,8 @@ library(ggraph)
 library(stm)
 
 library("kableExtra") # to create a table when converting to html
+library(arrow)
+
 ```
 
 # Importing data 
@@ -111,7 +113,7 @@ library("kableExtra") # to create a table when converting to html
 # data_words <- read.csv(file = "./output/created_datasets/cleaned_data.csv")
 
 # Importing dataset that we originally created and used in our analysis
-data_words <- read.csv(file = "./data/original_dataset_reproducibility_check/original_cleaned_data.csv")
+data_words <- read_feather("./data/original_dataset_reproducibility_check/original_cleaned_data.arrow")
 ```
 
 # Structural Topic Models on stakeholders
