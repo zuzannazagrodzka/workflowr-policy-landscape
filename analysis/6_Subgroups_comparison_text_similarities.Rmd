@@ -129,7 +129,7 @@ figure_topics
 
 # # UNCOMMENT TO SAVE FIGURES
 
-figure_name <- paste0("./output/Figure_Appendix_1B/Figure_2A.png")
+figure_name <- paste0("./output/Figure_Appendix_1A/Figure_1A.png")
 png(file=figure_name,
   width= 3000, height= 2000, res=400)
   figure_topics
