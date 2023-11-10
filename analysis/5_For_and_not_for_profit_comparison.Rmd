@@ -188,13 +188,22 @@ sum_df_sum_proc_ND_book =
   # dplyr::summarise(perc = mean(perc), SD = sd(perc2))
   dplyr::summarise(perc = median(perc), SD = sd(perc2))
 
-ggplot() +
+fig_book <- ggplot() +
   geom_point(data = df_sum_proc_ND_book, aes(x = perc, y = org_subgroups), alpha = 0.1, position = position_jitter()) +
   geom_pointrange(data = sum_df_sum_proc_ND_book, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = org_subgroups)) +
   facet_grid(type~.) +
   labs(x = "Document words occuring in dictionary (%)", y = "") +
   scale_colour_discrete(guide = "none") +
   theme_classic()
+
+fig_book
+
+# Saving the figure
+# UNCOMMENT TO SAVE THE FIGURE
+figure_name <- paste0("./output/Figure_Appendix_1C/Figure_1C_book.png")
+ggsave(filename = figure_name, fig_book  + theme_bw(base_size = 5),
+     width = 10, height = 5, dpi = 600, units = "in", device='png')
+
 
 # Plotting them separately Business
 df_sum_proc_ND_BUS = data.frame(
@@ -210,13 +219,22 @@ sum_df_sum_proc_ND_BUS =
   # dplyr::summarise(perc = mean(perc), SD = sd(perc2))
   dplyr::summarise(perc = median(perc), SD = sd(perc2))
 
-ggplot() +
+fig_bus <- ggplot() +
   geom_point(data = df_sum_proc_ND_BUS, aes(x = perc, y = org_subgroups), alpha = 0.1, position = position_jitter()) +
   geom_pointrange(data = sum_df_sum_proc_ND_BUS, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = org_subgroups)) +
   facet_grid(type~.) +
   labs(x = "Document words occuring in dictionary (%)", y = "") +
   scale_colour_discrete(guide = "none") +
   theme_classic()
+
+fig_bus
+
+# Saving the figure
+# UNCOMMENT TO SAVE THE FIGURE
+figure_name <- paste0("./output/Figure_Appendix_1C/Figure_1C_bus.png")
+ggsave(filename = figure_name, fig_bus  + theme_bw(base_size = 5),
+     width = 10, height = 5, dpi = 600, units = "in", device='png')
+
 
 
 # Plotting them separately UNESCO
@@ -233,7 +251,7 @@ sum_df_sum_proc_ND_UNESCO =
   # dplyr::summarise(perc = mean(perc), SD = sd(perc2))
   dplyr::summarise(perc = median(perc), SD = sd(perc2))
 
-ggplot() +
+fig_unesco <- ggplot() +
   geom_point(data = df_sum_proc_ND_UNESCO, aes(x = perc, y = org_subgroups), alpha = 0.1, position = position_jitter()) +
   geom_pointrange(data = sum_df_sum_proc_ND_UNESCO, aes(x = perc, xmin = perc - SD, xmax = perc + SD, y = org_subgroups)) +
   facet_grid(type~.) +
@@ -241,6 +259,13 @@ ggplot() +
   scale_colour_discrete(guide = "none") +
   theme_classic()
 
+fig_unesco
+
+# Saving the figure
+# UNCOMMENT TO SAVE THE FIGURE
+figure_name <- paste0("./output/Figure_Appendix_1C/Figure_1C_unesco.png")
+ggsave(filename = figure_name, fig_unesco  + theme_bw(base_size = 5),
+     width = 10, height = 5, dpi = 600, units = "in", device='png')
 
 ```
 
