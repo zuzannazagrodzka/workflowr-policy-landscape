@@ -114,7 +114,6 @@ The files are available in the `./data/mission_statements` folder.
 - Pensoft_About.txt
 - Elsevier_About.txt		
 - Springer Nature_About.txt
-- PLOS_About.txt			
 - Wiley_About.txt
 - PeerJ_About.txt
 
@@ -124,6 +123,7 @@ The files are available in the `./data/mission_statements` folder.
 - Annual Reviews_About.txt
 - BioOne_About.txt
 - Frontiers_About.txt
+- PLOS_About.txt	
 - Resilience Alliance_About.txt
 - The Royal Society Publishing_About.txt
 - The University of Chicago Press_About.txt

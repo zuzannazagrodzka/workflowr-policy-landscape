@@ -240,9 +240,9 @@ corpus_df$stakeholder[corpus_df$stakeholder%in% c("Australian Antarctic Data Cen
 
 # Publishers non for profit and for profit
 
-corpus_df$stakeholder[corpus_df$stakeholder%in% c("The University of Chicago Press", "Annual Reviews", "BioOne", "eLife", "Frontiers", "Resilience Alliance", "The Royal Society Publishing", "AIBS")]  <- "publishers_nonProfit"
+corpus_df$stakeholder[corpus_df$stakeholder%in% c("The University of Chicago Press", "Annual Reviews", "BioOne", "eLife", "Frontiers", "PLOS", "Resilience Alliance", "The Royal Society Publishing", "AIBS")]  <- "publishers_nonProfit"
 
-corpus_df$stakeholder[corpus_df$stakeholder%in% c("Cell Press", "Elsevier", "Springer Nature", "PeerJ", "Pensoft", "PLOS", "Wiley")]  <- "publishers_Profit"
+corpus_df$stakeholder[corpus_df$stakeholder%in% c("Cell Press", "Elsevier", "Springer Nature", "PeerJ", "Pensoft", "Wiley")]  <- "publishers_Profit"
 
 
 # Advocates - stakeholders promoting good research practices and Open Research agenda
