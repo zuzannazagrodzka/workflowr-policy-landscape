@@ -25,7 +25,7 @@ involved in the ecology and evolutionary biology research landscape.
 -   funders (30 documents)
 -   journals (non Open Access = 16 documents, journals Open Access = 14
     documents)
--   publishers (for-profit = 7 documents, not-for-profit = 8 documents)
+-   publishers (for-profit = 6 documents, not-for-profit = 9 documents)
 -   repositories (17 documents)
 -   learned societies (13 documents).
 
