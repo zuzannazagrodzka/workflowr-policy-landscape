@@ -38,6 +38,8 @@ wflow_build(files = c("analysis/index.Rmd",
                       "analysis/4_Language_analysis_Figure_2C.Rmd",
                       "analysis/5_For_and_not_for_profit_comparison.Rmd",
                       "analysis/6_Subgroups_comparison_text_similarities.Rmd",
+                      "analysis/7_For_and_not_for_profit_comparison_part_2.Rmd",
+                      "analysis/8_Subgroups_comparison_text_similarities_part_2",
                       "analysis/Original_Session_Info.Rmd",
                       "analysis/license.Rmd"))
 
@@ -63,6 +65,8 @@ wflow_publish(files = c("analysis/index.Rmd",
                 "analysis/5_For_and_not_for_profit_comparison.Rmd",
                 "analysis/license.Rmd",
                 "./analysis/6_Subgroups_comparison_text_similarities.Rmd",
+                "./analysis/7_For_and_not_for_profit_comparison_part_2.Rmd",
+                "./analysis/8_Subgroups_comparison_text_similarities_part_2",
                 "./analysis/Original_Session_Info.Rmd"),
               update = TRUE,
               message = "Update the file paths for all analysis and figures")
