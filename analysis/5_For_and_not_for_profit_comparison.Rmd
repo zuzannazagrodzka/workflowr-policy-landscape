@@ -81,6 +81,7 @@ data_words <- data_words %>%
   left_join(new_dictionary, by = c("word" = "word")) %>% # merging
   filter(org_subgroups %in% c("publishers_nonProfit", "publishers_Profit", "journals_nonOA", "journals_OA"))
 
+
 ```
 
 
@@ -203,7 +204,7 @@ fig_book
 
 # Saving the figure
 # UNCOMMENT TO SAVE THE FIGURE
-figure_name <- paste0("./output/Figure_Appendix_1C/Figure_1C_book.png")
+figure_name <- paste0("./output/Figure_3C/Figure_3C_book.png")
 ggsave(filename = figure_name, fig_book  + theme_bw(base_size = 5),
      width = 10, height = 5, dpi = 600, units = "in", device='png')
 
@@ -234,7 +235,7 @@ fig_bus
 
 # Saving the figure
 # UNCOMMENT TO SAVE THE FIGURE
-figure_name <- paste0("./output/Figure_Appendix_1C/Figure_1C_bus.png")
+figure_name <- paste0("./output/Figure_3C/Figure_3C_bus.png")
 ggsave(filename = figure_name, fig_bus  + theme_bw(base_size = 5),
      width = 10, height = 5, dpi = 600, units = "in", device='png')
 
@@ -266,7 +267,7 @@ fig_unesco
 
 # Saving the figure
 # UNCOMMENT TO SAVE THE FIGURE
-figure_name <- paste0("./output/Figure_Appendix_1C/Figure_1C_unesco.png")
+figure_name <- paste0("./output/Figure_3C/Figure_3C_unesco.png")
 ggsave(filename = figure_name, fig_unesco  + theme_bw(base_size = 5),
      width = 10, height = 5, dpi = 600, units = "in", device='png')
 
