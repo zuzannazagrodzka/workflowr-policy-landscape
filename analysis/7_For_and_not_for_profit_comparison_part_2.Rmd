@@ -12,26 +12,44 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Import data
+
+# R Step and Packages
+
+```{r, message=FALSE}
+# Clearing R
+rm(list=ls())
+
+# Libraries used for text/data analysis
+library(tidyverse) 
+library(dplyr)
+library(tidytext)
+
+# Libraries used to create plots
+library(ggplot2)
+
+# Library to create a table when converting to html
+library("kableExtra") 
+
+# Library to read an arrow file
+library(arrow)
+
+```
+
+
+# Import data
 add column based on the name of the journal if its OA run by for profit or not-for-profit: 
-- for_profit_oa
-- for_profit_no_oa
-- no_profit_oa
-- no_profit_no_oa
 
+- for_profit_no_oa:
+"BioSciences", "Biological Conservation", "Conservation Biology", "Ecological Applications","Ecology Letters", "Ecology", "Frontiers in Ecology and the Environment", "Global Change Biology", "Journal of Applied Ecology", "Nature Ecology and Evolution", "Trends in Ecology & Evolution"
 
-# for_profit_no_oa:
-# "BioSciences", "Biological Conservation", "Conservation Biology", "Ecological Applications","Ecology Letters", "Ecology", "Frontiers in Ecology and the Environment", "Global Change Biology", "Journal of Applied Ecology", "Nature Ecology and Evolution", "Trends in Ecology & Evolution"
+- no_profit_no_oa:
+"American Naturalist", "Annual Review of Ecology Evolution and Systematics", "Evolution", "Philosophical Transactions of the Royal Society B", "Proceedings of the Royal Society B Biological Sciences"
 
-# no_profit_no_oa:
-# "American Naturalist", "Annual Review of Ecology Evolution and Systematics", "Evolution", "Philosophical Transactions of the Royal Society B", "Proceedings of the Royal Society B Biological Sciences"
+- for_profit_oa:
+"Arctic, Antarctic, and Alpine Research", "Biogeosciences", "Conservation Letters", "Diversity and Distributions", "Ecology and Evolution", "Evolutionary Applications", "Neobiota", "PeerJJournal"
 
-# for_profit_oa:
-# "Arctic, Antarctic, and Alpine Research", "Biogeosciences", "Conservation Letters", "Diversity and Distributions", "Ecology and Evolution", "Evolutionary Applications", "Neobiota", "PeerJJournal"
-
-# no_profit_oa:
-# "Ecology and Society", "Evolution Letters", "Frontiers in Ecology and Evolution", "Plos Biology", "Remote Sensing in Ecology and Conservation", "eLifeJournal"
-
+- no_profit_oa:
+"Ecology and Society", "Evolution Letters", "Frontiers in Ecology and Evolution", "Plos Biology", "Remote Sensing in Ecology and Conservation", "eLifeJournal"
 
 
 # Importing data

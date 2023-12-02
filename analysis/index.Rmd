@@ -22,10 +22,12 @@ editor_options:
 3. [Methodology - Topic modeling - produce Fig 2A](Figure_2A.html)
 4. [Methodology - Text similarities - analysis and Fig 2B](3_Text_similarities_Figure_2B.html)
 5. [Methodology - Language usage - analysis and Fig 2C](4_Language_analysis_Figure_2C.html)
-6. [Methodology - For and Not-for-Profit Assessment - dictionary analysis - not included in manuscript](5_For_and_not_for_profit_comparison.html)
-7. [Methodology - For and Not-for_Profit, OA and not-OA Assessment - topic analysis - not included in manuscript](6_Subgroups_comparison_text_similarities.html)
-7. [Licence](license.html)
-8. [Additional Information - Session Info](Original_Session_Info.html)
+6. [Methodology - For and Not-for-Profit publishers, OA and non-OA journals Assessment - dictionary analysis](5_For_and_not_for_profit_comparison.html)
+7. [Methodology - For and Not-for-Profit publishers, OA and non-OA journals Assessment - topic analysis](6_Subgroups_comparison_text_similarities.html)
+8. [Methodology - For and Not-for-Profit, OA and non-OA journals Assessment - dictionary analysis](7_For_and_not_for_profit_comparison_part_2.html)
+9. [Methodology - For and Not-for-Profit, OA and non-OA journals Assessment - topic analysis](8_Subgroups_comparison_text_similarities_part_2.html)
+10. [Licence](license.html)
+11. [Additional Information - Session Info](Original_Session_Info.html)
 
 <!-- wflow_publish("analysis/_site.yml", "Change the theme", republish = TRUE) -->
 
