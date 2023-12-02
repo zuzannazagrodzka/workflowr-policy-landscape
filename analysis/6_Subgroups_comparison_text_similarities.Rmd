@@ -13,12 +13,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-# Visualising Text Similarities (Figure Appendix 1)
+# Visualising Text Similarities (Figure 3)
 
-# Figure Appendix.1A
+# Figure 3A
 
 
-Figure 1A in the Appendix shows gamma values (x-axis, means ± sd) that are the strength of association between a set of subgroups of some stakeholder documents (y-axis) and the corresponding topic. 
+Figure 3A shows gamma values (x-axis, means ± sd) that are the strength of association between a set of subgroups of some stakeholder documents (y-axis) and the corresponding topic. 
 
 High gamma values are strong associations. 
 
@@ -132,7 +132,7 @@ figure_topics
 
 # # UNCOMMENT TO SAVE FIGURES
 
-figure_name <- paste0("./output/Figure_Appendix_1A/Figure_1A.png")
+figure_name <- paste0("./output/Figure_3A/Figure_3A.png")
 png(file=figure_name,
   width= 3000, height= 2000, res=400)
   figure_topics
