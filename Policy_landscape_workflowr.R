@@ -76,5 +76,6 @@ wflow_publish(files = c("analysis/index.Rmd",
 
 wflow_status()
 
-
-# Deploy the website
+#
+# # Deploy the website
+# wflow_git_push(dry_run = TRUE)
