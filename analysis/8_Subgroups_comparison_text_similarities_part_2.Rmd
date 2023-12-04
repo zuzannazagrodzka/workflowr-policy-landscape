@@ -564,27 +564,27 @@ figure_list
 figure_name <- paste0("./output/Figure_4B/no_profit_no_oa_figure4B.png")
 png(file=figure_name,
   width= 3000, height= 3000, res=400)
-  journals_nonOA_figure4B
+  no_profit_no_oa_figure4B
   dev.off()
 
 
 figure_name <- paste0("./output/Figure_4B/for_profit_no_oa_figure4B.png")
 png(file=figure_name,
   width= 3000, height= 3000, res=400)
-  journals_OA_figure4B
+  for_profit_no_oa_figure4B
   dev.off()
   
 figure_name <- paste0("./output/Figure_4B/for_profit_oa_figure4B.png")
 png(file=figure_name,
   width= 3000, height= 3000, res=400)
-  publishers_nonProfit_figure4B
+  for_profit_oa_figure4B
   dev.off()
   
   
 figure_name <- paste0("./output/Figure_4B/no_profit_oa_figure4B.png")
 png(file=figure_name,
   width= 3000, height= 3000, res=400)
-  publishers_Profit_figure4B
+  no_profit_oa_figure4B
   dev.off()
   
 ```
