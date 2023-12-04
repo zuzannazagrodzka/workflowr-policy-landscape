@@ -473,9 +473,9 @@ for (stake in stake_names) {
     ) +
     expand_limits(x = c(-1.5, 1.5), y = c(-1.5, 1.5))
 
-  assign(paste0(stake_names[n], "_figure1B"), figure_to_save)
+  assign(paste0(stake_names[n], "_figure3B"), figure_to_save)
   # name_temp <- assign(paste0(stake_names[n], "_figure2b"), figure_to_save)
-  figure_list <- append(figure_list, paste0(stake_names[n], "_figure1B"))
+  figure_list <- append(figure_list, paste0(stake_names[n], "_figure3B"))
   
   print(figure_to_save)
 
@@ -496,27 +496,27 @@ figure_list
 figure_name <- paste0("./output/Figure_3B/journals_nonOA_figure3B.png")
 png(file=figure_name,
   width= 3000, height= 3000, res=400)
-  journals_nonOA_figure1B
+  journals_nonOA_figure3B
   dev.off()
 
 
 figure_name <- paste0("./output/Figure_3B/journals_OA_figure3B.png")
 png(file=figure_name,
   width= 3000, height= 3000, res=400)
-  journals_OA_figure1B
+  journals_OA_figure3B
   dev.off()
   
 figure_name <- paste0("./output/Figure_3B/publishers_nonProfit_figure3B.png")
 png(file=figure_name,
   width= 3000, height= 3000, res=400)
-  publishers_nonProfit_figure1B
+  publishers_nonProfit_figure3B
   dev.off()
   
   
 figure_name <- paste0("./output/Figure_3B/publishers_Profit_figure3B.png")
 png(file=figure_name,
   width= 3000, height= 3000, res=400)
-  publishers_Profit_figure1B
+  publishers_Profit_figure3B
   dev.off()
   
 ```
