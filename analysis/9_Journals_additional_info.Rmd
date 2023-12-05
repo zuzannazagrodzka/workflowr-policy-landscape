@@ -180,7 +180,7 @@ Creating a figure
 
 ```{r}
 
-legend_title <- "Society-owned"
+legend_title <- "Society owned"
 
 ggplot(df, aes(x = profit_access, y = n, fill = society_journal)) +
   geom_bar(stat='identity') +
