@@ -1,6 +1,6 @@
 ---
 title: "Methodology for “Accelerating the Open Research agenda to solve global challenges"
-author: "Zuzanna Zagrodzka, Andrew P Beckerman, Thomas F Johnson"
+author: "Zuzanna B Zagrodzka, Andrew P Beckerman, Thomas F Johnson"
 date: "`r Sys.Date()`"
 site: workflowr::wflow_site
 output:
