@@ -44,6 +44,9 @@ wflow_build(files = c("analysis/index.Rmd",
                       "analysis/Original_Session_Info.Rmd",
                       "analysis/license.Rmd"))
 
+# wflow_build(files = "analysis/9_Journals_additional_info.Rmd")
+
+
 # View the status of the workflowr project
 wflow_status()
 
@@ -75,9 +78,10 @@ wflow_publish(files = c("analysis/index.Rmd",
 
 
 # wflow_publish(c("analysis/index.Rmd"))
-
+# wflow_publish(files = "analysis/9_Journals_additional_info.Rmd")
 wflow_status()
 
 #
 # # Deploy the website
 # wflow_git_push(dry_run = TRUE)
+#
