@@ -522,15 +522,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree903da06051d907f0d86e5cb4f73fd7a0cfac6a2etargetblank903da06a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree899cda5c4890d91737cc7c586726b39cfbfe4b0ctargetblank899cda5a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/903da06051d907f0d86e5cb4f73fd7a0cfac6a2e" target="_blank">903da06</a>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/899cda5c4890d91737cc7c586726b39cfbfe4b0c" target="_blank">899cda5</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree903da06051d907f0d86e5cb4f73fd7a0cfac6a2etargetblank903da06a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomandbeckworkflowrpolicylandscapetree899cda5c4890d91737cc7c586726b39cfbfe4b0ctargetblank899cda5a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +540,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/903da06051d907f0d86e5cb4f73fd7a0cfac6a2e" target="_blank">903da06</a>.
+<a href="https://github.com/andbeck/workflowr-policy-landscape/tree/899cda5c4890d91737cc7c586726b39cfbfe4b0c" target="_blank">899cda5</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -570,7 +570,6 @@ Untracked files:
 
 Unstaged changes:
     Modified:   Policy_landscape_workflowr.R
-    Modified:   README.md
     Modified:   data/original_dataset_reproducibility_check/original_cleaned_data.csv
     Modified:   data/original_dataset_reproducibility_check/original_dataset_words_stm_5topics.csv
     Modified:   output/Figure_3A/Figure_3A.png
@@ -626,6 +625,74 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/899cda5c4890d91737cc7c586726b39cfbfe4b0c/analysis/9_Journals_additional_info.Rmd" target="_blank">899cda5</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-12-05
+</td>
+<td>
+wflow_publish(files = "analysis/9_Journals_additional_info.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/c118615521c53cbe422c69a1937cec0198dfe565/analysis/9_Journals_additional_info.Rmd" target="_blank">c118615</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-12-05
+</td>
+<td>
+.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/9931d771f515660e7fc90cf352b9bb90283312d7/analysis/9_Journals_additional_info.Rmd" target="_blank">9931d77</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-12-05
+</td>
+<td>
+Improving the description and cleaning the script
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/andbeck/workflowr-policy-landscape/61f889d254b43dc3ab0796b802daaff2ec509a0d/docs/9_Journals_additional_info.html" target="_blank">61f889d</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-12-05
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/andbeck/workflowr-policy-landscape/blob/903da06051d907f0d86e5cb4f73fd7a0cfac6a2e/analysis/9_Journals_additional_info.Rmd" target="_blank">903da06</a>
 </td>
 <td>
@@ -645,9 +712,10 @@ Update the file paths for all analysis and figures
 </div>
 </div>
 </div>
-<p>This script creates a figure ilustrating what journals are owned by
-the societies or different institutions (other) and journals owned and
-run only by publishers.</p>
+<p>This script creates a figure showing how many journals per category
+(for-profit OA, for-profit noOA, not-for-profit OA and not-for-profit
+noOA) are owned by the societies, different institutions (other) or
+solely by publishers.</p>
 <pre class="r"><code># Clearing R
 rm(list=ls())
 
@@ -836,8 +904,10 @@ df &lt;- data_journals %&gt;%
  8 no_profit_no_oa  yes                 4 0.8   
  9 no_profit_oa     no                  4 0.667 
 10 no_profit_oa     yes                 2 0.333 </code></pre>
-<p>Creating a figure</p>
-<pre class="r"><code>legend_title &lt;- &quot;Society-owned&quot;
+</div>
+<div id="creating-a-figure" class="section level1">
+<h1>Creating a figure</h1>
+<pre class="r"><code>legend_title &lt;- &quot;Society owned&quot;
 
 ggplot(df, aes(x = profit_access, y = n, fill = society_journal)) +
   geom_bar(stat=&#39;identity&#39;) +
@@ -847,22 +917,45 @@ panel.grid.minor = element_blank(), axis.line = element_line(colour = &quot;blac
   scale_fill_manual(legend_title, values=c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;)) + #no, other, yes
   scale_x_discrete(limit = c(&quot;for_profit_no_oa&quot;, &quot;for_profit_oa&quot;, &quot;no_profit_no_oa&quot;, &quot;no_profit_oa&quot;),
                      labels = c(&quot;For-profit nonOA&quot;,&quot;For-profit OA&quot;,&quot;Non-profit nonOA&quot;, &quot;Non-profit OA&quot;)) +
-  labs(y= &quot;Frequency&quot;, x = &quot;Category of journal&quot;)</code></pre>
+  labs(y= &quot;Frequency&quot;, x = &quot;Journal category&quot;)</code></pre>
 <p><img src="figure/9_Journals_additional_info.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>head(data_journals, 5)</code></pre>
-<pre><code># A tibble: 5 × 5
-  document                           access profit_access profit society_journal
-  &lt;chr&gt;                              &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;          
-1 American Naturalist                journ… no_profit_no… no_pr… yes            
-2 Annual Review of Ecology Evolutio… journ… no_profit_no… no_pr… no             
-3 Biological Conservation            journ… for_profit_n… profit no             
-4 BioSciences                        journ… for_profit_n… profit yes            
-5 Conservation Biology               journ… for_profit_n… profit yes            </code></pre>
-<pre class="r"><code>df$profit_access</code></pre>
-<pre><code> [1] for_profit_no_oa for_profit_no_oa for_profit_no_oa for_profit_oa   
- [5] for_profit_oa    for_profit_oa    no_profit_no_oa  no_profit_no_oa 
- [9] no_profit_oa     no_profit_oa    
-Levels: for_profit_no_oa for_profit_oa no_profit_no_oa no_profit_oa</code></pre>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/andbeck/workflowr-policy-landscape/blob/61f889d254b43dc3ab0796b802daaff2ec509a0d/docs/figure/9_Journals_additional_info.Rmd/unnamed-chunk-6-1.png" target="_blank">61f889d</a>
+</td>
+<td>
+zuzannazagrodzka
+</td>
+<td>
+2023-12-05
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
