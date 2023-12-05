@@ -175,7 +175,7 @@ df
 ```
 
 
-Creating a figure
+# Creating a figure
 
 
 ```{r}
