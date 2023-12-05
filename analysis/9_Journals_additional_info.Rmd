@@ -1,0 +1,202 @@
+---
+title: "9_Journals_additional_info"
+author: "zuzannazagrodzka"
+date: "2023-12-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This script creates a figure ilustrating what journals are owned by the societies or different institutions (other) and journals owned and run only by publishers.
+
+
+
+```{r, message=FALSE}
+# Clearing R
+rm(list=ls())
+
+# Loading libraries
+# Libraries used for text/data analysis
+library(tidyverse) 
+library(dplyr)
+library(tidytext)
+
+# Libraries used to create plots
+library(ggplot2)
+library(RColorBrewer)
+
+# Library to create a table when converting to html
+library("kableExtra") 
+
+# Library to read an arrow file
+library(arrow)
+
+```
+
+
+Importing data
+
+```{r}
+# Importing dataset that we originally created and used in our analysis
+df_corpuses <- read_feather(file = "./data/original_dataset_reproducibility_check/original_cleaned_data.arrow")
+
+```
+
+# Adding a column profit and access
+
+Adding column based on the name of the journal if its OA run by for profit or not-for-profit: 
+
+- for_profit_no_oa:
+"BioSciences", "Biological Conservation", "Conservation Biology", "Ecological Applications","Ecology Letters", "Ecology", "Frontiers in Ecology and the Environment", "Global Change Biology", "Journal of Applied Ecology", "Nature Ecology and Evolution", "Trends in Ecology & Evolution"
+
+- no_profit_no_oa:
+"American Naturalist", "Annual Review of Ecology Evolution and Systematics", "Evolution", "Philosophical Transactions of the Royal Society B", "Proceedings of the Royal Society B Biological Sciences"
+
+- for_profit_oa:
+"Arctic, Antarctic, and Alpine Research", "Biogeosciences", "Conservation Letters", "Diversity and Distributions", "Ecology and Evolution", "Evolutionary Applications", "Neobiota", "PeerJJournal"
+
+- no_profit_oa:
+"Ecology and Society", "Evolution Letters", "Frontiers in Ecology and Evolution", "Plos Biology", "Remote Sensing in Ecology and Conservation", "eLifeJournal"
+
+
+
+# Data Prep and Cleaning
+
+``` {r}
+# Data preparation
+
+## Getting a data set with the words
+data_journals <- df_corpuses
+
+dim(data_journals)
+colnames(data_journals)
+unique(data_journals$org_subgroups)
+# Merging and removing duplicates
+data_journals <- data_journals %>% 
+  rename(document = name) %>% 
+  select(document, org_subgroups) %>% 
+  distinct(document, .keep_all = TRUE) %>% 
+  filter(org_subgroups %in% c("journals_nonOA", "journals_OA")) %>% 
+  rename(access = org_subgroups)
+
+data <- data_journals
+
+# Adding a column with a new variable "profit access"
+data$profit_access <- data$document
+
+data$profit_access[data$profit_access%in% c("BioSciences", "Biological Conservation", "Conservation Biology", "Ecological Applications","Ecology Letters", "Ecology", "Frontiers in Ecology and the Environment", "Global Change Biology", "Journal of Applied Ecology", "Nature Ecology and Evolution", "Trends in Ecology & Evolution")] <- "for_profit_no_oa"
+
+data$profit_access[data$profit_access%in% c("American Naturalist", "Annual Review of Ecology Evolution and Systematics", "Evolution", "Philosophical Transactions of the Royal Society B", "Proceedings of the Royal Society B Biological Sciences")] <- "no_profit_no_oa"
+
+data$profit_access[data$profit_access%in% c("Arctic, Antarctic, and Alpine Research", "Biogeosciences", "Conservation Letters", "Diversity and Distributions", "Ecology and Evolution", "Evolutionary Applications", "Neobiota", "PeerJJournal")] <- "for_profit_oa"
+
+data$profit_access[data$profit_access%in% c("Ecology and Society", "Evolution Letters", "Frontiers in Ecology and Evolution", "Plos Biology", "Remote Sensing in Ecology and Conservation", "eLifeJournal")] <- "no_profit_oa"
+
+check <- data
+
+check <- check %>%
+  select(profit_access) %>%
+  group_by_all() %>%
+  summarise(COUNT = n())
+check
+
+data_journals <- data
+
+# Adding a column "profit"
+
+data$profit <- data$profit_access
+
+data$profit[data$profit_access%in% c("for_profit_no_oa", "for_profit_oa")] <- "profit"
+
+data$profit[data$profit_access%in% c("no_profit_no_oa", "no_profit_oa")] <- "no_profit"
+
+# # Check that all rows were replaced
+
+check <- data
+
+check <- check %>%
+  select(profit) %>%
+  group_by_all() %>%
+  summarise(COUNT = n())
+check
+
+data_journals <- data
+
+
+```
+
+```{r}
+# Adding a column with a new variable "society_journal" that tells us if the journal is run by societies/other organisations or just by publisher
+
+data <- data_journals
+data$society_journal <- data$document
+
+data$society_journal[data$society_journal%in% c("BioSciences", "Conservation Biology", "Ecological Applications", "Ecology", "Frontiers in Ecology and the Environment", "Journal of Applied Ecology", "American Naturalist", "Evolution", "Philosophical Transactions of the Royal Society B", "Proceedings of the Royal Society B Biological Sciences", "Conservation Letters", "Ecology and Evolution", "Evolution Letters", "Remote Sensing in Ecology and Conservation")] <- "yes"
+
+
+data$society_journal[data$society_journal%in% c("Biological Conservation", "Global Change Biology", "Nature Ecology and Evolution", "Trends in Ecology & Evolution", "Annual Review of Ecology Evolution and Systematics", "Diversity and Distributions", "Evolutionary Applications", "PeerJJournal", "Ecology and Society", "Frontiers in Ecology and Evolution", "Plos Biology", "eLifeJournal")] <- "no"
+
+
+data$society_journal[data$society_journal%in% c("Ecology Letters", "Arctic, Antarctic, and Alpine Research", "Biogeosciences", "Neobiota")] <- "other"
+
+
+# Check that all rows were replaced
+
+check <- data
+
+check <- check %>%
+  select(society_journal) %>%
+  group_by_all() %>%
+  summarise(COUNT = n())
+check
+
+data_journals <- data
+
+```
+
+
+```{r}
+# Data prep for the figure
+head(data_journals)
+# calculate percentages, put into dataframe
+df <- data_journals %>%
+  mutate(access = factor(access)) %>% 
+  mutate(profit_access = factor(profit_access)) %>%
+  mutate(profit = factor(profit)) %>%
+  mutate(society_journal = factor(society_journal)) %>%
+  group_by(profit_access, society_journal) %>%
+  summarize(n = n()) %>%
+  mutate(freq = n / sum(n))
+
+df
+```
+
+
+Creating a figure
+
+
+```{r}
+
+legend_title <- "Society-owned"
+
+ggplot(df, aes(x = profit_access, y = n, fill = society_journal)) +
+  geom_bar(stat='identity') +
+  theme_bw() +
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +
+  scale_fill_manual(legend_title, values=c("#999999", "#E69F00", "#56B4E9")) + #no, other, yes
+  scale_x_discrete(limit = c("for_profit_no_oa", "for_profit_oa", "no_profit_no_oa", "no_profit_oa"),
+                     labels = c("For-profit nonOA","For-profit OA","Non-profit nonOA", "Non-profit OA")) +
+  labs(y= "Frequency", x = "Category of journal")
+  
+
+head(data_journals, 5)
+
+df$profit_access
+
+```
+
+
+

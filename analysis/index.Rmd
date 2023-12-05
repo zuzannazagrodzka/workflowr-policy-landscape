@@ -26,8 +26,9 @@ editor_options:
 7. [Methodology - For and Not-for-Profit publishers, OA and non-OA journals Assessment - topic analysis](6_Subgroups_comparison_text_similarities.html)
 8. [Methodology - For and Not-for-Profit, OA and non-OA journals Assessment - dictionary analysis](7_For_and_not_for_profit_comparison_part_2.html)
 9. [Methodology - For and Not-for-Profit, OA and non-OA journals Assessment - topic analysis](8_Subgroups_comparison_text_similarities_part_2.html)
-10. [Licence](license.html)
-11. [Additional Information - Session Info](Original_Session_Info.html)
+10. [Methodology - Figure ilustrating journals owned by societies](9_Journals_additional_info.html)
+11. [Licence](license.html)
+12. [Additional Information - Session Info](Original_Session_Info.html)
 
 <!-- wflow_publish("analysis/_site.yml", "Change the theme", republish = TRUE) -->
 
