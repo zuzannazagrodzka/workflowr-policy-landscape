@@ -12,9 +12,10 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-There are two questions we did not address formally in the manuscript because of too small sample size. 
+There are questions we additionally addressed in the manuscript
 
 - What language do for-profit and not-for-profit publishers use in their mission statements and aims?
+- What language do OA and nonOA journals use in their mission statements and aims?
 - What organisations use more common language to the UNESCO Recommendations in Open Science and which use business words? 
 
 We conducted the same language analysis that were conducted on the main stakeholders groups to compare for-profit vs. not-for-profit publishers and nonOA journals vs. OA journals. 

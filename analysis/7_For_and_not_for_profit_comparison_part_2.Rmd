@@ -13,6 +13,30 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+There are questions we additionally addressed in the manuscript (part 2)
+
+- What language do for-profit OA, for-profit nonOA, not-for-profit nonOA and not-for-profit OA journals use in their mission statements and aims?
+- What organisations use more common language to the UNESCO Recommendations in Open Science and which use business words? 
+
+We conducted the same language analysis that were conducted on the main stakeholders groups to compare for-profit OA, for-profit nonOA, not-for-profit nonOA and not-for-profit OA journals.
+
+The lists of the journals belonging to four categories we identified: 
+
+- for_profit_no_oa (N = 11):
+"BioSciences", "Biological Conservation", "Conservation Biology", "Ecological Applications","Ecology Letters", "Ecology", "Frontiers in Ecology and the Environment", "Global Change Biology", "Journal of Applied Ecology", "Nature Ecology and Evolution", "Trends in Ecology & Evolution"
+
+- no_profit_no_oa (N = 5):
+"American Naturalist", "Annual Review of Ecology Evolution and Systematics", "Evolution", "Philosophical Transactions of the Royal Society B", "Proceedings of the Royal Society B Biological Sciences"
+
+- for_profit_oa (N = 8):
+"Arctic, Antarctic, and Alpine Research", "Biogeosciences", "Conservation Letters", "Diversity and Distributions", "Ecology and Evolution", "Evolutionary Applications", "Neobiota", "PeerJJournal"
+
+- no_profit_oa (N = 6):
+"Ecology and Society", "Evolution Letters", "Frontiers in Ecology and Evolution", "Plos Biology", "Remote Sensing in Ecology and Conservation", "eLifeJournal"
+
+
+
+
 # R Step and Packages
 
 ```{r, message=FALSE}
