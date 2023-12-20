@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+Additional information about journals (not included in the manuscript)
 
 This script creates a figure showing how many journals per category (for-profit OA, for-profit noOA, not-for-profit OA and not-for-profit noOA) are owned by the societies, different institutions (other) or solely by publishers.
 
